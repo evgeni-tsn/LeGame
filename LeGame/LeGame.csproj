@@ -39,12 +39,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Classes\Characters\Character.cs" />
+    <Compile Include="Classes\Items\Food\Food.cs" />
+    <Compile Include="Classes\GameObject.cs" />
+    <Compile Include="Classes\Items\HealingItem.cs" />
+    <Compile Include="Classes\Items\Medicine\Medicine.cs" />
+    <Compile Include="Classes\Items\Weapons\MeleeWeapon.cs" />
+    <Compile Include="Classes\Items\Weapons\RangedWeapon.cs" />
+    <Compile Include="Interfaces\IBonus.cs" />
     <Compile Include="Interfaces\IGameObject.cs" />
-    <Compile Include="Interfaces\IAttacks.cs" />
     <Compile Include="Interfaces\IKillable.cs" />
     <Compile Include="Interfaces\IHeals.cs" />
     <Compile Include="Interfaces\ILevel.cs" />
     <Compile Include="Interfaces\IMovable.cs" />
+    <Compile Include="Interfaces\IUseWeapon.cs" />
     <Compile Include="Interfaces\IWeapon.cs" />
     <Compile Include="RolePlayingGame.cs" />
     <Compile Include="Program.cs" />
@@ -66,10 +73,7 @@
   <ItemGroup>
     <Folder Include="Classes\Characters\Enemies\" />
     <Folder Include="Classes\Characters\Player\" />
-    <Folder Include="Classes\Food\" />
     <Folder Include="Classes\Levels\" />
-    <Folder Include="Classes\Medicine\" />
-    <Folder Include="Classes\Weapons\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />

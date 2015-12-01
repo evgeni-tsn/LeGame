@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 
 namespace LeGame.Interfaces
 {
-    public interface IKillable
+    interface IBonus
     {
-        int MaxHealth { get; set; }
-        int CurrentHealth { get; set; }
+        // Maybe implement some type of bonus (for an example speed increase).
     }
 }

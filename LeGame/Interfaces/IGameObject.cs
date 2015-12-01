@@ -1,9 +1,17 @@
-﻿namespace LeGame.Interfaces
-{
-    using Microsoft.Xna.Framework;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Microsoft.Xna.Framework;
 
+namespace LeGame.Interfaces
+{
     public interface IGameObject
     {
-        Vector2 position { get; set; }
+        string Id { get; set; }
+
+        Vector2 Position { get; set; }
+
+        string DisplayName { get; set; }
     }
 }

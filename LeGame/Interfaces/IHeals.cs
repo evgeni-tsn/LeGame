@@ -1,6 +1,11 @@
-﻿namespace LeGame.Interfaces
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace LeGame.Interfaces
 {
-    interface IHeals
+    public interface IHeals
     {
         int HealingAmount { get; set; } 
     }
