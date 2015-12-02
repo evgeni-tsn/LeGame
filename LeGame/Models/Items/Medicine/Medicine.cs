@@ -5,7 +5,7 @@ using System.Text;
 using LeGame.Interfaces;
 using Microsoft.Xna.Framework;
 
-namespace LeGame.Classes.Items.Medicine
+namespace LeGame.Models.Items.Medicine
 {
     abstract class Medicine : HealingItem, IBonus
     {

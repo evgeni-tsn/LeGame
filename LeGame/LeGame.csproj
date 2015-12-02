@@ -41,6 +41,7 @@
     <Compile Include="GlobalVariables.cs" />
     <Compile Include="Handlers\MovementHandler.cs" />
     <Compile Include="Models\Characters\Character.cs" />
+    <Compile Include="Models\Characters\Player\Player.cs" />
     <Compile Include="Models\Characters\Player\TestChar.cs" />
     <Compile Include="Models\Items\Food\Food.cs" />
     <Compile Include="Models\GameObject.cs" />

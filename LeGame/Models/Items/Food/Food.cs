@@ -5,7 +5,7 @@ using System.Text;
 using LeGame.Interfaces;
 using Microsoft.Xna.Framework;
 
-namespace LeGame.Classes.Items.Food
+namespace LeGame.Models.Items.Food
 {
     abstract class Food : HealingItem
     {
