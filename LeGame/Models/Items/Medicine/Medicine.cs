@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 
 namespace LeGame.Models.Items.Medicine
 {
-    abstract class Medicine : HealingItem, IBonus
+    public abstract class Medicine : HealingItem, IBonus
     {
         protected Medicine(Vector2 position, string displayName, int healingAmount) 
             : base(position, displayName, healingAmount)
