@@ -8,7 +8,7 @@ namespace LeGame.Classes.Items.Weapons
 {
     abstract class RangedWeapon : IWeapon
     {
-        public RangedWeapon(double damage, double range)
+        protected RangedWeapon(double damage, double range)
         {
             Damage = damage;
             Range = range;

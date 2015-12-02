@@ -5,11 +5,11 @@ using System.Text;
 using LeGame.Interfaces;
 using Microsoft.Xna.Framework;
 
-namespace LeGame.Classes.Items.Food
+namespace LeGame.Classes.Items.Medicine
 {
-    abstract class Food : HealingItem
+    abstract class Medicine : HealingItem, IBonus
     {
-        public Food(Vector2 position, string displayName, int healingAmount) 
+        protected Medicine(Vector2 position, string displayName, int healingAmount) 
             : base(position, displayName, healingAmount)
         {
         }
