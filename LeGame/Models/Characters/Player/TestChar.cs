@@ -6,20 +6,14 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace LeGame.Classes.Characters.Player
+namespace LeGame.Models.Characters.Player
 {
-    public class TestChar : Character
+    public class TestChar : Player
     {
         public TestChar(Vector2 position, string displayName, int maxHealth, int currentHealth, int speed, Texture2D texture)
             : base(position, displayName, maxHealth, currentHealth, speed, texture)
         {
 
         }
-
-        public override void AttackUsingWeapon()
-        {
-            return;
-        }
-
     }
 }
