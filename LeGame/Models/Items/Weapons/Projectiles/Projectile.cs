@@ -2,9 +2,9 @@
 
 namespace LeGame.Models.Items.Weapons.Projectiles
 {
-    public class Projectile
+    public abstract class Projectile
     {
-        public Projectile(int damage)
+        protected Projectile(int damage)
         {
             this.Damage = damage;
         }
