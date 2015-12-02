@@ -8,7 +8,7 @@ using LeGame.Interfaces;
 
 namespace LeGame.Classes
 {
-    abstract class GameObject : IGameObject
+    public abstract class GameObject : IGameObject
     {
         protected GameObject(Vector2 position, string displayName)
         {

@@ -38,7 +38,10 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="GlobalVariables.cs" />
+    <Compile Include="Handlers\MovementHandler.cs" />
     <Compile Include="Models\Characters\Character.cs" />
+    <Compile Include="Models\Characters\Player\TestChar.cs" />
     <Compile Include="Models\Items\Food\Food.cs" />
     <Compile Include="Models\GameObject.cs" />
     <Compile Include="Models\Items\HealingItem.cs" />
@@ -73,7 +76,6 @@
   <ItemGroup>
     <Folder Include="Exceptions\" />
     <Folder Include="Models\Characters\Enemies\" />
-    <Folder Include="Models\Characters\Player\" />
     <Folder Include="Models\Levels\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
