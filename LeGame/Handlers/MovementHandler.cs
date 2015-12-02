@@ -5,7 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using LeGame.Interfaces;
-using LeGame.Classes.Characters;
+using LeGame.Models.Characters;
 
 namespace LeGame.Handlers
 {

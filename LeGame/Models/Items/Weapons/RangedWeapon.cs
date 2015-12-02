@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using LeGame.Interfaces;
 
-namespace LeGame.Classes.Items.Weapons
+namespace LeGame.Models.Items.Weapons
 {
     abstract class RangedWeapon : IWeapon
     {
