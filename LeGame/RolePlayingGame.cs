@@ -1,8 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using LeGame.Classes.Characters;
-using LeGame.Classes.Characters.Player;
+using LeGame.Models.Characters;
+using LeGame.Models.Characters.Player;
 
 namespace LeGame
 {

@@ -6,7 +6,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using LeGame.Interfaces;
 
-namespace LeGame.Classes
+namespace LeGame.Models
 {
     public abstract class GameObject : IGameObject
     {

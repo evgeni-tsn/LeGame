@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using LeGame.Handlers;
 
-namespace LeGame.Classes.Characters
+namespace LeGame.Models.Characters
 {
     public abstract class Character : GameObject, IUseWeapon, IKillable, IMovable
     {
@@ -26,30 +26,7 @@ namespace LeGame.Classes.Characters
         public int CurrentHealth { get; set; }
         public int Speed { get; set; }
 
-
-        public virtual void Move()
-        {
-            KeyboardState state = Keyboard.GetState();
-            Keys[] keys = { Keys.W, Keys.A, Keys.S, Keys.D };
-
-            foreach (var key in keys)
-            {
-                if (state.IsKeyDown(key))
-                {
-                    switch (key)
-                    {
-                        case Keys.D: MovementHandler.MoveRight(this);
-                            break;
-                        case Keys.W: MovementHandler.MoveUp(this);
-                            break;
-                        case Keys.S: MovementHandler.MoveDown(this);
-                            break;
-                        case Keys.A: MovementHandler.MoveLeft(this);
-                            break;
-                    }
-                }
-            }
-        }
+        public abstract void Move();
 
         public abstract void AttackUsingWeapon();
 
