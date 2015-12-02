@@ -38,8 +38,10 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\GameException.cs" />
     <Compile Include="GlobalVariables.cs" />
     <Compile Include="Handlers\MovementHandler.cs" />
+    <Compile Include="Interfaces\ICharacter.cs" />
     <Compile Include="Models\Characters\Character.cs" />
     <Compile Include="Models\Characters\Player\Player.cs" />
     <Compile Include="Models\Characters\Player\TestChar.cs" />
@@ -48,6 +50,9 @@
     <Compile Include="Models\Items\HealingItem.cs" />
     <Compile Include="Models\Items\Medicine\Medicine.cs" />
     <Compile Include="Models\Items\Weapons\MeleeWeapon.cs" />
+    <Compile Include="Models\Items\Weapons\Projectiles\Grenade.cs" />
+    <Compile Include="Models\Items\Weapons\Projectiles\LaserBlast.cs" />
+    <Compile Include="Models\Items\Weapons\Projectiles\Projectile.cs" />
     <Compile Include="Models\Items\Weapons\RangedWeapon.cs" />
     <Compile Include="Interfaces\IBonus.cs" />
     <Compile Include="Interfaces\IGameObject.cs" />
@@ -75,7 +80,6 @@
     <MonoGameContentReference Include="Content\Content.mgcb" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Exceptions\" />
     <Folder Include="Models\Characters\Enemies\" />
     <Folder Include="Models\Levels\" />
   </ItemGroup>
