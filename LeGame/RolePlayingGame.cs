@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using LeGame.Classes.Characters;
+using LeGame.Classes.Characters.Player;
 
 namespace LeGame
 {
@@ -11,6 +13,9 @@ namespace LeGame
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
+        Texture2D testObject;
+        Character testChar;
 
         public RolePlayingGame()
         {
@@ -37,10 +42,17 @@ namespace LeGame
         /// </summary>
         protected override void LoadContent()
         {
+            IsMouseVisible = true;
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            testObject = Content.Load<Texture2D>(@"TestObjects/kappa");
 
-            // TODO: use this.Content to load your game content here
+            graphics.PreferredBackBufferWidth = GlobalVariables.WINDOW_WIDTH; // set this value to the desired width of your window
+            graphics.PreferredBackBufferHeight = GlobalVariables.WINDOW_HEIGHT;   // set this value to the desired height of your window
+            graphics.ApplyChanges();
+
+            Vector2 pos = new Vector2(0, 0);
+            testChar = new TestChar(pos, "Pesho", 100, 100, 15, testObject);
         }
 
         /// <summary>
@@ -63,6 +75,7 @@ namespace LeGame
                 Exit();
 
             // TODO: Add your update logic here
+            testChar.Move();
 
             base.Update(gameTime);
         }
@@ -73,9 +86,12 @@ namespace LeGame
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.White);
 
             // TODO: Add your drawing code here
+            spriteBatch.Begin();
+            spriteBatch.Draw(testChar.Texture, testChar.Position, Color.White);
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
