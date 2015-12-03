@@ -49,7 +49,7 @@ namespace LeGame
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            testLevel = new Level(@"..\..\..\Content\Maps\testMap.txt", Content);
+            testLevel = new Level(@"..\..\..\Content\Maps\testMap2.txt", Content);
             testObject = Content.Load<Texture2D>(@"TestObjects/kappa");
 
             graphics.PreferredBackBufferWidth = GlobalVariables.WINDOW_WIDTH; // set this value to the desired width of your window
