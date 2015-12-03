@@ -354,7 +354,7 @@
 /processorParam:TextureFormat=Color
 /build:Tiles/Furniture/Table.png
 
-#begin Tiles/NULL.png
+#begin Tiles/Furniture/TableWithTV.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -363,7 +363,7 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:TextureFormat=Color
-/build:Tiles/NULL.png
+/build:Tiles/Furniture/TableWithTV.png
 
 #begin Tiles/Carpet.png
 /importer:TextureImporter
@@ -376,7 +376,7 @@
 /processorParam:TextureFormat=Color
 /build:Tiles/Carpet.png
 
-#begin Tiles/Furniture/TableWithTV.png
+#begin Tiles/NULL.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -385,5 +385,16 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:TextureFormat=Color
-/build:Tiles/Furniture/TableWithTV.png
+/build:Tiles/NULL.png
+
+#begin TestObjects/testChar.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:TextureFormat=Color
+/build:TestObjects/testChar.png
 
