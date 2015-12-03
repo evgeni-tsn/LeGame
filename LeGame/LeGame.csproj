@@ -37,11 +37,16 @@
   <PropertyGroup>
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>LeGame.Program</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="Exceptions\GameException.cs" />
     <Compile Include="GlobalVariables.cs" />
+    <Compile Include="Handlers\CollisionHandler.cs" />
     <Compile Include="Handlers\MovementHandler.cs" />
     <Compile Include="Interfaces\ICharacter.cs" />
+    <Compile Include="Interfaces\ICollisionable.cs" />
     <Compile Include="Models\Characters\Character.cs" />
     <Compile Include="Models\Characters\Player\Player.cs" />
     <Compile Include="Models\Characters\Player\TestChar.cs" />
