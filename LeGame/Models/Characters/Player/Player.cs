@@ -7,13 +7,14 @@ using LeGame.Handlers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using LeGame.Models.Levels;
 
 namespace LeGame.Models.Characters.Player
 {
     public class Player : Character
     {
-        public Player(Vector2 position, string displayName, int maxHealth, int currentHealth, int speed, Texture2D texture) 
-            : base(position, displayName, maxHealth, currentHealth, speed, texture)
+        public Player(Vector2 position, string displayName, int maxHealth, int currentHealth, int speed, Texture2D texture, Level level) 
+            : base(position, displayName, maxHealth, currentHealth, speed, texture, level)
         {
         }
 
@@ -24,20 +25,26 @@ namespace LeGame.Models.Characters.Player
 
             foreach (var key in keys)
             {
+               
                 if (state.IsKeyDown(key))
                 {
+                    
                     switch (key)
                     {
                         case Keys.D:
+                           
                             MovementHandler.MoveRight(this);
                             break;
                         case Keys.W:
+                            
                             MovementHandler.MoveUp(this);
                             break;
                         case Keys.S:
+                           
                             MovementHandler.MoveDown(this);
                             break;
                         case Keys.A:
+                            
                             MovementHandler.MoveLeft(this);
                             break;
                     }

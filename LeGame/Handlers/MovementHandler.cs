@@ -6,6 +6,9 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using LeGame.Interfaces;
 using LeGame.Models.Characters;
+using LeGame.Models.Levels;
+
+
 
 namespace LeGame.Handlers
 {
@@ -13,9 +16,18 @@ namespace LeGame.Handlers
     {
         public static void MoveRight(Character character)
         {
+
             Vector2 temp = new Vector2(character.Position.X, character.Position.Y);
             temp.X += character.Speed;
+            
             character.Position = temp;
+            
+            if (CollisionHandler.Collide(character) is ICollisionable)
+            {
+                temp.X -= character.Speed;
+                character.Position = temp;
+            }
+            
             if (character.Position.X >= GlobalVariables.WINDOW_WIDTH - character.Texture.Width)
             {
                 Vector2 tempy = new Vector2(character.Position.X, character.Position.Y);
@@ -25,9 +37,16 @@ namespace LeGame.Handlers
         }
         public static void MoveLeft(Character character)
         {
+           
             Vector2 temp = new Vector2(character.Position.X, character.Position.Y);
             temp.X -= character.Speed;
+
             character.Position = temp;
+            if (CollisionHandler.Collide(character) is ICollisionable)
+            {
+                temp.X += character.Speed;
+                character.Position = temp;
+            }
             if (character.Position.X < 0)
             {
                 Vector2 tempy = new Vector2(character.Position.X, character.Position.Y);
@@ -37,9 +56,16 @@ namespace LeGame.Handlers
         }
         public static void MoveUp(Character character)
         {
+            
             Vector2 temp = new Vector2(character.Position.X, character.Position.Y);
             temp.Y -= character.Speed;
+
             character.Position = temp;
+            if (CollisionHandler.Collide(character) is ICollisionable)
+            {
+                temp.Y += character.Speed;
+                character.Position = temp;
+            }
             if (character.Position.Y < 0)
             {
                 Vector2 tempy = new Vector2(character.Position.X, character.Position.Y);
@@ -50,9 +76,16 @@ namespace LeGame.Handlers
         }
         public static void MoveDown(Character character)
         {
+            
             Vector2 temp = new Vector2(character.Position.X, character.Position.Y);
             temp.Y += character.Speed;
+
             character.Position = temp;
+            if (CollisionHandler.Collide(character) is ICollisionable)
+            {
+                temp.Y -= character.Speed;
+                character.Position = temp;
+            }
             if (character.Position.Y >= GlobalVariables.WINDOW_HEIGHT - character.Texture.Height)
             {
                 Vector2 tempy = new Vector2(character.Position.X, character.Position.Y);
@@ -60,5 +93,9 @@ namespace LeGame.Handlers
                 character.Position = tempy;
             }
         }
+
+        
+
+        
     }
 }
