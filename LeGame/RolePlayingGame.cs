@@ -1,8 +1,10 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Linq;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using LeGame.Models.Characters;
 using LeGame.Models.Characters.Player;
+using LeGame.Models.Levels;
 
 namespace LeGame
 {
@@ -16,6 +18,7 @@ namespace LeGame
 
         Texture2D testObject;
         Character testChar;
+        private Level testLevel;
 
         public RolePlayingGame()
         {
@@ -45,6 +48,8 @@ namespace LeGame
             IsMouseVisible = true;
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            testLevel = new Level(@"..\..\..\Content\Maps\testMap.txt", Content);
             testObject = Content.Load<Texture2D>(@"TestObjects/kappa");
 
             graphics.PreferredBackBufferWidth = GlobalVariables.WINDOW_WIDTH; // set this value to the desired width of your window
@@ -90,7 +95,10 @@ namespace LeGame
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
+
+            testLevel.Tiles.ForEach(t => spriteBatch.Draw(t.Image, t.Position));
             spriteBatch.Draw(testChar.Texture, testChar.Position, Color.White);
+
             spriteBatch.End();
 
             base.Draw(gameTime);
