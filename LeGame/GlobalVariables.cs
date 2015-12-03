@@ -7,7 +7,7 @@ namespace LeGame
 {
     public static class GlobalVariables
     {
-        public const int wINDOW_WIDTH = 600;
+        public const int wINDOW_WIDTH = 640;
         public const int wINDOW_HEIGHT = 480;
 
         public static int WINDOW_WIDTH
