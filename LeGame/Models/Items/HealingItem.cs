@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 
 namespace LeGame.Models.Items
 {
-    abstract class HealingItem : GameObject, IHeals
+    public abstract class HealingItem : GameObject, IHeals
     {
         protected HealingItem(Vector2 position, string displayName, int healingAmount) : base(position, displayName)
         {
