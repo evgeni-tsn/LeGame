@@ -48,16 +48,17 @@ namespace LeGame
             IsMouseVisible = true;
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            testLevel = new Level(@"..\..\..\Content\Maps\testMap.txt", Content);
-            testObject = Content.Load<Texture2D>(@"TestObjects/testChar");
-           
+            
+            testLevel = new Level(@"..\..\..\Content\Maps\testMap2.txt", Content);
+            testObject = Content.Load<Texture2D>(@"TestObjects/testChar");            
 
             graphics.PreferredBackBufferWidth = GlobalVariables.WINDOW_WIDTH; // set this value to the desired width of your window
             graphics.PreferredBackBufferHeight = GlobalVariables.WINDOW_HEIGHT;   // set this value to the desired height of your window
             graphics.ApplyChanges();
 
-            Vector2 pos = new Vector2(GlobalVariables.WINDOW_WIDTH/2, GlobalVariables.WINDOW_HEIGHT/2);
+            Vector2 pos = new Vector2(
+                GlobalVariables.WINDOW_WIDTH / 2 - testObject.Width / 2,
+                GlobalVariables.WINDOW_HEIGHT/2 - testObject.Height / 2);
             
             testChar = new TestChar(pos, "Pesho", 100, 100, 5, testObject, testLevel);
             testChar.Level = testLevel;

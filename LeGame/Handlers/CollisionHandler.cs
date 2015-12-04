@@ -16,7 +16,7 @@ namespace LeGame.Handlers
             {
                 Rectangle obj = new Rectangle((int)item.Position.X, (int)item.Position.Y, item.Image.Width, item.Image.Height);
                 Rectangle playerRec = character.BoundingBox;
-                if (item.HasCollision == true && playerRec.Intersects(obj))
+                if (item.CanCollide == true && playerRec.Intersects(obj))
                 {
                     return item;
                 }
