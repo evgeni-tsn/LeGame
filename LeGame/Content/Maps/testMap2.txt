@@ -1,0 +1,35 @@
+﻿┏_______________________┓
+i.......................|
+i..................S ...|
+i..................  ..V|
+i...............P ..... |
+i...............  .T .. |
+i...............  .  .. |
+i...............  ..... |
+i...............  .Q   .|
+i...............  .    .|
+i.......................|
+i.......................|
+i.......................|
+i.......................|
+i.......................|
+i.......................|
+i.......................|
+i.......................|
+┗-----------------------┛
+Legend:(char:file:collision:drawPriority?)
+ :Tiles/NULL:true
+┏:Tiles/whiteWall2NW:true
+┓:Tiles/whiteWall2NE:true
+┗:Tiles/whiteWall2SW:true
+┛:Tiles/whiteWall2SE:true
+_:Tiles/whiteWall2N:true
+-:Tiles/whiteWall2S:true
+|:Tiles/whiteWall2E:true
+i:Tiles/whiteWall2W:true
+.:Tiles/Carpet:false
+T:Tiles/Furniture/Table:true
+V:Tiles/Furniture/TableWithTV:true:1
+S:Tiles/Furniture/Couch1:true
+Q:Tiles/Furniture/Couch2:true
+P:Tiles/Furniture/Couch3:true
