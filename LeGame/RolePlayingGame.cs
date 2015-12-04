@@ -4,11 +4,11 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using LeGame.Models.Characters;
 using LeGame.Models.Characters.Player;
-using LeGame.Models.Levels;
 using LeGame.Models.LevelAssets;
 using System;
 using System.Collections.Generic;
 using LeGame.Interfaces;
+using LeGame.Models;
 
 namespace LeGame
 {
@@ -65,7 +65,7 @@ namespace LeGame
                 GlobalVariables.WINDOW_HEIGHT/2 - testObject.Height / 2);
             
             testChar = new TestChar(pos, "Pesho", 100, 100, 5, testObject, testLevel);
-            testLevel = new Level(@"..\..\..\Content\Maps\testMap2.txt",testChar, Content);
+            testLevel = new Level(@"..\..\..\Content\Maps\testMap2.txt", testChar, Content);
             testChar.Level = testLevel;
         }
 
@@ -105,7 +105,8 @@ namespace LeGame
             // TODO: Add your drawing code here
             spriteBatch.Begin();
            
-            testLevel.Tiles.ForEach(t => spriteBatch.Draw(t.Image, t.Position));
+            testLevel.Tiles.ForEach(t => spriteBatch.Draw(t.Texture, t.Position));
+            testLevel.Assets.ForEach(t => spriteBatch.Draw(t.Texture, t.Position));
             spriteBatch.Draw(testChar.Texture, testChar.Position, Color.White);
 
             spriteBatch.End();

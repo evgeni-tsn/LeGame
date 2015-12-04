@@ -9,18 +9,15 @@ using LeGame.Interfaces;
 namespace LeGame.Models.LevelAssets
 {
     //class for all the interactable assets other than tiles
-    class Asset : GameObject, ICollisionable
+    public class Asset : GameObject, ICollisionable
     {
-        public bool CanCollide
-        {
-            get { return CanCollide; }
-            set { CanCollide = value; }
-        }
+        public bool CanCollide { get; set; }
+        public int DrawPriority { get; set; }
 
-        public Asset(Vector2 position, string displayName, Texture2D texture)
+        public Asset(Vector2 position, string displayName, Texture2D texture, int drawPriority)
             : base(position, displayName, texture)
         {
-
+            this.DrawPriority = drawPriority;
         }
 
 
