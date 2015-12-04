@@ -6,16 +6,14 @@ using Microsoft.Xna.Framework.Content;
 
 namespace LeGame.Models
 {
-    public class Level
+    public class Level 
     {
         Character character;
         List<Asset> assets = new List<Asset>();
         List<Tile> tiles = new List<Tile>();
-        ContentManager content;
 
         public Level(string path, Character character, ContentManager content)
         {
-            this.Content = content;
             this.Character = character;
 
             AssetBuilder assetBuilder = new AssetBuilder(content, path);
@@ -43,13 +41,6 @@ namespace LeGame.Models
             get { return tiles; }
             private set{this.tiles = value;}
 
-        }
-
-        public ContentManager Content
-        {
-            get { return content; }
-            private set { this.content = value; }
-            
         }
     }
 }

@@ -27,11 +27,12 @@ namespace LeGame.Models
         public Vector2 Position { get; set; }
         public Rectangle BoundingBox
         {
-            get { return new Rectangle(
-                (int)Position.X,
-                (int)this.Position.Y,
-                this.Texture.Width,
-                this.Texture.Height
+            get
+            { return new Rectangle(
+                (int)(Position.X + 1),
+                (int)(this.Position.Y + 1),
+                (int)(this.Texture.Width -1 ),
+                (int)(this.Texture.Height -1 )
                 );
                 }
         }

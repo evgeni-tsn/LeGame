@@ -54,7 +54,6 @@ namespace LeGame.Models.LevelAssets
 
                     string textureFile = parameters[0];
                     bool hasCollision = parameters[1].Equals("true");
-
                     int drawPriority = parameters.Length > 2 ? int.Parse(parameters[2]) : 0;
                     var texture = content.Load<Texture2D>(textureFile);
                     var position = new Vector2(col * 32, row * 32);
@@ -72,7 +71,6 @@ namespace LeGame.Models.LevelAssets
         }
 
         // Properties
-
         public List<Asset> Assets
         {
             get { return this.assets; }
