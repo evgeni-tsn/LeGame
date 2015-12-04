@@ -7,7 +7,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using LeGame.Handlers;
-using LeGame.Models.Levels;
 
 namespace LeGame.Models.Characters
 {
