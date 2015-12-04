@@ -12,13 +12,13 @@ namespace LeGame.Handlers
         public static Object Collide(Character character)
         {
             List<Rectangle> objectRects = new List<Rectangle>();
-            foreach (var item in character.Level.Tiles)
+            foreach (var asset in character.Level.Assets)
             {
-                Rectangle obj = new Rectangle((int)item.Position.X, (int)item.Position.Y, item.Image.Width, item.Image.Height);
+                Rectangle obj = new Rectangle((int)asset.Position.X, (int)asset.Position.Y, asset.Texture.Width, asset.Texture.Height);
                 Rectangle playerRec = character.BoundingBox;
-                if (item.CanCollide == true && playerRec.Intersects(obj))
+                if (asset.CanCollide == true && playerRec.Intersects(obj))
                 {
-                    return item;
+                    return asset;
                 }
             }
             return 1;
