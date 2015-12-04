@@ -20,7 +20,7 @@ namespace LeGame.Models
             this.DisplayName = displayName;
             this.Texture = texture;
         }
-        
+
         public Texture2D Texture { get; set; }
         public string Id { get; set; }
         public string DisplayName { get; set; }

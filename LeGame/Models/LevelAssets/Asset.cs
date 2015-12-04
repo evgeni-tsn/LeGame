@@ -18,7 +18,10 @@ namespace LeGame.Models.LevelAssets
             : base(position, displayName, texture)
         {
             this.DrawPriority = drawPriority;
+
             this.CanCollide = true;
+
+
         }
 
 

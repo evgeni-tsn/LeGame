@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+ 
 using Microsoft.Xna.Framework.Input;
 using LeGame.Models.Characters;
 using LeGame.Interfaces;
 using LeGame.Models;
+
+ 
 
 namespace LeGame.Handlers
 {
@@ -14,11 +17,12 @@ namespace LeGame.Handlers
     {
         public static Object Collide(Character character)
         {
-            
+
             List<Rectangle> objectRects = new List<Rectangle>();
             foreach (var asset in character.Level.Assets)
             {
                 Rectangle obj = new Rectangle((int)asset.Position.X, (int)asset.Position.Y, asset.Texture.Width, asset.Texture.Height);
+ 
                 
                 if ((asset is ICollisionable || asset is IPickable) && character.BoundingBox.Intersects(obj))
                 {
@@ -71,7 +75,7 @@ namespace LeGame.Handlers
                     character.Level.Assets.Remove(item);
                 }
             }
-           
+
         }
     }
 }

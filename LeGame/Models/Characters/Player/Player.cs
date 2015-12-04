@@ -31,6 +31,7 @@ namespace LeGame.Models.Characters.Player
                     switch (key)
                     {
                         case Keys.D:
+
                             MovementHandler.MoveRight(this);
                             break;
                         case Keys.W:
@@ -44,6 +45,8 @@ namespace LeGame.Models.Characters.Player
                             break;
                     }
                     CollisionHandler.Reaction(this, key);
+                    
+
                 }
             }
         }

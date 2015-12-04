@@ -9,7 +9,9 @@ namespace LeGame.Models
     public class Level
     {
         Character character;
+
         List<GameObject> assets = new List<GameObject>();
+
         List<Tile> tiles = new List<Tile>();
         ContentManager content;
 
@@ -17,11 +19,8 @@ namespace LeGame.Models
         {
             this.Content = content;
             this.Character = character;
-
             AssetBuilder assetBuilder = new AssetBuilder(content, path);
-            
             this.Assets = assetBuilder.Assets;
-
             //should use method GenerateTiles
             this.Tiles = assetBuilder.Tiles;
         }
@@ -32,7 +31,9 @@ namespace LeGame.Models
             private set { character = value; }
         }
 
+
         public List<GameObject> Assets
+
         {
             get { return assets; }
             private set { this.assets = value; }
