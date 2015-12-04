@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using LeGame.Interfaces;
 using LeGame.Models;
+using LeGame.Models.Items.Gold;
 
 namespace LeGame
 {
@@ -23,6 +24,7 @@ namespace LeGame
         Texture2D testObject;
         Character testChar;
         private Level testLevel;
+        Texture2D testItem;
 
         public RolePlayingGame()
         {
@@ -54,7 +56,9 @@ namespace LeGame
             spriteBatch = new SpriteBatch(GraphicsDevice);
             
             
-            testObject = Content.Load<Texture2D>(@"TestObjects/testChar");            
+            testObject = Content.Load<Texture2D>(@"TestObjects/testChar");
+            testItem = Content.Load<Texture2D>(@"TestObjects/coin");
+            GoldCoin coin = new GoldCoin(new Vector2(300, 300), "Coin", testItem);
 
             graphics.PreferredBackBufferWidth = GlobalVariables.WINDOW_WIDTH; // set this value to the desired width of your window
             graphics.PreferredBackBufferHeight = GlobalVariables.WINDOW_HEIGHT;   // set this value to the desired height of your window
@@ -66,6 +70,7 @@ namespace LeGame
             
             testChar = new TestChar(pos, "Pesho", 100, 100, 5, testObject, testLevel);
             testLevel = new Level(@"..\..\..\Content\Maps\testMap2.txt", testChar, Content);
+            testLevel.Assets.Add(coin);
             testChar.Level = testLevel;
         }
 

@@ -47,14 +47,17 @@
     <Compile Include="Handlers\MovementHandler.cs" />
     <Compile Include="Interfaces\ICharacter.cs" />
     <Compile Include="Interfaces\ICollisionable.cs" />
+    <Compile Include="Interfaces\IPickable.cs" />
     <Compile Include="Models\Characters\Character.cs" />
     <Compile Include="Models\Characters\Player\Player.cs" />
     <Compile Include="Models\Characters\Player\TestChar.cs" />
     <Compile Include="Models\Items\Food\Food.cs" />
     <Compile Include="Models\GameObject.cs" />
+    <Compile Include="Models\Items\PickableItems\GoldCoin.cs" />
     <Compile Include="Models\Items\HealingItem.cs" />
     <Compile Include="Models\Items\Medicine\Medicine.cs" />
     <Compile Include="Models\Items\Medicine\SmallAid.cs" />
+    <Compile Include="Models\Items\PickableItem.cs" />
     <Compile Include="Models\Items\Weapons\MeleeWeapon.cs" />
     <Compile Include="Models\Items\Projectiles\Grenade.cs" />
     <Compile Include="Models\Items\Projectiles\LaserBlast.cs" />
