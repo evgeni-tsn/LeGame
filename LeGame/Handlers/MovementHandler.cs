@@ -92,10 +92,6 @@ namespace LeGame.Handlers
                 tempy.Y = GlobalVariables.WINDOW_HEIGHT - character.Texture.Height;
                 character.Position = tempy;
             }
-        }
-
-        
-
-        
+        }     
     }
 }

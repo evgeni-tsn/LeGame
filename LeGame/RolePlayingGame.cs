@@ -5,6 +5,10 @@ using Microsoft.Xna.Framework.Input;
 using LeGame.Models.Characters;
 using LeGame.Models.Characters.Player;
 using LeGame.Models.Levels;
+using LeGame.Models.LevelAssets;
+using System;
+using System.Collections.Generic;
+using LeGame.Interfaces;
 
 namespace LeGame
 {
@@ -49,7 +53,7 @@ namespace LeGame
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             
-            testLevel = new Level(@"..\..\..\Content\Maps\testMap2.txt", Content);
+            
             testObject = Content.Load<Texture2D>(@"TestObjects/testChar");            
 
             graphics.PreferredBackBufferWidth = GlobalVariables.WINDOW_WIDTH; // set this value to the desired width of your window
@@ -61,6 +65,7 @@ namespace LeGame
                 GlobalVariables.WINDOW_HEIGHT/2 - testObject.Height / 2);
             
             testChar = new TestChar(pos, "Pesho", 100, 100, 5, testObject, testLevel);
+            testLevel = new Level(@"..\..\..\Content\Maps\testMap2.txt",testChar, Content);
             testChar.Level = testLevel;
         }
 
@@ -99,7 +104,7 @@ namespace LeGame
             Vector2 origin = new Vector2(testObject.Width / 2, testObject.Height / 2);
             // TODO: Add your drawing code here
             spriteBatch.Begin();
-
+           
             testLevel.Tiles.ForEach(t => spriteBatch.Draw(t.Image, t.Position));
             spriteBatch.Draw(testChar.Texture, testChar.Position, Color.White);
 
