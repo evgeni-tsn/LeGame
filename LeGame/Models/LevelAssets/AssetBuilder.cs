@@ -25,7 +25,7 @@ namespace LeGame.Models.LevelAssets
             if (separatorLocation == -1)
             {
                 // TODO: Make a new exception for this case.
-                throw new Exception($"Map file \"{mapFilePath}\" doesn't contain \"Legend:\" separator.");
+                //throw new Exception($"Map file \"{mapFilePath}\" doesn't contain \"Legend:\" separator.");
             }
 
             List<string> mapRows = mapFile
@@ -47,7 +47,7 @@ namespace LeGame.Models.LevelAssets
                     if (!legend.ContainsKey(currentChar))
                     {
                         // TODO: Make a new exception for this case.
-                        throw new Exception($"Invalid legend in \"{mapFilePath}\" file.");
+                        //throw new Exception($"Invalid legend in \"{mapFilePath}\" file.");
                     }
 
                     string[] parameters = legend[currentChar].Split(':');
@@ -90,7 +90,7 @@ namespace LeGame.Models.LevelAssets
         {
             if (!File.Exists(textFilePath))
             {
-                throw new FileNotFoundException($"The supplied file path \"{textFilePath}\" for the tile builder is invalid.");
+                //throw new FileNotFoundException($"The supplied file path \"{textFilePath}\" for the tile builder is invalid.");
             }
 
             return File.ReadAllLines(textFilePath).ToList();
