@@ -14,7 +14,9 @@ namespace LeGame.Models.LevelAssets
 {
     public class AssetBuilder
     {
-        private List<Asset> assets;
+
+        private List<GameObject> assets;
+
         private List<Tile> tiles;
 
         // Constructor
@@ -36,7 +38,7 @@ namespace LeGame.Models.LevelAssets
                 .Skip(separatorLocation + 1)
                 .ToDictionary(item => item[0], item => item.Substring(2));
 
-            this.Assets = new List<Asset>();
+            this.Assets = new List<GameObject>();
             this.Tiles = new List<Tile>();
             for (int row = 0; row < mapRows.Count; row++)
             {
@@ -71,7 +73,7 @@ namespace LeGame.Models.LevelAssets
         }
 
         // Properties
-        public List<Asset> Assets
+        public List<GameObject> Assets
         {
             get { return this.assets; }
             private set { this.assets = value; }
@@ -93,6 +95,8 @@ namespace LeGame.Models.LevelAssets
 
             return File.ReadAllLines(textFilePath).ToList();
         }
+
+        
 
         //public List<Tile> GenerateAssets()
         //{
@@ -150,5 +154,6 @@ namespace LeGame.Models.LevelAssets
         //    // assets = assets.OrderBy(t => t.DrawPriority).ToList(); removed due to compatability issues, reuse possible lower in the hierarchy
         //    return assets;
         //}
+
     }
 }

@@ -20,8 +20,6 @@ namespace LeGame.Models.LevelAssets
             this.DrawPriority = drawPriority;
             this.CanCollide = true;
         }
-
-
         
     }
 }

@@ -20,7 +20,7 @@ namespace LeGame.Models
             this.DisplayName = displayName;
             this.Texture = texture;
         }
-         
+
         public Texture2D Texture { get; set; }
         public string Id { get; set; }
         public string DisplayName { get; set; }
@@ -28,13 +28,13 @@ namespace LeGame.Models
         public Rectangle BoundingBox
         {
             get
-            { return new Rectangle(
-                (int)(Position.X + 1),
-                (int)(this.Position.Y + 1),
-                (int)(this.Texture.Width -1 ),
-                (int)(this.Texture.Height -1 )
-                );
-                }
+            {
+                return new Rectangle(
+                    (int) (Position.X + 3),
+                    (int) (this.Position.Y + 3),
+                    (int) (this.Texture.Width - 6),
+                    (int) (this.Texture.Height - 5));
+            }
         }
         
     }

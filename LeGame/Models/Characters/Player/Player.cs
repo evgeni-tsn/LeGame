@@ -31,22 +31,22 @@ namespace LeGame.Models.Characters.Player
                     switch (key)
                     {
                         case Keys.D:
-                           
+
                             MovementHandler.MoveRight(this);
                             break;
                         case Keys.W:
-                            
                             MovementHandler.MoveUp(this);
                             break;
                         case Keys.S:
-                           
                             MovementHandler.MoveDown(this);
                             break;
                         case Keys.A:
-                            
                             MovementHandler.MoveLeft(this);
                             break;
                     }
+                    CollisionHandler.Reaction(this, key);
+                    
+
                 }
             }
         }
