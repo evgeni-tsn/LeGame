@@ -85,7 +85,7 @@ namespace LeGame.Handlers
         {
             return GetTexture(t).Width;
         }
-        // Get height
+        // Get Height
         public static int GetHeight(GameObject obj)
         {
             return GetTexture(obj).Height;

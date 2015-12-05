@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.IO;
+using LeGame.Exceptions;
 using LeGame.Models;
 using LeGame.Models.LevelAssets;
 using Microsoft.Xna.Framework.Content;
@@ -25,8 +26,7 @@ namespace LeGame.Models.LevelAssets
             int separatorLocation = mapFile.FindIndex(s => s.Contains("Legend:"));
             if (separatorLocation == -1)
             {
-                // TODO: Make a new exception for this case.
-                //throw new Exception($"Map file \"{mapFilePath}\" doesn't contain \"Legend:\" separator.");
+                throw new MapException(string.Format(Messages.MissingLegendMap,mapFilePath));
             }
 
             List<string> mapRows = mapFile
@@ -47,8 +47,7 @@ namespace LeGame.Models.LevelAssets
 
                     if (!legend.ContainsKey(currentChar))
                     {
-                        // TODO: Make a new exception for this case.
-                        //throw new Exception($"Invalid legend in \"{mapFilePath}\" file.");
+                        throw new MapException(string.Format(Messages.InvalidLegendMap, mapFilePath));
                     }
 
                     string[] parameters = legend[currentChar].Split(':');
@@ -100,7 +99,7 @@ namespace LeGame.Models.LevelAssets
         {
             if (!File.Exists(textFilePath))
             {
-                //throw new FileNotFoundException($"The supplied file path \"{textFilePath}\" for the tile builder is invalid.");
+                throw new FileNotFoundException("The supplied file path \"{0}\" for the tile builder is invalid.",textFilePath);
             }
 
             return File.ReadAllLines(textFilePath).ToList();

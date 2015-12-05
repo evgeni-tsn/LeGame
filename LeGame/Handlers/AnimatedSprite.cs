@@ -6,6 +6,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using LeGame.Models.Characters;
+using LeGame.Interfaces;
+using LeGame.Models.Characters.Enemies;
 
 namespace LeGame.Handlers
 {
@@ -19,11 +21,19 @@ namespace LeGame.Handlers
 
         private Dictionary<Keys, int[]> Frames = new Dictionary<Keys, int[]>()
         {
-            { Keys.D, new int[] { 6, 7, 8 } },      //RightFrames
-            { Keys.W, new int[] { 9, 10, 11 } },    //LeftFrames
-            { Keys.A, new int[] { 3, 4, 5 } },      //DownFrames
-            { Keys.S, new int[] { 0, 1, 2 } },      //UpFrames
-        }; 
+            { Keys.D, new int[] { 6, 7, 8 } },          //RightFrames
+            { Keys.W, new int[] { 9, 10, 11 } },        //LeftFrames
+            { Keys.A, new int[] { 3, 4, 5 } },          //DownFrames
+            { Keys.S, new int[] { 0, 1, 2 } },          //UpFrames
+        };
+
+        private Dictionary<string, int[]> AIFrames = new Dictionary<string, int[]>()
+        {
+            { "Right", new int[] { 6, 7, 8 } },
+            { "Up", new int[] { 9, 10, 11 } },
+            { "Left", new int[] { 3, 4, 5 } }, 
+            { "Down", new int[] { 0, 1, 2 } },
+        };
 
         private int timeSinceLastFrame = 0;
         private int timePerFrame = 150;
@@ -39,7 +49,15 @@ namespace LeGame.Handlers
 
         public void Update(GameTime gameTime, Character character)
         {
-            SpriteRotations(gameTime);
+            if(character is ICollisionable)
+            {
+                AISpriteRotaions(gameTime, (character as SampleEnemy).Direction);
+            }
+            else
+            {
+                PlayerSpriteRotations(gameTime);
+            }
+            
         }
 
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
@@ -57,15 +75,14 @@ namespace LeGame.Handlers
             spriteBatch.End();
         }
 
-        public int SpriteRotations(GameTime gameTime)
+        public int PlayerSpriteRotations(GameTime gameTime) 
         {
             timeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
             if (timeSinceLastFrame < timePerFrame)
             {
                 return currentFrame;
             }
-            timeSinceLastFrame -= timePerFrame;
-
+            timeSinceLastFrame = gameTime.ElapsedGameTime.Milliseconds;
 
             foreach (var key in Frames.Keys)
             {
@@ -83,6 +100,34 @@ namespace LeGame.Handlers
                     {
                         currentFrame = Frames[key][0];
                     }
+                }
+            }
+
+            return currentFrame;
+        }
+
+        public int AISpriteRotaions(GameTime gameTime, string direction)
+        {
+            timeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
+            if (timeSinceLastFrame < timePerFrame)
+            {
+                return currentFrame;
+            }
+            timeSinceLastFrame = gameTime.ElapsedGameTime.Milliseconds;
+
+            foreach (var key in AIFrames.Keys.Where(key => direction.Equals(key)))
+            {
+                if (AIFrames[key].Contains(currentFrame))
+                {
+                    currentFrame++;
+                    if (currentFrame == AIFrames[key][2] + 1)
+                    {
+                        currentFrame = AIFrames[key][0];
+                    }
+                }
+                else
+                {
+                    currentFrame = AIFrames[key][0];
                 }
             }
 

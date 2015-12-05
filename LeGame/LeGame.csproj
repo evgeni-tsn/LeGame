@@ -38,11 +38,14 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>LeGame.Program</StartupObject>
+    <StartupObject>LeGame.RolePlayingGame</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Engine\Messages.cs" />
     <Compile Include="Exceptions\GameException.cs" />
-    <Compile Include="GlobalVariables.cs" />
+    <Compile Include="Exceptions\MapException.cs" />
+    <Compile Include="Engine\GlobalVariables.cs" />
+    <Compile Include="Handlers\AIPathfinder.cs" />
     <Compile Include="Handlers\AnimatedSprite.cs" />
     <Compile Include="Handlers\CollisionHandler.cs" />
     <Compile Include="Handlers\GFXHandler.cs" />
@@ -51,11 +54,12 @@
     <Compile Include="Interfaces\ICollisionable.cs" />
     <Compile Include="Interfaces\IPickable.cs" />
     <Compile Include="Models\Characters\Character.cs" />
+    <Compile Include="Models\Characters\Enemies\SampleEnemy.cs" />
     <Compile Include="Models\Characters\Player\Player.cs" />
     <Compile Include="Models\Characters\Player\TestChar.cs" />
     <Compile Include="Models\GameObject.cs" />
     <Compile Include="Models\Items\PickableItems\GoldCoin.cs" />
-    <Compile Include="Models\Items\PickableItem.cs" />
+    <Compile Include="Models\Items\PickableItems\PickableItem.cs" />
     <Compile Include="Models\Items\Weapons\MeleeWeapon.cs" />
     <Compile Include="Models\Items\Projectiles\Grenade.cs" />
     <Compile Include="Models\Items\Projectiles\LaserBlast.cs" />
@@ -73,8 +77,8 @@
     <Compile Include="Models\LevelAssets\Asset.cs" />
     <Compile Include="Models\LevelAssets\AssetBuilder.cs" />
     <Compile Include="Models\LevelAssets\Tile.cs" />
+    <Compile Include="Engine\GameEngine.cs" />
     <Compile Include="RolePlayingGame.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -91,7 +95,6 @@
     <MonoGameContentReference Include="Content\Content.mgcb" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\Characters\Enemies\" />
     <Folder Include="Models\Items\Medicine\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

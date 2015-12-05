@@ -10,7 +10,9 @@ namespace LeGame.Models
     {
         Character character;
 
-        List<GameObject> assets = new List<GameObject>();
+        private List<GameObject> assets = new List<GameObject>();
+        private List<Character> enemies;
+
 
         List<Tile> tiles = new List<Tile>();
 
@@ -21,6 +23,13 @@ namespace LeGame.Models
 
             this.Assets = assetBuilder.Assets;
             this.Tiles = assetBuilder.Tiles;
+            this.Enemies = new List<Character>();
+        }
+
+        public List<Character> Enemies
+        {
+            get { return enemies; }
+            private set { enemies = value; }
         }
 
         public Character Character
