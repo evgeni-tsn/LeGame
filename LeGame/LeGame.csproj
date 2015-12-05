@@ -44,6 +44,7 @@
     <Compile Include="Exceptions\GameException.cs" />
     <Compile Include="GlobalVariables.cs" />
     <Compile Include="Handlers\CollisionHandler.cs" />
+    <Compile Include="Handlers\GFXHandler.cs" />
     <Compile Include="Handlers\MovementHandler.cs" />
     <Compile Include="Interfaces\ICharacter.cs" />
     <Compile Include="Interfaces\ICollisionable.cs" />

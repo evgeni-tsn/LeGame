@@ -13,8 +13,8 @@ namespace LeGame.Models.Items
 {
     public abstract class PickableItem : GameObject, IPickable
     {
-        public PickableItem(Vector2 position, string displayName, Texture2D texture)
-            : base(position, displayName, texture)
+        public PickableItem(Vector2 position, string type)
+            : base(position, type)
         {
 
         }

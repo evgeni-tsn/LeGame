@@ -13,8 +13,8 @@ namespace LeGame.Models.Characters.Player
         private Level level;
 
         
-        public TestChar(Vector2 position, string displayName, int maxHealth, int currentHealth, int speed, Texture2D texture, Level level)
-            : base(position, displayName, maxHealth, currentHealth, speed, texture, level)
+        public TestChar(Vector2 position, string type, int maxHealth, int currentHealth, int speed, Level level)
+            : base(position, type, maxHealth, currentHealth, speed, level)
         {
             
         }

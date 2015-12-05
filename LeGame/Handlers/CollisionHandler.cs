@@ -8,8 +8,8 @@ using Microsoft.Xna.Framework.Input;
 using LeGame.Models.Characters;
 using LeGame.Interfaces;
 using LeGame.Models;
+using Microsoft.Xna.Framework.Graphics;
 
- 
 
 namespace LeGame.Handlers
 {
@@ -23,10 +23,11 @@ namespace LeGame.Handlers
                 Rectangle obj = new Rectangle(
                     (int)asset.Position.X,
                     (int)asset.Position.Y,
-                    asset.Texture.Width,
-                    asset.Texture.Height);
+                    GfxHandler.GetWidth(asset),
+                    GfxHandler.GetHeight(asset));
                 
-                if ((asset is ICollisionable || asset is IPickable) && character.BoundingBox.Intersects(obj))
+                if ((asset is ICollisionable || asset is IPickable) 
+                    && GfxHandler.GetBBox(character).Intersects(obj))
                 {
                     return asset;
                 }

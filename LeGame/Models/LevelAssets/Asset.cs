@@ -14,8 +14,8 @@ namespace LeGame.Models.LevelAssets
         public bool CanCollide { get; set; }
         public int DrawPriority { get; set; }
 
-        public Asset(Vector2 position, string displayName, Texture2D texture, int drawPriority)
-            : base(position, displayName, texture)
+        public Asset(Vector2 position, string type, int drawPriority)
+            : base(position, type)
         {
             this.DrawPriority = drawPriority;
             this.CanCollide = true;

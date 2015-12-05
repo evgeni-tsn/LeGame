@@ -18,17 +18,16 @@ namespace LeGame.Models
         {
             this.Character = character;
             AssetBuilder assetBuilder = new AssetBuilder(content, path);
+
             this.Assets = assetBuilder.Assets;
-            //should use method GenerateTiles
             this.Tiles = assetBuilder.Tiles;
         }
 
         public Character Character
         {
             get { return character; }
-            private set { character = value; }
+            private set { this.character = value; }
         }
-
 
         public List<GameObject> Assets
 
@@ -40,8 +39,7 @@ namespace LeGame.Models
         public List<Tile> Tiles
         {
             get { return tiles; }
-            private set{this.tiles = value;}
-
+            private set { this.tiles = value; }
         }
     }
 }

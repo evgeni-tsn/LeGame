@@ -13,16 +13,15 @@ namespace LeGame.Models.LevelAssets
     {
         private Vector2 position;
         private string id;
-        private string displayName;
+        private string type;
 
-        public Tile(Vector2 position, Texture2D texture, int drawPriority)
+        public Tile(Vector2 position, string type, int drawPriority)
             : this()
         {
             this.Position = position;
-            this.Texture = texture;
             this.DrawPriority = drawPriority;
-            this.Id = "Tile";
-            this.DisplayName = "Nothing right now"; //maybe deserves a logical improvement?
+            this.Type = type;
+            //this.Id = "Tile";
         }
 
         public  Vector2 Position
@@ -37,13 +36,12 @@ namespace LeGame.Models.LevelAssets
             set { this.id = value; }
         }
 
-        public string DisplayName
+        public string Type
         {
-            get { return this.displayName; }
-            set { this.displayName = value; }
+            get { return this.type; }
+            set { this.type = value; }
         }
-
-        public Texture2D Texture { get; set; }
+        
         public int DrawPriority { get; set; }
         //public bool CanCollide { get; set; } // should be removed as well
     }
