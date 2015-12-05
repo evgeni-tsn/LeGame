@@ -6,6 +6,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using LeGame.Models.Characters;
+using LeGame.Interfaces;
+using LeGame.Models.Characters.Enemies;
 
 namespace LeGame.Handlers
 {
@@ -35,7 +37,15 @@ namespace LeGame.Handlers
 
         public void Update(GameTime gameTime, Character character)
         {
-            SpriteRotations(gameTime);
+            if(character is ICollisionable)
+            {
+                AISpriteRotaions(gameTime, (character as SampleEnemy).Direction);
+            }
+            else
+            {
+                PlayerSpriteRotations(gameTime);
+            }
+            
             
         }
 
@@ -53,7 +63,7 @@ namespace LeGame.Handlers
             spriteBatch.Draw(Texture, destinationRectangle, sourceRectangle,Color.White);
             spriteBatch.End();
         }
-        public int SpriteRotations(GameTime gameTime)
+        public int PlayerSpriteRotations(GameTime gameTime) 
         {
             timeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
 
@@ -61,7 +71,7 @@ namespace LeGame.Handlers
             {
                 if (timeSinceLastFrame >= timePerFrame)
                 {
-                    timeSinceLastFrame -= timePerFrame;
+                    timeSinceLastFrame = gameTime.ElapsedGameTime.Milliseconds;
                     if (RightFrames.Contains(currentFrame))
                     {
                         currentFrame++;
@@ -81,7 +91,7 @@ namespace LeGame.Handlers
             {
                 if (timeSinceLastFrame >= timePerFrame)
                 {
-                    timeSinceLastFrame -= timePerFrame;
+                    timeSinceLastFrame = gameTime.ElapsedGameTime.Milliseconds;
                     if (UpFrames.Contains(currentFrame))
                     {
                         currentFrame++;
@@ -101,7 +111,7 @@ namespace LeGame.Handlers
             {
                 if (timeSinceLastFrame >= timePerFrame)
                 {
-                    timeSinceLastFrame -= timePerFrame;
+                    timeSinceLastFrame = gameTime.ElapsedGameTime.Milliseconds;
                     if (LeftFrames.Contains(currentFrame))
                     {
                         currentFrame++;
@@ -121,7 +131,94 @@ namespace LeGame.Handlers
             {
                 if (timeSinceLastFrame >= timePerFrame)
                 {
-                    timeSinceLastFrame -= timePerFrame;
+                    timeSinceLastFrame = gameTime.ElapsedGameTime.Milliseconds;
+                    if (DownFrames.Contains(currentFrame))
+                    {
+                        currentFrame++;
+                        if (currentFrame >= DownFrames[2] + 1)
+                        {
+                            currentFrame = DownFrames[0];
+                        }
+                    }
+                    else
+                    {
+                        currentFrame = DownFrames[0];
+                    }
+
+                }
+
+            }
+            return currentFrame;
+        }
+        public int AISpriteRotaions(GameTime gameTime, string direction)
+        {
+            timeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
+
+            if (direction == "Right")
+            {
+                if (timeSinceLastFrame >= timePerFrame)
+                {
+                    timeSinceLastFrame = gameTime.ElapsedGameTime.Milliseconds;
+                    if (RightFrames.Contains(currentFrame))
+                    {
+                        currentFrame++;
+                        if (currentFrame == RightFrames[2] + 1)
+                        {
+                            currentFrame = RightFrames[0];
+                        }
+                    }
+                    else
+                    {
+                        currentFrame = RightFrames[0];
+                    }
+                }
+
+            }
+            if (direction == "Up")
+            {
+                if (timeSinceLastFrame >= timePerFrame)
+                {
+                    timeSinceLastFrame = gameTime.ElapsedGameTime.Milliseconds;
+                    if (UpFrames.Contains(currentFrame))
+                    {
+                        currentFrame++;
+                        if (currentFrame >= UpFrames[2] + 1)
+                        {
+                            currentFrame = UpFrames[0];
+                        }
+                    }
+                    else
+                    {
+                        currentFrame = UpFrames[0];
+                    }
+                }
+
+            }
+            if (direction == "Left")
+            {
+                if (timeSinceLastFrame >= timePerFrame)
+                {
+                    timeSinceLastFrame = gameTime.ElapsedGameTime.Milliseconds;
+                    if (LeftFrames.Contains(currentFrame))
+                    {
+                        currentFrame++;
+                        if (currentFrame >= LeftFrames[2] + 1)
+                        {
+                            currentFrame = LeftFrames[0];
+                        }
+                    }
+                    else
+                    {
+                        currentFrame = LeftFrames[0];
+                    }
+                }
+
+            }
+            if (direction == "Down")
+            {
+                if (timeSinceLastFrame >= timePerFrame)
+                {
+                    timeSinceLastFrame = gameTime.ElapsedGameTime.Milliseconds;
                     if (DownFrames.Contains(currentFrame))
                     {
                         currentFrame++;

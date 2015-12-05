@@ -2,7 +2,7 @@
 
 namespace LeGame.Exceptions
 {
-    public abstract class GameException : ApplicationException
+    public abstract class GameException : Exception
     {
         protected GameException(string message) 
             : base(message)
