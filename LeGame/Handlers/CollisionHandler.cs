@@ -8,8 +8,8 @@ using Microsoft.Xna.Framework.Input;
 using LeGame.Models.Characters;
 using LeGame.Interfaces;
 using LeGame.Models;
+using Microsoft.Xna.Framework.Graphics;
 
- 
 
 namespace LeGame.Handlers
 {
@@ -17,14 +17,17 @@ namespace LeGame.Handlers
     {
         public static Object Collide(Character character)
         {
-
             List<Rectangle> objectRects = new List<Rectangle>();
             foreach (var asset in character.Level.Assets)
             {
-                Rectangle obj = new Rectangle((int)asset.Position.X, (int)asset.Position.Y, asset.Texture.Width, asset.Texture.Height);
- 
+                Rectangle obj = new Rectangle(
+                    (int)asset.Position.X,
+                    (int)asset.Position.Y,
+                    GfxHandler.GetWidth(asset),
+                    GfxHandler.GetHeight(asset));
                 
-                if ((asset is ICollisionable || asset is IPickable) && character.BoundingBox.Intersects(obj))
+                if ((asset is ICollisionable || asset is IPickable) 
+                    && GfxHandler.GetBBox(character).Intersects(obj))
                 {
                     return asset;
                 }
@@ -34,18 +37,14 @@ namespace LeGame.Handlers
                 }
             }
             return 1;
-           
-           
         }
         public static void Reaction(Character character, Keys key)
         {
-            if(CollisionHandler.Collide(character) !=(object)1)
+            if (CollisionHandler.Collide(character) != (object)1)
             {
                  Vector2 temp = new Vector2(character.Position.X, character.Position.Y);
                
                 //movement reactions
-            
-                
             
                 if (CollisionHandler.Collide(character) is ICollisionable && key == Keys.D)
                 {
@@ -68,7 +67,7 @@ namespace LeGame.Handlers
                     character.Position = temp;
                 }
             
-                if(CollisionHandler.Collide(character) is IPickable)
+                if (CollisionHandler.Collide(character) is IPickable)
                 {
                     GameObject item = (GameObject)CollisionHandler.Collide(character);
                     Console.Beep(8000,50); // legit cool gold-pickup sound

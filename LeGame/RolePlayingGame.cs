@@ -7,6 +7,7 @@ using LeGame.Models.Characters.Player;
 using LeGame.Models.LevelAssets;
 using System;
 using System.Collections.Generic;
+using LeGame.Handlers;
 using LeGame.Interfaces;
 using LeGame.Models;
 using LeGame.Models.Items.Gold;
@@ -21,13 +22,10 @@ namespace LeGame
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-
-        Texture2D testObject;
+        
         Character testChar;
         private Level testLevel;
-
-        Texture2D testItem;
-
+        
 
         public RolePlayingGame()
         {
@@ -57,25 +55,19 @@ namespace LeGame
             IsMouseVisible = true;
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            GfxHandler.Initialise(Content);
             
-            
-
-            testObject = Content.Load<Texture2D>(@"TestObjects/testChar");
-            testItem = Content.Load<Texture2D>(@"TestObjects/coin");
-            GoldCoin coin = new GoldCoin(new Vector2(300, 300), "Coin", testItem);
-
-            testObject = Content.Load<Texture2D>(@"TestObjects/testChar");            
-
+            GoldCoin coin = new GoldCoin(new Vector2(300, 300), "TestObjects/coin");
 
             graphics.PreferredBackBufferWidth = GlobalVariables.WINDOW_WIDTH; // set this value to the desired width of your window
             graphics.PreferredBackBufferHeight = GlobalVariables.WINDOW_HEIGHT;   // set this value to the desired height of your window
             graphics.ApplyChanges();
-
-            Vector2 pos = new Vector2(
-                GlobalVariables.WINDOW_WIDTH / 2 - testObject.Width / 2,
-                GlobalVariables.WINDOW_HEIGHT/2 - testObject.Height / 2);
             
-            testChar = new TestChar(pos, "Pesho", 100, 100, 5, testObject, testLevel);
+            Vector2 pos = new Vector2(
+                GlobalVariables.WINDOW_WIDTH / 2 - 16,
+                GlobalVariables.WINDOW_HEIGHT / 2 - 16);
+            testChar = new TestChar(pos, @"TestObjects/testChar", 100, 100, 5, testLevel);
+
             testLevel = new Level(@"..\..\..\Content\Maps\testMap2.txt", testChar, Content);
 
             testLevel.Assets.Add(coin);
@@ -115,13 +107,13 @@ namespace LeGame
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.White);
-            Vector2 origin = new Vector2(testObject.Width / 2, testObject.Height / 2);
+            Vector2 origin = new Vector2(GfxHandler.GetWidth(testChar) / 2, GfxHandler.GetHeight(testChar) / 2);
             // TODO: Add your drawing code here
             spriteBatch.Begin();
            
-            testLevel.Tiles.ForEach(t => spriteBatch.Draw(t.Texture, t.Position));
-            testLevel.Assets.ForEach(t => spriteBatch.Draw(t.Texture, t.Position));
-            spriteBatch.Draw(testChar.Texture, testChar.Position, Color.White);
+            testLevel.Tiles.ForEach(t => spriteBatch.Draw(GfxHandler.GetTexture(t), t.Position));
+            testLevel.Assets.ForEach(t => spriteBatch.Draw(GfxHandler.GetTexture(t), t.Position));
+            spriteBatch.Draw(GfxHandler.GetTexture(testChar), testChar.Position, Color.White);
 
             spriteBatch.End();
 

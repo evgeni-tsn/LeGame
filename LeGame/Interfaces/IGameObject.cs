@@ -12,6 +12,6 @@ namespace LeGame.Interfaces
 
         Vector2 Position { get; set; }
 
-        string DisplayName { get; set; }
+        string Type { get; set; }
     }
 }

@@ -12,8 +12,8 @@ namespace LeGame.Models.Characters
 {
     public abstract class Character : GameObject, IUseWeapon, IKillable, IMovable
     {
-        protected Character(Vector2 position, string displayName, int maxHealth, int currentHealth, int speed, Texture2D texture, Level level)
-            : base(position, displayName, texture)
+        protected Character(Vector2 position, string type, int maxHealth, int currentHealth, int speed, Level level)
+            : base(position, type)
         {
             this.MaxHealth = maxHealth;
             this.CurrentHealth = currentHealth;
