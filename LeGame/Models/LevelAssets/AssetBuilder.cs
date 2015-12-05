@@ -19,8 +19,7 @@ namespace LeGame.Models.LevelAssets
         private List<GameObject> assets;
 
         private List<Tile> tiles;
-
-        // Constructor
+        
         public AssetBuilder(ContentManager content, string mapFilePath)
         {
             List<string> mapFile = ReadMapFile(mapFilePath);
@@ -70,7 +69,6 @@ namespace LeGame.Models.LevelAssets
                 }
             }
         }
-
         // Properties
         public List<GameObject> Assets
         {
