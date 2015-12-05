@@ -14,12 +14,12 @@ namespace LeGame.Handlers
     public static class GfxHandler
     {
         private static Dictionary<string, Texture2D> lib = new Dictionary<string, Texture2D>();
-        private static List<string> FileNames = new List<string>(); 
+        private static List<string> fileNames = new List<string>(); 
 
         public static void Initialise(ContentManager content)
         {
             GetFilenames(GlobalVariables.CONTENT_DIR);
-            foreach (string s in FileNames)
+            foreach (string s in fileNames)
             {
                 string file = s.Substring(17, s.LastIndexOf('.') - 17);
                 file = file.Contains('\\') ? file.Replace('\\', '/') : file;
@@ -36,7 +36,7 @@ namespace LeGame.Handlers
                 {
                     foreach (string file in Directory.GetFiles(dir))
                     {
-                       FileNames.Add(file);
+                       fileNames.Add(file);
                     }
                 }
                 GetFilenames(dir);

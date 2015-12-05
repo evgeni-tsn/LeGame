@@ -38,8 +38,8 @@ namespace LeGame.Models.LevelAssets
                 .Skip(separatorLocation + 1)
                 .ToDictionary(item => item[0], item => item.Substring(2));
 
-            this.Assets = new List<GameObject>();
-            this.Tiles = new List<Tile>();
+            this.assets = new List<GameObject>();
+            this.tiles = new List<Tile>();
             for (int row = 0; row < mapRows.Count; row++)
             {
                 for (int col = 0; col < mapRows[row].Length; col++)
@@ -62,11 +62,11 @@ namespace LeGame.Models.LevelAssets
 
                     if (hasCollision)
                     {
-                        this.Assets.Add(new Asset(position, contentPath, drawPriority));
+                        this.assets.Add(new Asset(position, contentPath, drawPriority));
                     }
                     else
                     {
-                        this.Tiles.Add(new Tile(position, contentPath, drawPriority));
+                        this.tiles.Add(new Tile(position, contentPath, drawPriority));
                     }
                 }
             }
@@ -75,13 +75,25 @@ namespace LeGame.Models.LevelAssets
         // Properties
         public List<GameObject> Assets
         {
-            get { return this.assets; }
+            get
+            {
+                return this.assets
+                .Select(ass => (Asset)ass)
+                .OrderBy(ass => ass.DrawPriority)
+                .Select(ass => (GameObject)ass)
+                .ToList();
+            }
             private set { this.assets = value; }
         }
 
         public List<Tile> Tiles
         {
-            get { return this.tiles; }
+            get
+            {
+                return this.tiles
+                    .OrderBy(till => till.DrawPriority)
+                    .ToList();
+            }
             private set { this.tiles = value; }
         }
 
