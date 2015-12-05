@@ -12,8 +12,8 @@ namespace LeGame.Models.Characters.Player
 {
     public class Player : Character
     {
-        public Player(Vector2 position, string type, int maxHealth, int currentHealth, int speed, Level level) 
-            : base(position, type, maxHealth, currentHealth, speed, level)
+        public Player(Vector2 position, string type, int maxHealth, int currentHealth, int speed, Level level, Texture2D texture) 
+            : base(position, type, maxHealth, currentHealth, speed, level, texture)
         {
         }
 
@@ -42,6 +42,7 @@ namespace LeGame.Models.Characters.Player
                             break;
                     }
                     CollisionHandler.Reaction(this, key);
+                    
                 }
             }
         }

@@ -24,7 +24,9 @@ namespace LeGame
         SpriteBatch spriteBatch;
         
         Character testChar;
+        Texture2D testTex;
         private Level testLevel;
+        private AnimatedSprite animatedSprite;
         
 
         public RolePlayingGame()
@@ -58,15 +60,16 @@ namespace LeGame
             GfxHandler.Initialise(Content);
             
             GoldCoin coin = new GoldCoin(new Vector2(300, 300), "TestObjects/coin");
+            testTex = Content.Load<Texture2D>(@"TestObjects/catSprite");
 
             graphics.PreferredBackBufferWidth = GlobalVariables.WINDOW_WIDTH; // set this value to the desired width of your window
             graphics.PreferredBackBufferHeight = GlobalVariables.WINDOW_HEIGHT;   // set this value to the desired height of your window
             graphics.ApplyChanges();
             
             Vector2 pos = new Vector2(
-                GlobalVariables.WINDOW_WIDTH / 2 - 16,
-                GlobalVariables.WINDOW_HEIGHT / 2 - 16);
-            testChar = new TestChar(pos, @"TestObjects/testChar", 100, 100, 5, testLevel);
+                GlobalVariables.WINDOW_WIDTH / 2 - 90,
+                GlobalVariables.WINDOW_HEIGHT / 2);
+            testChar = new TestChar(pos, @"TestObjects/testChar", 100, 100, 3, testLevel, testTex);
 
             testLevel = new Level(@"..\..\..\Content\Maps\testMap2.txt", testChar, Content);
 
@@ -96,6 +99,7 @@ namespace LeGame
 
             // TODO: Add your update logic here
             testChar.Move();
+            testChar.Sprite.Update(gameTime, testChar);
 
             base.Update(gameTime);
         }
@@ -106,17 +110,18 @@ namespace LeGame
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.White);
+            GraphicsDevice.Clear(Color.Wheat);
             Vector2 origin = new Vector2(GfxHandler.GetWidth(testChar) / 2, GfxHandler.GetHeight(testChar) / 2);
             // TODO: Add your drawing code here
             spriteBatch.Begin();
            
             testLevel.Tiles.ForEach(t => spriteBatch.Draw(GfxHandler.GetTexture(t), t.Position));
             testLevel.Assets.ForEach(t => spriteBatch.Draw(GfxHandler.GetTexture(t), t.Position));
-            spriteBatch.Draw(GfxHandler.GetTexture(testChar), testChar.Position, Color.White);
+            //spriteBatch.Draw(GfxHandler.GetTexture(testChar), testChar.Position, Color.White);
+            
 
             spriteBatch.End();
-
+            testChar.Sprite.Draw(spriteBatch, testChar.Position);
             base.Draw(gameTime);
         }
     }

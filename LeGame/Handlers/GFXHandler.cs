@@ -45,6 +45,7 @@ namespace LeGame.Handlers
         // Get Texture
         public static Texture2D GetTexture(GameObject obj)
         {
+          
             return lib[obj.Type];
         }
 
