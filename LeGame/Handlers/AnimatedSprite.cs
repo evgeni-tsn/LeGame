@@ -17,12 +17,16 @@ namespace LeGame.Handlers
         private int currentFrame;
         private int totalFrames;
 
+        private Dictionary<Keys, int[]> Frames = new Dictionary<Keys, int[]>()
+        {
+            { Keys.D, new int[] { 6, 7, 8 } },      //RightFrames
+            { Keys.W, new int[] { 9, 10, 11 } },    //LeftFrames
+            { Keys.A, new int[] { 3, 4, 5 } },      //DownFrames
+            { Keys.S, new int[] { 0, 1, 2 } },      //UpFrames
+        }; 
+
         private int timeSinceLastFrame = 0;
         private int timePerFrame = 150;
-        private int[] RightFrames = { 6, 7, 8 };
-        private int[] LeftFrames = { 3, 4, 5 };
-        private int[] DownFrames = { 0, 1, 2 };
-        private int[] UpFrames = { 9, 10, 11 };
 
         public AnimatedSprite(Texture2D texture, int rows, int columns)
         {
@@ -36,7 +40,6 @@ namespace LeGame.Handlers
         public void Update(GameTime gameTime, Character character)
         {
             SpriteRotations(gameTime);
-            
         }
 
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
@@ -53,91 +56,36 @@ namespace LeGame.Handlers
             spriteBatch.Draw(Texture, destinationRectangle, sourceRectangle,Color.White);
             spriteBatch.End();
         }
+
         public int SpriteRotations(GameTime gameTime)
         {
             timeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
-
-            if (Keyboard.GetState().IsKeyDown(Keys.D))
+            if (timeSinceLastFrame < timePerFrame)
             {
-                if (timeSinceLastFrame >= timePerFrame)
+                return currentFrame;
+            }
+            timeSinceLastFrame -= timePerFrame;
+
+
+            foreach (var key in Frames.Keys)
+            {
+                if (Keyboard.GetState().IsKeyDown(key))
                 {
-                    timeSinceLastFrame -= timePerFrame;
-                    if (RightFrames.Contains(currentFrame))
+                    if (Frames[key].Contains(currentFrame))
                     {
                         currentFrame++;
-                        if (currentFrame == RightFrames[2] + 1)
+                        if (currentFrame == Frames[key][2] + 1)
                         {
-                            currentFrame = RightFrames[0];
+                            currentFrame = Frames[key][0];
                         }
                     }
                     else
                     {
-                        currentFrame = RightFrames[0];
+                        currentFrame = Frames[key][0];
                     }
                 }
-
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.W))
-            {
-                if (timeSinceLastFrame >= timePerFrame)
-                {
-                    timeSinceLastFrame -= timePerFrame;
-                    if (UpFrames.Contains(currentFrame))
-                    {
-                        currentFrame++;
-                        if (currentFrame >= UpFrames[2] + 1)
-                        {
-                            currentFrame = UpFrames[0];
-                        }
-                    }
-                    else
-                    {
-                        currentFrame = UpFrames[0];
-                    }
-                }
 
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.A))
-            {
-                if (timeSinceLastFrame >= timePerFrame)
-                {
-                    timeSinceLastFrame -= timePerFrame;
-                    if (LeftFrames.Contains(currentFrame))
-                    {
-                        currentFrame++;
-                        if (currentFrame >= LeftFrames[2] + 1)
-                        {
-                            currentFrame = LeftFrames[0];
-                        }
-                    }
-                    else
-                    {
-                        currentFrame = LeftFrames[0];
-                    }
-                }
-
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.S))
-            {
-                if (timeSinceLastFrame >= timePerFrame)
-                {
-                    timeSinceLastFrame -= timePerFrame;
-                    if (DownFrames.Contains(currentFrame))
-                    {
-                        currentFrame++;
-                        if (currentFrame >= DownFrames[2] + 1)
-                        {
-                            currentFrame = DownFrames[0];
-                        }
-                    }
-                    else
-                    {
-                        currentFrame = DownFrames[0];
-                    }
-
-                }
-
-            }
             return currentFrame;
         }
     }
