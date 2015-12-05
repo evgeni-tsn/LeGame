@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Exceptions\GameException.cs" />
     <Compile Include="GlobalVariables.cs" />
+    <Compile Include="Handlers\AIPathfinder.cs" />
     <Compile Include="Handlers\AnimatedSprite.cs" />
     <Compile Include="Handlers\CollisionHandler.cs" />
     <Compile Include="Handlers\GFXHandler.cs" />
@@ -51,6 +52,7 @@
     <Compile Include="Interfaces\ICollisionable.cs" />
     <Compile Include="Interfaces\IPickable.cs" />
     <Compile Include="Models\Characters\Character.cs" />
+    <Compile Include="Models\Characters\Enemies\SampleEnemy.cs" />
     <Compile Include="Models\Characters\Player\Player.cs" />
     <Compile Include="Models\Characters\Player\TestChar.cs" />
     <Compile Include="Models\GameObject.cs" />
@@ -91,7 +93,6 @@
     <MonoGameContentReference Include="Content\Content.mgcb" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\Characters\Enemies\" />
     <Folder Include="Models\Items\Medicine\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

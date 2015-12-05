@@ -18,7 +18,8 @@ namespace LeGame.Handlers
         public static Object Collide(Character character)
         {
             List<Rectangle> objectRects = new List<Rectangle>();
-            foreach (var asset in character.Level.Assets)
+            List<GameObject> daaa = character.Level.Assets.Concat(character.Level.Enemies).ToList(); // certainly NEEDS to be revamped
+            foreach (var asset in daaa)// character.Level.Assets)
             {
                 Rectangle obj = new Rectangle(
                     (int)asset.Position.X,

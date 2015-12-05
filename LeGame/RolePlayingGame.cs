@@ -11,6 +11,7 @@ using LeGame.Handlers;
 using LeGame.Interfaces;
 using LeGame.Models;
 using LeGame.Models.Items.Gold;
+using LeGame.Models.Characters.Enemies;
 
 
 namespace LeGame
@@ -24,9 +25,11 @@ namespace LeGame
         SpriteBatch spriteBatch;
         
         Character testChar;
+        Character sampleEnemy;
         Texture2D testTex;
+        Texture2D testEnemyTex;
         private Level testLevel;
-        private AnimatedSprite animatedSprite;
+        
         
 
         public RolePlayingGame()
@@ -61,21 +64,24 @@ namespace LeGame
             
             GoldCoin coin = new GoldCoin(new Vector2(300, 300), "TestObjects/coin");
             testTex = Content.Load<Texture2D>(@"TestObjects/catSprite");
+            testEnemyTex = Content.Load<Texture2D>(@"TestObjects/cockSprite");
 
             graphics.PreferredBackBufferWidth = GlobalVariables.WINDOW_WIDTH; // set this value to the desired width of your window
             graphics.PreferredBackBufferHeight = GlobalVariables.WINDOW_HEIGHT;   // set this value to the desired height of your window
             graphics.ApplyChanges();
-            
+
+            Vector2 enemyPos = new Vector2(550, 350);
             Vector2 pos = new Vector2(
                 GlobalVariables.WINDOW_WIDTH / 2 - 90,
                 GlobalVariables.WINDOW_HEIGHT / 2);
-            testChar = new TestChar(pos, @"TestObjects/testChar", 100, 100, 3, testLevel, testTex);
-
+            sampleEnemy = new SampleEnemy(enemyPos, @"TestObjects/cockSprite", 100, 100, 1, testLevel, testEnemyTex);
+            testChar = new TestChar(pos, @"TestObjects/testChar", 100, 100, 2, testLevel, testTex);
             testLevel = new Level(@"..\..\..\Content\Maps\testMap2.txt", testChar, Content);
-
             testLevel.Assets.Add(coin);
 
+            sampleEnemy.Level = testLevel;
             testChar.Level = testLevel;
+            testLevel.Enemies.Add(sampleEnemy);
         }
 
         /// <summary>
@@ -98,8 +104,12 @@ namespace LeGame
                 Exit();
 
             // TODO: Add your update logic here
+
             testChar.Move();
             testChar.Sprite.Update(gameTime, testChar);
+            sampleEnemy.Sprite.Update(gameTime, sampleEnemy);
+            sampleEnemy.Move();
+            
 
             base.Update(gameTime);
         }
@@ -115,13 +125,18 @@ namespace LeGame
             // TODO: Add your drawing code here
             spriteBatch.Begin();
            
-            testLevel.Tiles.ForEach(t => spriteBatch.Draw(GfxHandler.GetTexture(t), t.Position));
+            testLevel.Tiles.ForEach(t=>spriteBatch.Draw(GfxHandler.GetTexture(t), t.Position));
             testLevel.Assets.ForEach(t => spriteBatch.Draw(GfxHandler.GetTexture(t), t.Position));
-            //spriteBatch.Draw(GfxHandler.GetTexture(testChar), testChar.Position, Color.White);
+            
+            //testLevel.Assets.ForEach(t => 
+            //{
+            //    if (t.Type != "uhm") spriteBatch.Draw(GfxHandler.GetTexture(t), t.Position);
+            //});
             
 
             spriteBatch.End();
             testChar.Sprite.Draw(spriteBatch, testChar.Position);
+            sampleEnemy.Sprite.Draw(spriteBatch, sampleEnemy.Position);
             base.Draw(gameTime);
         }
     }
