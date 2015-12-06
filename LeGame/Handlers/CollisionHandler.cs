@@ -32,41 +32,39 @@ namespace LeGame.Handlers
         }
         public static void Reaction(Character character, Keys key)
         {
-            if (CollisionHandler.Collide(character) != (object)1)
-            {
-                 Vector2 temp = new Vector2(character.Position.X, character.Position.Y);
+            if (CollisionHandler.Collide(character) == (object) 1) return;
+            Vector2 temp = new Vector2(character.Position.X, character.Position.Y);
                
-                //movement reactions
+            //movement reactions
             
-                if (CollisionHandler.Collide(character) is ICollisionable && key == Keys.D)
-                {
-                    temp.X -= character.Speed;
-                    character.Position = temp;
-                }
-                if (CollisionHandler.Collide(character) is ICollisionable && key == Keys.W)
-                {
-                    temp.Y += character.Speed;
-                    character.Position = temp;
-                }
-                if (CollisionHandler.Collide(character) is ICollisionable && key == Keys.S)
-                {
-                    temp.Y -= character.Speed;
-                    character.Position = temp;
-                }
-                if (CollisionHandler.Collide(character) is ICollisionable && key == Keys.A)
-                {
-                    temp.X += character.Speed;
-                    character.Position = temp;
-                }
-            
-                if (CollisionHandler.Collide(character) is IPickable)
-                {
-                    GameObject item = (GameObject)CollisionHandler.Collide(character);
-                    Console.Beep(8000,500); // legit cool gold-pickup sound // the lag it causes is also legit :D
-                    character.Level.Assets.Remove(item);
-                }
+            if (CollisionHandler.Collide(character) is ICollisionable && key == Keys.D)
+            {
+                temp.X -= character.Speed;
+                character.Position = temp;
             }
-
+            if (CollisionHandler.Collide(character) is ICollisionable && key == Keys.W)
+            {
+                temp.Y += character.Speed;
+                character.Position = temp;
+            }
+            if (CollisionHandler.Collide(character) is ICollisionable && key == Keys.S)
+            {
+                temp.Y -= character.Speed;
+                character.Position = temp;
+            }
+            if (CollisionHandler.Collide(character) is ICollisionable && key == Keys.A)
+            {
+                temp.X += character.Speed;
+                character.Position = temp;
+            }
+            
+            if (CollisionHandler.Collide(character) is IPickable)
+            {
+                GameObject item = (GameObject)CollisionHandler.Collide(character);
+                Console.Beep(8000,50); // legit cool gold-pickup sound 
+                // the freeze it causes based on the duration is also legit :D
+                character.Level.Assets.Remove(item);
+            }
         }
     }
 }
