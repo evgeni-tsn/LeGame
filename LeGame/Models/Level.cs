@@ -16,10 +16,10 @@ namespace LeGame.Models
 
         List<NonInteractiveBG> tiles = new List<NonInteractiveBG>();
 
-        public Level(string path, Character character, ContentManager content)
+        public Level(string path, Character character)
         {
             this.Character = character;
-            BackgroundBuilder assetBuilder = new BackgroundBuilder(content, path);
+            BackgroundBuilder assetBuilder = new BackgroundBuilder(path);
 
             this.Assets = assetBuilder.Assets;
             this.Tiles = assetBuilder.Tiles;

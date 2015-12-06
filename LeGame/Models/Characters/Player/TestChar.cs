@@ -11,12 +11,12 @@ namespace LeGame.Models.Characters.Player
 {
     public class TestChar : Player
     {
-        private Level level;
-        private AnimatedSprite sprite;
+        //private Level level;
+        //private AnimatedSprite sprite;
 
         
-        public TestChar(Vector2 position, string type, int maxHealth, int currentHealth, int speed, Level level, Texture2D texture)
-            : base(position, type, maxHealth, currentHealth, speed, level, texture)
+        public TestChar(Vector2 position, string type, int maxHealth, int currentHealth, int speed, Level level)
+            : base(position, type, maxHealth, currentHealth, speed, level)
         {
             
         }

@@ -13,8 +13,8 @@ namespace LeGame.Models.Characters.Enemies
     {
         public string Direction { get; set; }
 
-        public SampleEnemy(Vector2 position, string type, int maxHealth, int currentHealth, int speed, Level level, Texture2D texture)
-            :base(position, type, maxHealth, currentHealth, speed, level, texture)
+        public SampleEnemy(Vector2 position, string type, int maxHealth, int currentHealth, int speed, Level level)
+            :base(position, type, maxHealth, currentHealth, speed, level)
         {
 
         }
