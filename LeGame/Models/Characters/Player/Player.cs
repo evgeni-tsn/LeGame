@@ -12,8 +12,8 @@ namespace LeGame.Models.Characters.Player
 {
     public class Player : Character
     {
-        public Player(Vector2 position, string type, int maxHealth, int currentHealth, int speed, Level level, Texture2D texture) 
-            : base(position, type, maxHealth, currentHealth, speed, level, texture)
+        public Player(Vector2 position, string type, int maxHealth, int currentHealth, int speed, Level level) 
+            : base(position, type, maxHealth, currentHealth, speed, level)
         {
         }
 
@@ -22,28 +22,24 @@ namespace LeGame.Models.Characters.Player
             KeyboardState state = Keyboard.GetState();
             Keys[] keys = { Keys.W, Keys.A, Keys.S, Keys.D };
 
-            foreach (var key in keys)
+            foreach (var key in keys.Where(key => state.IsKeyDown(key)))
             {
-                if (state.IsKeyDown(key))
+                switch (key)
                 {
-                    switch (key)
-                    {
-                        case Keys.D:
-                            MovementHandler.MoveRight(this);
-                            break;
-                        case Keys.W:
-                            MovementHandler.MoveUp(this);
-                            break;
-                        case Keys.S:
-                            MovementHandler.MoveDown(this);
-                            break;
-                        case Keys.A:
-                            MovementHandler.MoveLeft(this);
-                            break;
-                    }
-                    CollisionHandler.Reaction(this, key);
-                    
+                    case Keys.D:
+                        MovementHandler.MoveRight(this);
+                        break;
+                    case Keys.W:
+                        MovementHandler.MoveUp(this);
+                        break;
+                    case Keys.S:
+                        MovementHandler.MoveDown(this);
+                        break;
+                    case Keys.A:
+                        MovementHandler.MoveLeft(this);
+                        break;
                 }
+                CollisionHandler.Reaction(this, key);
             }
         }
 

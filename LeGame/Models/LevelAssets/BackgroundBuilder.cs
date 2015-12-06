@@ -20,7 +20,7 @@ namespace LeGame.Models.LevelAssets
         private List<GameObject> assets;
         private List<NonInteractiveBG> tiles;
         
-        public BackgroundBuilder(ContentManager content, string mapFilePath)
+        public BackgroundBuilder(string mapFilePath)
         {
             // Read the text file for the map and find the separation between map and legend.
             List<string> mapFile = ReadMapFile(mapFilePath);

@@ -17,24 +17,15 @@ namespace LeGame.Handlers
     {
         public static Object Collide(Character character)
         {
-            List<Rectangle> objectRects = new List<Rectangle>();
             List<GameObject> daaa = character.Level.Assets.Concat(character.Level.Enemies).ToList(); // certainly NEEDS to be revamped
-            foreach (var asset in daaa)// character.Level.Assets)
+            foreach (var item in daaa)// character.Level.Assets)
             {
-                Rectangle obj = new Rectangle(
-                    (int)asset.Position.X,
-                    (int)asset.Position.Y,
-                    GfxHandler.GetWidth(asset),
-                    GfxHandler.GetHeight(asset));
-                
-                if ((asset is ICollisionable || asset is IPickable) 
+                Rectangle obj = GfxHandler.GetBBox(item);
+
+                if ((item is ICollisionable || item is IPickable)
                     && GfxHandler.GetBBox(character).Intersects(obj))
                 {
-                    return asset;
-                }
-                else
-                {
-                    continue;
+                    return item;
                 }
             }
             return 1;
@@ -71,7 +62,8 @@ namespace LeGame.Handlers
                 if (CollisionHandler.Collide(character) is IPickable)
                 {
                     GameObject item = (GameObject)CollisionHandler.Collide(character);
-                    Console.Beep(8000,50); // legit cool gold-pickup sound
+                    Console.Beep(8000,50); // legit cool gold-pickup sound 
+                                           // the freeze it causes based on the duration is also legit :D
                     character.Level.Assets.Remove(item);
                 }
             }

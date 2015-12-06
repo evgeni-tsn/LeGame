@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using LeGame.Handlers.Graphics;
 using LeGame.Models;
 using LeGame.Models.LevelAssets;
 using Microsoft.Xna.Framework;
@@ -13,23 +14,28 @@ namespace LeGame.Handlers
 {
     public static class GfxHandler
     {
-        private static Dictionary<string, Texture2D> lib = new Dictionary<string, Texture2D>();
-        private static List<string> fileNames = new List<string>(); 
+        private static Dictionary<string, AnimatedSprite> Sprites = new Dictionary<string, AnimatedSprite>();
+        private static Dictionary<string, Texture2D> textureLibrary = new Dictionary<string, Texture2D>();
+        private static List<string> fileNames = new List<string>();
 
-        public static void Initialise(ContentManager content)
+        public static void Load(ContentManager content)
         {
             GetFilenames(GlobalVariables.CONTENT_DIR);
             foreach (string s in fileNames)
             {
-                // s is something like: "..\\..\\..\\Content\\TestObjects\\catSprite.png"
-                //                                   cut out |------this part-------|
+                // s is something like: "..\..\..\Content\TestObjects\catSprite.png"
+                //                      |->     17     <-|----- take this -----|   |
                 string file = s.Substring(17, s.LastIndexOf('.') - 17);
 
                 // format it appropriately for the content.Load
-                // TestObjects\\catSprite -> TestObjects/catSprite
+                // TestObjects\catSprite -> TestObjects/catSprite
                 file = file.Contains('\\') ? file.Replace('\\', '/') : file;
 
-                lib.Add(file, content.Load<Texture2D>(file));
+                if (file.ToLower().Contains("sprite"))
+                {
+                    Sprites.Add(file, MakeSprite(content.Load<Texture2D>(file)));
+                }
+                textureLibrary.Add(file, content.Load<Texture2D>(file));
             }
         }
 
@@ -48,31 +54,48 @@ namespace LeGame.Handlers
                 GetFilenames(dir);
             }
         }
+        // Make Sprite
+        private static AnimatedSprite MakeSprite(Texture2D texture)
+        {
+            int rows = texture.Height / 32;
+            int columns = texture.Width / 32;
+            return new AnimatedSprite(texture, rows, columns);
+        }
+        // Get Sprite
+        public static AnimatedSprite GetSprite(GameObject obj)
+        {
+            return Sprites[obj.Type];
+        }
         // Get Texture
         public static Texture2D GetTexture(GameObject obj)
         {
-            return lib[obj.Type];
+            return textureLibrary[obj.Type];
         }
 
         public static Texture2D GetTexture(NonInteractiveBG t)
         {
-            return lib[t.Type];
+            return textureLibrary[t.Type];
         }
         // Get Bounding Box
         public static Rectangle GetBBox(GameObject obj)
         {
             Texture2D texture = GetTexture(obj);
+            Vector2 pos = obj.Position;
+            int width = texture.Width;
+            int height = texture.Height;
 
-            return new Rectangle(
-                    (int)(obj.Position.X + 3),
-                    (int)(obj.Position.Y + 3),
-                    (int)(texture.Width - 6),
-                    (int)(texture.Height - 5));
+            if (obj.Type.ToLower().Contains("sprite"))
+            {
+                width = 32;
+                height = 32;
+            }
+
+            return new Rectangle((int)(pos.X + 3), (int)(pos.Y + 3), width - 6, height - 5);
         }
         // Get Width
         public static int GetWidth(GameObject obj)
         {
-            return GetTexture(obj).Width;
+            return GetBBox(obj).Width;
         }
 
         public static int GetWidth(NonInteractiveBG t)
@@ -82,7 +105,7 @@ namespace LeGame.Handlers
         // Get Height
         public static int GetHeight(GameObject obj)
         {
-            return GetTexture(obj).Height;
+            return GetBBox(obj).Height;
         }
 
         public static int GetHeight(NonInteractiveBG t)

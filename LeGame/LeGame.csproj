@@ -46,7 +46,7 @@
     <Compile Include="Exceptions\MapException.cs" />
     <Compile Include="Engine\GlobalVariables.cs" />
     <Compile Include="Handlers\AIPathfinder.cs" />
-    <Compile Include="Handlers\AnimatedSprite.cs" />
+    <Compile Include="Handlers\Graphics\AnimatedSprite.cs" />
     <Compile Include="Handlers\CollisionHandler.cs" />
     <Compile Include="Handlers\GFXHandler.cs" />
     <Compile Include="Handlers\MovementHandler.cs" />
