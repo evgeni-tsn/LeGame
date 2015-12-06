@@ -11,7 +11,7 @@ namespace LeGame.Interfaces
     public interface ILevel
     {
         Character Character { get; set; }
-        List<Asset> Assets { get; set; }
-        List<Tile> Tiles { get; set; }
+        List<InteractiveBG> Assets { get; set; }
+        List<NonInteractiveBG> Tiles { get; set; }
     }
 }

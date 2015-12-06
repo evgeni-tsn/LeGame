@@ -14,12 +14,12 @@ namespace LeGame.Models
         private List<Character> enemies;
 
 
-        List<Tile> tiles = new List<Tile>();
+        List<NonInteractiveBG> tiles = new List<NonInteractiveBG>();
 
         public Level(string path, Character character, ContentManager content)
         {
             this.Character = character;
-            AssetBuilder assetBuilder = new AssetBuilder(content, path);
+            BackgroundBuilder assetBuilder = new BackgroundBuilder(content, path);
 
             this.Assets = assetBuilder.Assets;
             this.Tiles = assetBuilder.Tiles;
@@ -45,7 +45,7 @@ namespace LeGame.Models
             private set { this.assets = value; }
         }
 
-        public List<Tile> Tiles
+        public List<NonInteractiveBG> Tiles
         {
             get { return tiles; }
             private set { this.tiles = value; }

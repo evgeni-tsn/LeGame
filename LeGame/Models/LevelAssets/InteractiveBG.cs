@@ -8,13 +8,14 @@ using LeGame.Interfaces;
 
 namespace LeGame.Models.LevelAssets
 {
-    //class for all the interactable assets other than tiles
-    public class Asset : GameObject, ICollisionable
+    // Interactive Background -> Previously Asset
+    // Class for all the interactable background other than tiles
+    public class InteractiveBG : GameObject, ICollisionable
     {
         public bool CanCollide { get; set; }
         public int DrawPriority { get; set; }
 
-        public Asset(Vector2 position, string type, int drawPriority)
+        public InteractiveBG(Vector2 position, string type, int drawPriority)
             : base(position, type)
         {
             this.DrawPriority = drawPriority;
