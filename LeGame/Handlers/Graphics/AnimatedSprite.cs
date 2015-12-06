@@ -1,19 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
-using LeGame.Models.Characters;
 using LeGame.Interfaces;
+using LeGame.Models.Characters;
 using LeGame.Models.Characters.Enemies;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
-namespace LeGame.Handlers
+namespace LeGame.Handlers.Graphics
 {
     public class AnimatedSprite
     {
-        public Texture2D Texture { get; set; }
+        private Texture2D Texture;
         public int Rows { get; set; }
         public int Columns { get; set; }
         private int currentFrame;
@@ -36,7 +34,7 @@ namespace LeGame.Handlers
         };
 
         private int timeSinceLastFrame = 0;
-        private int timePerFrame = 150;
+        private int timePerFrame = 130;
 
         public AnimatedSprite(Texture2D texture, int rows, int columns)
         {
@@ -75,7 +73,7 @@ namespace LeGame.Handlers
             Rectangle sourceRectangle = new Rectangle(width * column, height * row, width, height);
             Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width, height);
 
-            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Opaque);
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
             spriteBatch.Draw(Texture, destinationRectangle, sourceRectangle,Color.White);
             spriteBatch.End();
         }

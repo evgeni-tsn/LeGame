@@ -62,7 +62,7 @@ namespace LeGame.Handlers
                 if (CollisionHandler.Collide(character) is IPickable)
                 {
                     GameObject item = (GameObject)CollisionHandler.Collide(character);
-                    Console.Beep(8000,50); // legit cool gold-pickup sound
+                    Console.Beep(8000,500); // legit cool gold-pickup sound // the lag it causes is also legit :D
                     character.Level.Assets.Remove(item);
                 }
             }
