@@ -19,20 +19,20 @@ namespace LeGame.Handlers
         private int currentFrame;
         private int totalFrames;
 
-        private Dictionary<Keys, int[]> Frames = new Dictionary<Keys, int[]>()
+        private Dictionary<Keys, string> keyToDirection = new Dictionary<Keys, string>
         {
-            { Keys.D, new int[] { 6, 7, 8 } },          //RightFrames
-            { Keys.W, new int[] { 9, 10, 11 } },        //LeftFrames
-            { Keys.A, new int[] { 3, 4, 5 } },          //DownFrames
-            { Keys.S, new int[] { 0, 1, 2 } },          //UpFrames
+            { Keys.D, "Right" },
+            { Keys.A, "Left" },
+            { Keys.W, "Up"},
+            { Keys.S, "Down" },
         };
 
-        private Dictionary<string, int[]> AIFrames = new Dictionary<string, int[]>()
+        private Dictionary<string, int[]> directionToFrames = new Dictionary<string, int[]>
         {
-            { "Right", new int[] { 6, 7, 8 } },
-            { "Up", new int[] { 9, 10, 11 } },
-            { "Left", new int[] { 3, 4, 5 } }, 
-            { "Down", new int[] { 0, 1, 2 } },
+            { "Right", new[] { 6, 7, 8 } },
+            { "Up", new[] { 9, 10, 11 } },
+            { "Left", new[] { 3, 4, 5 } }, 
+            { "Down", new[] { 0, 1, 2 } },
         };
 
         private int timeSinceLastFrame = 0;
@@ -51,22 +51,27 @@ namespace LeGame.Handlers
         {
             if(character is ICollisionable)
             {
-                AISpriteRotaions(gameTime, (character as SampleEnemy).Direction);
+                // Enemy
+                SpriteRotaions(gameTime, (character as SampleEnemy).Direction);
             }
             else
             {
-                PlayerSpriteRotations(gameTime);
+                // Player
+                foreach (var key in keyToDirection.Keys.Where(key => Keyboard.GetState().IsKeyDown(key)))
+                {
+                    SpriteRotaions(gameTime, keyToDirection[key]);
+                    break;
+                }
             }
-            
         }
 
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
             int width = Texture.Width / Columns;
             int height = Texture.Height / Rows;
-            int row = (int)((float)currentFrame / (float)Columns);
+            int row = currentFrame / Columns;
             int column = currentFrame % Columns;
-           // Color color = new Color(100, 100, 100, 100);
+            // Color color = new Color(100, 100, 100, 100);
             Rectangle sourceRectangle = new Rectangle(width * column, height * row, width, height);
             Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width, height);
 
@@ -75,59 +80,31 @@ namespace LeGame.Handlers
             spriteBatch.End();
         }
 
-        public int PlayerSpriteRotations(GameTime gameTime) 
+        public int SpriteRotaions(GameTime gameTime, string direction)
         {
+            // Coldown for the animation
             timeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
             if (timeSinceLastFrame < timePerFrame)
             {
                 return currentFrame;
             }
             timeSinceLastFrame = gameTime.ElapsedGameTime.Milliseconds;
+            // If enough time has passed 
 
-            foreach (var key in Frames.Keys)
+            // go through directionToFrames and find the one coresponding to the direction
+            foreach (var direct in directionToFrames.Keys.Where(key => direction.Equals(key)))
             {
-                if (Keyboard.GetState().IsKeyDown(key))
-                {
-                    if (Frames[key].Contains(currentFrame))
-                    {
-                        currentFrame++;
-                        if (currentFrame == Frames[key][2] + 1)
-                        {
-                            currentFrame = Frames[key][0];
-                        }
-                    }
-                    else
-                    {
-                        currentFrame = Frames[key][0];
-                    }
-                }
-            }
-
-            return currentFrame;
-        }
-
-        public int AISpriteRotaions(GameTime gameTime, string direction)
-        {
-            timeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
-            if (timeSinceLastFrame < timePerFrame)
-            {
-                return currentFrame;
-            }
-            timeSinceLastFrame = gameTime.ElapsedGameTime.Milliseconds;
-
-            foreach (var key in AIFrames.Keys.Where(key => direction.Equals(key)))
-            {
-                if (AIFrames[key].Contains(currentFrame))
+                if (directionToFrames[direct].Contains(currentFrame))
                 {
                     currentFrame++;
-                    if (currentFrame == AIFrames[key][2] + 1)
+                    if (currentFrame == directionToFrames[direct][2] + 1)
                     {
-                        currentFrame = AIFrames[key][0];
+                        currentFrame = directionToFrames[direct][0];
                     }
                 }
                 else
                 {
-                    currentFrame = AIFrames[key][0];
+                    currentFrame = directionToFrames[direct][0];
                 }
             }
 

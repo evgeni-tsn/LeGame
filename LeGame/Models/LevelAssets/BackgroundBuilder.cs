@@ -13,15 +13,16 @@ using LeGame.Interfaces;
 
 namespace LeGame.Models.LevelAssets
 {
-    public class AssetBuilder
+    // Previously AssetBuilder
+    public class BackgroundBuilder
     {
-
+        //TODO: assets and tiles to be renamed to something mroe descriptive.
         private List<GameObject> assets;
-
-        private List<Tile> tiles;
+        private List<NonInteractiveBG> tiles;
         
-        public AssetBuilder(ContentManager content, string mapFilePath)
+        public BackgroundBuilder(ContentManager content, string mapFilePath)
         {
+            // Read the text file for the map and find the separation between map and legend.
             List<string> mapFile = ReadMapFile(mapFilePath);
             int separatorLocation = mapFile.FindIndex(s => s.Contains("Legend:"));
             if (separatorLocation == -1)
@@ -38,7 +39,8 @@ namespace LeGame.Models.LevelAssets
                 .ToDictionary(item => item[0], item => item.Substring(2));
 
             this.assets = new List<GameObject>();
-            this.tiles = new List<Tile>();
+            this.tiles = new List<NonInteractiveBG>();
+            // Go through the chars and store their corresponding items in the assets/tiles
             for (int row = 0; row < mapRows.Count; row++)
             {
                 for (int col = 0; col < mapRows[row].Length; col++)
@@ -55,16 +57,15 @@ namespace LeGame.Models.LevelAssets
                     string contentPath = parameters[0];
                     bool hasCollision = parameters[1].Equals("true");
                     int drawPriority = parameters.Length > 2 ? int.Parse(parameters[2]) : 0;
-                    var texture = content.Load<Texture2D>(contentPath);
                     var position = new Vector2(col * 32, row * 32);
 
                     if (hasCollision)
                     {
-                        this.assets.Add(new Asset(position, contentPath, drawPriority));
+                        this.assets.Add(new InteractiveBG(position, contentPath, drawPriority));
                     }
                     else
                     {
-                        this.tiles.Add(new Tile(position, contentPath, drawPriority));
+                        this.tiles.Add(new NonInteractiveBG(position, contentPath, drawPriority));
                     }
                 }
             }
@@ -75,15 +76,13 @@ namespace LeGame.Models.LevelAssets
             get
             {
                 return this.assets
-                .Select(ass => (Asset)ass)
-                .OrderBy(ass => ass.DrawPriority)
-                .Select(ass => (GameObject)ass)
-                .ToList();
+                    .OrderBy(ass => (ass as InteractiveBG).DrawPriority)
+                    .ToList();
             }
             private set { this.assets = value; }
         }
 
-        public List<Tile> Tiles
+        public List<NonInteractiveBG> Tiles
         {
             get
             {
@@ -93,13 +92,12 @@ namespace LeGame.Models.LevelAssets
             }
             private set { this.tiles = value; }
         }
-
         // Methods
         private List<string> ReadMapFile(string textFilePath)
         {
             if (!File.Exists(textFilePath))
             {
-                throw new FileNotFoundException("The supplied file path \"{0}\" for the tile builder is invalid.",textFilePath);
+                throw new FileNotFoundException("The supplied file path \"{0}\" for the tile builder is invalid.", textFilePath);
             }
 
             return File.ReadAllLines(textFilePath).ToList();

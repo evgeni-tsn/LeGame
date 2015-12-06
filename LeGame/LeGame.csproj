@@ -74,9 +74,9 @@
     <Compile Include="Interfaces\IUseWeapon.cs" />
     <Compile Include="Interfaces\IWeapon.cs" />
     <Compile Include="Models\Level.cs" />
-    <Compile Include="Models\LevelAssets\Asset.cs" />
-    <Compile Include="Models\LevelAssets\AssetBuilder.cs" />
-    <Compile Include="Models\LevelAssets\Tile.cs" />
+    <Compile Include="Models\LevelAssets\InteractiveBG.cs" />
+    <Compile Include="Models\LevelAssets\BackgroundBuilder.cs" />
+    <Compile Include="Models\LevelAssets\NonInteractiveBG.cs" />
     <Compile Include="Engine\GameEngine.cs" />
     <Compile Include="RolePlayingGame.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

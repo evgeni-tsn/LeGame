@@ -22,6 +22,7 @@ namespace LeGame.Models.Characters
             this.Texture = texture;
             this.Sprite = new AnimatedSprite(this.Texture, 4, 3);
         }
+
         public AnimatedSprite Sprite { get; set; }
         public Texture2D Texture { get; set; }
         public Level Level { get; set; }

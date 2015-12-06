@@ -21,13 +21,19 @@ namespace LeGame.Handlers
             GetFilenames(GlobalVariables.CONTENT_DIR);
             foreach (string s in fileNames)
             {
+                // s is something like: "..\\..\\..\\Content\\TestObjects\\catSprite.png"
+                //                                   cut out |------this part-------|
                 string file = s.Substring(17, s.LastIndexOf('.') - 17);
+
+                // format it appropriately for the content.Load
+                // TestObjects\\catSprite -> TestObjects/catSprite
                 file = file.Contains('\\') ? file.Replace('\\', '/') : file;
+
                 lib.Add(file, content.Load<Texture2D>(file));
             }
         }
 
-        // Recursively get the folders in Content.
+        // Recursively get the files in Content.
         private static void GetFilenames(string sourceDir)
         {
             foreach (string dir in Directory.GetDirectories(sourceDir))
@@ -45,11 +51,10 @@ namespace LeGame.Handlers
         // Get Texture
         public static Texture2D GetTexture(GameObject obj)
         {
-          
             return lib[obj.Type];
         }
 
-        public static Texture2D GetTexture(Tile t)
+        public static Texture2D GetTexture(NonInteractiveBG t)
         {
             return lib[t.Type];
         }
@@ -64,24 +69,13 @@ namespace LeGame.Handlers
                     (int)(texture.Width - 6),
                     (int)(texture.Height - 5));
         }
-
-        public static Rectangle GetBBox(Tile t)
-        {
-            Texture2D texture = GetTexture(t);
-
-            return new Rectangle(
-                    (int)(t.Position.X + 3),
-                    (int)(t.Position.Y + 3),
-                    (int)(texture.Width - 6),
-                    (int)(texture.Height - 5));
-        }
         // Get Width
         public static int GetWidth(GameObject obj)
         {
             return GetTexture(obj).Width;
         }
 
-        public static int GetWidth(Tile t)
+        public static int GetWidth(NonInteractiveBG t)
         {
             return GetTexture(t).Width;
         }
@@ -91,7 +85,7 @@ namespace LeGame.Handlers
             return GetTexture(obj).Height;
         }
 
-        public static int GetHeight(Tile t)
+        public static int GetHeight(NonInteractiveBG t)
         {
             return GetTexture(t).Height;
         }

@@ -9,19 +9,21 @@ using LeGame.Models;
 
 namespace LeGame.Models.LevelAssets
 {
-    public struct Tile : IGameObject//, ICollisionable //ICollisionable should be removed
+    // Non Interactive Background -> Previously Tile
+    // Class for non interactive background tiles/
+    public struct NonInteractiveBG : IGameObject
     {
         private Vector2 position;
         private string id;
         private string type;
 
-        public Tile(Vector2 position, string type, int drawPriority)
+        public NonInteractiveBG(Vector2 position, string type, int drawPriority)
             : this()
         {
             this.Position = position;
             this.DrawPriority = drawPriority;
             this.Type = type;
-            //this.Id = "Tile";
+            this.Id = "Tile";
         }
 
         public  Vector2 Position
@@ -43,6 +45,5 @@ namespace LeGame.Models.LevelAssets
         }
         
         public int DrawPriority { get; set; }
-        //public bool CanCollide { get; set; } // should be removed as well
     }
 }
