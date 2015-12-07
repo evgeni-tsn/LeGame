@@ -71,7 +71,7 @@ namespace LeGame
                 GlobalVariables.WINDOW_HEIGHT / 2);
 
             sampleEnemy = new SampleEnemy(enemyPos, @"TestObjects/cockSprite", 100, 100, 1, testLevel);
-            testPlayer = new TestChar(pos, @"TestObjects/catRotation", 100, 100, 2, testLevel);
+            testPlayer = new TestChar(pos, @"Player/p1Rotation", 100, 100, 2, testLevel);
 
             testLevel = new Level(@"..\..\..\Content\Maps\testMap2.txt", testPlayer);
 
