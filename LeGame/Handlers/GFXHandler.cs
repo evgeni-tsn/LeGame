@@ -14,7 +14,8 @@ namespace LeGame.Handlers
 {
     public static class GfxHandler
     {
-        private static Dictionary<string, AnimatedSprite> Sprites = new Dictionary<string, AnimatedSprite>();
+        private static Dictionary<string, AnimatedSprite> sprites = new Dictionary<string, AnimatedSprite>();
+        private static Dictionary<string, RotationSprite> rSprites = new Dictionary<string, RotationSprite>();
         private static Dictionary<string, Texture2D> textureLibrary = new Dictionary<string, Texture2D>();
         private static List<string> fileNames = new List<string>();
 
@@ -24,7 +25,7 @@ namespace LeGame.Handlers
             foreach (string s in fileNames)
             {
                 // s is something like: "..\..\..\Content\TestObjects\catSprite.png"
-                //                      |->     17     <-|----- take this -----|   |
+                //                      |->     17     <-|>---- take this ----<|   |
                 string file = s.Substring(17, s.LastIndexOf('.') - 17);
 
                 // format it appropriately for the content.Load
@@ -33,7 +34,11 @@ namespace LeGame.Handlers
 
                 if (file.ToLower().Contains("sprite"))
                 {
-                    Sprites.Add(file, MakeSprite(content.Load<Texture2D>(file)));
+                    sprites.Add(file, MakeSprite(content.Load<Texture2D>(file)));
+                }
+                if (file.ToLower().Contains("rotation"))
+                {
+                    rSprites.Add(file, MakeRotationSprite(content.Load<Texture2D>(file)));
                 }
                 textureLibrary.Add(file, content.Load<Texture2D>(file));
             }
@@ -48,23 +53,21 @@ namespace LeGame.Handlers
                 {
                     foreach (string file in Directory.GetFiles(dir))
                     {
-                       fileNames.Add(file);
+                        fileNames.Add(file);
                     }
                 }
                 GetFilenames(dir);
             }
         }
-        // Make Sprite
-        private static AnimatedSprite MakeSprite(Texture2D texture)
+        // Get Rotation Sprite 
+        public static RotationSprite GetRotationSprite(GameObject obj)
         {
-            int rows = texture.Height / 32;
-            int columns = texture.Width / 32;
-            return new AnimatedSprite(texture, rows, columns);
+            return rSprites[obj.Type];
         }
         // Get Sprite
         public static AnimatedSprite GetSprite(GameObject obj)
         {
-            return Sprites[obj.Type];
+            return sprites[obj.Type];
         }
         // Get Texture
         public static Texture2D GetTexture(GameObject obj)
@@ -86,8 +89,14 @@ namespace LeGame.Handlers
 
             if (obj.Type.ToLower().Contains("sprite"))
             {
-                width = 32;
-                height = 32;
+                width = GlobalVariables.TILE_WIDTH;
+                height = GlobalVariables.TILE_HEIGHT;
+            }
+            else if (obj.Type.ToLower().Contains("rotation"))
+            {
+                pos = new Vector2(pos.X - 16, pos.Y - 16);
+                width = GlobalVariables.TILE_WIDTH;
+                height = GlobalVariables.TILE_HEIGHT;
             }
 
             return new Rectangle((int)(pos.X + 3), (int)(pos.Y + 3), width - 6, height - 5);
@@ -111,6 +120,17 @@ namespace LeGame.Handlers
         public static int GetHeight(NonInteractiveBG t)
         {
             return GetTexture(t).Height;
+        }
+
+        // Make Rotation Sprite
+        private static RotationSprite MakeRotationSprite(Texture2D texture)
+        {
+            return new RotationSprite(texture);
+        }
+        // Make Sprite
+        private static AnimatedSprite MakeSprite(Texture2D texture)
+        {
+            return new AnimatedSprite(texture);
         }
     }
 }

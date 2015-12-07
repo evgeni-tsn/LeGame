@@ -57,7 +57,7 @@ namespace LeGame.Models.LevelAssets
                     string contentPath = parameters[0];
                     bool hasCollision = parameters[1].Equals("true");
                     int drawPriority = parameters.Length > 2 ? int.Parse(parameters[2]) : 0;
-                    var position = new Vector2(col * 32, row * 32);
+                    var position = new Vector2(col * GlobalVariables.TILE_HEIGHT, row * GlobalVariables.TILE_WIDTH);
 
                     if (hasCollision)
                     {

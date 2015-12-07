@@ -49,6 +49,7 @@
     <Compile Include="Handlers\Graphics\AnimatedSprite.cs" />
     <Compile Include="Handlers\CollisionHandler.cs" />
     <Compile Include="Handlers\GFXHandler.cs" />
+    <Compile Include="Handlers\Graphics\RotationSprite.cs" />
     <Compile Include="Handlers\MovementHandler.cs" />
     <Compile Include="Interfaces\ICharacter.cs" />
     <Compile Include="Interfaces\ICollisionable.cs" />
