@@ -36,11 +36,11 @@ namespace LeGame.Handlers.Graphics
         private int timeSinceLastFrame = 0;
         private int timePerFrame = 130;
 
-        public AnimatedSprite(Texture2D texture, int rows, int columns)
+        public AnimatedSprite(Texture2D texture)
         {
             Texture = texture;
-            Rows = rows;
-            Columns = columns;
+            Rows = Texture.Height / GlobalVariables.TILE_HEIGHT;
+            Columns = Texture.Width / GlobalVariables.TILE_WIDTH;
             currentFrame = 0;
             totalFrames = Rows * Columns;
         }
@@ -74,7 +74,7 @@ namespace LeGame.Handlers.Graphics
             Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width, height);
 
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
-            spriteBatch.Draw(Texture, destinationRectangle, sourceRectangle,Color.White);
+            spriteBatch.Draw(Texture, destinationRectangle, sourceRectangle, Color.White);
             spriteBatch.End();
         }
 

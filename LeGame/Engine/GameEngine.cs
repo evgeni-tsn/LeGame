@@ -23,10 +23,10 @@ namespace LeGame
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         
-        Character testPlayer;
+        Player testPlayer;
         Character sampleEnemy;
         private Level testLevel;
-        
+        private float rotationAngle;
 
         public GameEngine()
         {
@@ -67,11 +67,11 @@ namespace LeGame
 
             Vector2 enemyPos = new Vector2(550, 350);
             Vector2 pos = new Vector2(
-                GlobalVariables.WINDOW_WIDTH / 2 - 90,
+                GlobalVariables.WINDOW_WIDTH / 2 - 140,
                 GlobalVariables.WINDOW_HEIGHT / 2);
 
             sampleEnemy = new SampleEnemy(enemyPos, @"TestObjects/cockSprite", 100, 100, 1, testLevel);
-            testPlayer = new TestChar(pos, @"TestObjects/catSprite", 100, 100, 2, testLevel);
+            testPlayer = new TestChar(pos, @"TestObjects/catRotation", 100, 100, 2, testLevel);
 
             testLevel = new Level(@"..\..\..\Content\Maps\testMap2.txt", testPlayer);
 
@@ -104,8 +104,14 @@ namespace LeGame
             }
 
             // TODO: Add your update logic here
+
+            // The mouse position should probably be implemented in the player class.
+            var positionMouse = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
+            rotationAngle = (float)((Math.PI * 0.5f) + Math.Atan2(positionMouse.Y - testPlayer.Position.Y, positionMouse.X - testPlayer.Position.X));
+
+
             testPlayer.Move();
-            GfxHandler.GetSprite(testPlayer).Update(gameTime, testPlayer);
+            GfxHandler.GetRotationSprite(testPlayer).Update(gameTime, testPlayer);
             
             sampleEnemy.Move();
             GfxHandler.GetSprite(sampleEnemy).Update(gameTime, sampleEnemy);
@@ -135,7 +141,7 @@ namespace LeGame
 
             spriteBatch.End();
 
-            GfxHandler.GetSprite(testPlayer).Draw(spriteBatch, testPlayer.Position);
+            GfxHandler.GetRotationSprite(testPlayer).Draw(spriteBatch, testPlayer.Position, rotationAngle);
             GfxHandler.GetSprite(sampleEnemy).Draw(spriteBatch, sampleEnemy.Position);
 
             base.Draw(gameTime);

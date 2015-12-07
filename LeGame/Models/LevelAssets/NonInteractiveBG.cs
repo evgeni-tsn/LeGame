@@ -10,7 +10,7 @@ using LeGame.Models;
 namespace LeGame.Models.LevelAssets
 {
     // Non Interactive Background -> Previously Tile
-    // Class for non interactive background tiles/
+    // Class for non interactive background tiles
     public struct NonInteractiveBG : IGameObject
     {
         private Vector2 position;
