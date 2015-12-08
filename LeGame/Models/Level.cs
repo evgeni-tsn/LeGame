@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Content;
 
 namespace LeGame.Models
 {
-    public class Level 
+    public class Level : ILevel
     {
         Character character;
 
