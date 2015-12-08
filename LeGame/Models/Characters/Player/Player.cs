@@ -12,31 +12,48 @@ namespace LeGame.Models.Characters.Player
 {
     public class Player : Character
     {
+        private Keys[] kbKeys = { Keys.W, Keys.A, Keys.S, Keys.D };
+
         public Player(Vector2 position, string type, int maxHealth, int currentHealth, int speed, Level level) 
             : base(position, type, maxHealth, currentHealth, speed, level)
         {
         }
 
+        public float FacingAngle { get; private set; }
+        public float MovementAngle { get; private set; }
+
+        public Keys[] KbKeys
+        {
+            get { return this.kbKeys; }
+        }
+
         public override void Move()
         {
-            KeyboardState state = Keyboard.GetState();
-            Keys[] keys = { Keys.W, Keys.A, Keys.S, Keys.D };
+            KeyboardState kbState = Keyboard.GetState();
+            MouseState mState = Mouse.GetState();
 
-            foreach (var key in keys.Where(key => state.IsKeyDown(key)))
+            FacingAngle = (float)((Math.PI * 0.5f) + Math.Atan2(mState.Y - this.Position.Y, mState.X - this.Position.X));
+            //Console.WriteLine(FacingAngle); // Debug
+
+            foreach (var key in KbKeys.Where(key => kbState.IsKeyDown(key)))
             {
                 switch (key)
                 {
                     case Keys.D:
                         MovementHandler.MoveRight(this);
+                        MovementAngle = 1.55f;
                         break;
                     case Keys.W:
                         MovementHandler.MoveUp(this);
+                        MovementAngle = 0f;
                         break;
                     case Keys.S:
                         MovementHandler.MoveDown(this);
+                        MovementAngle = 3.15f;
                         break;
                     case Keys.A:
                         MovementHandler.MoveLeft(this);
+                        MovementAngle = -1.55f;
                         break;
                 }
                 CollisionHandler.Reaction(this, key);

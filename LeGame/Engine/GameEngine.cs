@@ -26,7 +26,6 @@ namespace LeGame
         Player testPlayer;
         Character sampleEnemy;
         private Level testLevel;
-        private float rotationAngle;
 
         public GameEngine()
         {
@@ -61,10 +60,6 @@ namespace LeGame
             GoldCoin coin = new GoldCoin(new Vector2(300, 300), "TestObjects/coin");
             //testEnemyTex = Content.Load<Texture2D>(@"TestObjects/cockSprite");
 
-            graphics.PreferredBackBufferWidth = GlobalVariables.WINDOW_WIDTH; // set this value to the desired width of your window
-            graphics.PreferredBackBufferHeight = GlobalVariables.WINDOW_HEIGHT;   // set this value to the desired height of your window
-            graphics.ApplyChanges();
-
             Vector2 enemyPos = new Vector2(550, 350);
             Vector2 pos = new Vector2(
                 GlobalVariables.WINDOW_WIDTH / 2 - 140,
@@ -80,6 +75,11 @@ namespace LeGame
             sampleEnemy.Level = testLevel;
             testPlayer.Level = testLevel;
             testLevel.Enemies.Add(sampleEnemy);
+
+            // TODO: Get Width and Heignt based on the level size?
+            graphics.PreferredBackBufferWidth = GlobalVariables.WINDOW_WIDTH; // set this value to the desired width of your window
+            graphics.PreferredBackBufferHeight = GlobalVariables.WINDOW_HEIGHT;   // set this value to the desired height of your window
+            graphics.ApplyChanges();
         }
 
         /// <summary>
@@ -105,11 +105,7 @@ namespace LeGame
 
             // TODO: Add your update logic here
 
-            // The mouse position should probably be implemented in the player class.
-            var positionMouse = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
-            rotationAngle = (float)((Math.PI * 0.5f) + Math.Atan2(positionMouse.Y - testPlayer.Position.Y, positionMouse.X - testPlayer.Position.X));
-
-
+           
             testPlayer.Move();
             GfxHandler.GetRotationSprite(testPlayer).Update(gameTime, testPlayer);
             
@@ -141,7 +137,7 @@ namespace LeGame
 
             spriteBatch.End();
 
-            GfxHandler.GetRotationSprite(testPlayer).Draw(spriteBatch, testPlayer.Position, rotationAngle);
+            GfxHandler.GetRotationSprite(testPlayer).Draw(spriteBatch, testPlayer.Position, testPlayer.FacingAngle, testPlayer.MovementAngle);
             GfxHandler.GetSprite(sampleEnemy).Draw(spriteBatch, sampleEnemy.Position);
 
             base.Draw(gameTime);

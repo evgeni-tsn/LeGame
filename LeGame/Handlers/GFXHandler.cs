@@ -94,7 +94,7 @@ namespace LeGame.Handlers
             }
             else if (obj.Type.ToLower().Contains("rotation"))
             {
-                pos = new Vector2(pos.X - 16, pos.Y - 16);
+                pos = new Vector2(pos.X - GlobalVariables.TILE_WIDTH / 2f, pos.Y - GlobalVariables.TILE_HEIGHT / 2f);
                 width = GlobalVariables.TILE_WIDTH;
                 height = GlobalVariables.TILE_HEIGHT;
             }
