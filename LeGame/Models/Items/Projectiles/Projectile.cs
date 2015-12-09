@@ -5,12 +5,13 @@ namespace LeGame.Models.Items.Projectiles
 {
     public abstract class Projectile : GameObject, IMovable
     {
-        protected Projectile(Vector2 position, string type, int damage, int speed, float angle)
+        protected Projectile(Vector2 position, string type, int damage, int speed, float angle, int range)
             :base(position, type)
         {
             this.Damage = damage;
             this.Angle = angle;
             this.Speed = speed;
+            this.Range = range;
             this.Lifetime = 0;
         }
 
@@ -18,6 +19,7 @@ namespace LeGame.Models.Items.Projectiles
         public int Speed { get; set; }
         public float Angle { get; set; }
         public int Lifetime { get; set; }
+        public int Range { get; set; }
 
         public virtual void Move()
         {

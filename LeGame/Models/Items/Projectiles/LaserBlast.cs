@@ -6,11 +6,12 @@ namespace LeGame.Models.Items.Projectiles
 {
     public class LaserBlast : Projectile
     {
-        public LaserBlast(Vector2 position, float angle) 
-            : base(position, "Projectiles/LaserProjectile", 25, 20, angle)
+        private const int LazerBlastSpeed = 20;
+
+        public LaserBlast(Vector2 position, float angle, int damage, int range) 
+            : base(position, "Projectiles/LaserProjectile", damage, LazerBlastSpeed, angle, range)
         {
         }
-
 
         public override void Move()
         {

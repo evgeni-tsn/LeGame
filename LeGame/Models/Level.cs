@@ -46,7 +46,6 @@ namespace LeGame.Models
         }
 
         public List<GameObject> Assets
-
         {
             get { return this.assets; }
             private set { this.assets = value; }

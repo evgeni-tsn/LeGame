@@ -148,7 +148,7 @@ namespace LeGame
             {
                 GfxHandler.GetRotationSprite(projectile).Draw(spriteBatch, projectile.Position, projectile.Angle, projectile.Angle);
 
-                if (projectile.Lifetime > 20)
+                if (projectile.Lifetime > projectile.Range)
                 {
                     testLevel.Projectiles.Remove(projectile);
                 }
