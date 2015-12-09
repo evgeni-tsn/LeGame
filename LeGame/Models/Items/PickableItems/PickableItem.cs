@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
-using LeGame.Models;
-using LeGame.Interfaces;
+﻿using LeGame.Interfaces;
 using LeGame.Models.Characters;
+using Microsoft.Xna.Framework;
 
-
-namespace LeGame.Models.Items
+namespace LeGame.Models.Items.PickableItems
 {
     public abstract class PickableItem : GameObject, IPickable
     {

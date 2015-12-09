@@ -9,8 +9,8 @@ using System;
 using LeGame.Handlers;
 using LeGame.Interfaces;
 using LeGame.Models;
-using LeGame.Models.Items.Gold;
 using LeGame.Models.Characters.Enemies;
+using LeGame.Models.Items.PickableItems;
 
 
 namespace LeGame
@@ -111,7 +111,11 @@ namespace LeGame
             
             sampleEnemy.Move();
             GfxHandler.GetSprite(sampleEnemy).Update(gameTime, sampleEnemy);
-            
+
+            foreach (var projectile in testLevel.Projectiles)
+            {
+                projectile.Move();
+            }
 
             base.Update(gameTime);
         }
@@ -139,6 +143,16 @@ namespace LeGame
 
             GfxHandler.GetRotationSprite(testPlayer).Draw(spriteBatch, testPlayer.Position, testPlayer.FacingAngle, testPlayer.MovementAngle);
             GfxHandler.GetSprite(sampleEnemy).Draw(spriteBatch, sampleEnemy.Position);
+
+            foreach (var projectile in testLevel.Projectiles.ToList())
+            {
+                GfxHandler.GetRotationSprite(projectile).Draw(spriteBatch, projectile.Position, projectile.Angle, projectile.Angle);
+
+                if (projectile.Lifetime > projectile.Range)
+                {
+                    testLevel.Projectiles.Remove(projectile);
+                }
+            }
 
             base.Draw(gameTime);
         }

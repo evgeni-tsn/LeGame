@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using LeGame.Handlers;
+using LeGame.Interfaces;
+using LeGame.Models.Items.Projectiles;
+using LeGame.Models.Items.Weapons;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -14,13 +17,17 @@ namespace LeGame.Models.Characters.Player
     {
         private Keys[] kbKeys = { Keys.W, Keys.A, Keys.S, Keys.D };
 
+
         public Player(Vector2 position, string type, int maxHealth, int currentHealth, int speed, Level level) 
             : base(position, type, maxHealth, currentHealth, speed, level)
         {
+            // TODO: Implement weapon pickup and display it on the character.
+            this.EquippedWeapon = new LaserGun();
         }
 
         public float FacingAngle { get; private set; }
         public float MovementAngle { get; private set; }
+        public IWeapon EquippedWeapon { get; set; }
 
         public Keys[] KbKeys
         {
@@ -58,11 +65,19 @@ namespace LeGame.Models.Characters.Player
                 }
                 CollisionHandler.Reaction(this, key);
             }
+
+            if (mState.LeftButton == ButtonState.Pressed)
+            {
+                AttackUsingWeapon();
+            }
         }
 
         public override void AttackUsingWeapon()
         {
-            throw new NotImplementedException();
+            if (EquippedWeapon != null)
+            {
+                this.EquippedWeapon.Attack(this.Level, this);
+            }
         }
     }
 }

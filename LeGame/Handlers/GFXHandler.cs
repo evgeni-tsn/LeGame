@@ -36,7 +36,7 @@ namespace LeGame.Handlers
                 {
                     sprites.Add(file, MakeSprite(content.Load<Texture2D>(file)));
                 }
-                if (file.ToLower().Contains("rotation"))
+                if (file.ToLower().Contains("rotation") || file.ToLower().Contains("projectile"))
                 {
                     rSprites.Add(file, MakeRotationSprite(content.Load<Texture2D>(file)));
                 }
