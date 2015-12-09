@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using LeGame.Interfaces;
+﻿using Microsoft.Xna.Framework;
 
-namespace LeGame.Models.Items.Gold
+namespace LeGame.Models.Items.PickableItems
 {
     public class GoldCoin : PickableItem
     {

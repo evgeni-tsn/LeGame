@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using LeGame.Handlers;
+using LeGame.Models.Items.Projectiles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -57,6 +58,13 @@ namespace LeGame.Models.Characters.Player
                         break;
                 }
                 CollisionHandler.Reaction(this, key);
+            }
+
+            if (mState.LeftButton == ButtonState.Pressed)
+            {
+                //TODO: move to the weapon class and trigger with AttackUsingWeapon
+                //TODO: add cooldown
+                this.Level.Projectiles.Add(new LaserBlast(this.Position, this.FacingAngle  - 1.55f));
             }
         }
 
