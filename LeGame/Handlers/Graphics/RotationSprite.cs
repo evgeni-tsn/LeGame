@@ -7,33 +7,26 @@ using Microsoft.Xna.Framework.Input;
 
 namespace LeGame.Handlers.Graphics
 {
-    public class RotationSprite
+    public class RotationSprite : Sprite
     {
+        private const int timePerFrame = 50;
         private readonly int totalFrames;
-        private readonly int timePerFrame = 50;
-        private readonly Texture2D texture;
 
-        private int currentFrame;
         private bool reverse;
+        private int currentFrame;
         private int timeSinceLastFrame;
 
-        public RotationSprite(Texture2D texture)
+        public RotationSprite(Texture2D texture) 
+            : base(texture)
         {
-            this.texture = texture;
-            this.Rows = this.texture.Height / GlobalVariables.TileHeight;
-            this.Columns = this.texture.Width / GlobalVariables.TileWidth;
             this.currentFrame = 5;
             this.totalFrames = this.Columns;
         }
 
-        public int Rows { get; set; }
-
-        public int Columns { get; set; }
-
-        public void Update(GameTime gameTime, Character character)
+        public override void Update(GameTime gameTime, Character character)
         {
             this.timeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
-            if (this.timeSinceLastFrame < this.timePerFrame)
+            if (this.timeSinceLastFrame < timePerFrame)
             {
                 return;
             }
@@ -64,8 +57,8 @@ namespace LeGame.Handlers.Graphics
 
         public void Draw(SpriteBatch spriteBatch, Vector2 location, float torsoRotation, float legRotation)
         {
-            int width = this.texture.Width /this.Columns;
-            int height = this.texture.Height /this.Rows;
+            int width = this.Texture.Width /this.Columns;
+            int height = this.Texture.Height /this.Rows;
             int legsRow = 0;
             int torsoRow = 3;
             int column = this.currentFrame %this.Columns;
@@ -77,8 +70,8 @@ namespace LeGame.Handlers.Graphics
 
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
 
-            spriteBatch.Draw(this.texture, null, destinationRectangle, legsSource, origin, legRotation, null, null);
-            spriteBatch.Draw(this.texture, null, destinationRectangle, torsoSource, origin, torsoRotation, null, null);
+            spriteBatch.Draw(this.Texture, null, destinationRectangle, legsSource, origin, legRotation, null, null);
+            spriteBatch.Draw(this.Texture, null, destinationRectangle, torsoSource, origin, torsoRotation, null, null);
             spriteBatch.End();
         }
     }

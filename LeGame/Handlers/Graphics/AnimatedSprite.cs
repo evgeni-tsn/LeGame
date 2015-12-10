@@ -9,9 +9,10 @@ using Microsoft.Xna.Framework.Input;
 
 namespace LeGame.Handlers.Graphics
 {
-    public class AnimatedSprite
+    public class AnimatedSprite : Sprite
     {
-        private readonly Texture2D texture;
+        private const int TimePerFrame = 130;
+        
         private readonly Dictionary<Keys, string> keyToDirection = new Dictionary<Keys, string>
         {
             { Keys.D, "Right" },
@@ -27,25 +28,18 @@ namespace LeGame.Handlers.Graphics
             { "Down", new[] { 0, 1, 2 } }
         };
 
+        private int totalFrames;
         private int currentFrame;
         private int timeSinceLastFrame;
-        private int timePerFrame = 130;
-        private int totalFrames;
 
-        public AnimatedSprite(Texture2D texture)
+        public AnimatedSprite(Texture2D texture) 
+            : base(texture)
         {
-            this.texture = texture;
-            this.Rows = this.texture.Height / GlobalVariables.TileHeight;
-            this.Columns = this.texture.Width / GlobalVariables.TileWidth;
-            this.currentFrame = 0;
             this.totalFrames = this.Rows * this.Columns;
+            this.currentFrame = 0;
         }
-
-        public int Rows { get; set; }
-
-        public int Columns { get; set; }
-
-        public void Update(GameTime gameTime, Character character)
+        
+        public override void Update(GameTime gameTime, Character character)
         {
             if (character is ICollisionable)
             {
@@ -65,8 +59,8 @@ namespace LeGame.Handlers.Graphics
 
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
-            int width = this.texture.Width / this.Columns;
-            int height = this.texture.Height / this.Rows;
+            int width = this.Texture.Width / this.Columns;
+            int height = this.Texture.Height / this.Rows;
             int row = this.currentFrame / this.Columns;
             int column = this.currentFrame % this.Columns;
             // Color color = new Color(100, 100, 100, 100);
@@ -74,7 +68,7 @@ namespace LeGame.Handlers.Graphics
             Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width, height);
 
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
-            spriteBatch.Draw(this.texture, destinationRectangle, sourceRectangle, Color.White);
+            spriteBatch.Draw(this.Texture, destinationRectangle, sourceRectangle, Color.White);
             spriteBatch.End();
         }
 
@@ -82,7 +76,7 @@ namespace LeGame.Handlers.Graphics
         {
             // Coldown for the animation
             this.timeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
-            if (this.timeSinceLastFrame < this.timePerFrame)
+            if (this.timeSinceLastFrame < TimePerFrame)
             {
                 return this.currentFrame;
             }
