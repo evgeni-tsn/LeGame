@@ -1,4 +1,5 @@
 ﻿using System;
+using LeGame.Engine;
 
 namespace LeGame
 {
@@ -7,7 +8,7 @@ namespace LeGame
         [STAThread]
         private static void Main()
         {
-            var game = new GameEngine();
+            GameEngine game = new GameEngine();
             game.Run();
         }
     }

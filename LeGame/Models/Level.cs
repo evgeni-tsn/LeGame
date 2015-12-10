@@ -3,20 +3,11 @@ using LeGame.Interfaces;
 using LeGame.Models.Characters;
 using LeGame.Models.Items.Projectiles;
 using LeGame.Models.LevelAssets;
-using Microsoft.Xna.Framework.Content;
 
 namespace LeGame.Models
 {
     public class Level : ILevel
     {
-        Character character;
-
-        private List<Projectile> projectiles = new List<Projectile>(); 
-        private List<GameObject> assets = new List<GameObject>();
-        private List<Character> enemies;
-
-        List<NonInteractiveBG> tiles = new List<NonInteractiveBG>();
-
         public Level(string path, Character character)
         {
             this.Character = character;
@@ -27,34 +18,14 @@ namespace LeGame.Models
             this.Enemies = new List<Character>();
         }
 
-        public List<Projectile> Projectiles
-        {
-            get { return this.projectiles; }
-            private set { this.projectiles = value; }
-        }
+        public List<Projectile> Projectiles { get; private set; } = new List<Projectile>();
 
-        public List<Character> Enemies
-        {
-            get { return this.enemies; }
-            private set { this.enemies = value; }
-        }
+        public List<Character> Enemies { get; private set; }
 
-        public Character Character
-        {
-            get { return this.character; }
-            private set { this.character = value; }
-        }
+        public Character Character { get; private set; }
 
-        public List<GameObject> Assets
-        {
-            get { return this.assets; }
-            private set { this.assets = value; }
-        }
+        public List<GameObject> Assets { get; private set; }
 
-        public List<NonInteractiveBG> Tiles
-        {
-            get { return this.tiles; }
-            private set { this.tiles = value; }
-        }
+        public List<NonInteractiveBg> Tiles { get; private set; }
     }
 }

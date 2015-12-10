@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using LeGame.Handlers;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
 
 namespace LeGame.Models.Characters.Player
 {
@@ -13,16 +6,11 @@ namespace LeGame.Models.Characters.Player
     {
         //private Level level;
         //private AnimatedSprite sprite;
-
         
         public TestChar(Vector2 position, string type, int maxHealth, int currentHealth, int speed, Level level)
             : base(position, type, maxHealth, currentHealth, speed, level)
         {
             
         }
-        
-        
-
-        
     }
 }

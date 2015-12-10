@@ -1,85 +1,61 @@
 ﻿using System.Linq;
+using LeGame.Handlers;
+using LeGame.Models;
+using LeGame.Models.Characters;
+using LeGame.Models.Characters.Enemies;
+using LeGame.Models.Characters.Player;
+using LeGame.Models.Items.PickableItems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using LeGame.Models.Characters;
-using LeGame.Models.Characters.Player;
-using LeGame.Models.LevelAssets;
-using System;
-using LeGame.Handlers;
-using LeGame.Interfaces;
-using LeGame.Models;
-using LeGame.Models.Characters.Enemies;
-using LeGame.Models.Items.PickableItems;
 
-
-namespace LeGame
+namespace LeGame.Engine
 {
-    /// <summary>
-    /// This is the main type for your game.
-    /// </summary>
     public class GameEngine : Game
     {
-        GraphicsDeviceManager graphics;
+        readonly GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        
-        Player testPlayer;
-        Character sampleEnemy;
+
+        private Player testPlayer;
+        private Character sampleEnemy;
         private Level testLevel;
 
         public GameEngine()
         {
-            graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
+            this.graphics = new GraphicsDeviceManager(this);
+            this.Content.RootDirectory = "Content";
         }
-
-        /// <summary>
-        /// Allows the game to perform any initialization it needs to before starting to run.
-        /// This is where it can query for any required services and load any non-graphic
-        /// related content.  Calling base.Initialize will enumerate through any components
-        /// and initialize them as well.
-        /// </summary>
-        protected override void Initialize()
-        {
-            // TODO: Add your initialization logic here
-
-            base.Initialize();
-        }
-
-        /// <summary>
-        /// LoadContent will be called once per game and is the place to load
-        /// all of your content.
-        /// </summary>
+        
         protected override void LoadContent()
         {
-            IsMouseVisible = true;
+            this.IsMouseVisible = true;
             // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-            GfxHandler.Load(Content);
+            this.spriteBatch = new SpriteBatch(this.GraphicsDevice);
+            GfxHandler.Load(this.Content);
             
             GoldCoin coin = new GoldCoin(new Vector2(300, 300), "TestObjects/coin");
             //testEnemyTex = Content.Load<Texture2D>(@"TestObjects/cockSprite");
 
             Vector2 enemyPos = new Vector2(550, 350);
             Vector2 pos = new Vector2(
-                GlobalVariables.WINDOW_WIDTH / 2 - 140,
-                GlobalVariables.WINDOW_HEIGHT / 2);
+                GlobalVariables.WindowWidth / 2 - 140,
+                GlobalVariables.WindowHeight / 2);
 
-            sampleEnemy = new SampleEnemy(enemyPos, @"TestObjects/cockSprite", 100, 100, 1, testLevel);
-            testPlayer = new TestChar(pos, @"Player/p1Rotation", 100, 100, 2, testLevel);
+            this.sampleEnemy = new SampleEnemy(enemyPos, @"TestObjects/cockSprite", 100, 100, 1, this.testLevel);
+            this.testPlayer = new TestChar(pos, @"Player/p1Rotation", 100, 100, 2, this.testLevel);
 
-            testLevel = new Level(@"..\..\..\Content\Maps\testMap2.txt", testPlayer);
+            this.testLevel = new Level(@"..\..\..\Content\Maps\testMap2.txt", this.testPlayer);
 
-            testLevel.Assets.Add(coin);
+            this.testLevel.Assets.Add(coin);
 
-            sampleEnemy.Level = testLevel;
-            testPlayer.Level = testLevel;
-            testLevel.Enemies.Add(sampleEnemy);
+            this.sampleEnemy.Level = this.testLevel;
+            this.testPlayer.Level = this.testLevel;
+            this.testLevel.Enemies.Add(this.sampleEnemy);
 
             // TODO: Get Width and Heignt based on the level size?
-            graphics.PreferredBackBufferWidth = GlobalVariables.WINDOW_WIDTH; // set this value to the desired width of your window
-            graphics.PreferredBackBufferHeight = GlobalVariables.WINDOW_HEIGHT;   // set this value to the desired height of your window
-            graphics.ApplyChanges();
+            this.graphics.PreferredBackBufferWidth = GlobalVariables.WindowWidth; // set this value to the desired width of your window
+            this.graphics.PreferredBackBufferHeight = GlobalVariables.WindowHeight;   // set this value to the desired height of your window
+            this.graphics.ApplyChanges();
         }
 
         /// <summary>
@@ -106,13 +82,13 @@ namespace LeGame
             // TODO: Add your update logic here
 
            
-            testPlayer.Move();
-            GfxHandler.GetRotationSprite(testPlayer).Update(gameTime, testPlayer);
+            this.testPlayer.Move();
+            GfxHandler.GetRotationSprite(this.testPlayer).Update(gameTime, this.testPlayer);
             
-            sampleEnemy.Move();
-            GfxHandler.GetSprite(sampleEnemy).Update(gameTime, sampleEnemy);
+            this.sampleEnemy.Move();
+            GfxHandler.GetSprite(this.sampleEnemy).Update(gameTime, this.sampleEnemy);
 
-            foreach (var projectile in testLevel.Projectiles)
+            foreach (var projectile in this.testLevel.Projectiles)
             {
                 projectile.Move();
             }
@@ -126,31 +102,31 @@ namespace LeGame
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Wheat);
-            Vector2 origin = new Vector2(GfxHandler.GetWidth(testPlayer) / 2, GfxHandler.GetHeight(testPlayer) / 2);
+            this.GraphicsDevice.Clear(Color.Wheat);
+            Vector2 origin = new Vector2(GfxHandler.GetWidth(this.testPlayer) / 2, GfxHandler.GetHeight(this.testPlayer) / 2);
             // TODO: Add your drawing code here
-            spriteBatch.Begin();
+            this.spriteBatch.Begin();
            
-            testLevel.Tiles.ForEach(t => spriteBatch.Draw(GfxHandler.GetTexture(t), t.Position));
-            testLevel.Assets.ForEach(t => spriteBatch.Draw(GfxHandler.GetTexture(t), t.Position));
+            this.testLevel.Tiles.ForEach(t => this.spriteBatch.Draw(GfxHandler.GetTexture(t), t.Position));
+            this.testLevel.Assets.ForEach(t => this.spriteBatch.Draw(GfxHandler.GetTexture(t), t.Position));
 
             //testLevel.Assets.ForEach(t => 
             //{
             //    if (t.Type != "uhm") spriteBatch.Dra(GfxHandler.GetTexture(t), t.Position);
             //});
 
-            spriteBatch.End();
+            this.spriteBatch.End();
 
-            GfxHandler.GetRotationSprite(testPlayer).Draw(spriteBatch, testPlayer.Position, testPlayer.FacingAngle, testPlayer.MovementAngle);
-            GfxHandler.GetSprite(sampleEnemy).Draw(spriteBatch, sampleEnemy.Position);
+            GfxHandler.GetRotationSprite(this.testPlayer).Draw(this.spriteBatch, this.testPlayer.Position, this.testPlayer.FacingAngle, this.testPlayer.MovementAngle);
+            GfxHandler.GetSprite(this.sampleEnemy).Draw(this.spriteBatch, this.sampleEnemy.Position);
 
-            foreach (var projectile in testLevel.Projectiles.ToList())
+            foreach (var projectile in this.testLevel.Projectiles.ToList())
             {
-                GfxHandler.GetRotationSprite(projectile).Draw(spriteBatch, projectile.Position, projectile.Angle, projectile.Angle);
+                GfxHandler.GetRotationSprite(projectile).Draw(this.spriteBatch, projectile.Position, projectile.Angle, projectile.Angle);
 
                 if (projectile.Lifetime > projectile.Range)
                 {
-                    testLevel.Projectiles.Remove(projectile);
+                    this.testLevel.Projectiles.Remove(projectile);
                 }
             }
 

@@ -1,5 +1,4 @@
 ﻿using System;
-using LeGame.Interfaces;
 using Microsoft.Xna.Framework;
 
 namespace LeGame.Models.Items.Projectiles
@@ -20,11 +19,6 @@ namespace LeGame.Models.Items.Projectiles
                 this.Position.Y + (float)Math.Sin(this.Angle) * this.Speed);
 
             this.Lifetime++;
-        }
-
-        public override void Hit(ICharacter target)
-        {
-            base.Hit(target);
         }
     }
 }

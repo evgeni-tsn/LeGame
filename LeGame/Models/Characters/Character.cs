@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using LeGame.Interfaces;
+﻿using LeGame.Interfaces;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using LeGame.Handlers;
 
 namespace LeGame.Models.Characters
 {
@@ -22,8 +15,11 @@ namespace LeGame.Models.Characters
         }
         
         public Level Level { get; set; }
+
         public int MaxHealth { get; set; }
+
         public int CurrentHealth { get; set; }
+
         public int Speed { get; set; }
 
         public abstract void Move();

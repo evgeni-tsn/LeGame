@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using LeGame.Interfaces;
+﻿using LeGame.Interfaces;
 using LeGame.Models.Characters.Player;
 
 namespace LeGame.Models.Items.Weapons
@@ -11,11 +7,12 @@ namespace LeGame.Models.Items.Weapons
     {
         protected RangedWeapon(int damage, int range)
         {
-            Damage = damage;
-            Range = range;
+            this.Damage = damage;
+            this.Range = range;
         }
 
         public int Damage { get; set; }
+
         public int Range { get; set; }
 
         public abstract void Attack(Level level, Player attacker);

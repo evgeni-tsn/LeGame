@@ -1,5 +1,4 @@
-﻿using LeGame.Interfaces;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 
 namespace LeGame.Models.Items.Projectiles
 {
@@ -9,10 +8,6 @@ namespace LeGame.Models.Items.Projectiles
             : base(position, type, damage, speed, angle, range)
         {
         }
-
-        public override void Hit(ICharacter target)
-        {
-            base.Hit(target);
-        }
+        
     }
 }

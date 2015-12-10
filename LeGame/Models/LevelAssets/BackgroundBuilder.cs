@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System.IO;
 using LeGame.Exceptions;
-using LeGame.Models;
-using LeGame.Models.LevelAssets;
-using Microsoft.Xna.Framework.Content;
-using LeGame.Interfaces;
 
 namespace LeGame.Models.LevelAssets
 {
@@ -18,7 +11,7 @@ namespace LeGame.Models.LevelAssets
     {
         //TODO: assets and tiles to be renamed to something mroe descriptive.
         private List<GameObject> assets;
-        private List<NonInteractiveBG> tiles;
+        private List<NonInteractiveBg> tiles;
         
         public BackgroundBuilder(string mapFilePath)
         {
@@ -39,7 +32,7 @@ namespace LeGame.Models.LevelAssets
                 .ToDictionary(item => item[0], item => item.Substring(2));
 
             this.assets = new List<GameObject>();
-            this.tiles = new List<NonInteractiveBG>();
+            this.tiles = new List<NonInteractiveBg>();
             // Go through the chars and store their corresponding items in the assets/tiles
             for (int row = 0; row < mapRows.Count; row++)
             {
@@ -57,15 +50,15 @@ namespace LeGame.Models.LevelAssets
                     string contentPath = parameters[0];
                     bool hasCollision = parameters[1].Equals("true");
                     int drawPriority = parameters.Length > 2 ? int.Parse(parameters[2]) : 0;
-                    var position = new Vector2(col * GlobalVariables.TILE_HEIGHT, row * GlobalVariables.TILE_WIDTH);
+                    var position = new Vector2(col * GlobalVariables.TileHeight, row * GlobalVariables.TileWidth);
 
                     if (hasCollision)
                     {
-                        this.assets.Add(new InteractiveBG(position, contentPath, drawPriority));
+                        this.assets.Add(new InteractiveBg(position, contentPath, drawPriority));
                     }
                     else
                     {
-                        this.tiles.Add(new NonInteractiveBG(position, contentPath, drawPriority));
+                        this.tiles.Add(new NonInteractiveBg(position, contentPath, drawPriority));
                     }
                 }
             }
@@ -76,13 +69,13 @@ namespace LeGame.Models.LevelAssets
             get
             {
                 return this.assets
-                    .OrderBy(ass => (ass as InteractiveBG).DrawPriority)
+                    .OrderBy(ass => ((InteractiveBg) ass).DrawPriority)
                     .ToList();
             }
             private set { this.assets = value; }
         }
 
-        public List<NonInteractiveBG> Tiles
+        public List<NonInteractiveBg> Tiles
         {
             get
             {

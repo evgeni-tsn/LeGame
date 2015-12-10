@@ -1,30 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace LeGame
+﻿namespace LeGame
 {
     public static class GlobalVariables
     {
-        private const int wINDOW_WIDTH = 800;
-        private const int wINDOW_HEIGHT = 480;
+        public static readonly string ContentDir = @"..\..\..\Content\";
+        public static readonly int TileWidth = 32;
+        public static readonly int TileHeight = 32;
 
-        public static readonly string CONTENT_DIR = @"..\..\..\Content\";
-        public static readonly int TILE_WIDTH = 32;
-        public static readonly int TILE_HEIGHT = 32;
+        public static int WindowWidth { get; } = 800;
 
-        public static int WINDOW_WIDTH
-        {
-            get { return wINDOW_WIDTH; }
-        }
-        public static int WINDOW_HEIGHT
-        {
-            get { return wINDOW_HEIGHT; }
-        }
-
-
-
-
+        public static int WindowHeight { get; } = 480;
     }
 }

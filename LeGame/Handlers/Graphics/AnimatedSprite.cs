@@ -11,53 +11,53 @@ namespace LeGame.Handlers.Graphics
 {
     public class AnimatedSprite
     {
-        private Texture2D Texture;
-        public int Rows { get; set; }
-        public int Columns { get; set; }
-        private int currentFrame;
-        private int totalFrames;
-
-        private Dictionary<Keys, string> keyToDirection = new Dictionary<Keys, string>
+        private readonly Texture2D texture;
+        private readonly Dictionary<Keys, string> keyToDirection = new Dictionary<Keys, string>
         {
             { Keys.D, "Right" },
             { Keys.A, "Left" },
             { Keys.W, "Up"},
-            { Keys.S, "Down" },
+            { Keys.S, "Down" }
         };
-
-        private Dictionary<string, int[]> directionToFrames = new Dictionary<string, int[]>
+        private readonly Dictionary<string, int[]> directionToFrames = new Dictionary<string, int[]>
         {
             { "Right", new[] { 6, 7, 8 } },
             { "Up", new[] { 9, 10, 11 } },
-            { "Left", new[] { 3, 4, 5 } }, 
-            { "Down", new[] { 0, 1, 2 } },
+            { "Left", new[] { 3, 4, 5 } },
+            { "Down", new[] { 0, 1, 2 } }
         };
 
-        private int timeSinceLastFrame = 0;
+        private int currentFrame;
+        private int timeSinceLastFrame;
         private int timePerFrame = 130;
+        private int totalFrames;
 
         public AnimatedSprite(Texture2D texture)
         {
-            Texture = texture;
-            Rows = Texture.Height / GlobalVariables.TILE_HEIGHT;
-            Columns = Texture.Width / GlobalVariables.TILE_WIDTH;
-            currentFrame = 0;
-            totalFrames = Rows * Columns;
+            this.texture = texture;
+            this.Rows = this.texture.Height / GlobalVariables.TileHeight;
+            this.Columns = this.texture.Width / GlobalVariables.TileWidth;
+            this.currentFrame = 0;
+            this.totalFrames = this.Rows * this.Columns;
         }
+
+        public int Rows { get; set; }
+
+        public int Columns { get; set; }
 
         public void Update(GameTime gameTime, Character character)
         {
-            if(character is ICollisionable)
+            if (character is ICollisionable)
             {
                 // Enemy
-                SpriteRotaions(gameTime, (character as SampleEnemy).Direction);
+                SpriteRotaions(gameTime, ((SampleEnemy)character).Direction);
             }
             else
             {
                 // Player
-                foreach (var key in keyToDirection.Keys.Where(key => Keyboard.GetState().IsKeyDown(key)))
+                foreach (var key in this.keyToDirection.Keys.Where(key => Keyboard.GetState().IsKeyDown(key)))
                 {
-                    SpriteRotaions(gameTime, keyToDirection[key]);
+                    SpriteRotaions(gameTime, this.keyToDirection[key]);
                     break;
                 }
             }
@@ -65,48 +65,47 @@ namespace LeGame.Handlers.Graphics
 
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
-            int width = Texture.Width / Columns;
-            int height = Texture.Height / Rows;
-            int row = currentFrame / Columns;
-            int column = currentFrame % Columns;
+            int width = this.texture.Width / this.Columns;
+            int height = this.texture.Height / this.Rows;
+            int row = this.currentFrame / this.Columns;
+            int column = this.currentFrame % this.Columns;
             // Color color = new Color(100, 100, 100, 100);
             Rectangle sourceRectangle = new Rectangle(width * column, height * row, width, height);
             Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width, height);
 
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
-            spriteBatch.Draw(Texture, destinationRectangle, sourceRectangle, Color.White);
+            spriteBatch.Draw(this.texture, destinationRectangle, sourceRectangle, Color.White);
             spriteBatch.End();
         }
 
         public int SpriteRotaions(GameTime gameTime, string direction)
         {
             // Coldown for the animation
-            timeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
-            if (timeSinceLastFrame < timePerFrame)
+            this.timeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
+            if (this.timeSinceLastFrame < this.timePerFrame)
             {
-                return currentFrame;
+                return this.currentFrame;
             }
-            timeSinceLastFrame = gameTime.ElapsedGameTime.Milliseconds;
+            this.timeSinceLastFrame = gameTime.ElapsedGameTime.Milliseconds;
             // If enough time has passed 
 
             // go through directionToFrames and find the one coresponding to the direction
-            foreach (var direct in directionToFrames.Keys.Where(key => direction.Equals(key)))
+            foreach (var direct in this.directionToFrames.Keys.Where(key => direction.Equals(key)))
             {
-                if (directionToFrames[direct].Contains(currentFrame))
+                if (this.directionToFrames[direct].Contains(this.currentFrame))
                 {
-                    currentFrame++;
-                    if (currentFrame == directionToFrames[direct][2] + 1)
+                    this.currentFrame++;
+                    if (this.currentFrame == this.directionToFrames[direct][2] + 1)
                     {
-                        currentFrame = directionToFrames[direct][0];
+                        this.currentFrame = this.directionToFrames[direct][0];
                     }
                 }
                 else
                 {
-                    currentFrame = directionToFrames[direct][0];
+                    this.currentFrame = this.directionToFrames[direct][0];
                 }
             }
-
-            return currentFrame;
+            return this.currentFrame;
         }
     }
 }

@@ -45,11 +45,12 @@
     <Compile Include="Exceptions\GameException.cs" />
     <Compile Include="Exceptions\MapException.cs" />
     <Compile Include="Engine\GlobalVariables.cs" />
-    <Compile Include="Handlers\AIPathfinder.cs" />
+    <Compile Include="Handlers\AiPathfinder.cs" />
     <Compile Include="Handlers\Graphics\AnimatedSprite.cs" />
     <Compile Include="Handlers\CollisionHandler.cs" />
     <Compile Include="Handlers\GFXHandler.cs" />
     <Compile Include="Handlers\Graphics\RotationSprite.cs" />
+    <Compile Include="Handlers\Graphics\Sprite.cs" />
     <Compile Include="Handlers\MovementHandler.cs" />
     <Compile Include="Interfaces\ICharacter.cs" />
     <Compile Include="Interfaces\ICollisionable.cs" />
@@ -76,9 +77,9 @@
     <Compile Include="Interfaces\IUseWeapon.cs" />
     <Compile Include="Interfaces\IWeapon.cs" />
     <Compile Include="Models\Level.cs" />
-    <Compile Include="Models\LevelAssets\InteractiveBG.cs" />
+    <Compile Include="Models\LevelAssets\InteractiveBg.cs" />
     <Compile Include="Models\LevelAssets\BackgroundBuilder.cs" />
-    <Compile Include="Models\LevelAssets\NonInteractiveBG.cs" />
+    <Compile Include="Models\LevelAssets\NonInteractiveBg.cs" />
     <Compile Include="Engine\GameEngine.cs" />
     <Compile Include="RolePlayingGame.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
