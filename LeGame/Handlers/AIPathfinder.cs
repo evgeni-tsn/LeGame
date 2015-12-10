@@ -9,7 +9,7 @@ namespace LeGame.Handlers
     {
         public static void FindPath(Character player, Character ai)
         {
-            const double tolerance = 0.000001;
+            const double tolerance = 0.0000001;
 
             Random rng = new Random();
             if (Math.Abs(ai.Position.X - player.Position.X) > tolerance && 

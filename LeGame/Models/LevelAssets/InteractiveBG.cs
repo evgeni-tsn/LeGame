@@ -10,11 +10,11 @@ namespace LeGame.Models.LevelAssets
         public bool CanCollide { get; set; }
         public int DrawPriority { get; set; }
 
-        public InteractiveBg(Vector2 position, string type, int drawPriority)
+        public InteractiveBg(Vector2 position, string type, int drawPriority, bool canCollide)
             : base(position, type)
         {
             this.DrawPriority = drawPriority;
-            this.CanCollide = true;
+            this.CanCollide = canCollide;
         }
         
     }

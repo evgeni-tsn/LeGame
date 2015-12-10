@@ -107,10 +107,10 @@ namespace LeGame.Engine
             // TODO: Add your drawing code here
             this.spriteBatch.Begin();
            
-            this.testLevel.Tiles.ForEach(t => this.spriteBatch.Draw(GfxHandler.GetTexture(t), t.Position));
+            //this.testLevel.Tiles.ForEach(t => this.spriteBatch.Draw(GfxHandler.GetTexture(t), t.Position));
             this.testLevel.Assets.ForEach(t => this.spriteBatch.Draw(GfxHandler.GetTexture(t), t.Position));
 
-            //testLevel.Assets.ForEach(t => 
+            //testLevel.Background.ForEach(t => 
             //{
             //    if (t.Type != "uhm") spriteBatch.Dra(GfxHandler.GetTexture(t), t.Position);
             //});

@@ -13,6 +13,6 @@ namespace LeGame.Interfaces
 
         List<GameObject> Assets { get; }
 
-        List<NonInteractiveBg> Tiles { get; }
+        //List<NonInteractiveBg> Tiles { get; }
     }
 }
