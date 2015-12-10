@@ -9,9 +9,8 @@ namespace LeGame.Models.LevelAssets
     // Previously AssetBuilder
     public class BackgroundBuilder
     {
-        //TODO: assets and tiles to be renamed to something mroe descriptive.
-        private List<GameObject> assets;
-        private List<NonInteractiveBg> tiles;
+        private List<GameObject> background;
+        //private List<NonInteractiveBg> tiles;
         
         public BackgroundBuilder(string mapFilePath)
         {
@@ -31,9 +30,9 @@ namespace LeGame.Models.LevelAssets
                 .Skip(separatorLocation + 1)
                 .ToDictionary(item => item[0], item => item.Substring(2));
 
-            this.assets = new List<GameObject>();
-            this.tiles = new List<NonInteractiveBg>();
-            // Go through the chars and store their corresponding items in the assets/tiles
+            this.background = new List<GameObject>();
+            //this.tiles = new List<NonInteractiveBg>();
+            // Go through the chars and store their corresponding items in the background/tiles
             for (int row = 0; row < mapRows.Count; row++)
             {
                 for (int col = 0; col < mapRows[row].Length; col++)
@@ -45,46 +44,51 @@ namespace LeGame.Models.LevelAssets
                         throw new MapException(string.Format(Messages.InvalidLegendMap, mapFilePath));
                     }
 
-                    string[] parameters = legend[currentChar].Split(':');
+                    string[] layers = legend[currentChar].Split('|');
 
-                    string contentPath = parameters[0];
-                    bool hasCollision = parameters[1].Equals("true");
-                    int drawPriority = parameters.Length > 2 ? int.Parse(parameters[2]) : 0;
-                    var position = new Vector2(col * GlobalVariables.TileHeight, row * GlobalVariables.TileWidth);
+                    foreach (string layer in layers)
+                    {
+                        string[] parameters = layer.Split(':');
 
-                    if (hasCollision)
-                    {
-                        this.assets.Add(new InteractiveBg(position, contentPath, drawPriority));
-                    }
-                    else
-                    {
-                        this.tiles.Add(new NonInteractiveBg(position, contentPath, drawPriority));
+                        string contentPath = parameters[0];
+                        bool hasCollision = parameters[1].Equals("true");
+                        int drawPriority = parameters.Length > 2 ? int.Parse(parameters[2]) : 0;
+                        var position = new Vector2(col * GlobalVariables.TileHeight, row * GlobalVariables.TileWidth);
+
+                        //if (hasCollision)
+                        //{
+                        this.background.Add(new InteractiveBg(position, contentPath, drawPriority, hasCollision));
+                        //}
+                        //else
+                        //{
+                        //    this.tiles.Add(new NonInteractiveBg(position, contentPath, drawPriority));
+                        //}
                     }
                 }
             }
         }
         // Properties
-        public List<GameObject> Assets
+        public List<GameObject> Background
         {
             get
             {
-                return this.assets
+                return this.background
                     .OrderBy(ass => ((InteractiveBg) ass).DrawPriority)
                     .ToList();
             }
-            private set { this.assets = value; }
+            private set { this.background = value; }
         }
 
-        public List<NonInteractiveBg> Tiles
-        {
-            get
-            {
-                return this.tiles
-                    .OrderBy(till => till.DrawPriority)
-                    .ToList();
-            }
-            private set { this.tiles = value; }
-        }
+        //public List<NonInteractiveBg> Tiles
+        //{
+        //    get
+        //    {
+        //        return this.tiles
+        //            .OrderBy(till => till.DrawPriority)
+        //            .ToList();
+        //    }
+        //    private set { this.tiles = value; }
+        //}
         // Methods
         private List<string> ReadMapFile(string textFilePath)
         {

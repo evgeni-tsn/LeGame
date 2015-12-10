@@ -13,8 +13,8 @@ namespace LeGame.Models
             this.Character = character;
             BackgroundBuilder assetBuilder = new BackgroundBuilder(path);
 
-            this.Assets = assetBuilder.Assets;
-            this.Tiles = assetBuilder.Tiles;
+            this.Assets = assetBuilder.Background;
+            //this.Tiles = assetBuilder.Tiles;
             this.Enemies = new List<Character>();
         }
 
@@ -26,6 +26,6 @@ namespace LeGame.Models
 
         public List<GameObject> Assets { get; private set; }
 
-        public List<NonInteractiveBg> Tiles { get; private set; }
+        //public List<NonInteractiveBg> Tiles { get; private set; }
     }
 }

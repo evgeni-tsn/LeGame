@@ -1,4 +1,4 @@
-﻿┏__________________┓
+﻿┏_U________U_______┓
 i..................|
 i.............S ...|
 i.............  ..V|
@@ -7,13 +7,13 @@ i..........  .T .. |
 i..........  .  .. |
 i..........  ..... |
 i..........  .Q   .|
-i..........  .    .|
+i..........  .    .q
 i..................|
 i..................|
 i..................|
-i..................|
-┗------------------┛
-Legend:(char:file:isGameObject:drawPriority?)
+i.W...........doo..|
+┗----------p-------┛
+Legend:(char:file:isGameObject:drawPriority?)|(another layer at the same position)?
  :Tiles/NULL:true
 ┏:Tiles/whiteWall2NW:true
 ┓:Tiles/whiteWall2NE:true
@@ -24,8 +24,14 @@ _:Tiles/whiteWall2N:true
 |:Tiles/whiteWall2E:true
 i:Tiles/whiteWall2W:true
 .:Tiles/Carpet:false
+o:Tiles/Carpet:true
 T:Tiles/Furniture/Table:true
 V:Tiles/Furniture/TableWithTV:true:1
 S:Tiles/Furniture/Couch1:true
 Q:Tiles/Furniture/Couch2:true
 P:Tiles/Furniture/Couch3:true
+W:Tiles/Carpet:false|Tiles/Furniture/WindowS:false:1
+U:Tiles/whiteWall2N:true|Tiles/Furniture/WindowN:false:1
+p:Tiles/whiteWall2S:true|Tiles/Furniture/PaintingGreenS:false:1
+q:Tiles/whiteWall2E:true|Tiles/Furniture/PaintingBlueE:false:1
+d:Tiles/Carpet:false|Tiles/Furniture/DeskWithChairS:false:1

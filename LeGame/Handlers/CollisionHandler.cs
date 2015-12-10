@@ -16,17 +16,17 @@ namespace LeGame.Handlers
             List<GameObject> collisionItems = character.Level.Assets.Concat(character.Level.Enemies).ToList(); 
             // certainly NEEDS to be revamped
 
-            foreach (var item in collisionItems)// character.Level.Assets)
+            foreach (var item in collisionItems)// character.Level.Background)
             {
                 Rectangle obj = GfxHandler.GetBBox(item);
 
-                if ((item is ICollisionable || item is IPickable)
+                if (((item is ICollisionable && ((ICollisionable)item).CanCollide) || item is IPickable)
                     && GfxHandler.GetBBox(character).Intersects(obj))
                 {
                     return item;
                 }
             }
-            return 1;
+            return -1;
         }
         public static void Reaction(Character character, Keys key)
         {
