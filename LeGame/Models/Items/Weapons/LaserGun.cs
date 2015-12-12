@@ -15,7 +15,7 @@ namespace LeGame.Models.Items.Weapons
 
         public override void Attack(Level level, Player attacker)
         {
-            level.Projectiles.Add(new LaserBlast(attacker.Position, attacker.FacingAngle - 1.55f, this.Damage, this.Range));
+            level.Projectiles.Add(new LaserBlast(attacker, attacker.FacingAngle - 1.55f, this.Damage, this.Range));
         }
     }
 }

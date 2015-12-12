@@ -16,7 +16,9 @@ namespace LeGame.Handlers.Graphics
         }
 
         public Texture2D Texture { get; }
+
         public int Rows { get; set; }
+
         public int Columns { get; set; }
 
         public virtual void Update(GameTime gameTime, Character character)

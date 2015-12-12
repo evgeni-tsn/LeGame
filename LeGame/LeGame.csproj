@@ -57,7 +57,7 @@
     <Compile Include="Interfaces\IPickable.cs" />
     <Compile Include="Interfaces\ISprite.cs" />
     <Compile Include="Models\Characters\Character.cs" />
-    <Compile Include="Models\Characters\Enemies\SampleEnemy.cs" />
+    <Compile Include="Models\Characters\Enemies\Enemy.cs" />
     <Compile Include="Models\Characters\Player\Player.cs" />
     <Compile Include="Models\Characters\Player\TestChar.cs" />
     <Compile Include="Models\GameObject.cs" />

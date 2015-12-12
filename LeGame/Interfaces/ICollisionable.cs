@@ -1,6 +1,6 @@
 ﻿namespace LeGame.Interfaces
 {
-    interface ICollisionable
+    public interface ICollisionable
     {
         bool CanCollide { get; set; }
     }

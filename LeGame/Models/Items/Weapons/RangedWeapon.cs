@@ -3,7 +3,7 @@ using LeGame.Models.Characters.Player;
 
 namespace LeGame.Models.Items.Weapons
 {
-    abstract class RangedWeapon : IWeapon
+    public abstract class RangedWeapon : IWeapon
     {
         protected RangedWeapon(int damage, int range)
         {

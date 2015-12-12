@@ -11,10 +11,14 @@ using Microsoft.Xna.Framework.Input;
 
 namespace LeGame.Engine
 {
+    using System.ComponentModel.Design;
+
+    using LeGame.Models.Items.Projectiles;
+
     public class GameEngine : Game
     {
-        readonly GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        private readonly GraphicsDeviceManager graphics;
+        private SpriteBatch spriteBatch;
 
         private Player testPlayer;
         private Character sampleEnemy;
@@ -29,19 +33,20 @@ namespace LeGame.Engine
         protected override void LoadContent()
         {
             this.IsMouseVisible = true;
+
             // Create a new SpriteBatch, which can be used to draw textures.
             this.spriteBatch = new SpriteBatch(this.GraphicsDevice);
             GfxHandler.Load(this.Content);
             
             GoldCoin coin = new GoldCoin(new Vector2(300, 300), "TestObjects/coin");
-            //testEnemyTex = Content.Load<Texture2D>(@"TestObjects/cockSprite");
 
+            // testEnemyTex = Content.Load<Texture2D>(@"TestObjects/cockSprite");
             Vector2 enemyPos = new Vector2(550, 350);
             Vector2 pos = new Vector2(
                 GlobalVariables.WindowWidth / 2 - 140,
                 GlobalVariables.WindowHeight / 2);
 
-            this.sampleEnemy = new SampleEnemy(enemyPos, @"TestObjects/cockSprite", 100, 100, 1, this.testLevel);
+            this.sampleEnemy = new Enemy(enemyPos, @"TestObjects/cockSprite", 100, 100, 1, this.testLevel);
             this.testPlayer = new TestChar(pos, @"Player/p1Rotation", 100, 100, 2, this.testLevel);
 
             this.testLevel = new Level(@"..\..\..\Content\Maps\testMap2.txt", this.testPlayer);
@@ -76,19 +81,20 @@ namespace LeGame.Engine
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
-                Exit();
+                this.Exit();
             }
 
             // TODO: Add your update logic here
-
-           
             this.testPlayer.Move();
             GfxHandler.GetRotationSprite(this.testPlayer).Update(gameTime, this.testPlayer);
             
-            this.sampleEnemy.Move();
-            GfxHandler.GetSprite(this.sampleEnemy).Update(gameTime, this.sampleEnemy);
+            foreach (Character enemy in this.testLevel.Enemies.ToList())
+            {
+                enemy.Move();
+                GfxHandler.GetSprite(enemy).Update(gameTime, enemy);
+            }
 
-            foreach (var projectile in this.testLevel.Projectiles)
+            foreach (Projectile projectile in this.testLevel.Projectiles.ToList())
             {
                 projectile.Move();
             }
@@ -103,18 +109,18 @@ namespace LeGame.Engine
         protected override void Draw(GameTime gameTime)
         {
             this.GraphicsDevice.Clear(Color.Wheat);
-            Vector2 origin = new Vector2(GfxHandler.GetWidth(this.testPlayer) / 2, GfxHandler.GetHeight(this.testPlayer) / 2);
+
+            // Vector2 origin = new Vector2(GfxHandler.GetWidth(this.testPlayer) / 2, GfxHandler.GetHeight(this.testPlayer) / 2);
             // TODO: Add your drawing code here
             this.spriteBatch.Begin();
            
-            //this.testLevel.Tiles.ForEach(t => this.spriteBatch.Draw(GfxHandler.GetTexture(t), t.Position));
+            // this.testLevel.Tiles.ForEach(t => this.spriteBatch.Draw(GfxHandler.GetTexture(t), t.Position));
             this.testLevel.Assets.ForEach(t => this.spriteBatch.Draw(GfxHandler.GetTexture(t), t.Position));
 
-            //testLevel.Background.ForEach(t => 
-            //{
-            //    if (t.Type != "uhm") spriteBatch.Dra(GfxHandler.GetTexture(t), t.Position);
-            //});
-
+            // testLevel.Background.ForEach(t => 
+            // {
+            //     if (t.Type != "uhm") spriteBatch.Dra(GfxHandler.GetTexture(t), t.Position);
+            // });
             this.spriteBatch.End();
 
             GfxHandler.GetRotationSprite(this.testPlayer).Draw(this.spriteBatch, this.testPlayer.Position, this.testPlayer.FacingAngle, this.testPlayer.MovementAngle);

@@ -20,6 +20,7 @@ namespace LeGame.Handlers.Graphics
             { Keys.W, "Up"},
             { Keys.S, "Down" }
         };
+
         private readonly Dictionary<string, int[]> directionToFrames = new Dictionary<string, int[]>
         {
             { "Right", new[] { 6, 7, 8 } },
@@ -44,14 +45,14 @@ namespace LeGame.Handlers.Graphics
             if (character is ICollisionable)
             {
                 // Enemy
-                SpriteRotaions(gameTime, ((SampleEnemy)character).Direction);
+                this.SpriteRotaions(gameTime, ((Enemy)character).Direction);
             }
             else
             {
                 // Player
                 foreach (var key in this.keyToDirection.Keys.Where(key => Keyboard.GetState().IsKeyDown(key)))
                 {
-                    SpriteRotaions(gameTime, this.keyToDirection[key]);
+                    this.SpriteRotaions(gameTime, this.keyToDirection[key]);
                     break;
                 }
             }
@@ -81,8 +82,8 @@ namespace LeGame.Handlers.Graphics
                 return this.currentFrame;
             }
             this.timeSinceLastFrame = gameTime.ElapsedGameTime.Milliseconds;
-            // If enough time has passed 
 
+            // If enough time has passed 
             // go through directionToFrames and find the one coresponding to the direction
             foreach (var direct in this.directionToFrames.Keys.Where(key => direction.Equals(key)))
             {

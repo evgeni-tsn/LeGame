@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using LeGame.Handlers.Graphics;
+using LeGame.Interfaces;
 using LeGame.Models;
 using LeGame.Models.LevelAssets;
 using Microsoft.Xna.Framework;
@@ -10,6 +11,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace LeGame.Handlers
 {
+
     public static class GfxHandler
     {
         private static readonly Dictionary<string, AnimatedSprite> Sprites = new Dictionary<string, AnimatedSprite>();
@@ -58,17 +60,17 @@ namespace LeGame.Handlers
             }
         }
         // Get Rotation Sprite 
-        public static RotationSprite GetRotationSprite(GameObject obj)
+        public static RotationSprite GetRotationSprite(IGameObject obj)
         {
             return RSprites[obj.Type];
         }
         // Get Sprite
-        public static AnimatedSprite GetSprite(GameObject obj)
+        public static AnimatedSprite GetSprite(IGameObject obj)
         {
             return Sprites[obj.Type];
         }
         // Get Texture
-        public static Texture2D GetTexture(GameObject obj)
+        public static Texture2D GetTexture(IGameObject obj)
         {
             return TextureLibrary[obj.Type];
         }
@@ -78,7 +80,7 @@ namespace LeGame.Handlers
             return TextureLibrary[t.Type];
         }
         // Get Bounding Box
-        public static Rectangle GetBBox(GameObject obj)
+        public static Rectangle GetBBox(IGameObject obj)
         {
             Texture2D texture = GetTexture(obj);
             Vector2 pos = obj.Position;
@@ -100,7 +102,7 @@ namespace LeGame.Handlers
             return new Rectangle((int)(pos.X + 3), (int)(pos.Y + 3), width - 6, height - 5);
         }
         // Get Width
-        public static int GetWidth(GameObject obj)
+        public static int GetWidth(IGameObject obj)
         {
             return GetBBox(obj).Width;
         }
@@ -110,7 +112,7 @@ namespace LeGame.Handlers
             return GetTexture(t).Width;
         }
         // Get Height
-        public static int GetHeight(GameObject obj)
+        public static int GetHeight(IGameObject obj)
         {
             return GetBBox(obj).Height;
         }

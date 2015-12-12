@@ -16,15 +16,16 @@ namespace LeGame.Models
             this.Assets = assetBuilder.Background;
             //this.Tiles = assetBuilder.Tiles;
             this.Enemies = new List<Character>();
+            this.Projectiles = new List<Projectile>();
         }
 
-        public List<Projectile> Projectiles { get; private set; } = new List<Projectile>();
+        public List<Projectile> Projectiles { get; private set; } 
 
         public List<Character> Enemies { get; private set; }
 
         public Character Character { get; private set; }
 
-        public List<GameObject> Assets { get; private set; }
+        public List<IGameObject> Assets { get; private set; }
 
         //public List<NonInteractiveBg> Tiles { get; private set; }
     }

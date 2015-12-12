@@ -11,7 +11,7 @@ namespace LeGame.Interfaces
 
         List<Character> Enemies { get; }
 
-        List<GameObject> Assets { get; }
+        List<IGameObject> Assets { get; }
 
         //List<NonInteractiveBg> Tiles { get; }
     }

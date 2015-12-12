@@ -10,9 +10,6 @@ namespace LeGame.Models.Characters.Player
 {
     public class Player : Character
     {
-        private readonly Keys[] kbKeys = { Keys.W, Keys.A, Keys.S, Keys.D };
-
-
         public Player(Vector2 position, string type, int maxHealth, int currentHealth, int speed, Level level) 
             : base(position, type, maxHealth, currentHealth, speed, level)
         {
@@ -24,7 +21,7 @@ namespace LeGame.Models.Characters.Player
         public float MovementAngle { get; private set; }
         public IWeapon EquippedWeapon { get; set; }
 
-        public Keys[] KbKeys => this.kbKeys;
+        public Keys[] KbKeys { get; } = { Keys.W, Keys.A, Keys.S, Keys.D };
 
         public override void Move()
         {
@@ -55,21 +52,18 @@ namespace LeGame.Models.Characters.Player
                         this.MovementAngle = -1.55f;
                         break;
                 }
-                CollisionHandler.Reaction(this, key);
+                CollisionHandler.PlayerReaction(this, key);
             }
 
             if (mState.LeftButton == ButtonState.Pressed)
             {
-                AttackUsingWeapon();
+                this.AttackUsingWeapon();
             }
         }
 
         public override void AttackUsingWeapon()
         {
-            if (this.EquippedWeapon != null)
-            {
-                this.EquippedWeapon.Attack(this.Level, this);
-            }
+            this.EquippedWeapon?.Attack(this.Level, this);
         }
     }
 }
