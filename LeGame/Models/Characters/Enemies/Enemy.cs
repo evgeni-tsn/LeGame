@@ -5,7 +5,7 @@ using LeGame.Interfaces;
 
 namespace LeGame.Models.Characters.Enemies
 {
-    public class Enemy : Character, ICollisionable
+    public class Enemy : Character, ICollidable
     {
         public Enemy(Vector2 position, string type, int maxHealth, int currentHealth, int speed, Level level)
             : base(position, type, maxHealth, currentHealth, speed, level)

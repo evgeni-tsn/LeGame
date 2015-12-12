@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace LeGame.Handlers.Graphics
 {
-    public abstract class Sprite: ISprite
+    public abstract class Sprite : ISprite
     {
 
         protected Sprite(Texture2D texture)
@@ -15,14 +15,20 @@ namespace LeGame.Handlers.Graphics
             this.Columns = this.Texture.Width / GlobalVariables.TileWidth;
         }
 
-        public Texture2D Texture { get; }
-
         public int Rows { get; set; }
 
         public int Columns { get; set; }
 
-        public virtual void Update(GameTime gameTime, Character character)
-        {
-        }
+        protected int CurrentFrame { get; set; }
+
+        protected int TotalFrames { get; set; }
+
+        protected int TimeSinceLastFrame { get; set; }
+
+        protected Texture2D Texture { get; }
+
+        public abstract void Update(GameTime gameTime, Character character = null);
+
+        public abstract void Draw(SpriteBatch spriteBatch, Vector2 location, float rotationA = 0, float rotationB = 0);
     }
 }

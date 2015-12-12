@@ -46,14 +46,16 @@
     <Compile Include="Exceptions\MapException.cs" />
     <Compile Include="Engine\GlobalVariables.cs" />
     <Compile Include="Handlers\AiPathfinder.cs" />
-    <Compile Include="Handlers\Graphics\AnimatedSprite.cs" />
+    <Compile Include="Handlers\Graphics\FourDirectionSprite.cs" />
     <Compile Include="Handlers\CollisionHandler.cs" />
     <Compile Include="Handlers\GFXHandler.cs" />
+    <Compile Include="Handlers\Graphics\EffectSprite.cs" />
     <Compile Include="Handlers\Graphics\RotationSprite.cs" />
+    <Compile Include="Handlers\Graphics\PlayerRotationSprite.cs" />
     <Compile Include="Handlers\Graphics\Sprite.cs" />
     <Compile Include="Handlers\MovementHandler.cs" />
     <Compile Include="Interfaces\ICharacter.cs" />
-    <Compile Include="Interfaces\ICollisionable.cs" />
+    <Compile Include="Interfaces\ICollidable.cs" />
     <Compile Include="Interfaces\IPickable.cs" />
     <Compile Include="Interfaces\ISprite.cs" />
     <Compile Include="Models\Characters\Character.cs" />
@@ -63,6 +65,7 @@
     <Compile Include="Models\GameObject.cs" />
     <Compile Include="Models\Items\PickableItems\GoldCoin.cs" />
     <Compile Include="Models\Items\PickableItems\PickableItem.cs" />
+    <Compile Include="Models\Items\Projectiles\EnergyBall.cs" />
     <Compile Include="Models\Items\Weapons\LaserGun.cs" />
     <Compile Include="Models\Items\Weapons\MeleeWeapon.cs" />
     <Compile Include="Models\Items\Projectiles\Grenade.cs" />

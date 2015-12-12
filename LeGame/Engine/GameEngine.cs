@@ -5,16 +5,13 @@ using LeGame.Models.Characters;
 using LeGame.Models.Characters.Enemies;
 using LeGame.Models.Characters.Player;
 using LeGame.Models.Items.PickableItems;
+using LeGame.Models.Items.Projectiles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 namespace LeGame.Engine
 {
-    using System.ComponentModel.Design;
-
-    using LeGame.Models.Items.Projectiles;
-
     public class GameEngine : Game
     {
         private readonly GraphicsDeviceManager graphics;
@@ -86,7 +83,7 @@ namespace LeGame.Engine
 
             // TODO: Add your update logic here
             this.testPlayer.Move();
-            GfxHandler.GetRotationSprite(this.testPlayer).Update(gameTime, this.testPlayer);
+            GfxHandler.GetSprite(this.testPlayer).Update(gameTime, this.testPlayer);
             
             foreach (Character enemy in this.testLevel.Enemies.ToList())
             {
@@ -97,6 +94,7 @@ namespace LeGame.Engine
             foreach (Projectile projectile in this.testLevel.Projectiles.ToList())
             {
                 projectile.Move();
+                GfxHandler.GetSprite(projectile).Update(gameTime);
             }
 
             base.Update(gameTime);
@@ -123,12 +121,12 @@ namespace LeGame.Engine
             // });
             this.spriteBatch.End();
 
-            GfxHandler.GetRotationSprite(this.testPlayer).Draw(this.spriteBatch, this.testPlayer.Position, this.testPlayer.FacingAngle, this.testPlayer.MovementAngle);
             GfxHandler.GetSprite(this.sampleEnemy).Draw(this.spriteBatch, this.sampleEnemy.Position);
+            GfxHandler.GetSprite(this.testPlayer).Draw(this.spriteBatch, this.testPlayer.Position, this.testPlayer.FacingAngle, this.testPlayer.MovementAngle);
 
             foreach (var projectile in this.testLevel.Projectiles.ToList())
             {
-                GfxHandler.GetRotationSprite(projectile).Draw(this.spriteBatch, projectile.Position, projectile.Angle, projectile.Angle);
+                GfxHandler.GetSprite(projectile).Draw(this.spriteBatch, projectile.Position, projectile.Angle);
 
                 if (projectile.Lifetime > projectile.Range)
                 {

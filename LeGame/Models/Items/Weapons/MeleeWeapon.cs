@@ -3,7 +3,7 @@ using LeGame.Models.Characters.Player;
 
 namespace LeGame.Models.Items.Weapons
 {
-    abstract class MeleeWeapon : IWeapon
+    public abstract class MeleeWeapon : IWeapon
     {
         protected MeleeWeapon(int damage)
         {

@@ -3,7 +3,7 @@ using LeGame.Models.Items.Projectiles;
 
 namespace LeGame.Models.Items.Weapons
 {
-    class LaserGun : RangedWeapon
+    public class LaserGun : RangedWeapon
     {
         private const int LaserGunDamage = 2;
         private const int LaserGunRange = 20;

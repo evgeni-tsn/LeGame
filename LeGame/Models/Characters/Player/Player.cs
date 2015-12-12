@@ -10,7 +10,7 @@ namespace LeGame.Models.Characters.Player
 {
     public class Player : Character
     {
-        public Player(Vector2 position, string type, int maxHealth, int currentHealth, int speed, Level level) 
+        protected Player(Vector2 position, string type, int maxHealth, int currentHealth, int speed, Level level) 
             : base(position, type, maxHealth, currentHealth, speed, level)
         {
             // TODO: Implement weapon pickup and display it on the character.
@@ -19,7 +19,8 @@ namespace LeGame.Models.Characters.Player
 
         public float FacingAngle { get; private set; }
         public float MovementAngle { get; private set; }
-        public IWeapon EquippedWeapon { get; set; }
+
+        private IWeapon EquippedWeapon { get; set; }
 
         public Keys[] KbKeys { get; } = { Keys.W, Keys.A, Keys.S, Keys.D };
 

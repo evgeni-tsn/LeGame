@@ -5,10 +5,8 @@ namespace LeGame.Models.LevelAssets
 {
     // Interactive Background -> Previously Asset
     // Class for all the interactable background other than tiles
-    public class InteractiveBg : GameObject, ICollisionable
+    public class InteractiveBg : GameObject, ICollidable
     {
-        public bool CanCollide { get; set; }
-        public int DrawPriority { get; set; }
 
         public InteractiveBg(Vector2 position, string type, int drawPriority, bool canCollide)
             : base(position, type)
@@ -16,6 +14,9 @@ namespace LeGame.Models.LevelAssets
             this.DrawPriority = drawPriority;
             this.CanCollide = canCollide;
         }
-        
+
+        public bool CanCollide { get; set; }
+
+        public int DrawPriority { get; private set; }
     }
 }

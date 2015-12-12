@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace LeGame.Handlers.Graphics
 {
-    public class AnimatedSprite : Sprite
+    public class FourDirectionSprite : Sprite
     {
         private const int TimePerFrame = 130;
         
@@ -29,20 +29,16 @@ namespace LeGame.Handlers.Graphics
             { "Down", new[] { 0, 1, 2 } }
         };
 
-        private int totalFrames;
-        private int currentFrame;
-        private int timeSinceLastFrame;
-
-        public AnimatedSprite(Texture2D texture) 
+        public FourDirectionSprite(Texture2D texture, Character character = null) 
             : base(texture)
         {
-            this.totalFrames = this.Rows * this.Columns;
-            this.currentFrame = 0;
+            this.TotalFrames = this.Rows * this.Columns;
+            this.CurrentFrame = 0;
         }
         
         public override void Update(GameTime gameTime, Character character)
         {
-            if (character is ICollisionable)
+            if (character is ICollidable)
             {
                 // Enemy
                 this.SpriteRotaions(gameTime, ((Enemy)character).Direction);
@@ -58,13 +54,13 @@ namespace LeGame.Handlers.Graphics
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch, Vector2 location)
+        public override void Draw(SpriteBatch spriteBatch, Vector2 location, float a = 0, float b = 0)
         {
             int width = this.Texture.Width / this.Columns;
             int height = this.Texture.Height / this.Rows;
-            int row = this.currentFrame / this.Columns;
-            int column = this.currentFrame % this.Columns;
-            // Color color = new Color(100, 100, 100, 100);
+            int row = this.CurrentFrame / this.Columns;
+            int column = this.CurrentFrame % this.Columns;
+
             Rectangle sourceRectangle = new Rectangle(width * column, height * row, width, height);
             Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width, height);
 
@@ -73,34 +69,35 @@ namespace LeGame.Handlers.Graphics
             spriteBatch.End();
         }
 
-        public int SpriteRotaions(GameTime gameTime, string direction)
+        private int SpriteRotaions(GameTime gameTime, string direction)
         {
             // Coldown for the animation
-            this.timeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
-            if (this.timeSinceLastFrame < TimePerFrame)
+            this.TimeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
+            if (this.TimeSinceLastFrame < TimePerFrame)
             {
-                return this.currentFrame;
+                return this.CurrentFrame;
             }
-            this.timeSinceLastFrame = gameTime.ElapsedGameTime.Milliseconds;
+            this.TimeSinceLastFrame = gameTime.ElapsedGameTime.Milliseconds;
 
             // If enough time has passed 
             // go through directionToFrames and find the one coresponding to the direction
-            foreach (var direct in this.directionToFrames.Keys.Where(key => direction.Equals(key)))
+            foreach (string direct in this.directionToFrames.Keys.Where(key => direction.Equals(key)))
             {
-                if (this.directionToFrames[direct].Contains(this.currentFrame))
+                if (this.directionToFrames[direct].Contains(this.CurrentFrame))
                 {
-                    this.currentFrame++;
-                    if (this.currentFrame == this.directionToFrames[direct][2] + 1)
+                    this.CurrentFrame++;
+                    if (this.CurrentFrame == this.directionToFrames[direct][2] + 1)
                     {
-                        this.currentFrame = this.directionToFrames[direct][0];
+                        this.CurrentFrame = this.directionToFrames[direct][0];
                     }
                 }
                 else
                 {
-                    this.currentFrame = this.directionToFrames[direct][0];
+                    this.CurrentFrame = this.directionToFrames[direct][0];
                 }
             }
-            return this.currentFrame;
+
+            return this.CurrentFrame;
         }
     }
 }
