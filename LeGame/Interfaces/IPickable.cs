@@ -1,6 +1,6 @@
 ﻿namespace LeGame.Interfaces
 {
-    interface IPickable
+    public interface IPickable
     {
         bool HasBeenPicked { get; set; }
     }

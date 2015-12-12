@@ -12,6 +12,11 @@ namespace LeGame.Handlers
             Random rng = new Random();
             const float Tolerance = 0.001f;
 
+            if (ai.CurrentHealth < 0)
+            {
+                return;
+            }
+
             if (Math.Abs(ai.Position.X - player.Position.X) > Tolerance && 
                 Math.Abs(ai.Position.Y - player.Position.Y) > Tolerance)
             {
@@ -20,24 +25,24 @@ namespace LeGame.Handlers
                     if (ai.Position.X < player.Position.X)
                     {
                         ai.Position = new Vector2(ai.Position.X + ai.Speed, ai.Position.Y);
-                        ((Enemy) ai).Direction = "Right";
+                        ((Enemy)ai).Direction = "Right";
                     }
                     else if (ai.Position.X > player.Position.X)
                     {
                         ai.Position = new Vector2(ai.Position.X - ai.Speed, ai.Position.Y);
-                        ((Enemy) ai).Direction = "Left";
+                        ((Enemy)ai).Direction = "Left";
                     }
                     else
                     {
                         if (ai.Position.Y < player.Position.Y)
                         {
                             ai.Position = new Vector2(ai.Position.X, ai.Position.Y + ai.Speed);
-                            ((Enemy) ai).Direction = "Down";
+                            ((Enemy)ai).Direction = "Down";
                         }
                         else if (ai.Position.Y > player.Position.Y)
                         {
                             ai.Position = new Vector2(ai.Position.X, ai.Position.Y - ai.Speed);
-                            ((Enemy) ai).Direction = "Up";
+                            ((Enemy)ai).Direction = "Up";
                         }
                     }
                 }
@@ -47,22 +52,22 @@ namespace LeGame.Handlers
                 if (ai.Position.X < player.Position.X)
                 {
                     ai.Position = new Vector2(ai.Position.X + ai.Speed, ai.Position.Y);
-                    ((Enemy) ai).Direction = "Right";
+                    ((Enemy)ai).Direction = "Right";
                 }
                 else if (ai.Position.X > player.Position.X)
                 {
                     ai.Position = new Vector2(ai.Position.X - ai.Speed, ai.Position.Y);
-                    ((Enemy) ai).Direction = "Left";
+                    ((Enemy)ai).Direction = "Left";
                 }
                 else if (ai.Position.Y < player.Position.Y)
                 {
                     ai.Position = new Vector2(ai.Position.X, ai.Position.Y + ai.Speed);
-                    ((Enemy) ai).Direction = "Down";
+                    ((Enemy)ai).Direction = "Down";
                 }
                 else if (ai.Position.Y > player.Position.Y)
                 {
                     ai.Position = new Vector2(ai.Position.X, ai.Position.Y - ai.Speed);
-                    ((Enemy) ai).Direction = "Up";
+                    ((Enemy)ai).Direction = "Up";
                 }
             }
         }

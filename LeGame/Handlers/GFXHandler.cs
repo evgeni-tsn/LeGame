@@ -14,8 +14,7 @@ namespace LeGame.Handlers
 
     public static class GfxHandler
     {
-        private static readonly Dictionary<string, AnimatedSprite> Sprites = new Dictionary<string, AnimatedSprite>();
-        private static readonly Dictionary<string, RotationSprite> RSprites = new Dictionary<string, RotationSprite>();
+        private static readonly Dictionary<string, ISprite> Sprites = new Dictionary<string, ISprite>(); 
         private static readonly Dictionary<string, Texture2D> TextureLibrary = new Dictionary<string, Texture2D>();
         private static readonly List<string> FileNames = new List<string>();
 
@@ -26,22 +25,102 @@ namespace LeGame.Handlers
             {
                 // s is something like: "..\..\..\Content\TestObjects\catSprite.png"
                 //                      |->     17     <-|>---- take this ----<|   |
-                string file = s.Substring(17, s.LastIndexOf('.') - 17);
+                string fileName = s.Substring(17, s.LastIndexOf('.') - 17);
 
                 // format it appropriately for the content.Load
                 // TestObjects\catSprite -> TestObjects/catSprite
-                file = file.Contains('\\') ? file.Replace('\\', '/') : file;
+                fileName = fileName.Contains('\\') ? fileName.Replace('\\', '/') : fileName;
+                var lowerCase = fileName.ToLower();
+                if (lowerCase.Contains("sprite"))
+                {
+                    Sprites.Add(fileName, MakeEnemySprite(content.Load<Texture2D>(fileName)));
+                }
 
-                if (file.ToLower().Contains("sprite"))
+                if (lowerCase.Contains("rotation"))
                 {
-                    Sprites.Add(file, MakeSprite(content.Load<Texture2D>(file)));
+                    Sprites.Add(fileName, MakePlayerSprite(content.Load<Texture2D>(fileName)));
                 }
-                if (file.ToLower().Contains("rotation") || file.ToLower().Contains("projectile"))
+
+                if (lowerCase.Contains("projectile"))
                 {
-                    RSprites.Add(file, MakeRotationSprite(content.Load<Texture2D>(file)));
+                    Sprites.Add(fileName, MakeRotationSprite(content.Load<Texture2D>(fileName)));
                 }
-                TextureLibrary.Add(file, content.Load<Texture2D>(file));
+
+                if (lowerCase.Contains("effect"))
+                {
+                    Sprites.Add(fileName, MakeEffectSprite(content.Load<Texture2D>(fileName)));
+                }
+
+                TextureLibrary.Add(fileName, content.Load<Texture2D>(fileName));
             }
+        }
+
+        // Get Sprite
+        public static ISprite GetSprite(IGameObject obj)
+        {
+            return Sprites[obj.Type];
+        }
+        
+        // Get Texture
+        public static Texture2D GetTexture(IGameObject obj)
+        {
+            return TextureLibrary[obj.Type];
+        }
+
+        // Get Bounding Box
+        public static Rectangle GetBBox(IGameObject obj)
+        {
+            Texture2D texture = GetTexture(obj);
+            Vector2 pos = obj.Position;
+            int width = texture.Width;
+            int height = texture.Height;
+
+            if (obj.Type.ToLower().Contains("sprite"))
+            {
+                width = GlobalVariables.TileWidth;
+                height = GlobalVariables.TileHeight;
+            }
+            else if (obj.Type.ToLower().Contains("rotation") || obj.Type.ToLower().Contains("projectile"))
+            {
+                pos = new Vector2(pos.X - GlobalVariables.TileWidth / 2f, pos.Y - GlobalVariables.TileHeight / 2f);
+                width = GlobalVariables.TileWidth;
+                height = GlobalVariables.TileHeight;
+            }
+
+            return new Rectangle((int)(pos.X + 6), (int)(pos.Y + 6), width - 12, height - 10);
+        }
+
+        // Get Width
+        public static int GetWidth(IGameObject obj)
+        {
+            return GetBBox(obj).Width;
+        }
+
+        // Get Height
+        public static int GetHeight(IGameObject obj)
+        {
+            return GetBBox(obj).Height;
+        }
+
+        // Makeing Sprites
+        private static EffectSprite MakeEffectSprite(Texture2D texture)
+        {
+            return new EffectSprite(texture);
+        }
+
+        private static RotationSprite MakeRotationSprite(Texture2D texture)
+        {
+            return new RotationSprite(texture);
+        }
+        
+        private static PlayerRotationSprite MakePlayerSprite(Texture2D texture)
+        {
+            return new PlayerRotationSprite(texture);
+        }
+        
+        private static FourDirectionSprite MakeEnemySprite(Texture2D texture)
+        {
+            return new FourDirectionSprite(texture);
         }
 
         // Recursively get the files in Content.
@@ -58,79 +137,6 @@ namespace LeGame.Handlers
                 }
                 GetFilenames(dir);
             }
-        }
-        // Get Rotation Sprite 
-        public static RotationSprite GetRotationSprite(IGameObject obj)
-        {
-            return RSprites[obj.Type];
-        }
-        // Get Sprite
-        public static AnimatedSprite GetSprite(IGameObject obj)
-        {
-            return Sprites[obj.Type];
-        }
-        // Get Texture
-        public static Texture2D GetTexture(IGameObject obj)
-        {
-            return TextureLibrary[obj.Type];
-        }
-
-        public static Texture2D GetTexture(NonInteractiveBg t)
-        {
-            return TextureLibrary[t.Type];
-        }
-        // Get Bounding Box
-        public static Rectangle GetBBox(IGameObject obj)
-        {
-            Texture2D texture = GetTexture(obj);
-            Vector2 pos = obj.Position;
-            int width = texture.Width;
-            int height = texture.Height;
-
-            if (obj.Type.ToLower().Contains("sprite"))
-            {
-                width = GlobalVariables.TileWidth;
-                height = GlobalVariables.TileHeight;
-            }
-            else if (obj.Type.ToLower().Contains("rotation"))
-            {
-                pos = new Vector2(pos.X - GlobalVariables.TileWidth / 2f, pos.Y - GlobalVariables.TileHeight / 2f);
-                width = GlobalVariables.TileWidth;
-                height = GlobalVariables.TileHeight;
-            }
-
-            return new Rectangle((int)(pos.X + 3), (int)(pos.Y + 3), width - 6, height - 5);
-        }
-        // Get Width
-        public static int GetWidth(IGameObject obj)
-        {
-            return GetBBox(obj).Width;
-        }
-
-        public static int GetWidth(NonInteractiveBg t)
-        {
-            return GetTexture(t).Width;
-        }
-        // Get Height
-        public static int GetHeight(IGameObject obj)
-        {
-            return GetBBox(obj).Height;
-        }
-
-        public static int GetHeight(NonInteractiveBg t)
-        {
-            return GetTexture(t).Height;
-        }
-
-        // Make Rotation Sprite
-        private static RotationSprite MakeRotationSprite(Texture2D texture)
-        {
-            return new RotationSprite(texture);
-        }
-        // Make Sprite
-        private static AnimatedSprite MakeSprite(Texture2D texture)
-        {
-            return new AnimatedSprite(texture);
         }
     }
 }

@@ -4,14 +4,13 @@ using System.Linq;
 using LeGame.Interfaces;
 using LeGame.Models;
 using LeGame.Models.Characters;
+using LeGame.Models.Characters.Enemies;
+using LeGame.Models.Items.Projectiles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
 namespace LeGame.Handlers
 {
-    using LeGame.Models.Characters.Enemies;
-    using LeGame.Models.Items.Projectiles;
-
     internal static class CollisionHandler
     {
         public static void PlayerReaction(Character character, Keys key)
@@ -24,7 +23,7 @@ namespace LeGame.Handlers
                  Vector2 temp = new Vector2(character.Position.X, character.Position.Y);
                
                 // movement reactions
-                if (collider is ICollisionable)
+                if (collider is ICollidable)
                 {
                     if (key == Keys.D)
                     {
@@ -77,9 +76,12 @@ namespace LeGame.Handlers
                     var enemy = (Enemy)collider;
                     enemy.CurrentHealth -= projectile.Damage;
 
-                    if (enemy.CurrentHealth < 0)
+                    if (enemy.CurrentHealth < 0 && !enemy.Type.Contains("Effect"))
                     {
-                        character.Level.Enemies.Remove(enemy);
+                        // TODO: possition change is kinda hacky, maybe figure out a better way by fixing GfxHandler.
+                        enemy.Position = new Vector2(enemy.Position.X + 16, enemy.Position.Y + 16);
+                        enemy.Type = "Effects/FleshExplosionEffect";
+                        enemy.CanCollide = false;
                     }
                 }
             }
@@ -91,7 +93,7 @@ namespace LeGame.Handlers
             {
                 Rectangle obj = GfxHandler.GetBBox(item);
 
-                if (((item is ICollisionable && ((ICollisionable)item).CanCollide) || item is IPickable)
+                if (((item is ICollidable && ((ICollidable)item).CanCollide) || item is IPickable)
                     && GfxHandler.GetBBox(collider).Intersects(obj))
                 {
                     return item;

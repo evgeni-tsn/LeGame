@@ -1,7 +1,6 @@
 ﻿using LeGame.Handlers;
 using LeGame.Interfaces;
 using LeGame.Models.Characters.Player;
-using Microsoft.Xna.Framework;
 
 namespace LeGame.Models.Items.Projectiles
 {

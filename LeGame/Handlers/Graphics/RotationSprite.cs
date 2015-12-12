@@ -1,77 +1,48 @@
-﻿using System.Linq;
-using LeGame.Models.Characters;
-using LeGame.Models.Characters.Player;
+﻿using LeGame.Models.Characters;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 
 namespace LeGame.Handlers.Graphics
 {
     public class RotationSprite : Sprite
     {
-        private const int timePerFrame = 50;
-        private readonly int totalFrames;
-
-        private bool reverse;
-        private int currentFrame;
-        private int timeSinceLastFrame;
+        private const int TimePerFrame = 10;
 
         public RotationSprite(Texture2D texture) 
             : base(texture)
         {
-            this.currentFrame = 5;
-            this.totalFrames = this.Columns;
+            this.CurrentFrame = 0;
+            this.TotalFrames = this.Rows * this.Columns;
         }
 
-        public override void Update(GameTime gameTime, Character character)
+        public override void Update(GameTime gameTime, Character character = null)
         {
-            this.timeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
-            if (this.timeSinceLastFrame < timePerFrame)
+            this.TimeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
+            if (this.TimeSinceLastFrame < TimePerFrame)
             {
                 return;
             }
 
-            this.timeSinceLastFrame = gameTime.ElapsedGameTime.Milliseconds;
-            
-            KeyboardState keyState = Keyboard.GetState();
-
-            bool moving = ((Player) character).KbKeys.Any(key => keyState.IsKeyDown(key));
-
-            if (moving || this.currentFrame != 5)
+            this.CurrentFrame++;
+            if (this.CurrentFrame == this.TotalFrames)
             {
-                if (this.reverse)
-                {
-                    this.currentFrame--;
-                }
-                else
-                {
-                    this.currentFrame++;
-                }
-                
-                if (this.currentFrame == this.totalFrames - 1 || this.currentFrame == 0)
-                {
-                    this.reverse = !this.reverse;
-                }
+                this.CurrentFrame = 0;
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch, Vector2 location, float torsoRotation, float legRotation)
+        public override void Draw(SpriteBatch spriteBatch, Vector2 location, float rotation = 0, float rotationB = 0)
         {
             int width = this.Texture.Width / this.Columns;
             int height = this.Texture.Height / this.Rows;
-            int legsRow = 0;
-            int torsoRow = 3;
-            int column = this.currentFrame % this.Columns;
+            int row = this.CurrentFrame / this.Columns;
+            int column = this.CurrentFrame % this.Columns;
             var origin = new Vector2(width / 2f, height / 2f);
-
-            Rectangle torsoSource = new Rectangle(width * column, height * torsoRow, width, height);
-            Rectangle legsSource = new Rectangle(width * column, height * legsRow, width, height);
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width, height);
+            
+            Rectangle source = new Rectangle(width * column, height * row, width, height);
+            Rectangle destination = new Rectangle((int)location.X, (int)location.Y, width, height);
 
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
-
-            spriteBatch.Draw(this.Texture, null, destinationRectangle, legsSource, origin, legRotation, null, null);
-            spriteBatch.Draw(this.Texture, null, destinationRectangle, torsoSource, origin, torsoRotation, null, null);
+            spriteBatch.Draw(this.Texture, null, destination, source, origin, rotation, null, null);
             spriteBatch.End();
         }
     }
