@@ -1,4 +1,5 @@
 ﻿using System;
+using LeGame.Models.Characters.Player;
 using Microsoft.Xna.Framework;
 
 namespace LeGame.Models.Items.Projectiles
@@ -7,8 +8,8 @@ namespace LeGame.Models.Items.Projectiles
     {
         private const int LazerBlastSpeed = 20;
 
-        public LaserBlast(Vector2 position, float angle, int damage, int range) 
-            : base(position, "Projectiles/LaserProjectile", damage, LazerBlastSpeed, angle, range)
+        public LaserBlast(Player attacker, float angle, int damage, int range) 
+            : base(attacker, "Projectiles/LaserProjectile", damage, LazerBlastSpeed, angle, range)
         {
         }
 
@@ -19,6 +20,8 @@ namespace LeGame.Models.Items.Projectiles
                 this.Position.Y + (float)Math.Sin(this.Angle) * this.Speed);
 
             this.Lifetime++;
+
+            base.Move();
         }
     }
 }

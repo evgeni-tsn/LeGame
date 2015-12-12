@@ -6,10 +6,12 @@ using LeGame.Exceptions;
 
 namespace LeGame.Models.LevelAssets
 {
+    using LeGame.Interfaces;
+
     // Previously AssetBuilder
     public class BackgroundBuilder
     {
-        private List<GameObject> background;
+        private List<IGameObject> background;
         //private List<NonInteractiveBg> tiles;
         
         public BackgroundBuilder(string mapFilePath)
@@ -30,7 +32,7 @@ namespace LeGame.Models.LevelAssets
                 .Skip(separatorLocation + 1)
                 .ToDictionary(item => item[0], item => item.Substring(2));
 
-            this.background = new List<GameObject>();
+            this.background = new List<IGameObject>();
             //this.tiles = new List<NonInteractiveBg>();
             // Go through the chars and store their corresponding items in the background/tiles
             for (int row = 0; row < mapRows.Count; row++)
@@ -68,7 +70,7 @@ namespace LeGame.Models.LevelAssets
             }
         }
         // Properties
-        public List<GameObject> Background
+        public List<IGameObject> Background
         {
             get
             {

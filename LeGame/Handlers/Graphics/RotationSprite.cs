@@ -33,9 +33,9 @@ namespace LeGame.Handlers.Graphics
 
             this.timeSinceLastFrame = gameTime.ElapsedGameTime.Milliseconds;
             
-            KeyboardState kbStatew = Keyboard.GetState();
+            KeyboardState keyState = Keyboard.GetState();
 
-            bool moving = ((Player) character).KbKeys.Any(key => kbStatew.IsKeyDown(key));
+            bool moving = ((Player) character).KbKeys.Any(key => keyState.IsKeyDown(key));
 
             if (moving || this.currentFrame != 5)
             {
@@ -48,7 +48,7 @@ namespace LeGame.Handlers.Graphics
                     this.currentFrame++;
                 }
                 
-                if ((this.currentFrame == this.totalFrames - 1 || this.currentFrame == 0))
+                if (this.currentFrame == this.totalFrames - 1 || this.currentFrame == 0)
                 {
                     this.reverse = !this.reverse;
                 }
@@ -57,11 +57,11 @@ namespace LeGame.Handlers.Graphics
 
         public void Draw(SpriteBatch spriteBatch, Vector2 location, float torsoRotation, float legRotation)
         {
-            int width = this.Texture.Width /this.Columns;
-            int height = this.Texture.Height /this.Rows;
+            int width = this.Texture.Width / this.Columns;
+            int height = this.Texture.Height / this.Rows;
             int legsRow = 0;
             int torsoRow = 3;
-            int column = this.currentFrame %this.Columns;
+            int column = this.currentFrame % this.Columns;
             var origin = new Vector2(width / 2f, height / 2f);
 
             Rectangle torsoSource = new Rectangle(width * column, height * torsoRow, width, height);

@@ -7,12 +7,12 @@ i..........  .T .. |
 i..........  .  .. |
 i..........  ..... |
 i..........  .Q   .|
-i..........  .    .q
-i..................|
-i..................|
-i..................|
-i.W...........doo..|
-┗----------p-------┛
+joo........  .    .q
+io.................|
+io.................|
+io.................|
+ioooo.W........doo.|
+┗------------p-----┛
 Legend:(char:file:isGameObject:drawPriority?)|(another layer at the same position)?
  :Tiles/NULL:true
 ┏:Tiles/whiteWall2NW:true
@@ -23,6 +23,7 @@ _:Tiles/whiteWall2N:true
 -:Tiles/whiteWall2S:true
 |:Tiles/whiteWall2E:true
 i:Tiles/whiteWall2W:true
+j:Tiles/whiteWall2W:true|Tiles/Furniture/KitchenSW:false:1
 .:Tiles/Carpet:false
 o:Tiles/Carpet:true
 T:Tiles/Furniture/Table:true

@@ -10,6 +10,7 @@ namespace LeGame.Models.Items.PickableItems
         {
             this.HasBeenPicked = false;
         }
+
         public override bool HasBeenPicked { get; set; }
     }
 }

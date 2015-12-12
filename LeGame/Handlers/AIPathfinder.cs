@@ -9,35 +9,35 @@ namespace LeGame.Handlers
     {
         public static void FindPath(Character player, Character ai)
         {
-            const double tolerance = 0.0000001;
-
             Random rng = new Random();
-            if (Math.Abs(ai.Position.X - player.Position.X) > tolerance && 
-                Math.Abs(ai.Position.Y - player.Position.Y) > tolerance)
+            const float Tolerance = 0.001f;
+
+            if (Math.Abs(ai.Position.X - player.Position.X) > Tolerance && 
+                Math.Abs(ai.Position.Y - player.Position.Y) > Tolerance)
             {
                 if (rng.Next(1, 3) == 1)
                 {
                     if (ai.Position.X < player.Position.X)
                     {
                         ai.Position = new Vector2(ai.Position.X + ai.Speed, ai.Position.Y);
-                        ((SampleEnemy) ai).Direction = "Right";
+                        ((Enemy) ai).Direction = "Right";
                     }
                     else if (ai.Position.X > player.Position.X)
                     {
                         ai.Position = new Vector2(ai.Position.X - ai.Speed, ai.Position.Y);
-                        ((SampleEnemy) ai).Direction = "Left";
+                        ((Enemy) ai).Direction = "Left";
                     }
                     else
                     {
                         if (ai.Position.Y < player.Position.Y)
                         {
                             ai.Position = new Vector2(ai.Position.X, ai.Position.Y + ai.Speed);
-                            ((SampleEnemy) ai).Direction = "Down";
+                            ((Enemy) ai).Direction = "Down";
                         }
                         else if (ai.Position.Y > player.Position.Y)
                         {
                             ai.Position = new Vector2(ai.Position.X, ai.Position.Y - ai.Speed);
-                            ((SampleEnemy) ai).Direction = "Up";
+                            ((Enemy) ai).Direction = "Up";
                         }
                     }
                 }
@@ -47,22 +47,22 @@ namespace LeGame.Handlers
                 if (ai.Position.X < player.Position.X)
                 {
                     ai.Position = new Vector2(ai.Position.X + ai.Speed, ai.Position.Y);
-                    ((SampleEnemy) ai).Direction = "Right";
+                    ((Enemy) ai).Direction = "Right";
                 }
                 else if (ai.Position.X > player.Position.X)
                 {
                     ai.Position = new Vector2(ai.Position.X - ai.Speed, ai.Position.Y);
-                    ((SampleEnemy) ai).Direction = "Left";
+                    ((Enemy) ai).Direction = "Left";
                 }
                 else if (ai.Position.Y < player.Position.Y)
                 {
                     ai.Position = new Vector2(ai.Position.X, ai.Position.Y + ai.Speed);
-                    ((SampleEnemy) ai).Direction = "Down";
+                    ((Enemy) ai).Direction = "Down";
                 }
                 else if (ai.Position.Y > player.Position.Y)
                 {
                     ai.Position = new Vector2(ai.Position.X, ai.Position.Y - ai.Speed);
-                    ((SampleEnemy) ai).Direction = "Up";
+                    ((Enemy) ai).Direction = "Up";
                 }
             }
         }
