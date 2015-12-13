@@ -1,14 +1,17 @@
-﻿using System;
-using System.Linq;
-using LeGame.Engine;
-using LeGame.Handlers;
-using LeGame.Interfaces;
-using LeGame.Models.Items.Weapons;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
+﻿
 
 namespace LeGame.Models.Characters.Player
 {
+    using System;
+    using System.Linq;
+
+    using Engine;
+    using Handlers;
+    using Items.Weapons;
+
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Input;
+
     public class Player : Character
     {
         protected Player(Vector2 position, string type, int maxHealth, int currentHealth, int speed, Level level) 
