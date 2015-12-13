@@ -662,3 +662,15 @@
 /processorParam:TextureFormat=Color
 /build:Effects/FleshExplosionEffect.png
 
+#begin TestObjects/SpriteFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:TestObjects/SpriteFont.spritefont
+
+#begin TestObjects/DeathFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:TestObjects/DeathFont.spritefont
+

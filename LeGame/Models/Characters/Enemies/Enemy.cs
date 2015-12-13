@@ -20,9 +20,14 @@ namespace LeGame.Models.Characters.Enemies
         public override void Move()
         {
             AiPathfinder.FindPath(this.Level.Character, this);
+            CollisionHandler.AICollide(this, this.Level.Character);
         }
 
         public override void AttackUsingWeapon()
+        {
+            throw new NotImplementedException();
+        }
+        public  override void TakeDamage()
         {
             throw new NotImplementedException();
         }

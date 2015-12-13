@@ -23,7 +23,7 @@ namespace LeGame.Handlers
                  Vector2 temp = new Vector2(character.Position.X, character.Position.Y);
                
                 // movement reactions
-                if (collider is ICollidable)
+                if (collider is ICollidable && !(collider is IKillable))
                 {
                     if (key == Keys.D)
                     {
@@ -49,6 +49,7 @@ namespace LeGame.Handlers
                         character.Position = temp;
                     }
                 }
+                
             
                 if (collider is IPickable)
                 {
@@ -87,7 +88,7 @@ namespace LeGame.Handlers
             }
         }
 
-        private static object Collide(IGameObject collider, IEnumerable<IGameObject> collisionItems)
+        public static object Collide(IGameObject collider, IEnumerable<IGameObject> collisionItems)
         {
             foreach (var item in collisionItems)
             {
@@ -101,6 +102,24 @@ namespace LeGame.Handlers
             }
 
             return -1;
+        }
+        public static void AICollide(IGameObject collider, Character character)
+        {
+            Rectangle colliderBBox = GfxHandler.GetBBox(collider);
+            Rectangle charBBox = GfxHandler.GetBBox(character);
+            if(colliderBBox.Intersects(charBBox))
+            {
+                if(character.CooldownTimer >=5)
+                {
+                    character.TakeDamage();
+                    Console.Beep(3000, 49);
+                    character.CooldownTimer = 0;
+                    if (character.CurrentHealth < 0)
+                    {
+                       // guess =)
+                    }
+                }
+            }
         }
     }
 }

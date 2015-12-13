@@ -15,8 +15,9 @@ namespace LeGame.Models.Characters.Player
         {
             // TODO: Implement weapon pickup and display it on the character.
             this.EquippedWeapon = new LaserGun();
+           
         }
-
+        
         public float FacingAngle { get; private set; }
         public float MovementAngle { get; private set; }
 
@@ -65,6 +66,10 @@ namespace LeGame.Models.Characters.Player
         public override void AttackUsingWeapon()
         {
             this.EquippedWeapon?.Attack(this.Level, this);
+        }
+        public override void TakeDamage()
+        {
+            this.CurrentHealth -= 70;
         }
     }
 }

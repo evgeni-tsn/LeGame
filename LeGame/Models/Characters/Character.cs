@@ -12,8 +12,11 @@ namespace LeGame.Models.Characters
             this.CurrentHealth = currentHealth;
             this.Speed = speed;
             this.Level = level;
+            this.CooldownTimer = 5;
         }
-        
+
+        public int CooldownTimer { get;  set; }
+
         public Level Level { get; set; }
 
         public int MaxHealth { get; set; }
@@ -25,6 +28,8 @@ namespace LeGame.Models.Characters
         public abstract void Move();
 
         public abstract void AttackUsingWeapon();
+
+        public abstract void TakeDamage();
 
     }
 }
