@@ -66,6 +66,7 @@
     <Compile Include="Models\Items\PickableItems\GoldCoin.cs" />
     <Compile Include="Models\Items\PickableItems\PickableItem.cs" />
     <Compile Include="Models\Items\Projectiles\EnergyBall.cs" />
+    <Compile Include="Models\Items\Projectiles\LightningStrike.cs" />
     <Compile Include="Models\Items\Weapons\LaserGun.cs" />
     <Compile Include="Models\Items\Weapons\MeleeWeapon.cs" />
     <Compile Include="Models\Items\Projectiles\Grenade.cs" />

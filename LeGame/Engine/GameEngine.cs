@@ -43,7 +43,7 @@ namespace LeGame.Engine
                 GlobalVariables.WindowWidth / 2 - 140,
                 GlobalVariables.WindowHeight / 2);
 
-            this.sampleEnemy = new Enemy(enemyPos, @"TestObjects/cockSprite", 100, 100, 1, this.testLevel);
+            this.sampleEnemy = new Enemy(enemyPos, @"TestObjects/cockSprite", 100, 100, 2, this.testLevel);
             this.testPlayer = new TestChar(pos, @"Player/p1Rotation", 100, 100, 2, this.testLevel);
 
             this.testLevel = new Level(@"..\..\..\Content\Maps\testMap2.txt", this.testPlayer);

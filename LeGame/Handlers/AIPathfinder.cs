@@ -9,7 +9,6 @@ namespace LeGame.Handlers
     {
         public static void FindPath(Character player, Character ai)
         {
-            Random rng = new Random();
             const float Tolerance = 0.001f;
 
             if (ai.CurrentHealth < 0)
@@ -20,7 +19,7 @@ namespace LeGame.Handlers
             if (Math.Abs(ai.Position.X - player.Position.X) > Tolerance && 
                 Math.Abs(ai.Position.Y - player.Position.Y) > Tolerance)
             {
-                if (rng.Next(1, 3) == 1)
+                if (GlobalVariables.Rng.Next(1, 3) == 1)
                 {
                     if (ai.Position.X < player.Position.X)
                     {

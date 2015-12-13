@@ -6,10 +6,10 @@ namespace LeGame.Models.Items.Projectiles
 {
     public class EnergyBall : Projectile
     {
-        private const int LazerBlastSpeed = 20;
+        private const int EnergyBallSpeed = 20;
 
         public EnergyBall(Player attacker, float angle, int damage, int range) 
-            : base(attacker, "Projectiles/EnergyBallProjectile", damage, LazerBlastSpeed, angle, range)
+            : base(attacker, "Projectiles/EnergyBallProjectile", damage, EnergyBallSpeed, angle, range)
         {
         }
 

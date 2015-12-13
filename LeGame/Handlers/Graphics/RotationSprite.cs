@@ -6,7 +6,7 @@ namespace LeGame.Handlers.Graphics
 {
     public class RotationSprite : Sprite
     {
-        private const int TimePerFrame = 10;
+        private const int TimePerFrame = 20;
 
         public RotationSprite(Texture2D texture) 
             : base(texture)
@@ -23,11 +23,7 @@ namespace LeGame.Handlers.Graphics
                 return;
             }
 
-            this.CurrentFrame++;
-            if (this.CurrentFrame == this.TotalFrames)
-            {
-                this.CurrentFrame = 0;
-            }
+            this.CurrentFrame = GlobalVariables.Rng.Next(0, this.TotalFrames);
         }
 
         public override void Draw(SpriteBatch spriteBatch, Vector2 location, float rotation = 0, float rotationB = 0)
@@ -42,7 +38,7 @@ namespace LeGame.Handlers.Graphics
             Rectangle destination = new Rectangle((int)location.X, (int)location.Y, width, height);
 
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
-            spriteBatch.Draw(this.Texture, null, destination, source, origin, rotation, null, null);
+            spriteBatch.Draw(this.Texture, null, destination, source, origin, rotation + 1.55f, null, null);
             spriteBatch.End();
         }
     }

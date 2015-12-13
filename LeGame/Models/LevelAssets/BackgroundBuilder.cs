@@ -12,12 +12,12 @@ namespace LeGame.Models.LevelAssets
     public class BackgroundBuilder
     {
         private List<IGameObject> background;
-        //private List<NonInteractiveBg> tiles;
-        
+
+        // private List<NonInteractiveBg> tiles;
         public BackgroundBuilder(string mapFilePath)
         {
             // Read the text file for the map and find the separation between map and legend.
-            List<string> mapFile = ReadMapFile(mapFilePath);
+            List<string> mapFile = this.ReadMapFile(mapFilePath);
             int separatorLocation = mapFile.FindIndex(s => s.Contains("Legend:"));
             if (separatorLocation == -1)
             {
@@ -33,7 +33,8 @@ namespace LeGame.Models.LevelAssets
                 .ToDictionary(item => item[0], item => item.Substring(2));
 
             this.background = new List<IGameObject>();
-            //this.tiles = new List<NonInteractiveBg>();
+
+            // this.tiles = new List<NonInteractiveBg>();
             // Go through the chars and store their corresponding items in the background/tiles
             for (int row = 0; row < mapRows.Count; row++)
             {
