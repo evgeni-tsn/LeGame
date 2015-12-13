@@ -90,6 +90,8 @@
     <Compile Include="Engine\GameEngine.cs" />
     <Compile Include="RolePlayingGame.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Screens\Start Screen\Button.cs" />
+    <Compile Include="Screens\Start Screen\StartScreen.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

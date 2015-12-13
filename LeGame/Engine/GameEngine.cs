@@ -9,6 +9,7 @@ using LeGame.Models.Items.Projectiles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using LeGame.Screens.Start_Screen;
 
 namespace LeGame.Engine
 {
@@ -23,6 +24,7 @@ namespace LeGame.Engine
         int oneSec = 1000;
         int timeSinceLastUpdate = 0;
         StatScreen statScreen = new StatScreen();
+        StartScreen staRtScreen = new StartScreen();
         GameStages stages;
        
 
@@ -30,12 +32,15 @@ namespace LeGame.Engine
         {
             this.graphics = new GraphicsDeviceManager(this);
             this.Content.RootDirectory = "Content";
+            
         }
         
         protected override void LoadContent()
         {
+           
+           
             this.IsMouseVisible = true;
-            stages = GameStages.Stage1;
+            stages = GameStages.Game_Stage;
             // Create a new SpriteBatch, which can be used to draw textures.
             this.spriteBatch = new SpriteBatch(this.GraphicsDevice);
            
@@ -86,12 +91,16 @@ namespace LeGame.Engine
             {
                 this.Exit();
             }
-            if(this.testLevel.Character.CurrentHealth <= 0)
+            if(this.stages == GameStages.Game_Stage && this.testLevel.Character.CurrentHealth <= 0)
             {
-                stages = GameStages.Stage2;
+                stages = GameStages.Death_Stage;
             }
+            //if(stages == GameStages.Start_Stage)
+            //{
+            //    this.staRtScreen.Update(gameTime);
+            //}
 
-            if(stages == GameStages.Stage1)
+            if(stages == GameStages.Game_Stage)
             {
                 timeSinceLastUpdate += gameTime.ElapsedGameTime.Milliseconds;
                 if (timeSinceLastUpdate >= oneSec)
@@ -133,7 +142,7 @@ namespace LeGame.Engine
 
             // Vector2 origin = new Vector2(GfxHandler.GetWidth(this.testPlayer) / 2, GfxHandler.GetHeight(this.testPlayer) / 2);
             // TODO: Add your drawing code here
-            if (stages == GameStages.Stage1)
+            if (stages == GameStages.Game_Stage)
             {
                 this.spriteBatch.Begin();
 
@@ -157,13 +166,17 @@ namespace LeGame.Engine
                     }
                 }
             }
-            else
+            else if(this.stages == GameStages.Death_Stage)
             {
                 this.statScreen.EndScreen(this.Content, this.spriteBatch);
+            }
+            else
+            {
+                this.staRtScreen.DrawStartScreen(this.spriteBatch, this.Content);
             }
             
 
             base.Draw(gameTime);
-        }
+        }   
     }
 }
