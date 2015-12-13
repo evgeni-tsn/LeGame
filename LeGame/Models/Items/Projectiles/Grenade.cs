@@ -1,6 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-
-namespace LeGame.Models.Items.Projectiles
+﻿namespace LeGame.Models.Items.Projectiles
 {
     using LeGame.Models.Characters.Player;
 

@@ -1,17 +1,17 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-
-using LeGame.Engine;
-using LeGame.Handlers.Graphics;
-using LeGame.Interfaces;
-
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
-
-namespace LeGame.Handlers
+﻿namespace LeGame.Handlers
 {
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+
+    using LeGame.Engine;
+    using LeGame.Handlers.Graphics;
+    using LeGame.Interfaces;
+
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Content;
+    using Microsoft.Xna.Framework.Graphics;
+
     public static class GfxHandler
     {
         private static readonly Dictionary<string, ISprite> Sprites = new Dictionary<string, ISprite>(); 

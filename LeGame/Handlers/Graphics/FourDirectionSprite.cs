@@ -1,14 +1,17 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using LeGame.Interfaces;
-using LeGame.Models.Characters;
-using LeGame.Models.Characters.Enemies;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-
-namespace LeGame.Handlers.Graphics
+﻿namespace LeGame.Handlers.Graphics
 {
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using LeGame.Interfaces;
+    using LeGame.Models.Characters;
+    using LeGame.Models.Characters.Enemies;
+    using LeGame.Models.Characters.Player;
+
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Graphics;
+    using Microsoft.Xna.Framework.Input;
+
     public class FourDirectionSprite : Sprite
     {
         private const int TimePerFrame = 130;

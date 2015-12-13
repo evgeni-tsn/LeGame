@@ -1,9 +1,11 @@
-﻿using System;
-using LeGame.Models.Characters.Player;
-using Microsoft.Xna.Framework;
-
-namespace LeGame.Models.Items.Projectiles
+﻿namespace LeGame.Models.Items.Projectiles
 {
+    using System;
+
+    using LeGame.Models.Characters.Player;
+
+    using Microsoft.Xna.Framework;
+
     public class EnergyBall : Projectile
     {
         private const int EnergyBallSpeed = 20;

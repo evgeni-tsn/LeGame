@@ -1,7 +1,7 @@
-﻿using Microsoft.Xna.Framework;
-
-namespace LeGame.Models.Items.PickableItems
+﻿namespace LeGame.Models.Items.PickableItems
 {
+    using Microsoft.Xna.Framework;
+
     public class GoldCoin : PickableItem
     {
         

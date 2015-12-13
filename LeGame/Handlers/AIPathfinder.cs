@@ -1,11 +1,12 @@
-﻿using System;
-using LeGame.Models.Characters;
-using LeGame.Models.Characters.Enemies;
-using Microsoft.Xna.Framework;
-
-namespace LeGame.Handlers
+﻿namespace LeGame.Handlers
 {
+    using System;
+
     using LeGame.Engine;
+    using LeGame.Models.Characters;
+    using LeGame.Models.Characters.Enemies;
+
+    using Microsoft.Xna.Framework;
 
     public static class AiPathfinder
     {

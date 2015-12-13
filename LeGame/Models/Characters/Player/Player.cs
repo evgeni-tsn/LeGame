@@ -1,13 +1,11 @@
-﻿
-
-namespace LeGame.Models.Characters.Player
+﻿namespace LeGame.Models.Characters.Player
 {
     using System;
     using System.Linq;
 
-    using Engine;
-    using Handlers;
-    using Items.Weapons;
+    using LeGame.Engine;
+    using LeGame.Handlers;
+    using LeGame.Models.Items.Weapons;
 
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Input;

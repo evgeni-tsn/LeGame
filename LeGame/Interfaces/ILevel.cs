@@ -1,9 +1,9 @@
 ﻿namespace LeGame.Interfaces
 {
     using System.Collections.Generic;
-    
-    using Models.Characters;
-    using Models.Items.Projectiles;
+
+    using LeGame.Models.Characters;
+    using LeGame.Models.Items.Projectiles;
 
     public interface ILevel
     {

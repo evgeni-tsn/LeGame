@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using LeGame.Models.Characters;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Content;
-
-namespace LeGame.Handlers
+﻿namespace LeGame.Handlers
 {
+    using System;
+
     using LeGame.Engine;
+    using LeGame.Models.Characters;
+
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Content;
+    using Microsoft.Xna.Framework.Graphics;
 
     public class StatScreen
     {

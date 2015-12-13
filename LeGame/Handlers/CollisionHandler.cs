@@ -4,11 +4,11 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    using Interfaces;
-    using Models;
-    using Models.Characters;
-    using Models.Characters.Enemies;
-    using Models.Items.Projectiles;
+    using LeGame.Interfaces;
+    using LeGame.Models;
+    using LeGame.Models.Characters;
+    using LeGame.Models.Characters.Enemies;
+    using LeGame.Models.Items.Projectiles;
 
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Input;

@@ -1,12 +1,14 @@
-﻿using System.Linq;
-using LeGame.Models.Characters;
-using LeGame.Models.Characters.Player;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-
-namespace LeGame.Handlers.Graphics
+﻿namespace LeGame.Handlers.Graphics
 {
+    using System.Linq;
+
+    using LeGame.Models.Characters;
+    using LeGame.Models.Characters.Player;
+
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Graphics;
+    using Microsoft.Xna.Framework.Input;
+
     public class PlayerRotationSprite : Sprite
     {
         private const int TimePerFrame = 50;

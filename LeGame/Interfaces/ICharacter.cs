@@ -1,6 +1,4 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-
-namespace LeGame.Interfaces
+﻿namespace LeGame.Interfaces
 {
     public interface ICharacter : IMovable, IAttacker
     {

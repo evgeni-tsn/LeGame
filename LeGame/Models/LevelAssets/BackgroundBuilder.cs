@@ -1,13 +1,14 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Microsoft.Xna.Framework;
-using System.IO;
-using LeGame.Exceptions;
-
-namespace LeGame.Models.LevelAssets
+﻿namespace LeGame.Models.LevelAssets
 {
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+
     using LeGame.Engine;
+    using LeGame.Exceptions;
     using LeGame.Interfaces;
+
+    using Microsoft.Xna.Framework;
 
     // Previously AssetBuilder
     public class BackgroundBuilder

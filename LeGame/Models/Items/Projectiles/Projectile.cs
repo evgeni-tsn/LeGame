@@ -1,8 +1,8 @@
-﻿using LeGame.Handlers;
-using LeGame.Interfaces;
-
-namespace LeGame.Models.Items.Projectiles
+﻿namespace LeGame.Models.Items.Projectiles
 {
+    using LeGame.Handlers;
+    using LeGame.Interfaces;
+
     public abstract class Projectile : GameObject, IMovable
     {
         protected Projectile(ICharacter attacker, string type, int damage, int speed, float angle, int range)

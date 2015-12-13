@@ -1,10 +1,7 @@
 ﻿namespace LeGame.Models.Items.Weapons
 {
-    using Characters.Player;
-
-    using Interfaces;
-
-    using Projectiles;
+    using LeGame.Interfaces;
+    using LeGame.Models.Items.Projectiles;
 
     public class Unarmed : MeleeWeapon
     {

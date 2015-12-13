@@ -1,8 +1,7 @@
-﻿using LeGame.Interfaces;
-using LeGame.Models.Characters.Player;
-
-namespace LeGame.Models.Items.Weapons
+﻿namespace LeGame.Models.Items.Weapons
 {
+    using LeGame.Interfaces;
+
     public abstract class MeleeWeapon : IWeapon
     {
         protected MeleeWeapon(int damage)

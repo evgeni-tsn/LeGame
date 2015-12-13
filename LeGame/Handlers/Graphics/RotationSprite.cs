@@ -1,6 +1,5 @@
 ﻿namespace LeGame.Handlers.Graphics
 {
-    using LeGame.Engine;
     using LeGame.Models.Characters;
 
     using Microsoft.Xna.Framework;

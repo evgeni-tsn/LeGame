@@ -1,11 +1,11 @@
-﻿using LeGame.Interfaces;
-using LeGame.Models.Characters;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-
-namespace LeGame.Handlers.Graphics
+﻿namespace LeGame.Handlers.Graphics
 {
     using LeGame.Engine;
+    using LeGame.Interfaces;
+    using LeGame.Models.Characters;
+
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Graphics;
 
     public abstract class Sprite : ISprite
     {

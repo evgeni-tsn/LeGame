@@ -1,8 +1,9 @@
-﻿using LeGame.Interfaces;
-using Microsoft.Xna.Framework;
-
-namespace LeGame.Models.Characters
+﻿namespace LeGame.Models.Characters
 {
+    using LeGame.Interfaces;
+
+    using Microsoft.Xna.Framework;
+
     public abstract class Character : GameObject, ICharacter, IUseWeapon, IKillable
     {
         protected Character(Vector2 position, string type, int maxHealth, int currentHealth, int speed, Level level)

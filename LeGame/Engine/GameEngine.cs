@@ -1,22 +1,19 @@
-
 namespace LeGame.Engine
 {
     using System.Linq;
 
-    using Enumerations;
-
-    using Handlers;
+    using LeGame.Engine.Enumerations;
+    using LeGame.Handlers;
+    using LeGame.Models;
+    using LeGame.Models.Characters;
+    using LeGame.Models.Characters.Enemies;
+    using LeGame.Models.Characters.Player;
+    using LeGame.Models.Items.PickableItems;
+    using LeGame.Models.Items.Projectiles;
 
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
     using Microsoft.Xna.Framework.Input;
-
-    using Models;
-    using Models.Characters;
-    using Models.Characters.Enemies;
-    using Models.Characters.Player;
-    using Models.Items.PickableItems;
-    using Models.Items.Projectiles;
 
     public class GameEngine : Game
     {
@@ -29,7 +26,7 @@ namespace LeGame.Engine
         private Level testLevel;
         private int oneSec = 1000;
         private int timeSinceLastUpdate = 0;
-        private GameStages stages;
+        private GameStages stage;
        
 
         public GameEngine()
@@ -42,10 +39,8 @@ namespace LeGame.Engine
         
         protected override void LoadContent()
         {
-           
-           
             this.IsMouseVisible = true;
-            this.stages = GameStages.Game_Stage;
+            this.stage = GameStages.Game_Stage;
 
             // Create a new SpriteBatch, which can be used to draw textures.
             this.spriteBatch = new SpriteBatch(this.GraphicsDevice);
@@ -98,17 +93,17 @@ namespace LeGame.Engine
                 this.Exit();
             }
 
-            if (this.stages == GameStages.Game_Stage && this.testLevel.Character.CurrentHealth <= 0)
+            if (this.stage == GameStages.Game_Stage && this.testLevel.Character.CurrentHealth <= 0)
             {
-                this.stages = GameStages.Death_Stage;
+                this.stage = GameStages.Death_Stage;
             }
 
-            //if(stages == GameStages.Start_Stage)
+            //if(stage == GameStages.Start_Stage)
             //{
             //    this.staRtScreen.Update(gameTime);
             //}
             
-            if(this.stages == GameStages.Game_Stage)
+            if(this.stage == GameStages.Game_Stage)
             {
                 this.timeSinceLastUpdate += gameTime.ElapsedGameTime.Milliseconds;
                 if (this.timeSinceLastUpdate >= this.oneSec)
@@ -150,8 +145,7 @@ namespace LeGame.Engine
 
             // Vector2 origin = new Vector2(GfxHandler.GetWidth(this.testPlayer) / 2, GfxHandler.GetHeight(this.testPlayer) / 2);
             // TODO: Add your drawing code here
-
-            if (this.stages == GameStages.Game_Stage)
+            if (this.stage == GameStages.Game_Stage)
             {
                 this.spriteBatch.Begin();
 
@@ -175,7 +169,7 @@ namespace LeGame.Engine
                     }
                 }
             }
-            else if(this.stages == GameStages.Death_Stage)
+            else if (this.stage == GameStages.Death_Stage)
             {
                 this.statScreen.EndScreen(this.Content, this.spriteBatch);
             }

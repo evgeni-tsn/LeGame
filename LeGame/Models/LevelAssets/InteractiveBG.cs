@@ -1,8 +1,9 @@
-﻿using Microsoft.Xna.Framework;
-using LeGame.Interfaces;
-
-namespace LeGame.Models.LevelAssets
+﻿namespace LeGame.Models.LevelAssets
 {
+    using LeGame.Interfaces;
+
+    using Microsoft.Xna.Framework;
+
     // Interactive Background -> Previously Asset
     // Class for all the interactable background other than tiles
     public class InteractiveBg : GameObject, ICollidable

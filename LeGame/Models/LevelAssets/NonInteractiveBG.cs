@@ -1,8 +1,9 @@
-﻿using Microsoft.Xna.Framework;
-using LeGame.Interfaces;
-
-namespace LeGame.Models.LevelAssets
+﻿namespace LeGame.Models.LevelAssets
 {
+    using LeGame.Interfaces;
+
+    using Microsoft.Xna.Framework;
+
     // Non Interactive Background -> Previously Tile
     // Class for non interactive background tiles
     public struct NonInteractiveBg : IGameObject

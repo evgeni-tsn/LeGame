@@ -1,8 +1,9 @@
-﻿using System;
-using LeGame.Engine;
-
-namespace LeGame
+﻿namespace LeGame
 {
+    using System;
+
+    using LeGame.Engine;
+
     public static class RolePlayingGame
     {
         [STAThread]

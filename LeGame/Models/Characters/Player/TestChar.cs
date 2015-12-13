@@ -1,7 +1,7 @@
-﻿using Microsoft.Xna.Framework;
-
-namespace LeGame.Models.Characters.Player
+﻿namespace LeGame.Models.Characters.Player
 {
+    using Microsoft.Xna.Framework;
+
     public class TestChar : Player
     {
         //private Level level;

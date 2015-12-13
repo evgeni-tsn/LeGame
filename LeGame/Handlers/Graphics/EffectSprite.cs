@@ -1,10 +1,10 @@
-﻿using LeGame.Models.Characters;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-
-namespace LeGame.Handlers.Graphics
+﻿namespace LeGame.Handlers.Graphics
 {
     using LeGame.Engine;
+    using LeGame.Models.Characters;
+
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Graphics;
 
     public class EffectSprite : RotationSprite
     {

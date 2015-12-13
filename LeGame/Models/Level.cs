@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
-using LeGame.Interfaces;
-using LeGame.Models.Characters;
-using LeGame.Models.Items.Projectiles;
-using LeGame.Models.LevelAssets;
-
-namespace LeGame.Models
+﻿namespace LeGame.Models
 {
+    using System.Collections.Generic;
+
+    using LeGame.Interfaces;
+    using LeGame.Models.Characters;
+    using LeGame.Models.Items.Projectiles;
+    using LeGame.Models.LevelAssets;
+
     public class Level : ILevel
     {
         public Level(string path, Character character)
