@@ -20,6 +20,7 @@ namespace LeGame.Handlers
             int hp = character.CurrentHealth;
             this.font = content.Load<SpriteFont>(@"TestObjects/SpriteFont");
             string healthBar = String.Format("Health points: {0}", hp);
+
             spriteBatch.Begin();
             spriteBatch.DrawString(font, healthBar, new Vector2(650, 10), Color.Red);
             spriteBatch.End();

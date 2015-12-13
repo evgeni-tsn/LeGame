@@ -18,7 +18,7 @@ namespace LeGame.Models.Characters.Player
             : base(position, type, maxHealth, currentHealth, speed, level)
         {
             // TODO: Implement weapon pickup and display it on the character.
-            this.EquippedWeapon = new LaserGun();
+            this.EquippedWeapon = new Unarmed();
         }
 
         public Keys[] KbKeys { get; } = { Keys.W, Keys.A, Keys.S, Keys.D };

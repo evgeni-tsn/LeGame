@@ -1,4 +1,5 @@
-﻿namespace LeGame.Engine
+
+namespace LeGame.Engine
 {
     using System.Linq;
 
@@ -36,12 +37,15 @@
             this.statScreen = new StatScreen();
             this.graphics = new GraphicsDeviceManager(this);
             this.Content.RootDirectory = "Content";
+            
         }
         
         protected override void LoadContent()
         {
+           
+           
             this.IsMouseVisible = true;
-            this.stages = GameStages.Stage1;
+            this.stages = GameStages.Game_Stage;
 
             // Create a new SpriteBatch, which can be used to draw textures.
             this.spriteBatch = new SpriteBatch(this.GraphicsDevice);
@@ -94,12 +98,17 @@
                 this.Exit();
             }
 
-            if (this.testLevel.Character.CurrentHealth <= 0)
+            if (this.stages == GameStages.Game_Stage && this.testLevel.Character.CurrentHealth <= 0)
             {
-                this.stages = GameStages.Stage2;
+                this.stages = GameStages.Death_Stage;
             }
 
-            if (this.stages == GameStages.Stage1)
+            //if(stages == GameStages.Start_Stage)
+            //{
+            //    this.staRtScreen.Update(gameTime);
+            //}
+            
+            if(this.stages == GameStages.Game_Stage)
             {
                 this.timeSinceLastUpdate += gameTime.ElapsedGameTime.Milliseconds;
                 if (this.timeSinceLastUpdate >= this.oneSec)
@@ -142,7 +151,7 @@
             // Vector2 origin = new Vector2(GfxHandler.GetWidth(this.testPlayer) / 2, GfxHandler.GetHeight(this.testPlayer) / 2);
             // TODO: Add your drawing code here
 
-            if (this.stages == GameStages.Stage1)
+            if (this.stages == GameStages.Game_Stage)
             {
                 this.spriteBatch.Begin();
 
@@ -166,13 +175,17 @@
                     }
                 }
             }
-            else
+            else if(this.stages == GameStages.Death_Stage)
             {
                 this.statScreen.EndScreen(this.Content, this.spriteBatch);
+            }
+            else
+            {
+                // this.statScreen.DrawStartScreen(this.spriteBatch, this.Content);
             }
             
 
             base.Draw(gameTime);
-        }
+        }   
     }
 }
