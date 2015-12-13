@@ -1,12 +1,11 @@
 ﻿using LeGame.Handlers;
 using LeGame.Interfaces;
-using LeGame.Models.Characters.Player;
 
 namespace LeGame.Models.Items.Projectiles
 {
     public abstract class Projectile : GameObject, IMovable
     {
-        protected Projectile(Player attacker, string type, int damage, int speed, float angle, int range)
+        protected Projectile(ICharacter attacker, string type, int damage, int speed, float angle, int range)
             : base(attacker.Position, type)
         {
             this.Attacker = attacker;
@@ -27,11 +26,11 @@ namespace LeGame.Models.Items.Projectiles
 
         public int Range { get; }
 
-        private Player Attacker { get; }
+        private ICharacter Attacker { get; }
 
         public virtual void Move()
         {
-            CollisionHandler.ProjectileReaction(this, this.Attacker);
+            CollisionHandler.ProjectileReaction(this, this.Attacker.Level);
         }
 
         public virtual void Hit(ICharacter target)

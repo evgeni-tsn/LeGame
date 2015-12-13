@@ -1,28 +1,39 @@
-﻿using System.Linq;
-using LeGame.Handlers;
-using LeGame.Models;
-using LeGame.Models.Characters;
-using LeGame.Models.Characters.Enemies;
-using LeGame.Models.Characters.Player;
-using LeGame.Models.Items.PickableItems;
-using LeGame.Models.Items.Projectiles;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-
-namespace LeGame.Engine
+﻿namespace LeGame.Engine
 {
+    using System.Linq;
+
+    using Enumerations;
+
+    using Handlers;
+
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Graphics;
+    using Microsoft.Xna.Framework.Input;
+
+    using Models;
+    using Models.Characters;
+    using Models.Characters.Enemies;
+    using Models.Characters.Player;
+    using Models.Items.PickableItems;
+    using Models.Items.Projectiles;
+
     public class GameEngine : Game
     {
         private readonly GraphicsDeviceManager graphics;
+        private readonly StatScreen statScreen;
         private SpriteBatch spriteBatch;
 
         private Player testPlayer;
         private Character sampleEnemy;
         private Level testLevel;
+        private int oneSec = 1000;
+        private int timeSinceLastUpdate = 0;
+        private GameStages stages;
+       
 
         public GameEngine()
         {
+            this.statScreen = new StatScreen();
             this.graphics = new GraphicsDeviceManager(this);
             this.Content.RootDirectory = "Content";
         }
@@ -30,9 +41,11 @@ namespace LeGame.Engine
         protected override void LoadContent()
         {
             this.IsMouseVisible = true;
+            this.stages = GameStages.Stage1;
 
             // Create a new SpriteBatch, which can be used to draw textures.
             this.spriteBatch = new SpriteBatch(this.GraphicsDevice);
+           
             GfxHandler.Load(this.Content);
             
             GoldCoin coin = new GoldCoin(new Vector2(300, 300), "TestObjects/coin");
@@ -81,20 +94,38 @@ namespace LeGame.Engine
                 this.Exit();
             }
 
-            // TODO: Add your update logic here
-            this.testPlayer.Move();
-            GfxHandler.GetSprite(this.testPlayer).Update(gameTime, this.testPlayer);
-            
-            foreach (Character enemy in this.testLevel.Enemies.ToList())
+            if (this.testLevel.Character.CurrentHealth <= 0)
             {
-                enemy.Move();
-                GfxHandler.GetSprite(enemy).Update(gameTime, enemy);
+                this.stages = GameStages.Stage2;
             }
 
-            foreach (Projectile projectile in this.testLevel.Projectiles.ToList())
+            if (this.stages == GameStages.Stage1)
             {
-                projectile.Move();
-                GfxHandler.GetSprite(projectile).Update(gameTime);
+                this.timeSinceLastUpdate += gameTime.ElapsedGameTime.Milliseconds;
+                if (this.timeSinceLastUpdate >= this.oneSec)
+                {
+                    this.timeSinceLastUpdate = 0;
+                    this.testLevel.Character.CooldownTimer += 1;
+                }
+                this.testPlayer.Move();
+                GfxHandler.GetSprite(this.testPlayer).Update(gameTime, this.testPlayer);
+
+                foreach (Character enemy in this.testLevel.Enemies.ToList())
+                {
+                    enemy.Move();
+                    GfxHandler.GetSprite(enemy).Update(gameTime, enemy);
+                }
+
+                foreach (Projectile projectile in this.testLevel.Projectiles.ToList())
+                {
+                    projectile.Move();
+                    GfxHandler.GetSprite(projectile).Update(gameTime);
+                }
+
+            }
+            else
+            {
+
             }
 
             base.Update(gameTime);
@@ -106,33 +137,40 @@ namespace LeGame.Engine
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            this.GraphicsDevice.Clear(Color.Wheat);
+            this.GraphicsDevice.Clear(Color.Black);
 
             // Vector2 origin = new Vector2(GfxHandler.GetWidth(this.testPlayer) / 2, GfxHandler.GetHeight(this.testPlayer) / 2);
             // TODO: Add your drawing code here
-            this.spriteBatch.Begin();
-           
-            // this.testLevel.Tiles.ForEach(t => this.spriteBatch.Draw(GfxHandler.GetTexture(t), t.Position));
-            this.testLevel.Assets.ForEach(t => this.spriteBatch.Draw(GfxHandler.GetTexture(t), t.Position));
 
-            // testLevel.Background.ForEach(t => 
-            // {
-            //     if (t.Type != "uhm") spriteBatch.Dra(GfxHandler.GetTexture(t), t.Position);
-            // });
-            this.spriteBatch.End();
-
-            GfxHandler.GetSprite(this.sampleEnemy).Draw(this.spriteBatch, this.sampleEnemy.Position);
-            GfxHandler.GetSprite(this.testPlayer).Draw(this.spriteBatch, this.testPlayer.Position, this.testPlayer.FacingAngle, this.testPlayer.MovementAngle);
-
-            foreach (var projectile in this.testLevel.Projectiles.ToList())
+            if (this.stages == GameStages.Stage1)
             {
-                GfxHandler.GetSprite(projectile).Draw(this.spriteBatch, projectile.Position, projectile.Angle);
+                this.spriteBatch.Begin();
 
-                if (projectile.Lifetime > projectile.Range)
+
+                this.testLevel.Assets.ForEach(t => this.spriteBatch.Draw(GfxHandler.GetTexture(t), t.Position));
+
+
+
+                this.spriteBatch.End();
+                this.statScreen.DrawHealth(this.testLevel.Character, this.Content, this.spriteBatch);
+                GfxHandler.GetSprite(this.sampleEnemy).Draw(this.spriteBatch, this.sampleEnemy.Position);
+                GfxHandler.GetSprite(this.testPlayer).Draw(this.spriteBatch, this.testPlayer.Position, this.testPlayer.FacingAngle, this.testPlayer.MovementAngle);
+
+                foreach (var projectile in this.testLevel.Projectiles.ToList())
                 {
-                    this.testLevel.Projectiles.Remove(projectile);
+                    GfxHandler.GetSprite(projectile).Draw(this.spriteBatch, projectile.Position, projectile.Angle);
+
+                    if (projectile.Lifetime > projectile.Range)
+                    {
+                        this.testLevel.Projectiles.Remove(projectile);
+                    }
                 }
             }
+            else
+            {
+                this.statScreen.EndScreen(this.Content, this.spriteBatch);
+            }
+            
 
             base.Draw(gameTime);
         }

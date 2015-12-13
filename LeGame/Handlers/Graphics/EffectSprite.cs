@@ -4,6 +4,8 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace LeGame.Handlers.Graphics
 {
+    using LeGame.Engine;
+
     public class EffectSprite : RotationSprite
     {
         private const int TimePerFrame = 50;

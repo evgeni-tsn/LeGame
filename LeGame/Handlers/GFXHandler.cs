@@ -1,21 +1,22 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+
+using LeGame.Engine;
 using LeGame.Handlers.Graphics;
 using LeGame.Interfaces;
-using LeGame.Models;
-using LeGame.Models.LevelAssets;
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace LeGame.Handlers
 {
-
     public static class GfxHandler
     {
         private static readonly Dictionary<string, ISprite> Sprites = new Dictionary<string, ISprite>(); 
         private static readonly Dictionary<string, Texture2D> TextureLibrary = new Dictionary<string, Texture2D>();
+        
         private static readonly List<string> FileNames = new List<string>();
 
         public static void Load(ContentManager content)
@@ -50,7 +51,7 @@ namespace LeGame.Handlers
                 {
                     Sprites.Add(fileName, MakeEffectSprite(content.Load<Texture2D>(fileName)));
                 }
-
+                
                 TextureLibrary.Add(fileName, content.Load<Texture2D>(fileName));
             }
         }
@@ -82,7 +83,7 @@ namespace LeGame.Handlers
             }
             else if (obj.Type.ToLower().Contains("rotation") || obj.Type.ToLower().Contains("projectile"))
             {
-                pos = new Vector2(pos.X - GlobalVariables.TileWidth / 2f, pos.Y - GlobalVariables.TileHeight / 2f);
+                pos = new Vector2(pos.X - GlobalVariables.TileWidth / 2f, pos.Y - GlobalVariables.TileHeight / 2f);     
                 width = GlobalVariables.TileWidth;
                 height = GlobalVariables.TileHeight;
             }
@@ -132,9 +133,13 @@ namespace LeGame.Handlers
                 {
                     foreach (string file in Directory.GetFiles(dir))
                     {
-                        FileNames.Add(file);
+                        if (!file.Contains("font"))
+                        {
+                            FileNames.Add(file);
+                        }
                     }
                 }
+
                 GetFilenames(dir);
             }
         }

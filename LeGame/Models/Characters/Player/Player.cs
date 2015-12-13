@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using LeGame.Engine;
 using LeGame.Handlers;
 using LeGame.Interfaces;
 using LeGame.Models.Items.Weapons;
@@ -17,11 +18,6 @@ namespace LeGame.Models.Characters.Player
             this.EquippedWeapon = new LaserGun();
         }
 
-        public float FacingAngle { get; private set; }
-        public float MovementAngle { get; private set; }
-
-        private IWeapon EquippedWeapon { get; set; }
-
         public Keys[] KbKeys { get; } = { Keys.W, Keys.A, Keys.S, Keys.D };
 
         public override void Move()
@@ -38,19 +34,19 @@ namespace LeGame.Models.Characters.Player
                 {
                     case Keys.D:
                         MovementHandler.MoveRight(this);
-                        this.MovementAngle = 1.55f;
+                        this.MovementAngle = GlobalVariables.RightAngle;
                         break;
                     case Keys.W:
                         MovementHandler.MoveUp(this);
-                        this.MovementAngle = 0f;
+                        this.MovementAngle = GlobalVariables.UpAngle;
                         break;
                     case Keys.S:
                         MovementHandler.MoveDown(this);
-                        this.MovementAngle = 3.15f;
+                        this.MovementAngle = GlobalVariables.DownAngle;
                         break;
                     case Keys.A:
                         MovementHandler.MoveLeft(this);
-                        this.MovementAngle = -1.55f;
+                        this.MovementAngle = GlobalVariables.LeftAngle;
                         break;
                 }
                 CollisionHandler.PlayerReaction(this, key);
@@ -65,6 +61,10 @@ namespace LeGame.Models.Characters.Player
         public override void AttackUsingWeapon()
         {
             this.EquippedWeapon?.Attack(this.Level, this);
+        }
+        public override void TakeDamage()
+        {
+            this.CurrentHealth -= 70;
         }
     }
 }

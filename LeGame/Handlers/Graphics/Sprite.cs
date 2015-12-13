@@ -5,6 +5,8 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace LeGame.Handlers.Graphics
 {
+    using LeGame.Engine;
+
     public abstract class Sprite : ISprite
     {
 

@@ -5,6 +5,8 @@ using Microsoft.Xna.Framework;
 
 namespace LeGame.Handlers
 {
+    using LeGame.Engine;
+
     public static class AiPathfinder
     {
         public static void FindPath(Character player, Character ai)

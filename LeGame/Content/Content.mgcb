@@ -662,3 +662,26 @@
 /processorParam:TextureFormat=Color
 /build:Effects/FleshExplosionEffect.png
 
+#begin TestObjects/SpriteFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:TestObjects/SpriteFont.spritefont
+
+#begin TestObjects/DeathFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:TestObjects/DeathFont.spritefont
+
+#begin Projectiles/SwingProjectile.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:TextureFormat=Color
+/build:Projectiles/SwingProjectile.png
+

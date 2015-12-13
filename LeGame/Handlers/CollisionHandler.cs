@@ -1,16 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using LeGame.Interfaces;
-using LeGame.Models;
-using LeGame.Models.Characters;
-using LeGame.Models.Characters.Enemies;
-using LeGame.Models.Items.Projectiles;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
-
-namespace LeGame.Handlers
+﻿namespace LeGame.Handlers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using Interfaces;
+    using Models;
+    using Models.Characters;
+    using Models.Characters.Enemies;
+    using Models.Items.Projectiles;
+
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Input;
+
     internal static class CollisionHandler
     {
         public static void PlayerReaction(Character character, Keys key)
@@ -23,7 +25,7 @@ namespace LeGame.Handlers
                  Vector2 temp = new Vector2(character.Position.X, character.Position.Y);
                
                 // movement reactions
-                if (collider is ICollidable)
+                if (collider is ICollidable && !(collider is IKillable))
                 {
                     if (key == Keys.D)
                     {
@@ -49,27 +51,26 @@ namespace LeGame.Handlers
                         character.Position = temp;
                     }
                 }
-            
+                
                 if (collider is IPickable)
                 {
                     GameObject item = (GameObject)collider;
                     Console.Beep(8000, 50); 
 
                     // legit cool gold-pickup sound 
-                    // the freeze it causes based on the duration is also legit :D
                     character.Level.Assets.Remove(item);
                 }
             }
         }
 
-        public static void ProjectileReaction(Projectile projectile, Character character)
+        public static void ProjectileReaction(Projectile projectile, ILevel level)
         {
-            List<IGameObject> collisionItems = character.Level.Assets.Concat(character.Level.Enemies).ToList();
+            List<IGameObject> collisionItems = level.Assets.Concat(level.Enemies).ToList();
             object collider = Collide(projectile, collisionItems);
 
             if (!collider.Equals(-1))
             {
-                character.Level.Projectiles.Remove(projectile);
+                level.Projectiles.Remove(projectile);
 
                 if (collider is Enemy)
                 {
@@ -87,7 +88,7 @@ namespace LeGame.Handlers
             }
         }
 
-        private static object Collide(IGameObject collider, IEnumerable<IGameObject> collisionItems)
+        public static object Collide(IGameObject collider, IEnumerable<IGameObject> collisionItems)
         {
             foreach (var item in collisionItems)
             {
@@ -101,6 +102,25 @@ namespace LeGame.Handlers
             }
 
             return -1;
+        }
+
+        public static void AICollide(IGameObject collider, Character character)
+        {
+            Rectangle colliderBBox = GfxHandler.GetBBox(collider);
+            Rectangle charBBox = GfxHandler.GetBBox(character);
+            if (colliderBBox.Intersects(charBBox))
+            {
+                if (character.CooldownTimer >= 5)
+                {
+                    character.TakeDamage();
+                    Console.Beep(3000, 49);
+                    character.CooldownTimer = 0;
+                    if (character.CurrentHealth < 0)
+                    {
+                       // guess =)
+                    }
+                }
+            }
         }
     }
 }

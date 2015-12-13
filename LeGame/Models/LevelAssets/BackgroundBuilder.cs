@@ -6,6 +6,7 @@ using LeGame.Exceptions;
 
 namespace LeGame.Models.LevelAssets
 {
+    using LeGame.Engine;
     using LeGame.Interfaces;
 
     // Previously AssetBuilder

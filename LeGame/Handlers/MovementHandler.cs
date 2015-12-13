@@ -3,6 +3,8 @@ using Microsoft.Xna.Framework;
 
 namespace LeGame.Handlers
 {
+    using LeGame.Engine;
+
     public static class MovementHandler
     {
         public static void MoveRight(Character character)

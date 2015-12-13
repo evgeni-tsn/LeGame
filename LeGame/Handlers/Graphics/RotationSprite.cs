@@ -1,12 +1,14 @@
-﻿using LeGame.Models.Characters;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-
-namespace LeGame.Handlers.Graphics
+﻿namespace LeGame.Handlers.Graphics
 {
+    using LeGame.Engine;
+    using LeGame.Models.Characters;
+
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Graphics;
+
     public class RotationSprite : Sprite
     {
-        private const int TimePerFrame = 20;
+        private const int TimePerFrame = 30;
 
         public RotationSprite(Texture2D texture) 
             : base(texture)
@@ -23,7 +25,13 @@ namespace LeGame.Handlers.Graphics
                 return;
             }
 
-            this.CurrentFrame = GlobalVariables.Rng.Next(0, this.TotalFrames);
+            // this.CurrentFrame = GlobalVariables.Rng.Next(0, this.TotalFrames);
+            this.CurrentFrame++;
+            if (this.CurrentFrame == this.TotalFrames)
+            {
+                this.CurrentFrame = 0;
+            }
+
         }
 
         public override void Draw(SpriteBatch spriteBatch, Vector2 location, float rotation = 0, float rotationB = 0)

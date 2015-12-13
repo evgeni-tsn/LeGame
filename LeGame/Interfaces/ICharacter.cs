@@ -2,12 +2,12 @@
 
 namespace LeGame.Interfaces
 {
-    public interface ICharacter
+    public interface ICharacter : IMovable, IAttacker
     {
+        ILevel Level { get; set; }
+
         int MaxHealth { get; set; }
 
         int CurrentHealth { get; set; }
-
-        int Speed { get; set; }
     }
 }
