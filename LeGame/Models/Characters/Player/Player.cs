@@ -5,6 +5,7 @@
 
     using LeGame.Engine;
     using LeGame.Handlers;
+    using LeGame.Interfaces;
     using LeGame.Models.Items.Weapons;
 
     using Microsoft.Xna.Framework;
@@ -12,8 +13,8 @@
 
     public class Player : Character
     {
-        protected Player(Vector2 position, string type, int maxHealth, int currentHealth, int speed, Level level) 
-            : base(position, type, maxHealth, currentHealth, speed, level)
+        protected Player(Vector2 position, string type, int maxHealth, int currentHealth, int speed, int hitCooldown, ILevel level) 
+            : base(position, type, maxHealth, currentHealth, speed, hitCooldown, level)
         {
             // TODO: Implement weapon pickup and display it on the character.
             this.EquippedWeapon = new LaserGun();

@@ -99,18 +99,15 @@
         public static void AICollide(IGameObject collider, ICharacter character)
         {
             Rectangle colliderBBox = GfxHandler.GetBBox(collider);
-            Rectangle charBBox = GfxHandler.GetBBox((IGameObject)character);
+            Rectangle charBBox = GfxHandler.GetBBox(character);
             if (colliderBBox.Intersects(charBBox))
             {
-                if (character.CooldownTimer >= 5)
+                character.TakeDamage((ICharacter)collider);
+
+                // Console.Beep(3000, 49);
+                if (character.CurrentHealth < 0)
                 {
-                    character.TakeDamage((ICharacter)collider);
-                    Console.Beep(3000, 49);
-                    character.CooldownTimer = 0;
-                    if (character.CurrentHealth < 0)
-                    {
-                       // guess =)
-                    }
+                    // guess =)
                 }
             }
         }

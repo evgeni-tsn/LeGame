@@ -7,8 +7,10 @@
 
     public class RotationSprite : Sprite
     {
+        private const int RotationSpriteUpdateTIme = 50;
+
         public RotationSprite(Texture2D texture) 
-            : base(texture, 200)
+            : base(texture, RotationSpriteUpdateTIme)
         {
             this.CurrentFrame = 0;
             this.TotalFrames = this.Rows * this.Columns;
@@ -21,6 +23,7 @@
             {
                 return;
             }
+            this.TimeSinceLastFrame = gameTime.ElapsedGameTime.Milliseconds;
 
             // this.CurrentFrame = GlobalVariables.Rng.Next(0, this.TotalFrames);
             this.CurrentFrame++;
@@ -28,7 +31,6 @@
             {
                 this.CurrentFrame = 0;
             }
-
         }
 
         public override void Draw(SpriteBatch spriteBatch, Vector2 location, float rotation = 0, float rotationB = 0)

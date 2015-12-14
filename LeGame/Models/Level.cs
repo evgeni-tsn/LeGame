@@ -7,9 +7,9 @@
 
     public class Level : ILevel
     {
-        public Level(string path, ICharacter character)
+        public Level(string path, ICharacter player)
         {
-            this.Character = character;
+            this.Player = player;
             var assetBuilder = new BackgroundBuilder(path);
 
             this.Assets = assetBuilder.Background;
@@ -17,11 +17,11 @@
             this.Projectiles = new List<IProjectile>();
         }
 
+        public ICharacter Player { get; private set; }
+
         public List<IProjectile> Projectiles { get; private set; } 
 
         public List<ICharacter> Enemies { get; private set; }
-
-        public ICharacter Character { get; private set; }
 
         public List<IGameObject> Assets { get; private set; }
     }

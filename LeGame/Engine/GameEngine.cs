@@ -10,7 +10,6 @@ namespace LeGame.Engine
     using LeGame.Models.Characters.Enemies;
     using LeGame.Models.Characters.Player;
     using LeGame.Models.Items.PickableItems;
-    using LeGame.Models.Items.Projectiles;
     using LeGame.Screens.StartScreen;
 
     using Microsoft.Xna.Framework;
@@ -28,8 +27,6 @@ namespace LeGame.Engine
         private Player testPlayer;
         private Character sampleEnemy;
         private Level testLevel;
-        private int oneSec = 1000;
-        private int timeSinceLastUpdate = 0;
         private GameStages stage;
        
 
@@ -51,7 +48,7 @@ namespace LeGame.Engine
 
             // Create a new SpriteBatch, which can be used to draw textures.
             this.spriteBatch = new SpriteBatch(this.GraphicsDevice);
-           
+            
             GfxHandler.Load(this.Content);
             
             GoldCoin coin = new GoldCoin(new Vector2(300, 300), "TestObjects/coin");
@@ -99,14 +96,14 @@ namespace LeGame.Engine
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            GlobalVariables.GlobalTimer += gameTime.ElapsedGameTime.Milliseconds;
+
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
                 this.Exit();
             }
 
-            GlobalVariables.GlobalTime = gameTime;
-
-            if (this.stage == GameStages.Game_Stage && this.testLevel.Character.CurrentHealth <= 0)
+            if (this.stage == GameStages.Game_Stage && this.testLevel.Player.CurrentHealth <= 0)
             {
                 this.stage = GameStages.Death_Stage;
             }
@@ -118,29 +115,7 @@ namespace LeGame.Engine
             
             if (this.stage == GameStages.Game_Stage)
             {
-                this.timeSinceLastUpdate += gameTime.ElapsedGameTime.Milliseconds;
-                if (this.timeSinceLastUpdate >= this.oneSec)
-                {
-                    this.timeSinceLastUpdate = 0;
-                    this.testLevel.Character.CooldownTimer += 1;
-                }
-
-                this.testPlayer.Move();
-                GfxHandler.GetSprite(this.testPlayer).Update(gameTime, this.testPlayer);
-
-                foreach (ICharacter enemy in this.testLevel.Enemies.ToList())
-                {
-                    enemy.Move();
-                    GfxHandler.GetSprite(enemy).Update(gameTime, enemy);
-                }
-
-                foreach (Projectile projectile in this.testLevel.Projectiles.ToList())
-                {
-                    projectile.Move();
-                    GfxHandler.GetSprite(projectile).Update(gameTime);
-                }
-
-                GfxHandler.UpdateExistingEffects(gameTime);
+                GfxHandler.UpdateLevel(gameTime, this.testLevel);
             }
             else
             {
@@ -162,33 +137,9 @@ namespace LeGame.Engine
             // TODO: Add your drawing code here
             if (this.stage == GameStages.Game_Stage)
             {
-                this.spriteBatch.Begin();
+                this.statScreen.DrawHealth(this.testLevel.Player, this.Content, this.spriteBatch);
 
-
-                this.testLevel.Assets.ForEach(t => this.spriteBatch.Draw(GfxHandler.GetTexture(t), t.Position));
-
-                this.spriteBatch.End();
-                this.statScreen.DrawHealth(this.testLevel.Character, this.Content, this.spriteBatch);
-
-                foreach (var ememy in this.testLevel.Enemies)
-                {
-                    GfxHandler.GetSprite(ememy).Draw(this.spriteBatch, this.sampleEnemy.Position);
-                }
-                
-                foreach (var projectile in this.testLevel.Projectiles.ToList())
-                {
-                    GfxHandler.GetSprite(projectile).Draw(this.spriteBatch, projectile.Position, projectile.Angle);
-
-                    if (projectile.Lifetime > projectile.Range)
-                    {
-                        this.testLevel.Projectiles.Remove(projectile);
-                    }
-                }
-
-                GfxHandler.DrawExistingEffects(this.spriteBatch);
-
-                GfxHandler.GetSprite(this.testPlayer).Draw(this.spriteBatch, this.testPlayer.Position, this.testPlayer.FacingAngle, this.testPlayer.MovementAngle);
-
+                GfxHandler.DrawLevel(this.spriteBatch, this.testLevel);
             }
             else if (this.stage == GameStages.Death_Stage)
             {
