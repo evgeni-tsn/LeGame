@@ -12,7 +12,7 @@ namespace LeGame.Interfaces
 
         int Columns { get; set; }
 
-        void Update(GameTime gameTime, Character character = null);
+        void Update(GameTime gameTime, ICharacter character = null);
 
         void Draw(SpriteBatch spriteBatch, Vector2 location, float rotationA = 0, float rotationB = 0);
     }

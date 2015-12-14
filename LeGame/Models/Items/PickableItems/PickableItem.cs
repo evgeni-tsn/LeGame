@@ -15,7 +15,7 @@
 
         public abstract bool HasBeenPicked { get; set; }
 
-        public virtual void UponPickUp(Character character)
+        public virtual void UponPickUp(ICharacter character)
         {
             character.Level.Assets.Remove(this);
         }

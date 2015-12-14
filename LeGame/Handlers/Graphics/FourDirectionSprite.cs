@@ -30,14 +30,14 @@
             { "Down", new[] { 0, 1, 2 } }
         };
 
-        public FourDirectionSprite(Texture2D texture, Character character = null) 
+        public FourDirectionSprite(Texture2D texture, ICharacter character = null) 
             : base(texture, 130)
         {
             this.TotalFrames = this.Rows * this.Columns;
             this.CurrentFrame = 0;
         }
         
-        public override void Update(GameTime gameTime, Character character)
+        public override void Update(GameTime gameTime, ICharacter character)
         {
             if (character is ICollidable)
             {

@@ -1,6 +1,9 @@
 ﻿namespace LeGame.Handlers.Graphics
 {
+    using System.ComponentModel;
+
     using LeGame.Engine;
+    using LeGame.Interfaces;
     using LeGame.Models.Characters;
 
     using Microsoft.Xna.Framework;
@@ -22,7 +25,7 @@
 
         private float Rotation { get; set; }
 
-        public override void Update(GameTime gameTime, Character character = null)
+        public override void Update(GameTime gameTime, ICharacter character = null)
         {
             this.TimeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
             if (this.TimeSinceLastFrame < this.TimePerFrame)

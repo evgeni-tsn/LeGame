@@ -103,6 +103,8 @@ namespace LeGame.Engine
                 this.Exit();
             }
 
+            GlobalVariables.GlobalTime = gameTime;
+
             if (this.stage == GameStages.Game_Stage && this.testLevel.Character.CurrentHealth <= 0)
             {
                 this.stage = GameStages.Death_Stage;
@@ -121,6 +123,7 @@ namespace LeGame.Engine
                     this.timeSinceLastUpdate = 0;
                     this.testLevel.Character.CooldownTimer += 1;
                 }
+
                 this.testPlayer.Move();
                 GfxHandler.GetSprite(this.testPlayer).Update(gameTime, this.testPlayer);
 

@@ -2,6 +2,7 @@
 {
     using System.Linq;
 
+    using LeGame.Interfaces;
     using LeGame.Models.Characters;
     using LeGame.Models.Characters.Player;
 
@@ -20,7 +21,7 @@
             this.TotalFrames = this.Columns;
         }
 
-        public override void Update(GameTime gameTime, Character character)
+        public override void Update(GameTime gameTime, ICharacter character)
         {
             this.TimeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
             if (this.TimeSinceLastFrame < this.TimePerFrame)

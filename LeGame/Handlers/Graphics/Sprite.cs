@@ -32,7 +32,7 @@
 
         protected Texture2D Texture { get; }
 
-        public abstract void Update(GameTime gameTime, Character character = null);
+        public abstract void Update(GameTime gameTime, ICharacter character = null);
 
         public abstract void Draw(SpriteBatch spriteBatch, Vector2 location, float rotationA = 0, float rotationB = 0);
     }
