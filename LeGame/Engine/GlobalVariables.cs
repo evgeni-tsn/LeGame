@@ -8,7 +8,7 @@
     {
         public static readonly Random Rng = new Random();
 
-        public static GameTime GlobalTime;
+        public static int GlobalTimer = 0;
 
         public const string ContentDir = @"..\..\..\Content\";
 

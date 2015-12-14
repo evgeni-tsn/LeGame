@@ -1,6 +1,5 @@
 ﻿namespace LeGame.Handlers
 {
-    using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
@@ -63,12 +62,57 @@
             }
         }
 
+        public static void UpdateLevel(GameTime gameTime, ILevel level)
+        {
+            level.Player.Move();
+            GfxHandler.GetSprite(level.Player).Update(gameTime, level.Player);
+            foreach (ICharacter enemy in level.Enemies.ToList())
+            {
+                enemy.Move();
+                GfxHandler.GetSprite(enemy).Update(gameTime, enemy);
+            }
+
+            foreach (IProjectile projectile in level.Projectiles.ToList())
+            {
+                projectile.Move();
+                GfxHandler.GetSprite(projectile).Update(gameTime);
+            }
+
+            GfxHandler.UpdateExistingEffects(gameTime);
+        }
+
+        public static void DrawLevel(SpriteBatch spriteBatch, ILevel level)
+        {
+            spriteBatch.Begin();
+            level.Assets.ForEach(t => spriteBatch.Draw(GfxHandler.GetTexture(t), t.Position));
+            spriteBatch.End();
+            
+            foreach (var ememy in level.Enemies)
+            {
+                GfxHandler.GetSprite(ememy).Draw(spriteBatch, ememy.Position);
+            }
+
+            GfxHandler.DrawExistingEffects(spriteBatch);
+
+            foreach (var projectile in level.Projectiles.ToList())
+            {
+                GfxHandler.GetSprite(projectile).Draw(spriteBatch, projectile.Position, projectile.Angle);
+
+                if (projectile.Lifetime > projectile.Range)
+                {
+                    level.Projectiles.Remove(projectile);
+                }
+            }
+
+            GfxHandler.GetSprite(level.Player).Draw(spriteBatch, level.Player.Position, level.Player.FacingAngle, level.Player.MovementAngle);
+        }
+
         public static void AddBloodEffect(object sender)
         {
             var bleeder = (IGameObject)sender;
             var position = new Vector2(bleeder.Position.X + 16, bleeder.Position.Y + 16);
             
-            Effects.Add(new Effect(new EffectSprite(GetTexture("Effects/BloodEffect")), position));
+            Effects.Add(new Effect(new EffectSprite(GetTexture("Effects/BloodEffect"), true), position));
         }
 
         public static void AddDeathEffect(object sender)
@@ -132,7 +176,7 @@
             int width = texture.Width;
             int height = texture.Height;
 
-            if (obj.Type.ToLower().Contains("Sprite"))
+            if (obj.Type.ToLower().Contains("sprite"))
             {
                 width = GlobalVariables.TileWidth;
                 height = GlobalVariables.TileHeight;

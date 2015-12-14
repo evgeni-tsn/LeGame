@@ -29,6 +29,7 @@
             {
                 return;
             }
+            this.TimeSinceLastFrame = gameTime.ElapsedGameTime.Milliseconds;
 
             if (this.CurrentFrame != this.TotalFrames - 1)
             {

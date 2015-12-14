@@ -18,8 +18,10 @@
 
         private const int ChickenDefaultSpeed = 2;
 
+        private const int ChickenDefaultHitCooldown = 50;
+
         public Chicken(Vector2 position, Level level)
-            : base(position, ChickenDefaultType, ChickenDefaultMaxHealth, ChickenDefaultCurrentHealth, ChickenDefaultSpeed, level)
+            : base(position, ChickenDefaultType, ChickenDefaultMaxHealth, ChickenDefaultCurrentHealth, ChickenDefaultSpeed, ChickenDefaultHitCooldown, level)
         {
         }
     }

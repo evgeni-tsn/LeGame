@@ -89,7 +89,6 @@
     <Compile Include="Interfaces\IHeals.cs" />
     <Compile Include="Interfaces\ILevel.cs" />
     <Compile Include="Interfaces\IMovable.cs" />
-    <Compile Include="Interfaces\IUseWeapon.cs" />
     <Compile Include="Models\Items\Weapons\Unarmed.cs" />
     <Compile Include="Models\Level.cs" />
     <Compile Include="Models\LevelAssets\BackgroundAsset.cs" />

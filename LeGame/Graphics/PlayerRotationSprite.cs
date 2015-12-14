@@ -11,10 +11,11 @@
 
     public class PlayerRotationSprite : Sprite
     {
+        private const int PlayerRotationSpriteUpdateTime = 50;
         private bool reverse;
 
         public PlayerRotationSprite(Texture2D texture) 
-            : base(texture, 50)
+            : base(texture, PlayerRotationSpriteUpdateTime)
         {
             this.CurrentFrame = 5;
             this.TotalFrames = this.Columns;
@@ -27,7 +28,6 @@
             {
                 return;
             }
-
             this.TimeSinceLastFrame = gameTime.ElapsedGameTime.Milliseconds;
             
             KeyboardState keyState = Keyboard.GetState();

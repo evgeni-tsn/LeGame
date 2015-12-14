@@ -12,8 +12,10 @@
 
         private const int BlondyDefaultSpeed = 2;
 
+        private const int BlondyDefaultHitCooldown = 2000;
+
         public Blondy(Vector2 position, Level level)
-            : base(position, BlondyDefaultType, BlondyDefaultMaxHealth, BlondyDefaultCurrentHealth, BlondyDefaultSpeed, level)
+            : base(position, BlondyDefaultType, BlondyDefaultMaxHealth, BlondyDefaultCurrentHealth, BlondyDefaultSpeed, BlondyDefaultHitCooldown, level)
         {
             
         }

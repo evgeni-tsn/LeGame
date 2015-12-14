@@ -6,6 +6,8 @@
     {
         event EventHandler Damaged;
 
+        event EventHandler Died;
+
         int MaxHealth { get; set; }
 
         int CurrentHealth { get; set; }
