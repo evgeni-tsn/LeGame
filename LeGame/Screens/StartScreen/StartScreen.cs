@@ -1,4 +1,4 @@
-﻿namespace LeGame.Screens.Start_Screen
+﻿namespace LeGame.Screens.StartScreen
 {
     using LeGame.Engine;
 
@@ -15,9 +15,9 @@
         public void DrawStartScreen(SpriteBatch sb, ContentManager content)
         {
             Texture2D tex = content.Load<Texture2D>(@"TestObjects/start_button");
-            this.startButton = new Button(tex, buttonPosition);
+            this.startButton = new Button(tex, this.buttonPosition);
             sb.Begin();
-            sb.Draw(tex,startButton.BoundingBox,null, Color.White,0, buttonPosition, SpriteEffects.None, 1);
+            sb.Draw(tex,this.startButton.BoundingBox,null, Color.White,0, this.buttonPosition, SpriteEffects.None, 1);
             sb.End();
         }
         public void Clickity()

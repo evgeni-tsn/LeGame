@@ -17,7 +17,7 @@
     {
         public static void PlayerReaction(Character character, Keys key)
         {
-            List<IGameObject> collisionItems = character.Level.Assets.Concat(character.Level.Enemies).ToList();
+            IEnumerable<IGameObject> collisionItems = character.Level.Assets.Concat(character.Level.Enemies).ToList();
             var collider = Collide(character, collisionItems);
 
             if (!collider.Equals(-1))
@@ -65,7 +65,7 @@
 
         public static void ProjectileReaction(Projectile projectile, ILevel level)
         {
-            List<IGameObject> collisionItems = level.Assets.Concat(level.Enemies).ToList();
+            IEnumerable<IGameObject> collisionItems = level.Assets.Concat(level.Enemies).ToList();
             object collider = Collide(projectile, collisionItems);
 
             if (!collider.Equals(-1))
@@ -75,7 +75,7 @@
                 if (collider is Enemy)
                 {
                     var enemy = (Enemy)collider;
-                    enemy.CurrentHealth -= projectile.Damage;
+                    enemy.TakeDamage(projectile.Attacker);
 
                     if (enemy.CurrentHealth < 0 && !enemy.Type.Contains("Effect"))
                     {
@@ -104,15 +104,15 @@
             return -1;
         }
 
-        public static void AICollide(IGameObject collider, Character character)
+        public static void AICollide(IGameObject collider, ICharacter character)
         {
             Rectangle colliderBBox = GfxHandler.GetBBox(collider);
-            Rectangle charBBox = GfxHandler.GetBBox(character);
+            Rectangle charBBox = GfxHandler.GetBBox((IGameObject)character);
             if (colliderBBox.Intersects(charBBox))
             {
                 if (character.CooldownTimer >= 5)
                 {
-                    character.TakeDamage();
+                    character.TakeDamage((ICharacter)collider);
                     Console.Beep(3000, 49);
                     character.CooldownTimer = 0;
                     if (character.CurrentHealth < 0)

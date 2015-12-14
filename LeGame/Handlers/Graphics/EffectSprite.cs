@@ -1,5 +1,7 @@
 ﻿namespace LeGame.Handlers.Graphics
 {
+    using System;
+
     using LeGame.Engine;
     using LeGame.Models.Characters;
 
@@ -8,20 +10,22 @@
 
     public class EffectSprite : RotationSprite
     {
-        private const int TimePerFrame = 50;
 
         public EffectSprite(Texture2D texture)
             : base(texture)
         {
             this.Rotation = 0;
+            this.HasFinished = false;
         }
+
+        public bool HasFinished { get; set; }
 
         private float Rotation { get; set; }
 
         public override void Update(GameTime gameTime, Character character = null)
         {
             this.TimeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
-            if (this.TimeSinceLastFrame < TimePerFrame)
+            if (this.TimeSinceLastFrame < this.TimePerFrame)
             {
                 return;
             }
@@ -30,6 +34,11 @@
             {
                 this.CurrentFrame++;
             }
+            else if (!this.HasFinished)
+            {
+                this.HasFinished = true;
+            }
+
         }
 
         public override void Draw(SpriteBatch spriteBatch, Vector2 location, float rotation = 0, float rotationB = 0)

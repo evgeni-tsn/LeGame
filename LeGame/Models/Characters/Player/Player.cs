@@ -5,6 +5,7 @@
 
     using LeGame.Engine;
     using LeGame.Handlers;
+    using LeGame.Interfaces;
     using LeGame.Models.Items.Weapons;
 
     using Microsoft.Xna.Framework;
@@ -16,7 +17,7 @@
             : base(position, type, maxHealth, currentHealth, speed, level)
         {
             // TODO: Implement weapon pickup and display it on the character.
-            this.EquippedWeapon = new Unarmed();
+            this.EquippedWeapon = new LaserGun();
         }
 
         public Keys[] KbKeys { get; } = { Keys.W, Keys.A, Keys.S, Keys.D };
@@ -57,15 +58,6 @@
             {
                 this.AttackUsingWeapon();
             }
-        }
-
-        public override void AttackUsingWeapon()
-        {
-            this.EquippedWeapon?.Attack(this.Level, this);
-        }
-        public override void TakeDamage()
-        {
-            this.CurrentHealth -= 70;
         }
     }
 }

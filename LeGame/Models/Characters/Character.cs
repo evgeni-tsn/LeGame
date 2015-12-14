@@ -1,10 +1,12 @@
 ﻿namespace LeGame.Models.Characters
 {
+    using System;
+
     using LeGame.Interfaces;
 
     using Microsoft.Xna.Framework;
 
-    public abstract class Character : GameObject, ICharacter, IUseWeapon, IKillable
+    public abstract class Character : GameObject, ICharacter, IUseWeapon
     {
         protected Character(Vector2 position, string type, int maxHealth, int currentHealth, int speed, Level level)
             : base(position, type)
@@ -15,7 +17,9 @@
             this.Level = level;
             this.CooldownTimer = 5;
         }
-        
+
+        public event EventHandler Damaged;
+
         public int CooldownTimer { get;  set; }
 
         public ILevel Level { get; set; }
@@ -30,13 +34,21 @@
 
         public float MovementAngle { get; set; }
 
-        protected IWeapon EquippedWeapon { get; set; }
+        public IWeapon EquippedWeapon { get; set; }
 
         public abstract void Move();
+        
+        public virtual void AttackUsingWeapon()
+        {
+            this.EquippedWeapon?.Attack(this.Level, this);
+        }
 
-        public abstract void AttackUsingWeapon();
+        public virtual void TakeDamage(ICharacter attacker)
+        {
+            this.CurrentHealth -= attacker.EquippedWeapon.Damage;
 
-        public abstract void TakeDamage();
+            this.Damaged?.Invoke(this, new EventArgs());
+        }
 
     }
 }

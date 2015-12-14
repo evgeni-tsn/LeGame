@@ -1,11 +1,7 @@
 ﻿namespace LeGame.Interfaces
 {
-    public interface ICharacter : IMovable, IAttacker
+    public interface ICharacter : IMovable, IAttacker, IKillable, ICooldown
     {
         ILevel Level { get; set; }
-
-        int MaxHealth { get; set; }
-
-        int CurrentHealth { get; set; }
     }
 }

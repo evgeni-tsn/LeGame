@@ -48,6 +48,7 @@
     <Compile Include="Engine\GlobalVariables.cs" />
     <Compile Include="Handlers\AiPathfinder.cs" />
     <Compile Include="Engine\Enumerations\GameStages.cs" />
+    <Compile Include="Handlers\Graphics\Effect.cs" />
     <Compile Include="Handlers\Graphics\FourDirectionSprite.cs" />
     <Compile Include="Handlers\CollisionHandler.cs" />
     <Compile Include="Handlers\GFXHandler.cs" />
@@ -59,6 +60,7 @@
     <Compile Include="Handlers\MovementHandler.cs" />
     <Compile Include="Interfaces\ICharacter.cs" />
     <Compile Include="Interfaces\ICollidable.cs" />
+    <Compile Include="Interfaces\ICooldown.cs" />
     <Compile Include="Interfaces\IPickable.cs" />
     <Compile Include="Interfaces\ISprite.cs" />
     <Compile Include="Interfaces\IWeapon.cs" />
@@ -94,8 +96,8 @@
     <Compile Include="Engine\GameEngine.cs" />
     <Compile Include="RolePlayingGame.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Screens\Start Screen\Button.cs" />
-    <Compile Include="Screens\Start Screen\StartScreen.cs" />
+    <Compile Include="Screens\StartScreen\Button.cs" />
+    <Compile Include="Screens\StartScreen\StartScreen.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

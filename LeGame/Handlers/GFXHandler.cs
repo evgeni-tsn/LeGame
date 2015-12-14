@@ -1,5 +1,6 @@
 ﻿namespace LeGame.Handlers
 {
+    using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
@@ -12,12 +13,18 @@
     using Microsoft.Xna.Framework.Content;
     using Microsoft.Xna.Framework.Graphics;
 
+    using Effect = LeGame.Handlers.Graphics.Effect;
+
     public static class GfxHandler
     {
-        private static readonly Dictionary<string, ISprite> Sprites = new Dictionary<string, ISprite>(); 
-        private static readonly Dictionary<string, Texture2D> TextureLibrary = new Dictionary<string, Texture2D>();
-        
-        private static readonly List<string> FileNames = new List<string>();
+        private static readonly IDictionary<string, ISprite> Sprites = new Dictionary<string, ISprite>(); 
+        private static readonly IDictionary<string, Texture2D> TextureLibrary = new Dictionary<string, Texture2D>();
+        private static readonly IList<Effect> Effects = new List<Effect>();
+
+        private static readonly IList<string> FileNames = new List<string>();
+
+        private static readonly string[] FoldersToAvoid = { "bin", "obj", "Maps" };
+        private static readonly string[] FilesToAvoid = { "font" };
 
         public static void Load(ContentManager content)
         {
@@ -31,7 +38,8 @@
                 // format it appropriately for the content.Load
                 // TestObjects\catSprite -> TestObjects/catSprite
                 fileName = fileName.Contains('\\') ? fileName.Replace('\\', '/') : fileName;
-                var lowerCase = fileName.ToLower();
+
+                string lowerCase = fileName.ToLower();
                 if (lowerCase.Contains("sprite"))
                 {
                     Sprites.Add(fileName, MakeEnemySprite(content.Load<Texture2D>(fileName)));
@@ -56,16 +64,57 @@
             }
         }
 
+        public static void AddBloodEffect(object sender)
+        {
+            var bleeder = (IGameObject)sender;
+            var position = new Vector2(bleeder.Position.X + 16, bleeder.Position.Y + 16);
+            
+            Effects.Add(new Effect(new EffectSprite(GetTexture("Effects/BloodEffect")), position));
+        }
+
+        public static void DrawExistingEffects(SpriteBatch spriteBatch)
+        {
+            foreach (Effect effect in Effects.ToList())
+            {
+                effect.Sprite.Draw(spriteBatch, effect.Location);
+            }
+        }
+
+        public static void UpdateExistingEffects(GameTime gameTime)
+        {
+            foreach (Effect effect in Effects.ToList())
+            {
+                effect.Sprite.Update(gameTime);
+
+                var sprite = (EffectSprite)effect.Sprite;
+
+                if (sprite.HasFinished)
+                {
+                    Effects.Remove(effect);
+                }
+            }
+        }
+
         // Get Sprite
         public static ISprite GetSprite(IGameObject obj)
         {
             return Sprites[obj.Type];
         }
-        
+
+        public static ISprite GetSprite(string type)
+        {
+            return Sprites[type];
+        }
+
         // Get Texture
         public static Texture2D GetTexture(IGameObject obj)
         {
             return TextureLibrary[obj.Type];
+        }
+
+        public static Texture2D GetTexture(string type)
+        {
+            return TextureLibrary[type];
         }
 
         // Get Bounding Box
@@ -76,7 +125,7 @@
             int width = texture.Width;
             int height = texture.Height;
 
-            if (obj.Type.ToLower().Contains("sprite"))
+            if (obj.Type.ToLower().Contains("Sprite"))
             {
                 width = GlobalVariables.TileWidth;
                 height = GlobalVariables.TileHeight;
@@ -123,17 +172,17 @@
         {
             return new FourDirectionSprite(texture);
         }
-
+        
         // Recursively get the files in Content.
         private static void GetFilenames(string sourceDir)
         {
             foreach (string dir in Directory.GetDirectories(sourceDir))
             {
-                if (!dir.Contains("bin") && !dir.Contains("obj") && !dir.Contains("Maps"))
+                if (!FoldersToAvoid.Any(dir.Contains))
                 {
                     foreach (string file in Directory.GetFiles(dir))
                     {
-                        if (!file.Contains("font"))
+                        if (!FilesToAvoid.Any(file.Contains))
                         {
                             FileNames.Add(file);
                         }

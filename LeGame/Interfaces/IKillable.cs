@@ -1,11 +1,15 @@
 ﻿namespace LeGame.Interfaces
 {
+    using System;
+
     public interface IKillable
     {
+        event EventHandler Damaged;
+
         int MaxHealth { get; set; }
 
         int CurrentHealth { get; set; }
 
-        void TakeDamage();
+        void TakeDamage(ICharacter attacker);
     }
 }

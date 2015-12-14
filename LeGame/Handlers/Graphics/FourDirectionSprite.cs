@@ -14,8 +14,6 @@
 
     public class FourDirectionSprite : Sprite
     {
-        private const int TimePerFrame = 130;
-        
         private readonly Dictionary<Keys, string> keyToDirection = new Dictionary<Keys, string>
         {
             { Keys.D, "Right" },
@@ -33,7 +31,7 @@
         };
 
         public FourDirectionSprite(Texture2D texture, Character character = null) 
-            : base(texture)
+            : base(texture, 130)
         {
             this.TotalFrames = this.Rows * this.Columns;
             this.CurrentFrame = 0;

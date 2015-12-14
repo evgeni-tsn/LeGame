@@ -1,4 +1,4 @@
-﻿namespace LeGame.Screens.Start_Screen
+﻿namespace LeGame.Screens.StartScreen
 {
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;

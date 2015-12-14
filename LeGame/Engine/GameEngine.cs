@@ -10,6 +10,7 @@ namespace LeGame.Engine
     using LeGame.Models.Characters.Player;
     using LeGame.Models.Items.PickableItems;
     using LeGame.Models.Items.Projectiles;
+    using LeGame.Screens.StartScreen;
 
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
@@ -18,8 +19,10 @@ namespace LeGame.Engine
     public class GameEngine : Game
     {
         private readonly GraphicsDeviceManager graphics;
-        private readonly StatScreen statScreen;
         private SpriteBatch spriteBatch;
+
+        private StartScreen startScreen;
+        private StatScreen statScreen;
 
         private Player testPlayer;
         private Character sampleEnemy;
@@ -31,7 +34,6 @@ namespace LeGame.Engine
 
         public GameEngine()
         {
-            this.statScreen = new StatScreen();
             this.graphics = new GraphicsDeviceManager(this);
             this.Content.RootDirectory = "Content";
             
@@ -40,6 +42,10 @@ namespace LeGame.Engine
         protected override void LoadContent()
         {
             this.IsMouseVisible = true;
+
+            this.statScreen = new StatScreen();
+            //Commented because it disables mouse capturing.
+            //this.startScreen = new StartScreen();
             this.stage = GameStages.Game_Stage;
 
             // Create a new SpriteBatch, which can be used to draw textures.
@@ -56,10 +62,12 @@ namespace LeGame.Engine
                 GlobalVariables.WindowHeight / 2);
 
             this.sampleEnemy = new Enemy(enemyPos, @"TestObjects/cockSprite", 100, 100, 2, this.testLevel);
+            this.sampleEnemy.Damaged += (sender, args) => { GfxHandler.AddBloodEffect(sender); };
+
             this.testPlayer = new TestChar(pos, @"Player/p1Rotation", 100, 100, 2, this.testLevel);
+            this.testPlayer.Damaged += (sender, args) => { GfxHandler.AddBloodEffect(sender); };
 
             this.testLevel = new Level(@"..\..\..\Content\Maps\testMap2.txt", this.testPlayer);
-
             this.testLevel.Assets.Add(coin);
 
             this.sampleEnemy.Level = this.testLevel;
@@ -103,7 +111,7 @@ namespace LeGame.Engine
             //    this.staRtScreen.Update(gameTime);
             //}
             
-            if(this.stage == GameStages.Game_Stage)
+            if (this.stage == GameStages.Game_Stage)
             {
                 this.timeSinceLastUpdate += gameTime.ElapsedGameTime.Milliseconds;
                 if (this.timeSinceLastUpdate >= this.oneSec)
@@ -126,6 +134,7 @@ namespace LeGame.Engine
                     GfxHandler.GetSprite(projectile).Update(gameTime);
                 }
 
+                GfxHandler.UpdateExistingEffects(gameTime);
             }
             else
             {
@@ -168,6 +177,8 @@ namespace LeGame.Engine
                         this.testLevel.Projectiles.Remove(projectile);
                     }
                 }
+
+                GfxHandler.DrawExistingEffects(this.spriteBatch);
             }
             else if (this.stage == GameStages.Death_Stage)
             {
@@ -175,9 +186,9 @@ namespace LeGame.Engine
             }
             else
             {
-                // this.statScreen.DrawStartScreen(this.spriteBatch, this.Content);
+                //this.startScreen.DrawStartScreen(this.spriteBatch, this.Content);
             }
-            
+
 
             base.Draw(gameTime);
         }   

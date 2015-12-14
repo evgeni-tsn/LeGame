@@ -26,15 +26,5 @@
             AiPathfinder.FindPath(this.Level.Character, this);
             CollisionHandler.AICollide(this, this.Level.Character);
         }
-
-        public override void AttackUsingWeapon()
-        {
-            this.EquippedWeapon?.Attack(this.Level, this);
-        }
-
-        public override void TakeDamage()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

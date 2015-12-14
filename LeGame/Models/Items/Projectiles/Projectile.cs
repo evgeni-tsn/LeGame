@@ -26,13 +26,14 @@
 
         public int Range { get; }
 
-        private ICharacter Attacker { get; }
+        public ICharacter Attacker { get; }
 
         public virtual void Move()
         {
             CollisionHandler.ProjectileReaction(this, this.Attacker.Level);
         }
 
+        // TODO: Might be redundant, consider removal
         public virtual void Hit(ICharacter target)
         {
         }

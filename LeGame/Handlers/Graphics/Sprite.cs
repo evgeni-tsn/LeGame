@@ -10,11 +10,12 @@
     public abstract class Sprite : ISprite
     {
 
-        protected Sprite(Texture2D texture)
+        protected Sprite(Texture2D texture, int timePerFrame)
         {
             this.Texture = texture;
             this.Rows = this.Texture.Height / GlobalVariables.TileHeight;
             this.Columns = this.Texture.Width / GlobalVariables.TileWidth;
+            this.TimePerFrame = timePerFrame;
         }
 
         public int Rows { get; set; }
@@ -24,6 +25,8 @@
         protected int CurrentFrame { get; set; }
 
         protected int TotalFrames { get; set; }
+
+        protected int TimePerFrame { get; set; }
 
         protected int TimeSinceLastFrame { get; set; }
 

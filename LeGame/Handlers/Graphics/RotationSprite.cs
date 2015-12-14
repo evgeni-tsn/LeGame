@@ -7,10 +7,8 @@
 
     public class RotationSprite : Sprite
     {
-        private const int TimePerFrame = 30;
-
         public RotationSprite(Texture2D texture) 
-            : base(texture)
+            : base(texture, 200)
         {
             this.CurrentFrame = 0;
             this.TotalFrames = this.Rows * this.Columns;
@@ -19,7 +17,7 @@
         public override void Update(GameTime gameTime, Character character = null)
         {
             this.TimeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
-            if (this.TimeSinceLastFrame < TimePerFrame)
+            if (this.TimeSinceLastFrame < this.TimePerFrame)
             {
                 return;
             }
