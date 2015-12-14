@@ -62,10 +62,12 @@ namespace LeGame.Engine
                 GlobalVariables.WindowHeight / 2);
 
             this.sampleEnemy = new Enemy(enemyPos, @"TestObjects/cockSprite", 100, 100, 2, this.testLevel);
-            this.sampleEnemy.Damaged += (sender, args) => { GfxHandler.AddBloodEffect(sender); };
+            this.sampleEnemy.Damaged += (sender, args) => GfxHandler.AddBloodEffect(sender);
+            this.sampleEnemy.Died += (sender, args) => GfxHandler.AddDeathEffect(sender);
 
             this.testPlayer = new TestChar(pos, @"Player/p1Rotation", 100, 100, 2, this.testLevel);
-            this.testPlayer.Damaged += (sender, args) => { GfxHandler.AddBloodEffect(sender); };
+            this.testPlayer.Damaged += (sender, args) => GfxHandler.AddBloodEffect(sender);
+            this.testPlayer.Died += (sender, args) => GfxHandler.AddDeathEffect(sender);
 
             this.testLevel = new Level(@"..\..\..\Content\Maps\testMap2.txt", this.testPlayer);
             this.testLevel.Assets.Add(coin);
@@ -161,13 +163,14 @@ namespace LeGame.Engine
 
                 this.testLevel.Assets.ForEach(t => this.spriteBatch.Draw(GfxHandler.GetTexture(t), t.Position));
 
-
-
                 this.spriteBatch.End();
                 this.statScreen.DrawHealth(this.testLevel.Character, this.Content, this.spriteBatch);
-                GfxHandler.GetSprite(this.sampleEnemy).Draw(this.spriteBatch, this.sampleEnemy.Position);
-                GfxHandler.GetSprite(this.testPlayer).Draw(this.spriteBatch, this.testPlayer.Position, this.testPlayer.FacingAngle, this.testPlayer.MovementAngle);
 
+                foreach (var ememy in this.testLevel.Enemies)
+                {
+                    GfxHandler.GetSprite(ememy).Draw(this.spriteBatch, this.sampleEnemy.Position);
+                }
+                
                 foreach (var projectile in this.testLevel.Projectiles.ToList())
                 {
                     GfxHandler.GetSprite(projectile).Draw(this.spriteBatch, projectile.Position, projectile.Angle);
@@ -179,6 +182,9 @@ namespace LeGame.Engine
                 }
 
                 GfxHandler.DrawExistingEffects(this.spriteBatch);
+
+                GfxHandler.GetSprite(this.testPlayer).Draw(this.spriteBatch, this.testPlayer.Position, this.testPlayer.FacingAngle, this.testPlayer.MovementAngle);
+
             }
             else if (this.stage == GameStages.Death_Stage)
             {

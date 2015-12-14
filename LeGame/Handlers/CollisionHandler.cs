@@ -76,14 +76,6 @@
                 {
                     var enemy = (Enemy)collider;
                     enemy.TakeDamage(projectile.Attacker);
-
-                    if (enemy.CurrentHealth < 0 && !enemy.Type.Contains("Effect"))
-                    {
-                        // TODO: possition change is kinda hacky, maybe figure out a better way by fixing GfxHandler.
-                        enemy.Position = new Vector2(enemy.Position.X + 16, enemy.Position.Y + 16);
-                        enemy.Type = "Effects/FleshExplosionEffect";
-                        enemy.CanCollide = false;
-                    }
                 }
             }
         }
