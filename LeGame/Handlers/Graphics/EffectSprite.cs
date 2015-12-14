@@ -1,7 +1,5 @@
 ﻿namespace LeGame.Handlers.Graphics
 {
-    using System;
-
     using LeGame.Engine;
     using LeGame.Models.Characters;
 
@@ -10,15 +8,17 @@
 
     public class EffectSprite : RotationSprite
     {
-
-        public EffectSprite(Texture2D texture)
+        public EffectSprite(Texture2D texture, bool isPersistant = false)
             : base(texture)
         {
             this.Rotation = 0;
-            this.HasFinished = false;
+            this.HasEnded = false;
+            this.IsPersistant = isPersistant;
         }
 
-        public bool HasFinished { get; set; }
+        public bool HasEnded { get; private set; }
+
+        public bool IsPersistant { get; private set; }
 
         private float Rotation { get; set; }
 
@@ -34,9 +34,9 @@
             {
                 this.CurrentFrame++;
             }
-            else if (!this.HasFinished)
+            else if (!this.HasEnded)
             {
-                this.HasFinished = true;
+                this.HasEnded = true;
             }
 
         }

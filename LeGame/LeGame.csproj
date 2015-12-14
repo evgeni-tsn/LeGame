@@ -51,7 +51,7 @@
     <Compile Include="Handlers\Graphics\Effect.cs" />
     <Compile Include="Handlers\Graphics\FourDirectionSprite.cs" />
     <Compile Include="Handlers\CollisionHandler.cs" />
-    <Compile Include="Handlers\GFXHandler.cs" />
+    <Compile Include="Handlers\GfxHandler.cs" />
     <Compile Include="Handlers\Graphics\EffectSprite.cs" />
     <Compile Include="Handlers\Graphics\RotationSprite.cs" />
     <Compile Include="Handlers\Graphics\PlayerRotationSprite.cs" />

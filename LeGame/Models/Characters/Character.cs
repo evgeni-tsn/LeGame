@@ -3,10 +3,11 @@
     using System;
 
     using LeGame.Interfaces;
+    using LeGame.Models.Characters.Enemies;
 
     using Microsoft.Xna.Framework;
 
-    public abstract class Character : GameObject, ICharacter, IUseWeapon
+    public abstract class Character : GameObject, ICharacter, IUseWeapon, ICollidable
     {
         protected Character(Vector2 position, string type, int maxHealth, int currentHealth, int speed, Level level)
             : base(position, type)
@@ -19,6 +20,8 @@
         }
 
         public event EventHandler Damaged;
+
+        public event EventHandler Died;
 
         public int CooldownTimer { get;  set; }
 
@@ -36,6 +39,8 @@
 
         public IWeapon EquippedWeapon { get; set; }
 
+        public bool CanCollide { get; set; }
+
         public abstract void Move();
         
         public virtual void AttackUsingWeapon()
@@ -48,7 +53,16 @@
             this.CurrentHealth -= attacker.EquippedWeapon.Damage;
 
             this.Damaged?.Invoke(this, new EventArgs());
-        }
 
+            if (this.CurrentHealth <= 0)
+            {
+                this.Died?.Invoke(this, new EventArgs());
+
+                if (this is Enemy)
+                {
+                    this.Level.Enemies.Remove(this);
+                }
+            }
+        }
     }
 }

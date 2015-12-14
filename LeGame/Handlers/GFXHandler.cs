@@ -72,6 +72,14 @@
             Effects.Add(new Effect(new EffectSprite(GetTexture("Effects/BloodEffect")), position));
         }
 
+        public static void AddDeathEffect(object sender)
+        {
+            var riper = (IGameObject)sender;
+            var position = new Vector2(riper.Position.X + 16, riper.Position.Y + 16);
+
+            Effects.Add(new Effect(new EffectSprite(GetTexture("Effects/FleshExplosionEffect"), true), position));
+        }
+
         public static void DrawExistingEffects(SpriteBatch spriteBatch)
         {
             foreach (Effect effect in Effects.ToList())
@@ -88,7 +96,7 @@
 
                 var sprite = (EffectSprite)effect.Sprite;
 
-                if (sprite.HasFinished)
+                if (sprite.HasEnded && !sprite.IsPersistant)
                 {
                     Effects.Remove(effect);
                 }
@@ -153,9 +161,9 @@
         }
 
         // Makeing Sprites
-        private static EffectSprite MakeEffectSprite(Texture2D texture)
+        private static EffectSprite MakeEffectSprite(Texture2D texture, bool isPersistant = false)
         {
-            return new EffectSprite(texture);
+            return new EffectSprite(texture, isPersistant);
         }
 
         private static RotationSprite MakeRotationSprite(Texture2D texture)
