@@ -1,7 +1,4 @@
-﻿using LeGame.Models;
-using LeGame.Models.Characters.Player;
-
-namespace LeGame.Interfaces
+﻿namespace LeGame.Interfaces
 {
     public interface IWeapon
     {
@@ -9,6 +6,6 @@ namespace LeGame.Interfaces
 
         int Range { get; set; }
 
-        void Attack(Level level, Player player);
+        void Attack(ILevel level, ICharacter attacker);
     }
 }

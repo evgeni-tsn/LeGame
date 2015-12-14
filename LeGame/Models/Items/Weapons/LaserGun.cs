@@ -1,8 +1,8 @@
-﻿using LeGame.Models.Characters.Player;
-using LeGame.Models.Items.Projectiles;
-
-namespace LeGame.Models.Items.Weapons
+﻿namespace LeGame.Models.Items.Weapons
 {
+    using LeGame.Interfaces;
+    using LeGame.Models.Items.Projectiles;
+
     public class LaserGun : RangedWeapon
     {
         private const int LaserGunDamage = 2;
@@ -10,10 +10,9 @@ namespace LeGame.Models.Items.Weapons
 
         public LaserGun() : base(LaserGunDamage, LaserGunRange)
         {
-
         }
 
-        public override void Attack(Level level, Player attacker)
+        public override void Attack(ILevel level, ICharacter attacker)
         {
             level.Projectiles.Add(new LaserBlast(attacker, attacker.FacingAngle - 1.55f, this.Damage, this.Range));
         }

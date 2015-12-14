@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
-
-
-namespace LeGame.Screens.Start_Screen
+﻿namespace LeGame.Screens.StartScreen
 {
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Graphics;
+
     public class Button
     {
         private Texture2D buttonPic;
         private Vector2 position;
+
         public Button(Texture2D texture, Vector2 position)
         {
             this.ButtonPic = texture;
@@ -23,28 +18,35 @@ namespace LeGame.Screens.Start_Screen
         {
             get
             {
-                return buttonPic;
+                return this.buttonPic;
             }
 
             set
             {
-                buttonPic = value;
+                this.buttonPic = value;
             }
         }
+
         public Vector2 Position
         {
             get
             {
-                return position;
+                return this.position;
             }
 
             set
             {
-                position = value;
+                this.position = value;
             }
         }
 
-        public Rectangle BoundingBox { get { return new Rectangle((int)this.Position.X, (int)this.Position.Y, this.ButtonPic.Width, this.ButtonPic.Height);} }
+        public Rectangle BoundingBox
+        {
+            get
+            {
+                return new Rectangle((int)this.Position.X, (int)this.Position.Y, this.ButtonPic.Width, this.ButtonPic.Height);
+            }
+        }
 
         public void Draw(SpriteBatch sb, GameTime gameTime)
         {

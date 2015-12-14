@@ -1,19 +1,20 @@
-﻿using System.Linq;
-using LeGame.Models.Characters;
-using LeGame.Models.Characters.Player;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-
-namespace LeGame.Handlers.Graphics
+﻿namespace LeGame.Handlers.Graphics
 {
+    using System.Linq;
+
+    using LeGame.Models.Characters;
+    using LeGame.Models.Characters.Player;
+
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Graphics;
+    using Microsoft.Xna.Framework.Input;
+
     public class PlayerRotationSprite : Sprite
     {
-        private const int TimePerFrame = 50;
         private bool reverse;
 
         public PlayerRotationSprite(Texture2D texture) 
-            : base(texture)
+            : base(texture, 50)
         {
             this.CurrentFrame = 5;
             this.TotalFrames = this.Columns;
@@ -22,7 +23,7 @@ namespace LeGame.Handlers.Graphics
         public override void Update(GameTime gameTime, Character character)
         {
             this.TimeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
-            if (this.TimeSinceLastFrame < TimePerFrame)
+            if (this.TimeSinceLastFrame < this.TimePerFrame)
             {
                 return;
             }

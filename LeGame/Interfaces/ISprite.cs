@@ -1,9 +1,10 @@
-﻿using LeGame.Models.Characters;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-
+﻿
 namespace LeGame.Interfaces
 {
+    using LeGame.Models.Characters;
+
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Graphics;
 
     public interface ISprite
     {

@@ -1,18 +1,19 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using LeGame.Interfaces;
-using LeGame.Models.Characters;
-using LeGame.Models.Characters.Enemies;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-
-namespace LeGame.Handlers.Graphics
+﻿namespace LeGame.Handlers.Graphics
 {
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using LeGame.Interfaces;
+    using LeGame.Models.Characters;
+    using LeGame.Models.Characters.Enemies;
+    using LeGame.Models.Characters.Player;
+
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Graphics;
+    using Microsoft.Xna.Framework.Input;
+
     public class FourDirectionSprite : Sprite
     {
-        private const int TimePerFrame = 130;
-        
         private readonly Dictionary<Keys, string> keyToDirection = new Dictionary<Keys, string>
         {
             { Keys.D, "Right" },
@@ -30,7 +31,7 @@ namespace LeGame.Handlers.Graphics
         };
 
         public FourDirectionSprite(Texture2D texture, Character character = null) 
-            : base(texture)
+            : base(texture, 130)
         {
             this.TotalFrames = this.Rows * this.Columns;
             this.CurrentFrame = 0;

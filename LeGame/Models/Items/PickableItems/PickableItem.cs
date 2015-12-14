@@ -1,9 +1,10 @@
-﻿using LeGame.Interfaces;
-using LeGame.Models.Characters;
-using Microsoft.Xna.Framework;
-
-namespace LeGame.Models.Items.PickableItems
+﻿namespace LeGame.Models.Items.PickableItems
 {
+    using LeGame.Interfaces;
+    using LeGame.Models.Characters;
+
+    using Microsoft.Xna.Framework;
+
     public abstract class PickableItem : GameObject, IPickable
     {
         protected PickableItem(Vector2 position, string type)

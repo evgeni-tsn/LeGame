@@ -1,18 +1,21 @@
-﻿using LeGame.Interfaces;
-using LeGame.Models.Characters;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-
-namespace LeGame.Handlers.Graphics
+﻿namespace LeGame.Handlers.Graphics
 {
+    using LeGame.Engine;
+    using LeGame.Interfaces;
+    using LeGame.Models.Characters;
+
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Graphics;
+
     public abstract class Sprite : ISprite
     {
 
-        protected Sprite(Texture2D texture)
+        protected Sprite(Texture2D texture, int timePerFrame)
         {
             this.Texture = texture;
             this.Rows = this.Texture.Height / GlobalVariables.TileHeight;
             this.Columns = this.Texture.Width / GlobalVariables.TileWidth;
+            this.TimePerFrame = timePerFrame;
         }
 
         public int Rows { get; set; }
@@ -22,6 +25,8 @@ namespace LeGame.Handlers.Graphics
         protected int CurrentFrame { get; set; }
 
         protected int TotalFrames { get; set; }
+
+        protected int TimePerFrame { get; set; }
 
         protected int TimeSinceLastFrame { get; set; }
 

@@ -1,8 +1,7 @@
-﻿using LeGame.Interfaces;
-using LeGame.Models.Characters.Player;
-
-namespace LeGame.Models.Items.Weapons
+﻿namespace LeGame.Models.Items.Weapons
 {
+    using LeGame.Interfaces;
+
     public abstract class RangedWeapon : IWeapon
     {
         protected RangedWeapon(int damage, int range)
@@ -15,6 +14,6 @@ namespace LeGame.Models.Items.Weapons
 
         public int Range { get; set; }
 
-        public abstract void Attack(Level level, Player attacker);
+        public abstract void Attack(ILevel level, ICharacter attacker);
     }
 }

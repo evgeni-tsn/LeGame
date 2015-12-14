@@ -1,13 +1,16 @@
-﻿using System;
-using System.Linq;
-using LeGame.Handlers;
-using LeGame.Interfaces;
-using LeGame.Models.Items.Weapons;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
-
-namespace LeGame.Models.Characters.Player
+﻿namespace LeGame.Models.Characters.Player
 {
+    using System;
+    using System.Linq;
+
+    using LeGame.Engine;
+    using LeGame.Handlers;
+    using LeGame.Interfaces;
+    using LeGame.Models.Items.Weapons;
+
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Input;
+
     public class Player : Character
     {
         protected Player(Vector2 position, string type, int maxHealth, int currentHealth, int speed, Level level) 
@@ -15,13 +18,7 @@ namespace LeGame.Models.Characters.Player
         {
             // TODO: Implement weapon pickup and display it on the character.
             this.EquippedWeapon = new LaserGun();
-           
         }
-        
-        public float FacingAngle { get; private set; }
-        public float MovementAngle { get; private set; }
-
-        private IWeapon EquippedWeapon { get; set; }
 
         public Keys[] KbKeys { get; } = { Keys.W, Keys.A, Keys.S, Keys.D };
 
@@ -39,19 +36,19 @@ namespace LeGame.Models.Characters.Player
                 {
                     case Keys.D:
                         MovementHandler.MoveRight(this);
-                        this.MovementAngle = 1.55f;
+                        this.MovementAngle = GlobalVariables.RightAngle;
                         break;
                     case Keys.W:
                         MovementHandler.MoveUp(this);
-                        this.MovementAngle = 0f;
+                        this.MovementAngle = GlobalVariables.UpAngle;
                         break;
                     case Keys.S:
                         MovementHandler.MoveDown(this);
-                        this.MovementAngle = 3.15f;
+                        this.MovementAngle = GlobalVariables.DownAngle;
                         break;
                     case Keys.A:
                         MovementHandler.MoveLeft(this);
-                        this.MovementAngle = -1.55f;
+                        this.MovementAngle = GlobalVariables.LeftAngle;
                         break;
                 }
                 CollisionHandler.PlayerReaction(this, key);
@@ -61,15 +58,6 @@ namespace LeGame.Models.Characters.Player
             {
                 this.AttackUsingWeapon();
             }
-        }
-
-        public override void AttackUsingWeapon()
-        {
-            this.EquippedWeapon?.Attack(this.Level, this);
-        }
-        public override void TakeDamage()
-        {
-            this.CurrentHealth -= 70;
         }
     }
 }

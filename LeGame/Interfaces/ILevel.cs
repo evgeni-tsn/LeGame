@@ -1,13 +1,15 @@
-﻿using System.Collections.Generic;
-using LeGame.Models;
-using LeGame.Models.Characters;
-using LeGame.Models.LevelAssets;
-
-namespace LeGame.Interfaces
+﻿namespace LeGame.Interfaces
 {
+    using System.Collections.Generic;
+
+    using LeGame.Models.Characters;
+    using LeGame.Models.Items.Projectiles;
+
     public interface ILevel
     {
         Character Character { get; }
+
+        List<Projectile> Projectiles { get; }
 
         List<Character> Enemies { get; }
 

@@ -1,8 +1,10 @@
-﻿using LeGame.Models.Characters;
-using Microsoft.Xna.Framework;
-
-namespace LeGame.Handlers
+﻿namespace LeGame.Handlers
 {
+    using LeGame.Engine;
+    using LeGame.Models.Characters;
+
+    using Microsoft.Xna.Framework;
+
     public static class MovementHandler
     {
         public static void MoveRight(Character character)
