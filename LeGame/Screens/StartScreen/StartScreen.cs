@@ -20,6 +20,7 @@
             sb.Draw(tex,this.startButton.BoundingBox,null, Color.White,0, this.buttonPosition, SpriteEffects.None, 1);
             sb.End();
         }
+
         public void Clickity()
         {
 

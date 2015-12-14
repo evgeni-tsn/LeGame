@@ -1,12 +1,10 @@
-﻿namespace LeGame.Handlers.Graphics
+﻿namespace LeGame.Graphics
 {
     using System.Collections.Generic;
     using System.Linq;
 
     using LeGame.Interfaces;
-    using LeGame.Models.Characters;
     using LeGame.Models.Characters.Enemies;
-    using LeGame.Models.Characters.Player;
 
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
@@ -30,14 +28,14 @@
             { "Down", new[] { 0, 1, 2 } }
         };
 
-        public FourDirectionSprite(Texture2D texture, Character character = null) 
+        public FourDirectionSprite(Texture2D texture, ICharacter character = null) 
             : base(texture, 130)
         {
             this.TotalFrames = this.Rows * this.Columns;
             this.CurrentFrame = 0;
         }
         
-        public override void Update(GameTime gameTime, Character character)
+        public override void Update(GameTime gameTime, ICharacter character)
         {
             if (character is ICollidable)
             {
@@ -74,7 +72,7 @@
         {
             // Coldown for the animation
             this.TimeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
-            if (this.TimeSinceLastFrame < TimePerFrame)
+            if (this.TimeSinceLastFrame < this.TimePerFrame)
             {
                 return this.CurrentFrame;
             }

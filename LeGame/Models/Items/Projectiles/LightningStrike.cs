@@ -2,6 +2,7 @@
 {
     using System;
 
+    using LeGame.Interfaces;
     using LeGame.Models.Characters.Player;
 
     using Microsoft.Xna.Framework;
@@ -10,7 +11,7 @@
     {
         private const int LightningStrikeSpeed = 20;
 
-        public LightningStrike(Player attacker, float angle, int damage, int range) 
+        public LightningStrike(ICharacter attacker, float angle, int damage, int range) 
             : base(attacker, "Projectiles/LightningProjectile", damage, LightningStrikeSpeed, angle, range)
         {
         }

@@ -5,7 +5,6 @@
 
     using LeGame.Engine;
     using LeGame.Handlers;
-    using LeGame.Interfaces;
     using LeGame.Models.Items.Weapons;
 
     using Microsoft.Xna.Framework;

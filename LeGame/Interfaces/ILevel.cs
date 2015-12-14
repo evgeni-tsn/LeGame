@@ -7,11 +7,11 @@
 
     public interface ILevel
     {
-        Character Character { get; }
+        ICharacter Character { get; }
 
-        List<Projectile> Projectiles { get; }
+        List<IProjectile> Projectiles { get; }
 
-        List<Character> Enemies { get; }
+        List<ICharacter> Enemies { get; }
 
         List<IGameObject> Assets { get; }
 

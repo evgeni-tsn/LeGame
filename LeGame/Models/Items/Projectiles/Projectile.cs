@@ -3,7 +3,7 @@
     using LeGame.Handlers;
     using LeGame.Interfaces;
 
-    public abstract class Projectile : GameObject, IMovable
+    public abstract class Projectile : GameObject, IProjectile
     {
         protected Projectile(ICharacter attacker, string type, int damage, int speed, float angle, int range)
             : base(attacker.Position, type)

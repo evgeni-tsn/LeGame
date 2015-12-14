@@ -15,7 +15,7 @@
 
     internal static class CollisionHandler
     {
-        public static void PlayerReaction(Character character, Keys key)
+        public static void PlayerReaction(ICharacter character, Keys key)
         {
             IEnumerable<IGameObject> collisionItems = character.Level.Assets.Concat(character.Level.Enemies).ToList();
             var collider = Collide(character, collisionItems);

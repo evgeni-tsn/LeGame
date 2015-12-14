@@ -60,41 +60,28 @@
                         int drawPriority = parameters.Length > 2 ? int.Parse(parameters[2]) : 0;
                         var position = new Vector2(col * GlobalVariables.TileHeight, row * GlobalVariables.TileWidth);
 
-                        //if (hasCollision)
-                        //{
-                        this.background.Add(new InteractiveBg(position, contentPath, drawPriority, hasCollision));
-                        //}
-                        //else
-                        //{
-                        //    this.tiles.Add(new NonInteractiveBg(position, contentPath, drawPriority));
-                        //}
+                        this.background.Add(new BackgroundAsset(position, contentPath, drawPriority, hasCollision));
                     }
                 }
             }
         }
+
         // Properties
         public List<IGameObject> Background
         {
             get
             {
                 return this.background
-                    .OrderBy(ass => ((InteractiveBg) ass).DrawPriority)
+                    .OrderBy(ass => ((BackgroundAsset)ass).DrawPriority)
                     .ToList();
             }
-            private set { this.background = value; }
+
+            private set
+            {
+                this.background = value;
+            }
         }
 
-        //public List<NonInteractiveBg> Tiles
-        //{
-        //    get
-        //    {
-        //        return this.tiles
-        //            .OrderBy(till => till.DrawPriority)
-        //            .ToList();
-        //    }
-        //    private set { this.tiles = value; }
-        //}
-        // Methods
         private List<string> ReadMapFile(string textFilePath)
         {
             if (!File.Exists(textFilePath))

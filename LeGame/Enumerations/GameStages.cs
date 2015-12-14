@@ -1,4 +1,4 @@
-﻿namespace LeGame.Engine.Enumerations
+﻿namespace LeGame.Enumerations
 {
     public enum GameStages
     {

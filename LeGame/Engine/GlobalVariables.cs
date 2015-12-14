@@ -2,17 +2,19 @@
 {
     using System;
 
+    using Microsoft.Xna.Framework;
+
     public static class GlobalVariables
     {
         public static readonly Random Rng = new Random();
+
+        public static GameTime GlobalTime;
 
         public const string ContentDir = @"..\..\..\Content\";
 
         public const int TileWidth = 32;
 
         public const int TileHeight = 32;
-
-        // private static readonly GameTime globalTime;
 
         public static int WindowWidth { get; } = 800;
 

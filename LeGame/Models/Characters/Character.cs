@@ -1,7 +1,9 @@
 ﻿namespace LeGame.Models.Characters
 {
     using System;
+    using System.Net;
 
+    using LeGame.Engine;
     using LeGame.Interfaces;
     using LeGame.Models.Characters.Enemies;
 
@@ -23,9 +25,11 @@
 
         public event EventHandler Died;
 
-        public int CooldownTimer { get;  set; }
-
         public ILevel Level { get; set; }
+
+        public IWeapon EquippedWeapon { get; set; }
+
+        public int CooldownTimer { get;  set; }
 
         public int MaxHealth { get; set; }
 
@@ -36,8 +40,6 @@
         public float FacingAngle { get; set; }
 
         public float MovementAngle { get; set; }
-
-        public IWeapon EquippedWeapon { get; set; }
 
         public bool CanCollide { get; set; }
 
@@ -50,6 +52,7 @@
 
         public virtual void TakeDamage(ICharacter attacker)
         {
+            //this.CooldownTimer += GlobalVariables.GlobalTime.
             this.CurrentHealth -= attacker.EquippedWeapon.Damage;
 
             this.Damaged?.Invoke(this, new EventArgs());

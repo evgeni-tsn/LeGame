@@ -1,6 +1,6 @@
-﻿namespace LeGame.Handlers.Graphics
+﻿namespace LeGame.Graphics
 {
-    using LeGame.Models.Characters;
+    using LeGame.Interfaces;
 
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
@@ -14,7 +14,7 @@
             this.TotalFrames = this.Rows * this.Columns;
         }
 
-        public override void Update(GameTime gameTime, Character character = null)
+        public override void Update(GameTime gameTime, ICharacter character = null)
         {
             this.TimeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
             if (this.TimeSinceLastFrame < this.TimePerFrame)

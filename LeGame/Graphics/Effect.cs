@@ -1,4 +1,4 @@
-﻿namespace LeGame.Handlers.Graphics
+﻿namespace LeGame.Graphics
 {
     using LeGame.Interfaces;
 

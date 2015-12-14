@@ -2,6 +2,7 @@
 {
     using System;
 
+    using LeGame.Interfaces;
     using LeGame.Models.Characters.Player;
 
     using Microsoft.Xna.Framework;
@@ -10,7 +11,7 @@
     {
         private const int EnergyBallSpeed = 20;
 
-        public EnergyBall(Player attacker, float angle, int damage, int range) 
+        public EnergyBall(ICharacter attacker, float angle, int damage, int range) 
             : base(attacker, "Projectiles/EnergyBallProjectile", damage, EnergyBallSpeed, angle, range)
         {
         }
