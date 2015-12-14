@@ -3,6 +3,7 @@
     using System;
 
     using LeGame.Engine;
+    using LeGame.Interfaces;
     using LeGame.Models.Characters;
 
     using Microsoft.Xna.Framework;
@@ -13,7 +14,7 @@
     {
         private SpriteFont font;
 
-        public void DrawHealth(Character character, ContentManager content, SpriteBatch spriteBatch)
+        public void DrawHealth(ICharacter character, ContentManager content, SpriteBatch spriteBatch)
         {
             int hp = character.CurrentHealth;
             this.font = content.Load<SpriteFont>(@"Fonts/SpriteFont");

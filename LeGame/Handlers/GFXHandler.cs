@@ -6,14 +6,14 @@
     using System.Linq;
 
     using LeGame.Engine;
-    using LeGame.Handlers.Graphics;
+    using LeGame.Graphics;
     using LeGame.Interfaces;
 
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Content;
     using Microsoft.Xna.Framework.Graphics;
 
-    using Effect = LeGame.Handlers.Graphics.Effect;
+    using Effect = LeGame.Graphics.Effect;
 
     public static class GfxHandler
     {

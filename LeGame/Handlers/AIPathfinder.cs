@@ -3,6 +3,7 @@
     using System;
 
     using LeGame.Engine;
+    using LeGame.Interfaces;
     using LeGame.Models.Characters;
     using LeGame.Models.Characters.Enemies;
 
@@ -10,7 +11,7 @@
 
     public static class AiPathfinder
     {
-        public static void FindPath(Character player, Character ai)
+        public static void FindPath(ICharacter player, ICharacter ai)
         {
             const float Tolerance = 0.001f;
 

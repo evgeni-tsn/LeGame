@@ -1,13 +1,14 @@
 ﻿namespace LeGame.Handlers
 {
     using LeGame.Engine;
+    using LeGame.Interfaces;
     using LeGame.Models.Characters;
 
     using Microsoft.Xna.Framework;
 
     public static class MovementHandler
     {
-        public static void MoveRight(Character character)
+        public static void MoveRight(ICharacter character)
         {
             if (character.Position.X + character.Speed <= GlobalVariables.WindowWidth - GfxHandler.GetWidth(character))
             {
@@ -15,7 +16,7 @@
             }
         }
 
-        public static void MoveLeft(Character character)
+        public static void MoveLeft(ICharacter character)
         {
             if (character.Position.X - character.Speed > 0)
             {
@@ -23,7 +24,7 @@
             }
         }
 
-        public static void MoveUp(Character character)
+        public static void MoveUp(ICharacter character)
         {
             if (character.Position.Y - character.Speed > 0)
             {
@@ -31,7 +32,7 @@
             }
         }
 
-        public static void MoveDown(Character character)
+        public static void MoveDown(ICharacter character)
         {
             if (character.Position.Y + character.Speed <= GlobalVariables.WindowHeight - GfxHandler.GetHeight(character))
             {

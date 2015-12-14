@@ -2,8 +2,9 @@ namespace LeGame.Engine
 {
     using System.Linq;
 
-    using LeGame.Engine.Enumerations;
+    using LeGame.Enumerations;
     using LeGame.Handlers;
+    using LeGame.Interfaces;
     using LeGame.Models;
     using LeGame.Models.Characters;
     using LeGame.Models.Characters.Enemies;
@@ -61,11 +62,11 @@ namespace LeGame.Engine
                 GlobalVariables.WindowWidth / 2 - 140,
                 GlobalVariables.WindowHeight / 2);
 
-            this.sampleEnemy = new Enemy(enemyPos, @"TestObjects/cockSprite", 100, 100, 2, this.testLevel);
+            this.sampleEnemy = new Chicken(enemyPos, this.testLevel);
             this.sampleEnemy.Damaged += (sender, args) => GfxHandler.AddBloodEffect(sender);
             this.sampleEnemy.Died += (sender, args) => GfxHandler.AddDeathEffect(sender);
 
-            this.testPlayer = new TestChar(pos, @"Player/p1Rotation", 100, 100, 2, this.testLevel);
+            this.testPlayer = new Blondy(pos, this.testLevel);
             this.testPlayer.Damaged += (sender, args) => GfxHandler.AddBloodEffect(sender);
             this.testPlayer.Died += (sender, args) => GfxHandler.AddDeathEffect(sender);
 
@@ -127,7 +128,7 @@ namespace LeGame.Engine
                 this.testPlayer.Move();
                 GfxHandler.GetSprite(this.testPlayer).Update(gameTime, this.testPlayer);
 
-                foreach (Character enemy in this.testLevel.Enemies.ToList())
+                foreach (ICharacter enemy in this.testLevel.Enemies.ToList())
                 {
                     enemy.Move();
                     GfxHandler.GetSprite(enemy).Update(gameTime, enemy);

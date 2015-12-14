@@ -1,10 +1,7 @@
-﻿namespace LeGame.Handlers.Graphics
+﻿namespace LeGame.Graphics
 {
-    using System.ComponentModel;
-
     using LeGame.Engine;
     using LeGame.Interfaces;
-    using LeGame.Models.Characters;
 
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
