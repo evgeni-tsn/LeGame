@@ -23,8 +23,7 @@
 
         private static readonly IList<string> FileNames = new List<string>();
 
-        private static readonly string[] FoldersToAvoid = { "bin", "obj", "Maps" };
-        private static readonly string[] FilesToAvoid = { "font" };
+        private static readonly string[] FoldersToAvoid = { "bin", "obj", "Maps", "Font" };
 
         public static void Load(ContentManager content)
         {
@@ -190,10 +189,7 @@
                 {
                     foreach (string file in Directory.GetFiles(dir))
                     {
-                        if (!FilesToAvoid.Any(file.Contains))
-                        {
-                            FileNames.Add(file);
-                        }
+                        FileNames.Add(file);
                     }
                 }
 

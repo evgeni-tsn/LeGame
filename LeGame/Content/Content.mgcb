@@ -662,18 +662,6 @@
 /processorParam:TextureFormat=Color
 /build:Effects/FleshExplosionEffect.png
 
-#begin TestObjects/SpriteFont.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:TextureFormat=Compressed
-/build:TestObjects/SpriteFont.spritefont
-
-#begin TestObjects/DeathFont.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:TextureFormat=Compressed
-/build:TestObjects/DeathFont.spritefont
-
 #begin Projectiles/SwingProjectile.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -706,4 +694,16 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:TextureFormat=Color
 /build:Effects/BloodEffect.png
+
+#begin Fonts/DeathFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:Fonts/DeathFont.spritefont
+
+#begin Fonts/SpriteFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:Fonts/SpriteFont.spritefont
 
