@@ -3,7 +3,6 @@
     using System;
 
     using LeGame.Interfaces;
-    using LeGame.Models.Characters.Player;
 
     using Microsoft.Xna.Framework;
 

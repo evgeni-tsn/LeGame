@@ -63,7 +63,7 @@ namespace LeGame.Engine
             this.sampleEnemy.Damaged += (sender, args) => GfxHandler.AddBloodEffect(sender);
             this.sampleEnemy.Died += (sender, args) => GfxHandler.AddDeathEffect(sender);
 
-            this.testPlayer = new Blondy(pos, this.testLevel);
+            this.testPlayer = new TheGuy(pos, this.testLevel);
             this.testPlayer.Damaged += (sender, args) => GfxHandler.AddBloodEffect(sender);
             this.testPlayer.Died += (sender, args) => GfxHandler.AddDeathEffect(sender);
 
