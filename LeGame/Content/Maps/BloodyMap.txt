@@ -1,0 +1,38 @@
+┏TzzZzzzZzzzZzzzZzt┓
+i                  |
+i                  |
+i                  |
+I   b   b   b   b  |
+i                  |
+i                  |
+i                  |
+I   b   b   b   b  |
+i                  |
+i                  |
+i                  |
+I   b   b   b   b  |
+i  W            W  |
+┗Nw.wwwwn--Nwwww.wn┛
+Legend:(char:file:isGameObject:drawPriority?)|(another layer at the same position)?
+ :Tiles/NULL:false
+.:Tiles/NULL:true
+┏:Tiles/BloodyWallNW:true:1|Tiles/BloodyBackground:false
+┓:Tiles/BloodyWallNE:true
+┗:Tiles/BloodyWallSW:true
+┛:Tiles/BloodyWallSE:true
+B:Tiles/BloodyWallN:true:1|Tiles/BloodyBackground:false
+b:Tiles/BloodyBackground:false
+_:Tiles/BloodyWallN:true
+-:Tiles/BloodyWallS:true
+|:Tiles/BloodyWallE:true
+i:Tiles/BloodyWallW:true
+I:Tiles/BloodyWallW:true:1|Tiles/BloodyBackground:false
+j:Tiles/whiteWall2W:true|Tiles/Furniture/KitchenSW:false:1
+T:Tiles/BloodyTeethTopW:true
+t:Tiles/BloodyTeethTopE:true
+Z:Tiles/BloodyTeethBigN:false:1|Tiles/BloodyBackground:false|Tiles/NULL:true
+z:Tiles/BloodyTeethN:true
+N:Tiles/BloodyTeethDownW:true
+n:Tiles/BloodyTeethDownE:true
+W:Tiles/BloodyTeethBigS:false
+w:Tiles/BloodyTeethS:true

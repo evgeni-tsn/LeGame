@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-namespace LeGame.Models.Characters.Player
+﻿namespace LeGame.Models.Characters.Player
 {
     using System;
     using System.Linq;
@@ -22,13 +20,6 @@ namespace LeGame.Models.Characters.Player
             this.EquippedWeapon = new Unarmed();
         }
 
-
-        public float FacingAngle { get; private set; }
-        public float MovementAngle { get; private set; } 
-
-        private IWeapon EquippedWeapon { get; set; }
-
-
         public Keys[] KbKeys { get; } = { Keys.W, Keys.A, Keys.S, Keys.D };
 
         public override void Move()
@@ -37,13 +28,11 @@ namespace LeGame.Models.Characters.Player
             MouseState mouseState = Mouse.GetState();
 
             this.FacingAngle = (float)((Math.PI * 0.5f) + Math.Atan2(mouseState.Y - this.Position.Y, mouseState.X - this.Position.X));
-            //Console.WriteLine(FacingAngle); //Debug
-            //Better use Debug class.
-            Debug.WriteLine(this.FacingAngle);
+            // Debug.WriteLine(this.FacingAngle);
 
-            KeyboardAction(keyboardState);
+            this.KeyboardAction(keyboardState);
 
-            MouseAction(mouseState);
+            this.MouseAction(mouseState);
         }
 
         private void KeyboardAction(KeyboardState kbState)
@@ -77,7 +66,7 @@ namespace LeGame.Models.Characters.Player
         {
             if (mState.LeftButton == ButtonState.Pressed)
             {
-                AttackUsingWeapon();
+                this.AttackUsingWeapon();
             }
         }
     }

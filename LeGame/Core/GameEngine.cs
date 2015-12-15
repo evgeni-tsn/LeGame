@@ -4,6 +4,9 @@ namespace LeGame.Core
 {
     using Enumerations;
     using Handlers;
+
+    using LeGame.Screens;
+
     using Models;
     using Models.Characters;
     using Models.Characters.Enemies;
@@ -23,7 +26,7 @@ namespace LeGame.Core
         private StartScreen startScreen;
         private DeathScreen deathScreen;
         //yes there's a difference!
-        private StatScreen statScreen;
+        private StatPanel statPanel;
 
         private Player testPlayer;
         private Character sampleEnemy;
@@ -49,10 +52,9 @@ namespace LeGame.Core
             this.graphics.PreferredBackBufferWidth = GlobalVariables.WindowWidthDefault; // set this value to the desired width of your window
             this.graphics.PreferredBackBufferHeight = GlobalVariables.WindowHeightDefault;   // set this value to the desired height of your window
             this.graphics.ApplyChanges();
-            this.statScreen = new StatScreen();
-            startScreen = new StartScreen();
-            deathScreen = new DeathScreen();
-            //Commented because it disables mouse capturing.
+            this.statPanel = new StatPanel();
+            this.startScreen = new StartScreen();
+            this.deathScreen = new DeathScreen();
 
             this.stage = GameStages.Start_Stage;
 
@@ -77,7 +79,7 @@ namespace LeGame.Core
             this.testPlayer.Damaged += (sender, args) => GfxHandler.AddBloodEffect(sender);
             this.testPlayer.Died += (sender, args) => GfxHandler.AddDeathEffect(sender);
 
-            this.testLevel = new Level(@"..\..\..\Content\Maps\testMap2.txt", this.testPlayer);
+            this.testLevel = new Level(@"..\..\..\Content\Maps\BloodyMap.txt", this.testPlayer);
             this.testLevel.Assets.Add(coin);
 
             this.sampleEnemy.Level = this.testLevel;
@@ -112,15 +114,16 @@ namespace LeGame.Core
             {
                 Exit();
             }
+
             if (this.stage == GameStages.Start_Stage)
             {
                 if (this.startScreen.IsClicked()) this.stage = GameStages.GameStage;
                 startScreen.Update(mouse);
                 
             }
+
             if (this.stage == GameStages.DeathStage)
             {
-                
                 if (this.deathScreen.IsClicked()) this.stage = GameStages.Start_Stage;
                 deathScreen.Update(mouse);
             }
@@ -132,7 +135,6 @@ namespace LeGame.Core
                 {
                     this.stage = GameStages.DeathStage;
                 }
-                    
             }
           
 
@@ -147,13 +149,13 @@ namespace LeGame.Core
             // TODO: Add your drawing code here
             if (this.stage == GameStages.GameStage)
             {
-                this.statScreen.DrawHealth(this.testLevel.Player, this.Content, this.spriteBatch);
+                this.statPanel.DrawHealth(this.testLevel.Player, this.Content, this.spriteBatch);
 
                 GfxHandler.DrawLevel(this.spriteBatch, this.testLevel);
             }
             else if (this.stage == GameStages.DeathStage)
             {
-                //this.statScreen.EndScreen(this.Content, this.spriteBatch);
+                //this.statPanel.EndScreen(this.Content, this.spriteBatch);
                 this.GraphicsDevice.Clear(Color.AliceBlue);
                 this.deathScreen.Draw(spriteBatch, font);
             }
