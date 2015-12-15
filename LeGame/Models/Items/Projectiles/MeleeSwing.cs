@@ -9,7 +9,7 @@
     public class MeleeSwing : Projectile
     {
         public MeleeSwing(ICharacter attacker, float angle, int damage, int range)
-            : base(attacker, "Projectiles/SwingProjectile", damage, 3, angle, range)
+            : base(attacker, "Projectiles/SwingProjectileEdit", damage, 3, angle, range)
         {
         }
 

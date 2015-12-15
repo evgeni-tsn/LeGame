@@ -64,7 +64,7 @@ namespace LeGame.Core
             this.testPlayer.Damaged += (sender, args) => GfxHandler.AddBloodEffect(sender);
             this.testPlayer.Died += (sender, args) => GfxHandler.AddDeathEffect(sender);
 
-            this.testLevel = new Level(@"..\..\..\Content\Maps\testMap2.txt", this.testPlayer);
+            this.testLevel = new Level(@"..\..\..\Content\Maps\BloodyMap.txt", this.testPlayer);
             this.testLevel.Assets.Add(coin);
 
             this.sampleEnemy.Level = this.testLevel;
