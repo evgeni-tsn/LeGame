@@ -1,9 +1,8 @@
-﻿using LeGame.Interfaces;
-using LeGame.Models.Characters;
-using Microsoft.Xna.Framework;
-
-namespace LeGame.Models.Items.PickableItems
+﻿namespace LeGame.Models.Items.PickableItems
 {
+    using Interfaces;
+    using Microsoft.Xna.Framework;
+
     public abstract class PickableItem : GameObject, IPickable
     {
         protected PickableItem(Vector2 position, string type)
@@ -14,7 +13,7 @@ namespace LeGame.Models.Items.PickableItems
 
         public abstract bool HasBeenPicked { get; set; }
 
-        public virtual void UponPickUp(Character character)
+        public virtual void UponPickUp(ICharacter character)
         {
             character.Level.Assets.Remove(this);
         }

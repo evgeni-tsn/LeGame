@@ -1,18 +1,19 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using LeGame.Interfaces;
-using LeGame.Models.Characters;
-using LeGame.Models.Characters.Enemies;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-
-namespace LeGame.Handlers.Graphics
+﻿namespace LeGame.Graphics
 {
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using Interfaces;
+    using Models.Characters.Enemies;
+
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Graphics;
+    using Microsoft.Xna.Framework.Input;
+
     public class FourDirectionSprite : Sprite
     {
-        private const int TimePerFrame = 130;
-        
+        private const int FourDirectionSpriteUpdateTime = 130;
+
         private readonly Dictionary<Keys, string> keyToDirection = new Dictionary<Keys, string>
         {
             { Keys.D, "Right" },
@@ -29,15 +30,25 @@ namespace LeGame.Handlers.Graphics
             { "Down", new[] { 0, 1, 2 } }
         };
 
-        public FourDirectionSprite(Texture2D texture, Character character = null) 
-            : base(texture)
+        public FourDirectionSprite(Texture2D texture, ICharacter character = null) 
+            : base(texture, FourDirectionSpriteUpdateTime)
         {
+            this.Character = character;
             this.TotalFrames = this.Rows * this.Columns;
             this.CurrentFrame = 0;
         }
-        
-        public override void Update(GameTime gameTime, Character character)
+
+        public ICharacter Character { get; }
+
+        public override void Update(GameTime gameTime, ICharacter character)
         {
+            this.TimeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
+            if (this.TimeSinceLastFrame < this.TimePerFrame)
+            {
+                return;
+            }
+            this.TimeSinceLastFrame = gameTime.ElapsedGameTime.Milliseconds;
+
             if (character is ICollidable)
             {
                 // Enemy
@@ -69,16 +80,8 @@ namespace LeGame.Handlers.Graphics
             spriteBatch.End();
         }
 
-        private int SpriteRotaions(GameTime gameTime, string direction)
+        private void SpriteRotaions(GameTime gameTime, string direction)
         {
-            // Coldown for the animation
-            this.TimeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
-            if (this.TimeSinceLastFrame < TimePerFrame)
-            {
-                return this.CurrentFrame;
-            }
-            this.TimeSinceLastFrame = gameTime.ElapsedGameTime.Milliseconds;
-
             // If enough time has passed 
             // go through directionToFrames and find the one coresponding to the direction
             foreach (string direct in this.directionToFrames.Keys.Where(key => direction.Equals(key)))
@@ -96,8 +99,6 @@ namespace LeGame.Handlers.Graphics
                     this.CurrentFrame = this.directionToFrames[direct][0];
                 }
             }
-
-            return this.CurrentFrame;
         }
     }
 }

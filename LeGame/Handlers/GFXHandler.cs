@@ -1,27 +1,32 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using LeGame.Handlers.Graphics;
-using LeGame.Interfaces;
-using LeGame.Models;
-using LeGame.Models.LevelAssets;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
-
-namespace LeGame.Handlers
+﻿namespace LeGame.Handlers
 {
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+
+    using Core;
+    using Graphics;
+    using Interfaces;
+
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Content;
+    using Microsoft.Xna.Framework.Graphics;
+
+    using Effect = Graphics.Effect;
 
     public static class GfxHandler
     {
-        private static readonly Dictionary<string, ISprite> Sprites = new Dictionary<string, ISprite>(); 
-        private static readonly Dictionary<string, Texture2D> TextureLibrary = new Dictionary<string, Texture2D>();
-        
-        private static readonly List<string> FileNames = new List<string>();
+        private static readonly IDictionary<string, ISprite> Sprites = new Dictionary<string, ISprite>(); 
+        private static readonly IDictionary<string, Texture2D> TextureLibrary = new Dictionary<string, Texture2D>();
+        private static readonly IList<Effect> Effects = new List<Effect>();
+
+        private static readonly IList<string> FileNames = new List<string>();
+
+        private static readonly string[] FoldersToAvoid = { "bin", "obj", "Maps", "Font" };
 
         public static void Load(ContentManager content)
         {
-            GetFilenames(GlobalVariables.ContentDir);
+            FileHandler.GetFilenames(GlobalVariables.ContentDir, FileNames);
             foreach (string s in FileNames)
             {
                 // s is something like: "..\..\..\Content\TestObjects\catSprite.png"
@@ -31,7 +36,8 @@ namespace LeGame.Handlers
                 // format it appropriately for the content.Load
                 // TestObjects\catSprite -> TestObjects/catSprite
                 fileName = fileName.Contains('\\') ? fileName.Replace('\\', '/') : fileName;
-                var lowerCase = fileName.ToLower();
+
+                string lowerCase = fileName.ToLower();
                 if (lowerCase.Contains("sprite"))
                 {
                     Sprites.Add(fileName, MakeEnemySprite(content.Load<Texture2D>(fileName)));
@@ -56,22 +62,116 @@ namespace LeGame.Handlers
             }
         }
 
+        public static void UpdateLevel(GameTime gameTime, ILevel level)
+        {
+            level.Player.Move();
+            GetSprite(level.Player).Update(gameTime, level.Player);
+            foreach (var enemy in level.Enemies.ToList())
+            {
+                enemy.Move();
+                GetSprite(enemy).Update(gameTime, enemy);
+            }
+
+            foreach (var projectile in level.Projectiles.ToList())
+            {
+                projectile.Move();
+                GetSprite(projectile).Update(gameTime);
+            }
+
+            UpdateExistingEffects(gameTime);
+        }
+
+        public static void DrawLevel(SpriteBatch spriteBatch, ILevel level)
+        {
+            spriteBatch.Begin();
+            level.Assets.ForEach(t => spriteBatch.Draw(GetTexture(t), t.Position));
+            spriteBatch.End();
+
+            DrawExistingEffects(spriteBatch);
+
+            foreach (var ememy in level.Enemies)
+            {
+                GetSprite(ememy).Draw(spriteBatch, ememy.Position);
+            }
+
+            foreach (var projectile in level.Projectiles.ToList())
+            {
+                GetSprite(projectile).Draw(spriteBatch, projectile.Position, projectile.Angle);
+
+                if (projectile.Lifetime > projectile.Range)
+                {
+                    level.Projectiles.Remove(projectile);
+                }
+            }
+
+            GetSprite(level.Player).Draw(spriteBatch, level.Player.Position, level.Player.FacingAngle, level.Player.MovementAngle);
+        }
+
+        public static void AddBloodEffect(object sender)
+        {
+            var bleeder = (IGameObject)sender;
+            var position = new Vector2(bleeder.Position.X + 16, bleeder.Position.Y + 16);
+            
+            Effects.Add(new Effect(new EffectSprite(GetTexture("Effects/BloodEffect"), true), position));
+        }
+
+        public static void AddDeathEffect(object sender)
+        {
+            var riper = (IGameObject)sender;
+            var position = new Vector2(riper.Position.X + 16, riper.Position.Y + 16);
+
+            Effects.Add(new Effect(new EffectSprite(GetTexture("Effects/FleshExplosionEffect"), true), position));
+        }
+
+        public static void DrawExistingEffects(SpriteBatch spriteBatch)
+        {
+            foreach (var effect in Effects.ToList())
+            {
+                effect.Sprite.Draw(spriteBatch, effect.Location);
+            }
+        }
+
+        public static void UpdateExistingEffects(GameTime gameTime)
+        {
+            foreach (var effect in Effects.ToList())
+            {
+                effect.Sprite.Update(gameTime);
+
+                var sprite = (EffectSprite)effect.Sprite;
+
+                if (sprite.HasEnded && !sprite.IsPersistant)
+                {
+                    Effects.Remove(effect);
+                }
+            }
+        }
+
         // Get Sprite
         public static ISprite GetSprite(IGameObject obj)
         {
             return Sprites[obj.Type];
         }
-        
+
+        public static ISprite GetSprite(string type)
+        {
+            return Sprites[type];
+        }
+
         // Get Texture
         public static Texture2D GetTexture(IGameObject obj)
         {
             return TextureLibrary[obj.Type];
         }
 
+        public static Texture2D GetTexture(string type)
+        {
+            return TextureLibrary[type];
+        }
+
         // Get Bounding Box
         public static Rectangle GetBBox(IGameObject obj)
         {
-            Texture2D texture = GetTexture(obj);
+            var texture = GetTexture(obj);
             Vector2 pos = obj.Position;
             int width = texture.Width;
             int height = texture.Height;
@@ -103,10 +203,10 @@ namespace LeGame.Handlers
             return GetBBox(obj).Height;
         }
 
-        // Makeing Sprites
-        private static EffectSprite MakeEffectSprite(Texture2D texture)
+        // Making Sprites
+        private static EffectSprite MakeEffectSprite(Texture2D texture, bool isPersistant = false)
         {
-            return new EffectSprite(texture);
+            return new EffectSprite(texture, isPersistant);
         }
 
         private static RotationSprite MakeRotationSprite(Texture2D texture)
@@ -122,26 +222,6 @@ namespace LeGame.Handlers
         private static FourDirectionSprite MakeEnemySprite(Texture2D texture)
         {
             return new FourDirectionSprite(texture);
-        }
-
-        // Recursively get the files in Content.
-        private static void GetFilenames(string sourceDir)
-        {
-            foreach (string dir in Directory.GetDirectories(sourceDir))
-            {
-                if (!dir.Contains("bin") && !dir.Contains("obj") && !dir.Contains("Maps"))
-                {
-                    foreach (string file in Directory.GetFiles(dir))
-                    {
-                        if(!file.Contains("font"))
-                        {
-                            FileNames.Add(file);
-                        }
-                        
-                    }
-                }
-                GetFilenames(dir);
-            }
         }
     }
 }

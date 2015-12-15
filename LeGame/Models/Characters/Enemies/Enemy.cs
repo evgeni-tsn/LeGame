@@ -1,35 +1,26 @@
-﻿using System;
-using Microsoft.Xna.Framework;
-using LeGame.Handlers;
-using LeGame.Interfaces;
-
-namespace LeGame.Models.Characters.Enemies
+﻿namespace LeGame.Models.Characters.Enemies
 {
-    public class Enemy : Character, ICollidable
+    using Handlers;
+    using Interfaces;
+    using Items.Weapons;
+
+    using Microsoft.Xna.Framework;
+
+    public class Enemy : Character
     {
-        public Enemy(Vector2 position, string type, int maxHealth, int currentHealth, int speed, Level level)
-            : base(position, type, maxHealth, currentHealth, speed, level)
+        public Enemy(Vector2 position, string type, int maxHealth, int currentHealth, int speed, int hitCooldown, ILevel level)
+            : base(position, type, maxHealth, currentHealth, speed, hitCooldown, level)
         {
             this.CanCollide = true;
+            this.EquippedWeapon = new Unarmed();
         }
 
         public string Direction { get; set; }
 
-        public bool CanCollide { get; set; }
-
         public override void Move()
         {
-            AiPathfinder.FindPath(this.Level.Character, this);
-            CollisionHandler.AICollide(this, this.Level.Character);
-        }
-
-        public override void AttackUsingWeapon()
-        {
-            throw new NotImplementedException();
-        }
-        public  override void TakeDamage()
-        {
-            throw new NotImplementedException();
+            AiPathfinder.FindPath(this.Level.Player, this);
+            CollisionHandler.AiCollide(this, this.Level.Player);
         }
     }
 }

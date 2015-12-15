@@ -1,13 +1,7 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-
-namespace LeGame.Interfaces
+﻿namespace LeGame.Interfaces
 {
-    public interface ICharacter
+    public interface ICharacter : IGameObject, IMovable, IAttacker, IKillable, ICooldown
     {
-        int MaxHealth { get; set; }
-
-        int CurrentHealth { get; set; }
-
-        int Speed { get; set; }
+        ILevel Level { get; set; }
     }
 }

@@ -1,19 +1,20 @@
-﻿using LeGame.Models.Characters;
-using Microsoft.Xna.Framework;
-
-namespace LeGame.Handlers
+﻿namespace LeGame.Handlers
 {
+    using Core;
+    using Interfaces;
+    using Microsoft.Xna.Framework;
+
     public static class MovementHandler
     {
-        public static void MoveRight(Character character)
+        public static void MoveRight(ICharacter character)
         {
-            if (character.Position.X + character.Speed <= GlobalVariables.WindowWidth - GfxHandler.GetWidth(character))
+            if (character.Position.X + character.Speed <= GlobalVariables.WindowWidthDefault - GfxHandler.GetWidth(character))
             {
                 character.Position = new Vector2(character.Position.X + character.Speed, character.Position.Y);
             }
         }
 
-        public static void MoveLeft(Character character)
+        public static void MoveLeft(ICharacter character)
         {
             if (character.Position.X - character.Speed > 0)
             {
@@ -21,7 +22,7 @@ namespace LeGame.Handlers
             }
         }
 
-        public static void MoveUp(Character character)
+        public static void MoveUp(ICharacter character)
         {
             if (character.Position.Y - character.Speed > 0)
             {
@@ -29,9 +30,9 @@ namespace LeGame.Handlers
             }
         }
 
-        public static void MoveDown(Character character)
+        public static void MoveDown(ICharacter character)
         {
-            if (character.Position.Y + character.Speed <= GlobalVariables.WindowHeight - GfxHandler.GetHeight(character))
+            if (character.Position.Y + character.Speed <= GlobalVariables.WindowHeightDefault - GfxHandler.GetHeight(character))
             {
                 character.Position = new Vector2(character.Position.X, character.Position.Y + character.Speed);
             }

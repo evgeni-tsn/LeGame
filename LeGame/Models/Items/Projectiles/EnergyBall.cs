@@ -1,15 +1,17 @@
-﻿using System;
-using LeGame.Models.Characters.Player;
-using Microsoft.Xna.Framework;
-
-namespace LeGame.Models.Items.Projectiles
+﻿namespace LeGame.Models.Items.Projectiles
 {
+    using System;
+
+    using Interfaces;
+
+    using Microsoft.Xna.Framework;
+
     public class EnergyBall : Projectile
     {
-        private const int LazerBlastSpeed = 20;
+        private const int EnergyBallSpeed = 20;
 
-        public EnergyBall(Player attacker, float angle, int damage, int range) 
-            : base(attacker, "Projectiles/EnergyBallProjectile", damage, LazerBlastSpeed, angle, range)
+        public EnergyBall(ICharacter attacker, float angle, int damage, int range) 
+            : base(attacker, "Projectiles/EnergyBallProjectile", damage, EnergyBallSpeed, angle, range)
         {
         }
 

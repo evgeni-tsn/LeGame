@@ -1,7 +1,7 @@
-﻿using Microsoft.Xna.Framework;
-
-namespace LeGame.Models.Items.PickableItems
+﻿namespace LeGame.Models.Items.PickableItems
 {
+    using Microsoft.Xna.Framework;
+
     public class GoldCoin : PickableItem
     {
         
@@ -11,6 +11,6 @@ namespace LeGame.Models.Items.PickableItems
             this.HasBeenPicked = false;
         }
 
-        public override bool HasBeenPicked { get; set; }
+        public sealed override bool HasBeenPicked { get; set; }
     }
 }

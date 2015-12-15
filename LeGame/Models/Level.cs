@@ -1,32 +1,27 @@
-﻿using System.Collections.Generic;
-using LeGame.Interfaces;
-using LeGame.Models.Characters;
-using LeGame.Models.Items.Projectiles;
-using LeGame.Models.LevelAssets;
-
-namespace LeGame.Models
+﻿namespace LeGame.Models
 {
+    using System.Collections.Generic;
+
+    using Interfaces;
+    using LevelAssets;
+
     public class Level : ILevel
     {
-        public Level(string path, Character character)
+        public Level(string path, ICharacter player)
         {
-            this.Character = character;
-            BackgroundBuilder assetBuilder = new BackgroundBuilder(path);
-
+            this.Player = player;
+            var assetBuilder = new BackgroundBuilder(path);
             this.Assets = assetBuilder.Background;
-            //this.Tiles = assetBuilder.Tiles;
-            this.Enemies = new List<Character>();
-            this.Projectiles = new List<Projectile>();
+            this.Enemies = new List<ICharacter>();
+            this.Projectiles = new List<IProjectile>();
         }
 
-        public List<Projectile> Projectiles { get; private set; } 
+        public ICharacter Player { get; }
 
-        public List<Character> Enemies { get; private set; }
+        public List<IProjectile> Projectiles { get; } 
 
-        public Character Character { get; private set; }
+        public List<ICharacter> Enemies { get; }
 
-        public List<IGameObject> Assets { get; private set; }
-
-        //public List<NonInteractiveBg> Tiles { get; private set; }
+        public List<IGameObject> Assets { get; }
     }
 }

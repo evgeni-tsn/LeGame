@@ -1,14 +1,16 @@
-﻿using System;
-using LeGame.Models.Characters.Player;
-using Microsoft.Xna.Framework;
-
-namespace LeGame.Models.Items.Projectiles
+﻿namespace LeGame.Models.Items.Projectiles
 {
+    using System;
+
+    using Interfaces;
+
+    using Microsoft.Xna.Framework;
+
     public class LaserBlast : Projectile
     {
         private const int LazerBlastSpeed = 20;
 
-        public LaserBlast(Player attacker, float angle, int damage, int range) 
+        public LaserBlast(ICharacter attacker, float angle, int damage, int range) 
             : base(attacker, "Projectiles/LaserProjectile", damage, LazerBlastSpeed, angle, range)
         {
         }

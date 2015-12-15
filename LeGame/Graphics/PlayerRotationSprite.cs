@@ -1,32 +1,35 @@
-﻿using System.Linq;
-using LeGame.Models.Characters;
-using LeGame.Models.Characters.Player;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-
-namespace LeGame.Handlers.Graphics
+﻿namespace LeGame.Graphics
 {
+    using System.Linq;
+
+    using Interfaces;
+    using Models.Characters.Player;
+
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Graphics;
+    using Microsoft.Xna.Framework.Input;
+
     public class PlayerRotationSprite : Sprite
     {
-        private const int TimePerFrame = 50;
+        private const int PlayerRotationSpriteUpdateTime = 50;
+        private const int LegsRow = 0;
+        private const int TorsoRow = 1;
         private bool reverse;
 
         public PlayerRotationSprite(Texture2D texture) 
-            : base(texture)
+            : base(texture, PlayerRotationSpriteUpdateTime)
         {
             this.CurrentFrame = 5;
             this.TotalFrames = this.Columns;
         }
 
-        public override void Update(GameTime gameTime, Character character)
+        public override void Update(GameTime gameTime, ICharacter character)
         {
             this.TimeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
-            if (this.TimeSinceLastFrame < TimePerFrame)
+            if (this.TimeSinceLastFrame < this.TimePerFrame)
             {
                 return;
             }
-
             this.TimeSinceLastFrame = gameTime.ElapsedGameTime.Milliseconds;
             
             KeyboardState keyState = Keyboard.GetState();
@@ -55,8 +58,6 @@ namespace LeGame.Handlers.Graphics
         {
             int width = this.Texture.Width / this.Columns;
             int height = this.Texture.Height / this.Rows;
-            const int LegsRow = 0;
-            const int TorsoRow = 3;
             int column = this.CurrentFrame % this.Columns;
             var origin = new Vector2(width / 2f, height / 2f);
 

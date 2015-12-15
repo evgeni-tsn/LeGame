@@ -1,26 +1,28 @@
-﻿using System;
-using LeGame.Models.Characters;
-using LeGame.Models.Characters.Enemies;
-using Microsoft.Xna.Framework;
-
-namespace LeGame.Handlers
+﻿namespace LeGame.Handlers
 {
+    using System;
+
+    using Core;
+    using Interfaces;
+    using Models.Characters.Enemies;
+
+    using Microsoft.Xna.Framework;
+
     public static class AiPathfinder
     {
-        public static void FindPath(Character player, Character ai)
-        {
-            Random rng = new Random();
-            const float Tolerance = 0.001f;
+        private const float tolerance = 0.001f;
 
+        public static void FindPath(ICharacter player, ICharacter ai)
+        {
             if (ai.CurrentHealth < 0)
             {
                 return;
             }
 
-            if (Math.Abs(ai.Position.X - player.Position.X) > Tolerance && 
-                Math.Abs(ai.Position.Y - player.Position.Y) > Tolerance)
+            if (Math.Abs(ai.Position.X - player.Position.X) > tolerance && 
+                Math.Abs(ai.Position.Y - player.Position.Y) > tolerance)
             {
-                if (rng.Next(1, 3) == 1)
+                if (GlobalVariables.Rng.Next(1, 3) == 1)
                 {
                     if (ai.Position.X < player.Position.X)
                     {

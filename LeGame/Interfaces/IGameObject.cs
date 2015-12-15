@@ -1,7 +1,7 @@
-﻿using Microsoft.Xna.Framework;
-
-namespace LeGame.Interfaces
+﻿namespace LeGame.Interfaces
 {
+    using Microsoft.Xna.Framework;
+
     public interface IGameObject
     {
         string Id { get; set; }

@@ -1,6 +1,6 @@
-﻿namespace LeGame
+﻿namespace LeGame.Core
 {
-    public class Messages
+    public static class Messages
     {
         public const string MissingLegendMap = "Map file {0} doesn't contain \"Legend:\" separator.";
 

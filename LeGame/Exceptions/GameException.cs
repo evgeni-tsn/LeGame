@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace LeGame.Exceptions
+﻿namespace LeGame.Exceptions
 {
+    using System;
+
     public abstract class GameException : Exception
     {
         protected GameException(string message) 

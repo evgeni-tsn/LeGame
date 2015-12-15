@@ -1,20 +1,19 @@
-﻿using LeGame.Interfaces;
-using LeGame.Models.Characters.Player;
-
-namespace LeGame.Models.Items.Weapons
+﻿namespace LeGame.Models.Items.Weapons
 {
+    using Interfaces;
+
     public abstract class MeleeWeapon : IWeapon
     {
         protected MeleeWeapon(int damage)
         {
             this.Damage = damage;
-            this.Range = 0;
+            this.Range = 1;
         }
 
         public int Damage { get; set; }
 
         public int Range { get; set; }
 
-        public abstract void Attack(Level level, Player attacker);
+        public abstract void Attack(ILevel level, ICharacter attacker);
     }
 }
