@@ -26,7 +26,7 @@
 
         public static void Load(ContentManager content)
         {
-            GetFilenames(GlobalVariables.ContentDir);
+            FileHandler.GetFilenames(GlobalVariables.ContentDir, FileNames);
             foreach (string s in FileNames)
             {
                 // s is something like: "..\..\..\Content\TestObjects\catSprite.png"
@@ -203,7 +203,7 @@
             return GetBBox(obj).Height;
         }
 
-        // Makeing Sprites
+        // Making Sprites
         private static EffectSprite MakeEffectSprite(Texture2D texture, bool isPersistant = false)
         {
             return new EffectSprite(texture, isPersistant);
@@ -222,22 +222,6 @@
         private static FourDirectionSprite MakeEnemySprite(Texture2D texture)
         {
             return new FourDirectionSprite(texture);
-        }
-        
-        // Recursively get the files in Content.
-        private static void GetFilenames(string sourceDir)
-        {
-            foreach (var dir in Directory.GetDirectories(sourceDir))
-            {
-                if (!FoldersToAvoid.Any(dir.Contains))
-                {
-                    foreach (var file in Directory.GetFiles(dir))
-                    {
-                        FileNames.Add(file);
-                    }
-                }
-                GetFilenames(dir);
-            }
         }
     }
 }
