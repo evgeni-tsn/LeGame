@@ -73,7 +73,7 @@
     <Compile Include="Graphics\RotationSprite.cs" />
     <Compile Include="Graphics\PlayerRotationSprite.cs" />
     <Compile Include="Graphics\Sprite.cs" />
-    <Compile Include="Handlers\StatScreen.cs" />
+    <Compile Include="Screens\StatPanel.cs" />
     <Compile Include="Handlers\MovementHandler.cs" />
     <Compile Include="Interfaces\ICharacter.cs" />
     <Compile Include="Interfaces\ICollidable.cs" />
@@ -110,11 +110,12 @@
     <Compile Include="Interfaces\IMovable.cs" />
     <Compile Include="Models\Items\Weapons\Unarmed.cs" />
     <Compile Include="Models\Level.cs" />
-    <Compile Include="Models\LevelAssets\BackgroundAsset.cs" />
-    <Compile Include="Models\LevelAssets\BackgroundBuilder.cs" />
+    <Compile Include="Models\Items\LevelAssets\BackgroundAsset.cs" />
+    <Compile Include="Models\Items\LevelAssets\BackgroundBuilder.cs" />
     <Compile Include="Core\GameEngine.cs" />
     <Compile Include="RolePlayingGame.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Screens\DeathScreen\DeathScreen.cs" />
     <Compile Include="Screens\StartScreen\Button.cs" />
     <Compile Include="Screens\StartScreen\StartScreen.cs" />
   </ItemGroup>

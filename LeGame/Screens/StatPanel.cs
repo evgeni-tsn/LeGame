@@ -1,12 +1,14 @@
-﻿namespace LeGame.Handlers
+﻿namespace LeGame.Screens
 {
-    using Core;
-    using Interfaces;
+    using LeGame.Core;
+    using LeGame.Interfaces;
+
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Content;
     using Microsoft.Xna.Framework.Graphics;
+    using Microsoft.Xna.Framework.Input;
 
-    public class StatScreen
+    public class StatPanel
     {
         private SpriteFont font;
 
@@ -33,6 +35,9 @@
             spriteBatch.End();
         }
 
+        internal void Update(MouseState mouse)
+        {
+        }
     }
 }
 

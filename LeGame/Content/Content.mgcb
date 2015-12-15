@@ -673,17 +673,6 @@
 /processorParam:TextureFormat=Color
 /build:Projectiles/SwingProjectile.png
 
-#begin TestObjects/start_button.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:TextureFormat=Color
-/build:TestObjects/start_button.png
-
 #begin Effects/BloodEffect.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -740,6 +729,17 @@
 /processorParam:TextureFormat=Color
 /build:Tiles/BloodyBackground.png
 
+#begin TestObjects/button1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:TextureFormat=Color
+/build:TestObjects/button1.png
+
 #begin Tiles/BloodyTeethBigN.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -750,6 +750,17 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:TextureFormat=Color
 /build:Tiles/BloodyTeethBigN.png
+
+#begin TestObjects/button2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:TextureFormat=Color
+/build:TestObjects/button2.png
 
 #begin Tiles/BloodyTeethBigS.png
 /importer:TextureImporter

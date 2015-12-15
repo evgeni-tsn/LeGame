@@ -1,19 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using LeGame.Screens.StartScreen;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace LeGame.Screens.StartScreen
+namespace LeGame.Screens.DeathScreen
 {
-    using Core;
-    using Microsoft.Xna.Framework;
-    using Microsoft.Xna.Framework.Content;
-    using Microsoft.Xna.Framework.Graphics;
-
-    public class StartScreen
+    public class DeathScreen
     {
-
         public List<Button> buttons;
 
-        public StartScreen()
+        public DeathScreen()
         {
             this.buttons = new List<Button>();
         }
@@ -29,7 +29,8 @@ namespace LeGame.Screens.StartScreen
         public void Draw(SpriteBatch spriteBatch, SpriteFont font)
         {
             spriteBatch.Begin();
-            spriteBatch.DrawString(font,"Choose your character", new Vector2(300,300),Color.Black);
+            spriteBatch.DrawString(font, "GG NOOB", new Vector2(300, 100), Color.Red);
+            spriteBatch.DrawString(font, "I AM NOT A NOOB BUTTON", new Vector2(260, 300), Color.Red);
             foreach (Button button in buttons)
             {
                 button.Draw(spriteBatch);
@@ -46,11 +47,6 @@ namespace LeGame.Screens.StartScreen
             }
             return false;
         }
-
-        
-
-
-
 
     }
 }
