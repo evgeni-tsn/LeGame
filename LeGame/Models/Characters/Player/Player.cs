@@ -17,9 +17,9 @@ namespace LeGame.Models.Characters.Player
             this.EquippedWeapon = new LaserGun();
            
         }
-        
+
         public float FacingAngle { get; private set; }
-        public float MovementAngle { get; private set; }
+        public float MovementAngle { get; private set; } 
 
         private IWeapon EquippedWeapon { get; set; }
 

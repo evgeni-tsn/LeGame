@@ -37,8 +37,8 @@ namespace LeGame.Engine
         
         protected override void LoadContent()
         {
-           
-           
+
+            
             this.IsMouseVisible = true;
             stages = GameStages.Game_Stage;
             // Create a new SpriteBatch, which can be used to draw textures.
