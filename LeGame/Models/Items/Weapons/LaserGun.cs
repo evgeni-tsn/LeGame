@@ -5,7 +5,7 @@
 
     public class LaserGun : RangedWeapon
     {
-        private const int LaserGunDamage = 2;
+        private const int LaserGunDamage = 4;
         private const int LaserGunRange = 20;
 
         public LaserGun() : base(LaserGunDamage, LaserGunRange)

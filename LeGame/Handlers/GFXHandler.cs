@@ -86,13 +86,13 @@
             spriteBatch.Begin();
             level.Assets.ForEach(t => spriteBatch.Draw(GfxHandler.GetTexture(t), t.Position));
             spriteBatch.End();
-            
+
+            GfxHandler.DrawExistingEffects(spriteBatch);
+
             foreach (var ememy in level.Enemies)
             {
                 GfxHandler.GetSprite(ememy).Draw(spriteBatch, ememy.Position);
             }
-
-            GfxHandler.DrawExistingEffects(spriteBatch);
 
             foreach (var projectile in level.Projectiles.ToList())
             {

@@ -10,7 +10,7 @@
 
         private const int BlondyDefaultCurrentHealth = 100;
 
-        private const int BlondyDefaultSpeed = 2;
+        private const int BlondyDefaultSpeed = 3;
 
         private const int BlondyDefaultHitCooldown = 2000;
 

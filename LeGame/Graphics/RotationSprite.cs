@@ -7,7 +7,7 @@
 
     public class RotationSprite : Sprite
     {
-        private const int RotationSpriteUpdateTIme = 50;
+        private const int RotationSpriteUpdateTIme = 40;
 
         public RotationSprite(Texture2D texture) 
             : base(texture, RotationSpriteUpdateTIme)

@@ -57,7 +57,7 @@
             int width = this.Texture.Width / this.Columns;
             int height = this.Texture.Height / this.Rows;
             const int LegsRow = 0;
-            const int TorsoRow = 3;
+            const int TorsoRow = 1;
             int column = this.CurrentFrame % this.Columns;
             var origin = new Vector2(width / 2f, height / 2f);
 

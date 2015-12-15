@@ -69,6 +69,8 @@
     <Compile Include="Models\Characters\Enemies\Chicken.cs" />
     <Compile Include="Models\Characters\Enemies\Enemy.cs" />
     <Compile Include="Interfaces\IAttacker.cs" />
+    <Compile Include="Models\Characters\Player\Redhead.cs" />
+    <Compile Include="Models\Characters\Player\TheGuy.cs" />
     <Compile Include="Models\Characters\Player\Player.cs" />
     <Compile Include="Models\Characters\Player\Blondy.cs" />
     <Compile Include="Models\GameObject.cs" />
