@@ -1,7 +1,8 @@
-﻿namespace LeGame.Models.LevelAssets
+﻿using LeGame.Handlers;
+
+namespace LeGame.Models.LevelAssets
 {
     using System.Collections.Generic;
-    using System.IO;
     using System.Linq;
 
     using Core;
@@ -13,13 +14,13 @@
     // Previously AssetBuilder
     public class BackgroundBuilder
     {
-        private List<IGameObject> background;
+        private readonly List<IGameObject> background;
 
         // private List<NonInteractiveBg> tiles;
         public BackgroundBuilder(string mapFilePath)
         {
             // Read the text file for the map and find the separation between map and legend.
-            List<string> mapFile = this.ReadMapFile(mapFilePath);
+            List<string> mapFile = FileHandler.ReadMapFile(mapFilePath);
             int separatorLocation = mapFile.FindIndex(s => s.Contains("Legend:"));
             if (separatorLocation == -1)
             {
@@ -76,16 +77,5 @@
                     .ToList();
             }
         }
-
-        private List<string> ReadMapFile(string textFilePath)
-        {
-            if (!File.Exists(textFilePath))
-            {
-                throw new FileNotFoundException("The supplied file path \"{0}\" for the tile builder is invalid.", textFilePath);
-            }
-
-            return File.ReadAllLines(textFilePath).ToList();
-        }
-
     }
 }
