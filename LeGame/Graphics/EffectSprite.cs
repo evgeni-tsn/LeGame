@@ -1,7 +1,7 @@
 ﻿namespace LeGame.Graphics
 {
-    using LeGame.Engine;
-    using LeGame.Interfaces;
+    using Core;
+    using Interfaces;
 
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;

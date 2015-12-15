@@ -2,9 +2,9 @@
 {
     using System;
 
-    using LeGame.Engine;
-    using LeGame.Interfaces;
-    using LeGame.Models.Characters.Enemies;
+    using Core;
+    using Interfaces;
+    using Enemies;
 
     using Microsoft.Xna.Framework;
 

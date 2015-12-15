@@ -5,40 +5,15 @@
 
     public class Button
     {
-        private Texture2D buttonPic;
-        private Vector2 position;
-
         public Button(Texture2D texture, Vector2 position)
         {
             this.ButtonPic = texture;
             this.Position = position;
         }
 
-        public Texture2D ButtonPic
-        {
-            get
-            {
-                return this.buttonPic;
-            }
+        public Texture2D ButtonPic { get; set; }
 
-            set
-            {
-                this.buttonPic = value;
-            }
-        }
-
-        public Vector2 Position
-        {
-            get
-            {
-                return this.position;
-            }
-
-            set
-            {
-                this.position = value;
-            }
-        }
+        public Vector2 Position { get; set; }
 
         public Rectangle BoundingBox
         {

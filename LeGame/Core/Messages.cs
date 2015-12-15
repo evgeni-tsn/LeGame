@@ -1,4 +1,4 @@
-﻿namespace LeGame.Engine
+﻿namespace LeGame.Core
 {
     public static class Messages
     {

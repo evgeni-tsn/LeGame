@@ -1,7 +1,5 @@
 ﻿namespace LeGame.Models.Characters.Enemies
 {
-    using System;
-
     using Handlers;
     using Interfaces;
     using Items.Weapons;
@@ -22,7 +20,7 @@
         public override void Move()
         {
             AiPathfinder.FindPath(this.Level.Player, this);
-            CollisionHandler.AICollide(this, this.Level.Player);
+            CollisionHandler.AiCollide(this, this.Level.Player);
         }
     }
 }

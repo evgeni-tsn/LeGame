@@ -2,7 +2,7 @@
 {
     using System;
 
-    using LeGame.Interfaces;
+    using Interfaces;
 
     using Microsoft.Xna.Framework;
 

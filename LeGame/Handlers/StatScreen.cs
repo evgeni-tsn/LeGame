@@ -1,11 +1,7 @@
 ﻿namespace LeGame.Handlers
 {
-    using System;
-
-    using LeGame.Engine;
-    using LeGame.Interfaces;
-    using LeGame.Models.Characters;
-
+    using Core;
+    using Interfaces;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Content;
     using Microsoft.Xna.Framework.Graphics;
@@ -18,17 +14,20 @@
         {
             int hp = character.CurrentHealth;
             this.font = content.Load<SpriteFont>(@"Fonts/SpriteFont");
-            string healthBar = String.Format("Health points: {0}", hp);
+            string healthBar = $"Health points: {hp}";
 
             spriteBatch.Begin();
-            spriteBatch.DrawString(font, healthBar, new Vector2(650, 10), Color.Red);
+            spriteBatch.DrawString(this.font, healthBar, new Vector2(650, 10), Color.Red);
             spriteBatch.End();
         }
 
         public void EndScreen(ContentManager content, SpriteBatch spriteBatch)
         {
             this.font = content.Load<SpriteFont>(@"Fonts/DeathFont");
-            Vector2 middle = new Vector2(GlobalVariables.WindowWidth / 2, GlobalVariables.WindowHeight / 2);
+            var middle = new Vector2
+                (GlobalVariables.WindowWidthDefault / 2f,
+                GlobalVariables.WindowHeightDefault / 2f);
+
             spriteBatch.Begin();
             spriteBatch.DrawString(this.font, "GG NOOB", middle, Color.Red);
             spriteBatch.End();

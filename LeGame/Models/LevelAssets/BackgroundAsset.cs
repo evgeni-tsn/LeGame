@@ -1,6 +1,6 @@
 ﻿namespace LeGame.Models.LevelAssets
 {
-    using LeGame.Interfaces;
+    using Interfaces;
 
     using Microsoft.Xna.Framework;
     

@@ -3,8 +3,8 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    using LeGame.Interfaces;
-    using LeGame.Models.Characters.Enemies;
+    using Interfaces;
+    using Models.Characters.Enemies;
 
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
@@ -33,10 +33,13 @@
         public FourDirectionSprite(Texture2D texture, ICharacter character = null) 
             : base(texture, FourDirectionSpriteUpdateTime)
         {
+            this.Character = character;
             this.TotalFrames = this.Rows * this.Columns;
             this.CurrentFrame = 0;
         }
-        
+
+        public ICharacter Character { get; }
+
         public override void Update(GameTime gameTime, ICharacter character)
         {
             this.TimeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
@@ -77,7 +80,7 @@
             spriteBatch.End();
         }
 
-        private int SpriteRotaions(GameTime gameTime, string direction)
+        private void SpriteRotaions(GameTime gameTime, string direction)
         {
             // If enough time has passed 
             // go through directionToFrames and find the one coresponding to the direction
@@ -96,8 +99,6 @@
                     this.CurrentFrame = this.directionToFrames[direct][0];
                 }
             }
-
-            return this.CurrentFrame;
         }
     }
 }

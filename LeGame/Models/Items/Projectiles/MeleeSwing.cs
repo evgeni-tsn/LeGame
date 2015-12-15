@@ -2,7 +2,7 @@
 {
     using System;
 
-    using LeGame.Interfaces;
+    using Interfaces;
 
     using Microsoft.Xna.Framework;
 
@@ -16,8 +16,8 @@
         public override void Move()
         {
             this.Position = new Vector2(
-                this.Position.X + ((float)Math.Cos(this.Angle) * this.Speed),
-                this.Position.Y + ((float)Math.Sin(this.Angle) * this.Speed));
+                this.Position.X + (float)Math.Cos(this.Angle) * this.Speed,
+                this.Position.Y + (float)Math.Sin(this.Angle) * this.Speed);
 
             this.Lifetime++;
 

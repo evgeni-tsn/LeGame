@@ -1,7 +1,6 @@
 ﻿namespace LeGame.Models.Items.Projectiles
 {
-    using LeGame.Interfaces;
-    using LeGame.Models.Characters.Player;
+    using Interfaces;
 
     public class Grenade : Projectile
     {

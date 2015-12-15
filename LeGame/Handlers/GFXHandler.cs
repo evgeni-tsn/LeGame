@@ -4,15 +4,15 @@
     using System.IO;
     using System.Linq;
 
-    using LeGame.Engine;
-    using LeGame.Graphics;
-    using LeGame.Interfaces;
+    using Core;
+    using Graphics;
+    using Interfaces;
 
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Content;
     using Microsoft.Xna.Framework.Graphics;
 
-    using Effect = LeGame.Graphics.Effect;
+    using Effect = Graphics.Effect;
 
     public static class GfxHandler
     {
@@ -65,38 +65,38 @@
         public static void UpdateLevel(GameTime gameTime, ILevel level)
         {
             level.Player.Move();
-            GfxHandler.GetSprite(level.Player).Update(gameTime, level.Player);
-            foreach (ICharacter enemy in level.Enemies.ToList())
+            GetSprite(level.Player).Update(gameTime, level.Player);
+            foreach (var enemy in level.Enemies.ToList())
             {
                 enemy.Move();
-                GfxHandler.GetSprite(enemy).Update(gameTime, enemy);
+                GetSprite(enemy).Update(gameTime, enemy);
             }
 
-            foreach (IProjectile projectile in level.Projectiles.ToList())
+            foreach (var projectile in level.Projectiles.ToList())
             {
                 projectile.Move();
-                GfxHandler.GetSprite(projectile).Update(gameTime);
+                GetSprite(projectile).Update(gameTime);
             }
 
-            GfxHandler.UpdateExistingEffects(gameTime);
+            UpdateExistingEffects(gameTime);
         }
 
         public static void DrawLevel(SpriteBatch spriteBatch, ILevel level)
         {
             spriteBatch.Begin();
-            level.Assets.ForEach(t => spriteBatch.Draw(GfxHandler.GetTexture(t), t.Position));
+            level.Assets.ForEach(t => spriteBatch.Draw(GetTexture(t), t.Position));
             spriteBatch.End();
 
-            GfxHandler.DrawExistingEffects(spriteBatch);
+            DrawExistingEffects(spriteBatch);
 
             foreach (var ememy in level.Enemies)
             {
-                GfxHandler.GetSprite(ememy).Draw(spriteBatch, ememy.Position);
+                GetSprite(ememy).Draw(spriteBatch, ememy.Position);
             }
 
             foreach (var projectile in level.Projectiles.ToList())
             {
-                GfxHandler.GetSprite(projectile).Draw(spriteBatch, projectile.Position, projectile.Angle);
+                GetSprite(projectile).Draw(spriteBatch, projectile.Position, projectile.Angle);
 
                 if (projectile.Lifetime > projectile.Range)
                 {
@@ -104,7 +104,7 @@
                 }
             }
 
-            GfxHandler.GetSprite(level.Player).Draw(spriteBatch, level.Player.Position, level.Player.FacingAngle, level.Player.MovementAngle);
+            GetSprite(level.Player).Draw(spriteBatch, level.Player.Position, level.Player.FacingAngle, level.Player.MovementAngle);
         }
 
         public static void AddBloodEffect(object sender)
@@ -125,7 +125,7 @@
 
         public static void DrawExistingEffects(SpriteBatch spriteBatch)
         {
-            foreach (Effect effect in Effects.ToList())
+            foreach (var effect in Effects.ToList())
             {
                 effect.Sprite.Draw(spriteBatch, effect.Location);
             }
@@ -133,7 +133,7 @@
 
         public static void UpdateExistingEffects(GameTime gameTime)
         {
-            foreach (Effect effect in Effects.ToList())
+            foreach (var effect in Effects.ToList())
             {
                 effect.Sprite.Update(gameTime);
 
@@ -171,7 +171,7 @@
         // Get Bounding Box
         public static Rectangle GetBBox(IGameObject obj)
         {
-            Texture2D texture = GetTexture(obj);
+            var texture = GetTexture(obj);
             Vector2 pos = obj.Position;
             int width = texture.Width;
             int height = texture.Height;
@@ -227,16 +227,15 @@
         // Recursively get the files in Content.
         private static void GetFilenames(string sourceDir)
         {
-            foreach (string dir in Directory.GetDirectories(sourceDir))
+            foreach (var dir in Directory.GetDirectories(sourceDir))
             {
                 if (!FoldersToAvoid.Any(dir.Contains))
                 {
-                    foreach (string file in Directory.GetFiles(dir))
+                    foreach (var file in Directory.GetFiles(dir))
                     {
                         FileNames.Add(file);
                     }
                 }
-
                 GetFilenames(dir);
             }
         }

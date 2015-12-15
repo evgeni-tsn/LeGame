@@ -4,11 +4,10 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    using LeGame.Interfaces;
-    using LeGame.Models;
-    using LeGame.Models.Characters;
-    using LeGame.Models.Characters.Enemies;
-    using LeGame.Models.Items.Projectiles;
+    using Interfaces;
+    using Models;
+    using Models.Characters.Enemies;
+    using Models.Items.Projectiles;
 
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Input;
@@ -66,7 +65,7 @@
         public static void ProjectileReaction(Projectile projectile, ILevel level)
         {
             IEnumerable<IGameObject> collisionItems = level.Assets.Concat(level.Enemies).ToList();
-            object collider = Collide(projectile, collisionItems);
+            var collider = Collide(projectile, collisionItems);
 
             if (!collider.Equals(-1))
             {
@@ -96,7 +95,7 @@
             return -1;
         }
 
-        public static void AICollide(IGameObject collider, ICharacter character)
+        public static void AiCollide(IGameObject collider, ICharacter character)
         {
             Rectangle colliderBBox = GfxHandler.GetBBox(collider);
             Rectangle charBBox = GfxHandler.GetBBox(character);

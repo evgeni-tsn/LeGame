@@ -2,8 +2,8 @@
 {
     using System.Collections.Generic;
 
-    using LeGame.Interfaces;
-    using LeGame.Models.LevelAssets;
+    using Interfaces;
+    using LevelAssets;
 
     public class Level : ILevel
     {
@@ -11,18 +11,17 @@
         {
             this.Player = player;
             var assetBuilder = new BackgroundBuilder(path);
-
             this.Assets = assetBuilder.Background;
             this.Enemies = new List<ICharacter>();
             this.Projectiles = new List<IProjectile>();
         }
 
-        public ICharacter Player { get; private set; }
+        public ICharacter Player { get; }
 
-        public List<IProjectile> Projectiles { get; private set; } 
+        public List<IProjectile> Projectiles { get; } 
 
-        public List<ICharacter> Enemies { get; private set; }
+        public List<ICharacter> Enemies { get; }
 
-        public List<IGameObject> Assets { get; private set; }
+        public List<IGameObject> Assets { get; }
     }
 }

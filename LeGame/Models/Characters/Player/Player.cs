@@ -1,12 +1,14 @@
-﻿namespace LeGame.Models.Characters.Player
+﻿using System.Diagnostics;
+
+namespace LeGame.Models.Characters.Player
 {
     using System;
     using System.Linq;
 
-    using LeGame.Engine;
-    using LeGame.Handlers;
-    using LeGame.Interfaces;
-    using LeGame.Models.Items.Weapons;
+    using Core;
+    using Handlers;
+    using Interfaces;
+    using Items.Weapons;
 
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Input;
@@ -24,13 +26,22 @@
 
         public override void Move()
         {
-            KeyboardState kbState = Keyboard.GetState();
-            MouseState mState = Mouse.GetState();
+            KeyboardState keyboardState = Keyboard.GetState();
+            MouseState mouseState = Mouse.GetState();
 
-            this.FacingAngle = (float)((Math.PI * 0.5f) + Math.Atan2(mState.Y - this.Position.Y, mState.X - this.Position.X));
-            //Console.WriteLine(FacingAngle); // Debug
+            this.FacingAngle = (float)((Math.PI * 0.5f) + Math.Atan2(mouseState.Y - this.Position.Y, mouseState.X - this.Position.X));
+            //Console.WriteLine(FacingAngle); //Debug
+            //Better use Debug class.
+            Debug.WriteLine(this.FacingAngle);
 
-            foreach (var key in this.KbKeys.Where(key => kbState.IsKeyDown(key)))
+            KeyboardAction(keyboardState);
+
+            MouseAction(mouseState);
+        }
+
+        private void KeyboardAction(KeyboardState kbState)
+        {
+            foreach (var key in this.KbKeys.Where(kbState.IsKeyDown))
             {
                 switch (key)
                 {
@@ -53,10 +64,13 @@
                 }
                 CollisionHandler.PlayerReaction(this, key);
             }
+        }
 
+        private void MouseAction(MouseState mState)
+        {
             if (mState.LeftButton == ButtonState.Pressed)
             {
-                this.AttackUsingWeapon();
+                AttackUsingWeapon();
             }
         }
     }

@@ -1,7 +1,6 @@
 ﻿namespace LeGame.Screens.StartScreen
 {
-    using LeGame.Engine;
-
+    using Core;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Content;
     using Microsoft.Xna.Framework.Graphics;
@@ -10,7 +9,9 @@
     {
         
         private Button startButton;
-        Vector2 buttonPosition = new Vector2(GlobalVariables.WindowWidth / 2, GlobalVariables.WindowHeight / 2);
+        Vector2 buttonPosition = new Vector2(
+            GlobalVariables.WindowWidthDefault / 2f, 
+            GlobalVariables.WindowHeightDefault / 2f);
 
         public void DrawStartScreen(SpriteBatch sb, ContentManager content)
         {

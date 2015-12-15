@@ -2,7 +2,7 @@
 {
     using System;
 
-    using LeGame.Engine;
+    using Core;
 
     public static class RolePlayingGame
     {

@@ -1,4 +1,6 @@
-﻿namespace LeGame.Models.Characters.Player
+﻿using LeGame.Interfaces;
+
+namespace LeGame.Models.Characters.Player
 {
     using Microsoft.Xna.Framework;
 
@@ -14,7 +16,7 @@
 
         private const int RedheadDefaultHitCooldown = 2000;
 
-        public Redhead(Vector2 position, Level level)
+        public Redhead(Vector2 position, ILevel level)
             : base(position, RedheadDefaultType, RedheadDefaultMaxHealth, RedheadDefaultCurrentHealth, RedheadDefaultSpeed, RedheadDefaultHitCooldown, level)
         {
             

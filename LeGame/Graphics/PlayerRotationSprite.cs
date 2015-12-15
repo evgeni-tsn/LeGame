@@ -2,8 +2,8 @@
 {
     using System.Linq;
 
-    using LeGame.Interfaces;
-    using LeGame.Models.Characters.Player;
+    using Interfaces;
+    using Models.Characters.Player;
 
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
@@ -12,6 +12,8 @@
     public class PlayerRotationSprite : Sprite
     {
         private const int PlayerRotationSpriteUpdateTime = 50;
+        private const int LegsRow = 0;
+        private const int TorsoRow = 1;
         private bool reverse;
 
         public PlayerRotationSprite(Texture2D texture) 
@@ -56,8 +58,6 @@
         {
             int width = this.Texture.Width / this.Columns;
             int height = this.Texture.Height / this.Rows;
-            const int LegsRow = 0;
-            const int TorsoRow = 1;
             int column = this.CurrentFrame % this.Columns;
             var origin = new Vector2(width / 2f, height / 2f);
 

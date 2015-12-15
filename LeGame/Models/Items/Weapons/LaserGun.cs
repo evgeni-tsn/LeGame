@@ -1,7 +1,7 @@
 ﻿namespace LeGame.Models.Items.Weapons
 {
-    using LeGame.Interfaces;
-    using LeGame.Models.Items.Projectiles;
+    using Interfaces;
+    using Projectiles;
 
     public class LaserGun : RangedWeapon
     {

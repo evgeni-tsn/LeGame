@@ -1,7 +1,7 @@
 ﻿namespace LeGame.Models.Items.Projectiles
 {
-    using LeGame.Handlers;
-    using LeGame.Interfaces;
+    using Handlers;
+    using Interfaces;
 
     public abstract class Projectile : GameObject, IProjectile
     {

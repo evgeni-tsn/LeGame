@@ -1,4 +1,5 @@
-﻿namespace LeGame.Interfaces
+﻿
+namespace LeGame.Interfaces
 {
     public interface ICooldown
     {

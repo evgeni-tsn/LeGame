@@ -2,8 +2,7 @@
 {
     using System;
 
-    using LeGame.Interfaces;
-    using LeGame.Models.Characters.Player;
+    using Interfaces;
 
     using Microsoft.Xna.Framework;
 

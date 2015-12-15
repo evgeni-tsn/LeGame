@@ -4,9 +4,9 @@
     using System.IO;
     using System.Linq;
 
-    using LeGame.Engine;
-    using LeGame.Exceptions;
-    using LeGame.Interfaces;
+    using Core;
+    using Exceptions;
+    using Interfaces;
 
     using Microsoft.Xna.Framework;
 
@@ -74,11 +74,6 @@
                 return this.background
                     .OrderBy(ass => ((BackgroundAsset)ass).DrawPriority)
                     .ToList();
-            }
-
-            private set
-            {
-                this.background = value;
             }
         }
 

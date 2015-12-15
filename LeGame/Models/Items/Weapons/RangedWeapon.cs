@@ -1,6 +1,6 @@
 ﻿namespace LeGame.Models.Items.Weapons
 {
-    using LeGame.Interfaces;
+    using Interfaces;
 
     public abstract class RangedWeapon : IWeapon
     {

@@ -1,8 +1,6 @@
 ﻿namespace LeGame.Models.Items.PickableItems
 {
-    using LeGame.Interfaces;
-    using LeGame.Models.Characters;
-
+    using Interfaces;
     using Microsoft.Xna.Framework;
 
     public abstract class PickableItem : GameObject, IPickable

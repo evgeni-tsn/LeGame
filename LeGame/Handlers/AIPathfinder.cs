@@ -2,26 +2,25 @@
 {
     using System;
 
-    using LeGame.Engine;
-    using LeGame.Interfaces;
-    using LeGame.Models.Characters;
-    using LeGame.Models.Characters.Enemies;
+    using Core;
+    using Interfaces;
+    using Models.Characters.Enemies;
 
     using Microsoft.Xna.Framework;
 
     public static class AiPathfinder
     {
+        private const float tolerance = 0.001f;
+
         public static void FindPath(ICharacter player, ICharacter ai)
         {
-            const float Tolerance = 0.001f;
-
             if (ai.CurrentHealth < 0)
             {
                 return;
             }
 
-            if (Math.Abs(ai.Position.X - player.Position.X) > Tolerance && 
-                Math.Abs(ai.Position.Y - player.Position.Y) > Tolerance)
+            if (Math.Abs(ai.Position.X - player.Position.X) > tolerance && 
+                Math.Abs(ai.Position.Y - player.Position.Y) > tolerance)
             {
                 if (GlobalVariables.Rng.Next(1, 3) == 1)
                 {
