@@ -7,34 +7,99 @@ namespace LeGame.Screens.StartScreen
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
 
-    public class Button
+    public class Button : IButton
     {
+        private Color colour = new Color(255, 255, 255, 255);
         Texture2D texture;
         private Vector2 position;
-
-        Rectangle rectangle;
-        Color colour = new Color(255,255,255,255);
-
-        public Vector2 size;
+        private bool down;
+        private bool isClicked;
 
         public Button(Texture2D newTexture, Vector2 position)
         {
-            //global width = 800 global height = 480
-            //img w = 140 h = 100
-            this.position = position;
-            this.texture = newTexture;
-            size = new Vector2(texture.Width, texture.Height);
+           
+            this.Position = position;
+            this.Texture = newTexture;
+        }
+
+        public Rectangle BoundingBox
+        {
+            get { return new Rectangle((int) Position.X, (int) Position.Y, (int)Texture.Width, (int)Texture.Height); }
 
         }
 
-        bool down;
-        public bool isClicked;
+        public Texture2D Texture
+        {
+            get
+            {
+                return texture;
+            }
+
+            set
+            {
+                texture = value;
+            }
+        }
+
+        public Vector2 Position
+        {
+            get
+            {
+                return position;
+            }
+
+            set
+            {
+                position = value;
+            }
+        }
+
+        public bool Down
+        {
+            get
+            {
+                return down;
+            }
+
+            set
+            {
+                down = value;
+            }
+        }
+
+        public bool IsClicked
+        {
+            get
+            {
+                return isClicked;
+            }
+
+            set
+            {
+                isClicked = value;
+            }
+        }
+
+        public Color Colour
+        {
+            get
+            {
+                return colour;
+            }
+
+            set
+            {
+                colour = value;
+            }
+        }
+
+
         public void Update(MouseState mouse)
         {
-            rectangle = new Rectangle((int) position.X, (int) position.Y, (int)size.X,(int)size.Y);
+            
             Rectangle mouseRectangle = new Rectangle(mouse.X, mouse.Y, 1,1);
 
-            if (mouseRectangle.Intersects(rectangle))
+            if (mouseRectangle.Intersects(this.BoundingBox))
             {
                 if (colour.A == 255)
                 {
@@ -53,24 +118,19 @@ namespace LeGame.Screens.StartScreen
                     colour.A -= 3;
                 }
 
-                if (mouse.LeftButton == ButtonState.Pressed) isClicked = true;
+                if (mouse.LeftButton == ButtonState.Pressed) IsClicked = true;
                
             }
             else if (colour.A < 255)
             {
                 colour.A += 3;
-                isClicked = false;
+                IsClicked = false;
             }
-        }
-
-        public void setPosition(Vector2 newPosition)
-        {
-            position = newPosition;
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, rectangle, colour);
+            spriteBatch.Draw(Texture, this.BoundingBox,Colour);
 
         }
     }

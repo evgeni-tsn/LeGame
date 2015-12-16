@@ -42,7 +42,7 @@ namespace LeGame.Screens.DeathScreen
         {
             foreach (Button button in buttons)
             {
-                if (button.isClicked)
+                if (button.IsClicked)
                     return true;
             }
             return false;

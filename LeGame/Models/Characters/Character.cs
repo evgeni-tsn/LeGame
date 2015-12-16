@@ -10,7 +10,9 @@
 
     public abstract class Character : GameObject, ICharacter, ICollidable
     {
-        protected Character(Vector2 position, string type, int maxHealth, int currentHealth, int speed, int hitCooldown, ILevel level)
+        
+
+        protected Character( Vector2 position,string type, int maxHealth, int currentHealth, int speed, int hitCooldown, ILevel level)
             : base(position, type)
         {
             this.MaxHealth = maxHealth;

@@ -14,8 +14,8 @@
 
         private const int TheGuyDefaultHitCooldown = 2000;
 
-        public TheGuy(Vector2 position, Level level)
-            : base(position, TheGuyDefaultType, TheGuyDefaultMaxHealth, TheGuyDefaultCurrentHealth, TheGuyDefaultSpeed, TheGuyDefaultHitCooldown, level)
+        public TheGuy( Level level)
+            : base(TheGuyDefaultType, TheGuyDefaultMaxHealth, TheGuyDefaultCurrentHealth, TheGuyDefaultSpeed, TheGuyDefaultHitCooldown, level)
         {
             
         }
