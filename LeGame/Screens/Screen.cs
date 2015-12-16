@@ -8,6 +8,8 @@ using Microsoft.Xna.Framework.Input;
 
 namespace LeGame.Screens
 {
+    using LeGame.Interfaces;
+
     public abstract class Screen : IScreen
     {
        

@@ -5,6 +5,10 @@
     using System.Linq;
 
     using Interfaces;
+
+    using LeGame.Core.Factories;
+    using LeGame.Enumerations;
+
     using Models;
     using Models.Characters.Enemies;
     using Models.Items.Projectiles;
@@ -17,9 +21,10 @@
         public static void PlayerReaction(ICharacter character, Keys key)
         {
             IEnumerable<IGameObject> collisionItems = character.Level.Assets.Concat(character.Level.Enemies).ToList();
+
             var collider = Collide(character, collisionItems);
 
-            if (!collider.Equals(-1))
+            if (collider != null)
             {
                  Vector2 temp = new Vector2(character.Position.X, character.Position.Y);
                
@@ -60,6 +65,22 @@
                     character.Level.Assets.Remove(item);
                 }
             }
+
+
+            IGameObject door = character.Level.Assets.Find(a => a.Type.Contains("Door"));
+            if (door != null)
+            {
+                // TODO: do not assume that the door is to the left of the character and offset it.
+                Rectangle doorBox = GfxHandler.GetBBox(door);
+                doorBox.Offset(-30, 0);
+
+                Rectangle characterBox = GfxHandler.GetBBox(character);
+
+                if (doorBox.Intersects(characterBox))
+                {
+                    character.Level = LevelFactory.MakeLevel(Maps.BloodyMap, character);
+                }
+            }
         }
 
         public static void ProjectileReaction(Projectile projectile, ILevel level)
@@ -67,7 +88,7 @@
             IEnumerable<IGameObject> collisionItems = level.Assets.Concat(level.Enemies).ToList();
             var collider = Collide(projectile, collisionItems);
 
-            if (!collider.Equals(-1))
+            if (collider != null)
             {
                 level.Projectiles.Remove(projectile);
 
@@ -79,7 +100,7 @@
             }
         }
 
-        public static object Collide(IGameObject collider, IEnumerable<IGameObject> collisionItems)
+        public static IGameObject Collide(IGameObject collider, IEnumerable<IGameObject> collisionItems)
         {
             foreach (var item in collisionItems)
             {
@@ -92,7 +113,7 @@
                 }
             }
 
-            return -1;
+            return null;
         }
 
         public static void AiCollide(IGameObject collider, ICharacter character)

@@ -4,11 +4,12 @@
     using System.Linq;
 
     using Interfaces;
-    using Models.Characters.Enemies;
 
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
     using Microsoft.Xna.Framework.Input;
+
+    using Models.Characters.Enemies;
 
     public class FourDirectionSprite : Sprite
     {
@@ -30,15 +31,12 @@
             { "Down", new[] { 0, 1, 2 } }
         };
 
-        public FourDirectionSprite(Texture2D texture, ICharacter character = null) 
+        public FourDirectionSprite(Texture2D texture) 
             : base(texture, FourDirectionSpriteUpdateTime)
         {
-            this.Character = character;
             this.TotalFrames = this.Rows * this.Columns;
             this.CurrentFrame = 0;
         }
-
-        public ICharacter Character { get; }
 
         public override void Update(GameTime gameTime, ICharacter character)
         {
@@ -57,7 +55,7 @@
             else
             {
                 // Player
-                foreach (var key in this.keyToDirection.Keys.Where(key => Keyboard.GetState().IsKeyDown(key)))
+                foreach (Keys key in this.keyToDirection.Keys.Where(key => Keyboard.GetState().IsKeyDown(key)))
                 {
                     this.SpriteRotaions(gameTime, this.keyToDirection[key]);
                     break;
@@ -72,8 +70,8 @@
             int row = this.CurrentFrame / this.Columns;
             int column = this.CurrentFrame % this.Columns;
 
-            Rectangle sourceRectangle = new Rectangle(width * column, height * row, width, height);
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width, height);
+            var sourceRectangle = new Rectangle(width * column, height * row, width, height);
+            var destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width, height);
 
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
             spriteBatch.Draw(this.Texture, destinationRectangle, sourceRectangle, Color.White);
@@ -82,24 +80,24 @@
 
         private void SpriteRotaions(GameTime gameTime, string direction)
         {
-            // If enough time has passed 
-            // go through directionToFrames and find the one coresponding to the direction
-            if (!string.IsNullOrEmpty(direction))
+            if (string.IsNullOrEmpty(direction))
             {
-                foreach (string direct in this.directionToFrames.Keys.Where(key => direction.Equals(key)))
+                return;
+            }
+
+            foreach (string direct in this.directionToFrames.Keys.Where(key => direction.Equals(key)))
+            {
+                if (this.directionToFrames[direct].Contains(this.CurrentFrame))
                 {
-                    if (this.directionToFrames[direct].Contains(this.CurrentFrame))
-                    {
-                        this.CurrentFrame++;
-                        if (this.CurrentFrame == this.directionToFrames[direct][2] + 1)
-                        {
-                            this.CurrentFrame = this.directionToFrames[direct][0];
-                        }
-                    }
-                    else
+                    this.CurrentFrame++;
+                    if (this.CurrentFrame == this.directionToFrames[direct][2] + 1)
                     {
                         this.CurrentFrame = this.directionToFrames[direct][0];
                     }
+                }
+                else
+                {
+                    this.CurrentFrame = this.directionToFrames[direct][0];
                 }
             }
         }

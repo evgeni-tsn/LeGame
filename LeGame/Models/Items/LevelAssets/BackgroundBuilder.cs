@@ -1,22 +1,20 @@
-﻿using LeGame.Handlers;
-
-namespace LeGame.Models.LevelAssets
+﻿namespace LeGame.Models.Items.LevelAssets
 {
     using System.Collections.Generic;
     using System.Linq;
 
-    using Core;
-    using Exceptions;
-    using Interfaces;
+    using LeGame.Core;
+    using LeGame.Exceptions;
+    using LeGame.Handlers;
+    using LeGame.Interfaces;
+    using LeGame.Models.LevelAssets;
 
     using Microsoft.Xna.Framework;
 
-    // Previously AssetBuilder
     public class BackgroundBuilder
     {
         private readonly List<IGameObject> background;
-
-        // private List<NonInteractiveBg> tiles;
+        
         public BackgroundBuilder(string mapFilePath)
         {
             // Read the text file for the map and find the separation between map and legend.
@@ -24,7 +22,7 @@ namespace LeGame.Models.LevelAssets
             int separatorLocation = mapFile.FindIndex(s => s.Contains("Legend:"));
             if (separatorLocation == -1)
             {
-                throw new MapException(string.Format(Messages.MissingLegendMap,mapFilePath));
+                throw new MapException(string.Format(Messages.MissingLegendMap, mapFilePath));
             }
 
             List<string> mapRows = mapFile
@@ -36,8 +34,7 @@ namespace LeGame.Models.LevelAssets
                 .ToDictionary(item => item[0], item => item.Substring(2));
 
             this.background = new List<IGameObject>();
-
-            // this.tiles = new List<NonInteractiveBg>();
+            
             // Go through the chars and store their corresponding items in the background/tiles
             for (int row = 0; row < mapRows.Count; row++)
             {

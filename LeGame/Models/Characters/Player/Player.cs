@@ -13,7 +13,7 @@
 
     public class Player : Character
     {
-        public const int startingPointX = 50;
+        public const int startingPointX = 500;
         public const int startingPointY = 240;
 
         protected Player(string type, int maxHealth, int currentHealth, int speed, int hitCooldown, ILevel level) 

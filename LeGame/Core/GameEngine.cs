@@ -11,10 +11,6 @@ namespace LeGame.Core
     using Microsoft.Xna.Framework.Graphics;
     using Microsoft.Xna.Framework.Input;
 
-    using Models;
-    using Models.Characters;
-    using Models.Characters.Enemies;
-    using Models.Characters.Player;
     using Models.Items.PickableItems;
 
     using Screens;
@@ -28,25 +24,15 @@ namespace LeGame.Core
 
         private StartScreen startScreen;
         private DeathScreen deathScreen;
-        //yes there's a difference!
         private StatPanel statPanel;
-
-        //private Player testPlayer;
-        //private Character sampleEnemy;
-        //private Level testLevel;
-        private ILevel randomisedLevel;
         private GameStages stage;
-      
 
-        
-      
-        
+        private ICharacter player;
 
         public GameEngine()
         {
             this.graphics = new GraphicsDeviceManager(this);
             this.Content.RootDirectory = "Content";
-            
         }
         
         protected override void LoadContent()
@@ -70,44 +56,8 @@ namespace LeGame.Core
             // TODO: Ad an item factory.
             GoldCoin coin = new GoldCoin(new Vector2(300, 300), "TestObjects/coin");
 
-            // testEnemyTex = Content.Load<Texture2D>(@"TestObjects/cockSprite");
-            //Vector2 enemyPos = new Vector2(550, 350);
-            //Vector2 pos = new Vector2(
-            //    GlobalVariables.WindowWidthDefault / 2 - 140,
-            //    GlobalVariables.WindowHeightDefault / 2f);
-
-            //this.sampleEnemy = new Chicken(enemyPos, this.testLevel);
-            //this.sampleEnemy.Damaged += (sender, args) => GfxHandler.AddBloodEffect(sender);
-            //this.sampleEnemy.Died += (sender, args) => GfxHandler.AddDeathEffect(sender);
-            
-            //this.testPlayer = new TheGuy(pos, this.testLevel);
-            //this.testPlayer.Damaged += (sender, args) => GfxHandler.AddBloodEffect(sender);
-            //this.testPlayer.Died += (sender, args) => GfxHandler.AddDeathEffect(sender);
-
-            //this.testLevel = new Level(@"..\..\..\Content\Maps\BloodyMap.txt", this.testPlayer);
-            //this.testLevel.Assets.Add(coin);
-            //this.sampleEnemy.Level = this.testLevel;
-            //this.testPlayer.Level = this.testLevel;
-            //this.testLevel.Enemies.Add(this.sampleEnemy);\
-
-            this.randomisedLevel = LevelFactory.MakeLevel("BloodyMap");
-
-            // TODO: Get Width and Heignt based on the level size?
-            //start menu buttons
-
-            //Button buttonLeft = new Button(this.Content.Load<Texture2D>(@"TestObjects/button1"), new Vector2(210, 150));
-            //Button buttonRight = new Button(this.Content.Load<Texture2D>(@"TestObjects/button2"), new Vector2(460, 150));
-            //this.startScreen.buttons.Add(buttonLeft);
-            //this.startScreen.buttons.Add(buttonRight);
-            //death screen buttons
             this.startScreen.Load(this.Content);
             this.deathScreen.Load(this.Content);
-            //death screen buttons
-            
-
-           // this.deathScreen.buttons.Add(replay);
-           // this.font = this.Content.Load<SpriteFont>(@"Fonts/SpriteFont");
-
         }
         
         protected override void UnloadContent()
@@ -128,25 +78,25 @@ namespace LeGame.Core
 
             if (this.stage == GameStages.Start_Stage)
             {
-                var button = this.startScreen.IsClicked();
+                IButton button = this.startScreen.IsClicked();
+
                 if (button != null)
                 {
                     if (button.Position.X.Equals(130))
                     {
-                        this.randomisedLevel.Player = PlayerFacory.MakePlayer("Redhead");
-                        this.stage = GameStages.GameStage;
+                        this.player = PlayerFacory.MakePlayer(PlayerChars.Redhead);
                     }
                     else if (button.Position.X.Equals(330))
                     {
-                        this.randomisedLevel.Player = PlayerFacory.MakePlayer("The Guy");
-                        this.stage = GameStages.GameStage;
+                        this.player = PlayerFacory.MakePlayer(PlayerChars.TheGuy);
                     }
                     else
                     {
-                        this.randomisedLevel.Player = PlayerFacory.MakePlayer("Not a potato");
-                        this.stage = GameStages.GameStage;
+                        this.player = PlayerFacory.MakePlayer(PlayerChars.Blondy);
                     }
-                    this.randomisedLevel.Player.Level = this.randomisedLevel;
+
+                    this.stage = GameStages.GameStage;
+                    this.player.Level = LevelFactory.MakeLevel(Maps.HouseMap, this.player);
                 }
 
                 this.startScreen.Update(mouse);
@@ -155,18 +105,19 @@ namespace LeGame.Core
             if (this.stage == GameStages.DeathStage)
             {
                 var button = this.deathScreen.IsClicked();
-                if (button!=null)
+                if (button != null)
                 {    
                     this.stage = GameStages.Start_Stage;
                 }
+
                 this.deathScreen.Update(mouse);
             }
 
             if (this.stage == GameStages.GameStage)
             {
-                GfxHandler.UpdateLevel(gameTime, this.randomisedLevel);
+                GfxHandler.UpdateLevel(gameTime, this.player.Level);
 
-                if (this.randomisedLevel.Player.CurrentHealth <= 0)
+                if (this.player.CurrentHealth <= 0)
                 {
                     this.stage = GameStages.DeathStage;
                 }
@@ -183,9 +134,9 @@ namespace LeGame.Core
             // TODO: Add your drawing code here
             if (this.stage == GameStages.GameStage)
             {
-                this.statPanel.DrawHealth(this.randomisedLevel.Player, this.Content, this.spriteBatch);
+                this.statPanel.DrawHealth(this.player, this.Content, this.spriteBatch);
 
-                GfxHandler.DrawLevel(this.spriteBatch, this.randomisedLevel);
+                GfxHandler.DrawLevel(this.spriteBatch, this.player.Level);
             }
             else if (this.stage == GameStages.DeathStage)
             {
@@ -196,7 +147,7 @@ namespace LeGame.Core
             else
             {
                 this.GraphicsDevice.Clear(Color.Wheat);
-                this.startScreen.Draw(spriteBatch, this.GraphicsDevice);
+                this.startScreen.Draw(this.spriteBatch, this.GraphicsDevice);
             }
 
 

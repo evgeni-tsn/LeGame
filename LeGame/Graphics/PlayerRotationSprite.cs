@@ -3,11 +3,12 @@
     using System.Linq;
 
     using Interfaces;
-    using Models.Characters.Player;
 
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
     using Microsoft.Xna.Framework.Input;
+
+    using Models.Characters.Player;
 
     public class PlayerRotationSprite : Sprite
     {
@@ -34,7 +35,7 @@
             
             KeyboardState keyState = Keyboard.GetState();
 
-            bool moving = ((Player)character).KbKeys.Any(key => keyState.IsKeyDown(key));
+            bool moving = ((IPlayer)character).KbKeys.Any(key => keyState.IsKeyDown(key));
 
             if (moving || this.CurrentFrame != 5)
             {
