@@ -4,21 +4,30 @@ using System.Linq;
 using System.Text;
 using LeGame.Screens.StartScreen;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 namespace LeGame.Screens.DeathScreen
 {
-    public class DeathScreen
+    public class DeathScreen : Screen
     {
         public List<Button> buttons;
+        private SpriteFont font;
 
         public DeathScreen()
         {
             this.buttons = new List<Button>();
         }
 
-        public void Update(MouseState mouse)
+        public override void Load(ContentManager content)
+        {
+            font = content.Load<SpriteFont>(@"Fonts/SpriteFont");
+            Button replay = new Button(content.Load<Texture2D>(@"TestObjects/kappa"), new Vector2(300, 150));
+            buttons.Add(replay);
+        }
+
+        public override void Update(MouseState mouse)
         {
             foreach (Button button in buttons)
             {
@@ -26,7 +35,7 @@ namespace LeGame.Screens.DeathScreen
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch, SpriteFont font)
+        public override void Draw(SpriteBatch spriteBatch, GraphicsDevice graphics)
         {
             spriteBatch.Begin();
             spriteBatch.DrawString(font, "GG NOOB", new Vector2(300, 100), Color.Red);
@@ -38,14 +47,14 @@ namespace LeGame.Screens.DeathScreen
             spriteBatch.End();
         }
 
-        public bool IsClicked()
+        public override IButton IsClicked()
         {
             foreach (Button button in buttons)
             {
                 if (button.IsClicked)
-                    return true;
+                    return button;
             }
-            return false;
+            return null;
         }
 
     }

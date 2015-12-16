@@ -36,7 +36,7 @@ namespace LeGame.Core
         //private Level testLevel;
         private ILevel randomisedLevel;
         private GameStages stage;
-        private SpriteFont font;
+      
 
         
       
@@ -101,11 +101,12 @@ namespace LeGame.Core
             //this.startScreen.buttons.Add(buttonRight);
             //death screen buttons
             this.startScreen.Load(this.Content);
+            this.deathScreen.Load(this.Content);
             //death screen buttons
-            Button replay = new Button(Content.Load<Texture2D>(@"TestObjects/kappa"), new Vector2(300, 200));
+            
 
-            this.deathScreen.buttons.Add(replay);
-            this.font = this.Content.Load<SpriteFont>(@"Fonts/SpriteFont");
+           // this.deathScreen.buttons.Add(replay);
+           // this.font = this.Content.Load<SpriteFont>(@"Fonts/SpriteFont");
 
         }
         
@@ -153,7 +154,8 @@ namespace LeGame.Core
 
             if (this.stage == GameStages.DeathStage)
             {
-                if (this.deathScreen.IsClicked())
+                var button = this.deathScreen.IsClicked();
+                if (button!=null)
                 {    
                     this.stage = GameStages.Start_Stage;
                 }
@@ -189,7 +191,7 @@ namespace LeGame.Core
             {
                 //this.statPanel.EndScreen(this.Content, this.spriteBatch);
                 this.GraphicsDevice.Clear(Color.AliceBlue);
-                this.deathScreen.Draw(this.spriteBatch, this.font);
+                this.deathScreen.Draw(this.spriteBatch, this.GraphicsDevice);
             }
             else
             {

@@ -20,7 +20,7 @@ namespace LeGame.Screens.StartScreen
             this.buttons = new List<Button>();
         }
 
-        public void Load(ContentManager Content)
+        public override void Load(ContentManager Content)
         {
             font = Content.Load<SpriteFont>(@"Fonts/DeathFont");
             Button buttonLeft = new Button(Content.Load<Texture2D>(@"TestObjects/redheadButton"), new Vector2(130, 150));
