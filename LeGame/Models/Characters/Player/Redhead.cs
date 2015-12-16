@@ -16,10 +16,9 @@ namespace LeGame.Models.Characters.Player
 
         private const int RedheadDefaultHitCooldown = 2000;
 
-        public Redhead(Vector2 position, ILevel level = null)
-            : base(position, RedheadDefaultType, RedheadDefaultMaxHealth, RedheadDefaultCurrentHealth, RedheadDefaultSpeed, RedheadDefaultHitCooldown, level)
+        public Redhead(ILevel level = null)
+            : base(RedheadDefaultType, RedheadDefaultMaxHealth, RedheadDefaultCurrentHealth, RedheadDefaultSpeed, RedheadDefaultHitCooldown, level)
         {
-            
         }
     }
 }

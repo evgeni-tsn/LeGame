@@ -86,7 +86,6 @@ namespace LeGame.Core
 
             //this.testLevel = new Level(@"..\..\..\Content\Maps\BloodyMap.txt", this.testPlayer);
             //this.testLevel.Assets.Add(coin);
-
             //this.sampleEnemy.Level = this.testLevel;
             //this.testPlayer.Level = this.testLevel;
             //this.testLevel.Enemies.Add(this.sampleEnemy);\
@@ -95,12 +94,16 @@ namespace LeGame.Core
 
             // TODO: Get Width and Heignt based on the level size?
             //start menu buttons
-            Button buttonLeft = new Button(this.Content.Load<Texture2D>(@"TestObjects/button1"), new Vector2(210, 150));
-            Button buttonRight = new Button(this.Content.Load<Texture2D>(@"TestObjects/button2"), new Vector2(460, 150));
-            this.startScreen.buttons.Add(buttonLeft);
-            this.startScreen.buttons.Add(buttonRight);
+
+            //Button buttonLeft = new Button(this.Content.Load<Texture2D>(@"TestObjects/button1"), new Vector2(210, 150));
+            //Button buttonRight = new Button(this.Content.Load<Texture2D>(@"TestObjects/button2"), new Vector2(460, 150));
+            //this.startScreen.buttons.Add(buttonLeft);
+            //this.startScreen.buttons.Add(buttonRight);
             //death screen buttons
-            Button replay = new Button(this.Content.Load<Texture2D>(@"TestObjects/button1"), new Vector2(300, 200));
+           this.startScreen.Load(this.Content);
+            //death screen buttons
+            Button replay = new Button(Content.Load<Texture2D>(@"TestObjects/kappa"), new Vector2(300, 200));
+
             this.deathScreen.buttons.Add(replay);
             this.font = this.Content.Load<SpriteFont>(@"Fonts/SpriteFont");
 
@@ -124,9 +127,25 @@ namespace LeGame.Core
 
             if (this.stage == GameStages.Start_Stage)
             {
-                if (this.startScreen.IsClicked())
+                var button = this.startScreen.IsClicked();
+                if (button != null)
                 {
-                    this.stage = GameStages.GameStage;
+                    if (button.Position.X.Equals(130))
+                    {
+                        this.randomisedLevel.Player = PlayerFacory.MakePlayer("Redhead");
+                        this.stage = GameStages.GameStage;
+                    }
+                    else if (button.Position.X.Equals(330))
+                    {
+                        this.randomisedLevel.Player = PlayerFacory.MakePlayer("The Guy");
+                        this.stage = GameStages.GameStage;
+                    }
+                    else
+                    {
+                        this.randomisedLevel.Player = PlayerFacory.MakePlayer("Not a potato");
+                        this.stage = GameStages.GameStage;
+                    }
+                    this.randomisedLevel.Player.Level = this.randomisedLevel;
                 }
 
                 this.startScreen.Update(mouse);
@@ -135,10 +154,9 @@ namespace LeGame.Core
             if (this.stage == GameStages.DeathStage)
             {
                 if (this.deathScreen.IsClicked())
-                {
+                {    
                     this.stage = GameStages.Start_Stage;
                 }
-
                 this.deathScreen.Update(mouse);
             }
 
@@ -176,8 +194,7 @@ namespace LeGame.Core
             else
             {
                 this.GraphicsDevice.Clear(Color.Wheat);
-                this.startScreen.Draw(this.spriteBatch, this.font);
-                
+                this.startScreen.Draw(spriteBatch, this.GraphicsDevice);
             }
 
 

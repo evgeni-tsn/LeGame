@@ -1,4 +1,6 @@
-﻿namespace LeGame.Models
+﻿using Microsoft.Xna.Framework;
+
+namespace LeGame.Models
 {
     using System.Collections.Generic;
 
@@ -7,16 +9,17 @@
 
     public class Level : ILevel
     {
-        public Level(string path, ICharacter player)
+        public Level(string path, ICharacter player = null)
         {
             this.Player = player;
+            
             var assetBuilder = new BackgroundBuilder(path);
             this.Assets = assetBuilder.Background;
             this.Enemies = new List<ICharacter>();
             this.Projectiles = new List<IProjectile>();
         }
 
-        public ICharacter Player { get; }
+        public ICharacter Player { get; set; }
 
         public List<IProjectile> Projectiles { get; } 
 

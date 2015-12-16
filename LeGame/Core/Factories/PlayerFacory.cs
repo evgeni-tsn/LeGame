@@ -10,20 +10,19 @@
 
     public static class PlayerFacory
     {
-        public static ICharacter MakeRandomPlayer()
+        public static ICharacter MakePlayer(string type)
         {
-            var randomPosition = new Vector2(Rng.Next(50, WindowWidthDefault - 50), Rng.Next(50, WindowHeightDefault - 250));
             ICharacter player;
-            switch (Rng.Next(0, 2))
+            switch (type)
             {
-                case 0:
-                    player = new TheGuy(randomPosition);
+                case "The Guy":
+                    player = new TheGuy();
                     break;
-                case 1:
-                    player =  new Redhead(randomPosition);
+                case "Redhead":
+                    player =  new Redhead();
                     break;
                 default:
-                    player =  new Blondy(randomPosition);
+                    player =  new Blondy();
                     break;
             }
 

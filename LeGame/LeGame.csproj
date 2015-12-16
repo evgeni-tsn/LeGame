@@ -76,6 +76,9 @@
     <Compile Include="Graphics\RotationSprite.cs" />
     <Compile Include="Graphics\PlayerRotationSprite.cs" />
     <Compile Include="Graphics\Sprite.cs" />
+    <Compile Include="Screens\IButton.cs" />
+    <Compile Include="Screens\IScreen.cs" />
+    <Compile Include="Screens\Screen.cs" />
     <Compile Include="Screens\StatPanel.cs" />
     <Compile Include="Handlers\MovementHandler.cs" />
     <Compile Include="Interfaces\ICharacter.cs" />

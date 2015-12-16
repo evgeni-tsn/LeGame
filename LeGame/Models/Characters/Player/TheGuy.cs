@@ -1,6 +1,6 @@
 ﻿namespace LeGame.Models.Characters.Player
 {
-    using Microsoft.Xna.Framework;
+    using LeGame.Interfaces;
 
     public class TheGuy : Player
     {
@@ -14,10 +14,9 @@
 
         private const int TheGuyDefaultHitCooldown = 2000;
 
-        public TheGuy(Vector2 position, Level level = null)
-            : base(position, TheGuyDefaultType, TheGuyDefaultMaxHealth, TheGuyDefaultCurrentHealth, TheGuyDefaultSpeed, TheGuyDefaultHitCooldown, level)
+        public TheGuy(ILevel level = null)
+            : base(TheGuyDefaultType, TheGuyDefaultMaxHealth, TheGuyDefaultCurrentHealth, TheGuyDefaultSpeed, TheGuyDefaultHitCooldown, level)
         {
-            
         }
     }
 }

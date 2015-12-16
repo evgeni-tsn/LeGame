@@ -9,12 +9,10 @@
     {
         public static ILevel MakeLevel(string map)
         {
-            ICharacter player = PlayerFacory.MakeRandomPlayer();
             IEnumerable<ICharacter> enemies = EnemyFactory.MakeRandomEnemies();
 
-            ILevel newLevel = new Level($@"{GlobalVariables.ContentDir}Maps\{map}.txt", player);
+            ILevel newLevel = new Level($@"{GlobalVariables.ContentDir}Maps\{map}.txt");
             newLevel.Enemies.AddRange(enemies);
-            newLevel.Player.Level = newLevel;
 
             foreach (ICharacter enemy in newLevel.Enemies)
             {
