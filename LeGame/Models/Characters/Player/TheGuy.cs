@@ -2,7 +2,7 @@
 {
     using LeGame.Interfaces;
 
-    public class TheGuy : IPlayer
+    public class TheGuy : Player
     {
         private const string TheGuyDefaultType = "Player/p2Rotation";
 

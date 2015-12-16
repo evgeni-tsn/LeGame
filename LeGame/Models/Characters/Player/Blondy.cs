@@ -2,7 +2,7 @@
 {
     using LeGame.Interfaces;
 
-    public class Blondy : IPlayer
+    public class Blondy : Player
     {
         private const string BlondyDefaultType = "Player/p1Rotation";
 
