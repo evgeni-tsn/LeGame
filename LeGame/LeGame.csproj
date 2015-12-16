@@ -58,6 +58,9 @@
     <StartupObject>LeGame.RolePlayingGame</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Core\Factories\EnemyFactory.cs" />
+    <Compile Include="Core\Factories\LevelFactory.cs" />
+    <Compile Include="Core\Factories\PlayerFacory.cs" />
     <Compile Include="Core\Messages.cs" />
     <Compile Include="Exceptions\GameException.cs" />
     <Compile Include="Exceptions\MapException.cs" />
