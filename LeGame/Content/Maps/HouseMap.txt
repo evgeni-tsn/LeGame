@@ -3,7 +3,7 @@ i..................|
 i.............S ...|
 i.............  ..V|
 i..........P ..... |
-i..........  .T .. |
+I..........  .T .. |
 i..........  .  .. |
 i..........  ..... |
 i..........  .Q   .|
@@ -13,7 +13,7 @@ io.................|
 io.................|
 ioooo.W........doo.|
 ┗------------p-----┛
-Legend:(char:file:isGameObject:drawPriority?)|(another layer at the same position)?
+Legend:(char:file:isCollidable:drawPriority?)|[more layers at the same position]
  :Tiles/NULL:true
 ┏:Tiles/whiteWall2NW:true
 ┓:Tiles/whiteWall2NE:true
@@ -23,6 +23,7 @@ _:Tiles/whiteWall2N:true
 -:Tiles/whiteWall2S:true
 |:Tiles/whiteWall2E:true
 i:Tiles/whiteWall2W:true
+I:Tiles/whiteWall2W:true|Tiles/Furniture/DoorW:false:1
 j:Tiles/whiteWall2W:true|Tiles/Furniture/KitchenSW:false:1
 .:Tiles/Carpet:false
 o:Tiles/Carpet:true

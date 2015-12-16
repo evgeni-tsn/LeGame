@@ -3,10 +3,12 @@
     using System;
 
     using Core;
+
     using Interfaces;
-    using Models.Characters.Enemies;
 
     using Microsoft.Xna.Framework;
+
+    using Models.Characters.Enemies;
 
     public static class AiPathfinder
     {

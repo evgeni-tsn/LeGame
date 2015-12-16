@@ -11,12 +11,12 @@
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Input;
 
-    public class Player : Character
+    public class IPlayer : Character
     {
-        public const int startingPointX = 50;
+        public const int startingPointX = 500;
         public const int startingPointY = 240;
 
-        protected Player(string type, int maxHealth, int currentHealth, int speed, int hitCooldown, ILevel level) 
+        protected IPlayer(string type, int maxHealth, int currentHealth, int speed, int hitCooldown, ILevel level) 
             : base(new Vector2(startingPointX, startingPointY), type, maxHealth, currentHealth, speed, hitCooldown, level)
         {
             // TODO: Implement weapon pickup and display it on the character.

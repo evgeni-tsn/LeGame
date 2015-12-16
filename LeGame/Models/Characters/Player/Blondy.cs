@@ -2,9 +2,7 @@
 {
     using LeGame.Interfaces;
 
-    using Microsoft.Xna.Framework;
-
-    public class Blondy : Player
+    public class Blondy : IPlayer
     {
         private const string BlondyDefaultType = "Player/p1Rotation";
 
@@ -19,7 +17,6 @@
         public Blondy(ILevel level = null)
             : base(BlondyDefaultType, BlondyDefaultMaxHealth, BlondyDefaultCurrentHealth, BlondyDefaultSpeed, BlondyDefaultHitCooldown, level)
         {
-            
         }
     }
 }

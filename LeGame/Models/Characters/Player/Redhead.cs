@@ -4,7 +4,7 @@ namespace LeGame.Models.Characters.Player
 {
     using Microsoft.Xna.Framework;
 
-    public class Redhead : Player
+    public class Redhead : IPlayer
     {
         private const string RedheadDefaultType = "Player/p3Rotation";
 
