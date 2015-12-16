@@ -84,19 +84,22 @@
         {
             // If enough time has passed 
             // go through directionToFrames and find the one coresponding to the direction
-            foreach (string direct in this.directionToFrames.Keys.Where(key => direction.Equals(key)))
+            if (!string.IsNullOrEmpty(direction))
             {
-                if (this.directionToFrames[direct].Contains(this.CurrentFrame))
+                foreach (string direct in this.directionToFrames.Keys.Where(key => direction.Equals(key)))
                 {
-                    this.CurrentFrame++;
-                    if (this.CurrentFrame == this.directionToFrames[direct][2] + 1)
+                    if (this.directionToFrames[direct].Contains(this.CurrentFrame))
+                    {
+                        this.CurrentFrame++;
+                        if (this.CurrentFrame == this.directionToFrames[direct][2] + 1)
+                        {
+                            this.CurrentFrame = this.directionToFrames[direct][0];
+                        }
+                    }
+                    else
                     {
                         this.CurrentFrame = this.directionToFrames[direct][0];
                     }
-                }
-                else
-                {
-                    this.CurrentFrame = this.directionToFrames[direct][0];
                 }
             }
         }

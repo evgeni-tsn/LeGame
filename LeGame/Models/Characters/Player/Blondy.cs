@@ -1,5 +1,7 @@
 ﻿namespace LeGame.Models.Characters.Player
 {
+    using LeGame.Interfaces;
+
     using Microsoft.Xna.Framework;
 
     public class Blondy : Player
@@ -14,7 +16,7 @@
 
         private const int BlondyDefaultHitCooldown = 2000;
 
-        public Blondy(Level level)
+        public Blondy(ILevel level = null)
             : base(BlondyDefaultType, BlondyDefaultMaxHealth, BlondyDefaultCurrentHealth, BlondyDefaultSpeed, BlondyDefaultHitCooldown, level)
         {
             

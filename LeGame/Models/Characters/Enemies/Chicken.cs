@@ -16,7 +16,7 @@ namespace LeGame.Models.Characters.Enemies
 
         private const int ChickenDefaultHitCooldown = 50;
 
-        public Chicken(Vector2 position, ILevel level)
+        public Chicken(Vector2 position, ILevel level = null)
             : base(position, ChickenDefaultType, ChickenDefaultMaxHealth, ChickenDefaultCurrentHealth, ChickenDefaultSpeed, ChickenDefaultHitCooldown, level)
         {
         }

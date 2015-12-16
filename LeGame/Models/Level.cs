@@ -9,7 +9,7 @@ namespace LeGame.Models
 
     public class Level : ILevel
     {
-        public Level(string path, ICharacter player)
+        public Level(string path, ICharacter player = null)
         {
             this.Player = player;
             

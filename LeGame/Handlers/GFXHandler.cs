@@ -1,8 +1,10 @@
 ﻿namespace LeGame.Handlers
 {
+    using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Linq.Expressions;
 
     using Core;
     using Graphics;
@@ -18,11 +20,11 @@
     {
         private static readonly IDictionary<string, ISprite> Sprites = new Dictionary<string, ISprite>(); 
         private static readonly IDictionary<string, Texture2D> TextureLibrary = new Dictionary<string, Texture2D>();
+
         private static readonly IList<Effect> Effects = new List<Effect>();
+        private static readonly IDictionary<string, ISprite> UniqueEnemies = new Dictionary<string, ISprite>();
 
         private static readonly IList<string> FileNames = new List<string>();
-
-        private static readonly string[] FoldersToAvoid = { "bin", "obj", "Maps", "Font" };
 
         public static void Load(ContentManager content)
         {
@@ -89,6 +91,7 @@
 
             DrawExistingEffects(spriteBatch);
 
+            UpdateUniqueEnemySprites(level.Enemies);
             foreach (var ememy in level.Enemies)
             {
                 GetSprite(ememy).Draw(spriteBatch, ememy.Position);
@@ -105,6 +108,21 @@
             }
 
             GetSprite(level.Player).Draw(spriteBatch, level.Player.Position, level.Player.FacingAngle, level.Player.MovementAngle);
+        }
+
+        private static void UpdateUniqueEnemySprites(List<ICharacter> enemies)
+        {
+            if (UniqueEnemies.Count < enemies.Count)
+            {
+                foreach (ICharacter enemy in enemies.Where(e => !UniqueEnemies.ContainsKey(e.Id)))
+                {
+                    UniqueEnemies.Add(enemy.Id, new FourDirectionSprite(GetTexture(enemy.Type)));
+                }
+            }
+            else
+            {
+                // TODO: Remove dead ennemies.
+            }
         }
 
         public static void AddBloodEffect(object sender)
@@ -149,13 +167,18 @@
         // Get Sprite
         public static ISprite GetSprite(IGameObject obj)
         {
+            if (UniqueEnemies.ContainsKey(obj.Id))
+            {
+                return UniqueEnemies[obj.Id];
+            }
+            
             return Sprites[obj.Type];
         }
 
-        public static ISprite GetSprite(string type)
-        {
-            return Sprites[type];
-        }
+        //public static ISprite GetSprite(string type)
+        //{
+        //    return Sprites[type];
+        //}
 
         // Get Texture
         public static Texture2D GetTexture(IGameObject obj)
