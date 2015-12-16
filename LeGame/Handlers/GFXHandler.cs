@@ -70,8 +70,9 @@
             GetSprite(level.Player).Update(gameTime, level.Player);
             foreach (var enemy in level.Enemies.ToList())
             {
-                enemy.Move();
+               
                 GetSprite(enemy).Update(gameTime, enemy);
+                enemy.Move();
             }
 
             foreach (var projectile in level.Projectiles.ToList())

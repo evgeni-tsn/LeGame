@@ -100,7 +100,7 @@ namespace LeGame.Core
             //this.startScreen.buttons.Add(buttonLeft);
             //this.startScreen.buttons.Add(buttonRight);
             //death screen buttons
-           this.startScreen.Load(this.Content);
+            this.startScreen.Load(this.Content);
             //death screen buttons
             Button replay = new Button(Content.Load<Texture2D>(@"TestObjects/kappa"), new Vector2(300, 200));
 
