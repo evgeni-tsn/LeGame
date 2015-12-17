@@ -74,7 +74,7 @@
             {
                 // TODO: do not assume that the door is to the left of the character to offset it.
                 Rectangle doorBox = GfxHandler.GetBBox(door);
-                doorBox.Offset(-30, 0);
+                doorBox.Offset(-29, 0);
 
                 Rectangle characterBox = GfxHandler.GetBBox(character);
 
@@ -87,7 +87,7 @@
 
         public static void ProjectileReaction(Projectile projectile, ILevel level)
         {
-            IEnumerable<IGameObject> collisionItems = level.Assets.Concat(level.Enemies).ToList();
+            IEnumerable<IGameObject> collisionItems = level.Assets.Where(a => !(a is IPickable)).Concat(level.Enemies).ToList();
             IGameObject collider = Collide(projectile, collisionItems);
 
             if (collider != null)

@@ -1,30 +1,17 @@
 ﻿namespace LeGame.Models.Items.PickableItems
 {
-    using LeGame.Interfaces;
-
     using Microsoft.Xna.Framework;
 
-    public sealed class Steak : PickableItem, IHeals
+    public class Steak : HealingItem
     {
-        private const int SteakHealingAmount = 70;
+        private const string DefaultSteakType = "Items/Steak";
 
-        public Steak(Vector2 position, string type)
-            : base(position, type)
+        private const int DefaultSteakHealingAmount = 70;
+
+        public Steak(Vector2 position)
+            : base(position, DefaultSteakType)
         {
-            this.HasBeenPicked = false;
-            this.HealingAmount = SteakHealingAmount;
-        }
-
-        public int HealingAmount { get; set; }
-
-        public void HealCharacter(ICharacter character)
-        {
-            character.CurrentHealth += this.HealingAmount;
-
-            if (character.CurrentHealth > character.MaxHealth)
-            {
-                character.CurrentHealth = character.MaxHealth;
-            }
+            this.HealingAmount = DefaultSteakHealingAmount;
         }
     }
 }

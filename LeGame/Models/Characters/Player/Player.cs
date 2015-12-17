@@ -20,7 +20,7 @@
             : base(new Vector2(startingPointX, startingPointY), type, maxHealth, currentHealth, speed, hitCooldown, level)
         {
             // TODO: Implement weapon pickup and display it on the character.
-            this.EquippedWeapon = new Unarmed();
+            this.EquippedWeapon = new LaserGun();
         }
 
         public Keys[] KbKeys { get; } = { Keys.W, Keys.A, Keys.S, Keys.D };

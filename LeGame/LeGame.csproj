@@ -82,6 +82,9 @@
     <Compile Include="Graphics\Sprite.cs" />
     <Compile Include="Interfaces\IButton.cs" />
     <Compile Include="Interfaces\IScreen.cs" />
+    <Compile Include="Models\Items\PickableItems\HealingItem.cs" />
+    <Compile Include="Models\Items\PickableItems\OrangePotion.cs" />
+    <Compile Include="Models\Items\PickableItems\RedPotion.cs" />
     <Compile Include="Models\Items\PickableItems\Steak.cs" />
     <Compile Include="Models\Items\Weapons\Weapon.cs" />
     <Compile Include="Screens\Screen.cs" />

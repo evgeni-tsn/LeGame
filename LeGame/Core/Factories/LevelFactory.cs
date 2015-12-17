@@ -23,7 +23,7 @@
                 enemy.Level = newLevel;
             }
 
-            newLevel.Assets.AddRange(ItemFactory.MakeItems());
+            newLevel.Assets.AddRange(ItemFactory.MakeTextItems());
 
             return newLevel;
         }
