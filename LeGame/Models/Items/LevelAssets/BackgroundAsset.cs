@@ -1,9 +1,9 @@
-﻿namespace LeGame.Models.LevelAssets
+﻿namespace LeGame.Models.Items.LevelAssets
 {
-    using Interfaces;
+    using LeGame.Interfaces;
 
     using Microsoft.Xna.Framework;
-    
+
     public class BackgroundAsset : GameObject, ICollidable
     {
         public BackgroundAsset(Vector2 position, string type, int drawPriority, bool canCollide)

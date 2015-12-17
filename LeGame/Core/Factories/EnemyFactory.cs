@@ -22,6 +22,7 @@
                 var enemy = new Chicken(randomPosition);
 
                 enemy.Died += (sender, args) => GfxHandler.AddDeathEffect(sender);
+                enemy.Died += (sender, args) => ItemFactory.SpawnPotionByChance(sender); 
                 enemy.Damaged += (sender, args) => GfxHandler.AddBloodEffect(sender);
 
                 enemies.Add(enemy);

@@ -2,6 +2,8 @@
 {
     public interface IHeals
     {
-        int HealingAmount { get; set; } 
+        int HealingAmount { get; set; }
+
+        void HealCharacter(ICharacter character);
     }
 }

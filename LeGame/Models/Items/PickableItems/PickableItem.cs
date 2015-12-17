@@ -8,12 +8,11 @@
         protected PickableItem(Vector2 position, string type)
             : base(position, type)
         {
-
         }
 
-        public abstract bool HasBeenPicked { get; set; }
+        public virtual bool HasBeenPicked { get; set; }
 
-        public virtual void UponPickUp(ICharacter character)
+        public virtual void PickedUpBy(ICharacter character)
         {
             character.Level.Assets.Remove(this);
         }

@@ -7,7 +7,6 @@
     using LeGame.Exceptions;
     using LeGame.Handlers;
     using LeGame.Interfaces;
-    using LeGame.Models.LevelAssets;
 
     using Microsoft.Xna.Framework;
 
@@ -63,8 +62,7 @@
                 }
             }
         }
-
-        // Properties
+        
         public List<IGameObject> Background
         {
             get

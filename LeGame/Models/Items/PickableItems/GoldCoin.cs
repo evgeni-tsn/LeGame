@@ -4,7 +4,6 @@
 
     public class GoldCoin : PickableItem
     {
-        
         public GoldCoin(Vector2 position, string type)
             : base(position, type)
         {

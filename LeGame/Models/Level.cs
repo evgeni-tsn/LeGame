@@ -6,8 +6,6 @@
 
     using LeGame.Models.Items.LevelAssets;
 
-    using LevelAssets;
-
     public class Level : ILevel
     {
         public Level(string path, ICharacter player)

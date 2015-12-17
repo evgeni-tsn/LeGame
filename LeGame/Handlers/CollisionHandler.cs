@@ -9,12 +9,11 @@
     using LeGame.Core.Factories;
     using LeGame.Enumerations;
 
-    using Models;
-    using Models.Characters.Enemies;
-    using Models.Items.Projectiles;
-
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Input;
+    
+    using Models.Characters.Enemies;
+    using Models.Items.Projectiles;
 
     internal static class CollisionHandler
     {
@@ -58,11 +57,14 @@
                 
                 if (collider is IPickable)
                 {
-                    GameObject item = (GameObject)collider;
-                    Console.Beep(8000, 50); 
+                    var item = (IPickable)collider;
 
                     // legit cool gold-pickup sound 
-                    character.Level.Assets.Remove(item);
+                    Console.Beep(8000, 50);
+                    item.PickedUpBy(character);
+
+                    var healingItem = item as IHeals;
+                    healingItem?.HealCharacter(character);
                 }
             }
 
@@ -70,9 +72,9 @@
             IGameObject door = character.Level.Assets.Find(a => a.Type.Contains("Door"));
             if (door != null)
             {
-                // TODO: do not assume that the door is to the left of the character and offset it.
+                // TODO: do not assume that the door is to the left of the character to offset it.
                 Rectangle doorBox = GfxHandler.GetBBox(door);
-                doorBox.Offset(-30, 0);
+                doorBox.Offset(-29, 0);
 
                 Rectangle characterBox = GfxHandler.GetBBox(character);
 
@@ -85,18 +87,15 @@
 
         public static void ProjectileReaction(Projectile projectile, ILevel level)
         {
-            IEnumerable<IGameObject> collisionItems = level.Assets.Concat(level.Enemies).ToList();
-            var collider = Collide(projectile, collisionItems);
+            IEnumerable<IGameObject> collisionItems = level.Assets.Where(a => !(a is IPickable)).Concat(level.Enemies).ToList();
+            IGameObject collider = Collide(projectile, collisionItems);
 
             if (collider != null)
             {
                 level.Projectiles.Remove(projectile);
 
-                if (collider is Enemy)
-                {
-                    var enemy = (Enemy)collider;
-                    enemy.TakeDamage(projectile.Attacker);
-                }
+                var enemy = collider as Enemy;
+                enemy?.TakeDamage(projectile.Attacker);
             }
         }
 

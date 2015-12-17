@@ -83,7 +83,29 @@
         public static void DrawLevel(SpriteBatch spriteBatch, ILevel level)
         {
             spriteBatch.Begin();
-            level.Assets.ForEach(t => spriteBatch.Draw(GetTexture(t), t.Position));
+            level.Assets.ForEach(
+                asset =>
+                    {
+                        // Make sure Items are always top layer.
+                        if (asset is IPickable)
+                        {
+                            spriteBatch.Draw(
+                                GetTexture(asset),
+                                asset.Position,
+                                null,
+                                null,
+                                null,
+                                0,
+                                null,
+                                null,
+                                SpriteEffects.None,
+                                1); // Layer 1 since everything else is 0
+                        }
+                        else
+                        {
+                            spriteBatch.Draw(GetTexture(asset), asset.Position);
+                        }
+                    });
             spriteBatch.End();
 
             DrawExistingEffects(spriteBatch);
