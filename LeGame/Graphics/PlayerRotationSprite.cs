@@ -35,7 +35,7 @@
             
             KeyboardState keyState = Keyboard.GetState();
 
-            bool moving = ((IPlayer)character).KbKeys.Any(key => keyState.IsKeyDown(key));
+            bool moving = ((Player)character).KbKeys.Any(key => keyState.IsKeyDown(key));
 
             if (moving || this.CurrentFrame != 5)
             {

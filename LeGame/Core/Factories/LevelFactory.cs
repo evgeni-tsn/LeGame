@@ -10,15 +10,20 @@
     {
         public static ILevel MakeLevel(Maps map, ICharacter player)
         {
-            IEnumerable<ICharacter> enemies = EnemyFactory.MakeRandomEnemies();
-
             ILevel newLevel = new Level($@"{GlobalVariables.ContentDir}Maps\{map}.txt", player);
-            newLevel.Enemies.AddRange(enemies);
+
+            if (map == Maps.BloodyMap)
+            {
+                IEnumerable<ICharacter> enemies = EnemyFactory.MakeRandomEnemies();
+                newLevel.Enemies.AddRange(enemies);
+            }
 
             foreach (ICharacter enemy in newLevel.Enemies)
             {
                 enemy.Level = newLevel;
             }
+
+            newLevel.Assets.AddRange(ItemFactory.MakeItems());
 
             return newLevel;
         }

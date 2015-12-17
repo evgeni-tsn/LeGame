@@ -65,6 +65,7 @@
 
             this.CurrentHealth -= attacker.EquippedWeapon.Damage;
             this.Damaged?.Invoke(this, new EventArgs());
+            Console.Beep(2000, 10);
             if (this.CurrentHealth <= 0)
             {
                 this.Died?.Invoke(this, new EventArgs());

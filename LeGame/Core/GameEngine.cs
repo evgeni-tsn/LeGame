@@ -52,9 +52,6 @@ namespace LeGame.Core
             this.spriteBatch = new SpriteBatch(this.GraphicsDevice);
             
             GfxHandler.Load(this.Content);
-            
-            // TODO: Ad an item factory.
-            GoldCoin coin = new GoldCoin(new Vector2(300, 300), "TestObjects/coin");
 
             this.startScreen.Load(this.Content);
             this.deathScreen.Load(this.Content);
