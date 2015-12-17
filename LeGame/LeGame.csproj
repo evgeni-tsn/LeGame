@@ -82,6 +82,7 @@
     <Compile Include="Graphics\Sprite.cs" />
     <Compile Include="Interfaces\IButton.cs" />
     <Compile Include="Interfaces\IScreen.cs" />
+    <Compile Include="Interfaces\IStat.cs" />
     <Compile Include="Models\Items\PickableItems\HealingItem.cs" />
     <Compile Include="Models\Items\PickableItems\OrangePotion.cs" />
     <Compile Include="Models\Items\PickableItems\RedPotion.cs" />
@@ -133,6 +134,7 @@
     <Compile Include="Screens\DeathScreen\DeathScreen.cs" />
     <Compile Include="Screens\StartScreen\Button.cs" />
     <Compile Include="Screens\StartScreen\StartScreen.cs" />
+    <Compile Include="Screens\Stats\HealthStat.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

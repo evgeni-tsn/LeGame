@@ -58,7 +58,7 @@ namespace LeGame.Screens.StartScreen
             foreach (Button button in buttons)
             {
                 if (button.IsClicked)
-                   // button.IsClicked = true;
+                    
                     return button;
             }
            

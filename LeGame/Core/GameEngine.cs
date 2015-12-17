@@ -1,3 +1,8 @@
+using System;
+using System.Net;
+using System.Threading;
+using System.Threading.Tasks;
+
 namespace LeGame.Core
 {
     using Enumerations;
@@ -42,6 +47,7 @@ namespace LeGame.Core
             this.graphics.PreferredBackBufferWidth = GlobalVariables.WindowWidthDefault; // set this value to the desired width of your window
             this.graphics.PreferredBackBufferHeight = GlobalVariables.WindowHeightDefault;   // set this value to the desired height of your window
             this.graphics.ApplyChanges();
+
             this.statPanel = new StatPanel();
             this.startScreen = new StartScreen();
             this.deathScreen = new DeathScreen();
@@ -60,6 +66,7 @@ namespace LeGame.Core
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
+            
         }
 
         protected override void Update(GameTime gameTime)
@@ -75,10 +82,14 @@ namespace LeGame.Core
 
             if (this.stage == GameStages.Start_Stage)
             {
+
+
+                
                 IButton button = this.startScreen.IsClicked();
 
-                if (button != null)
+                if (button != null && button.IsClicked)
                 {
+                    Thread.Sleep(10);
                     if (button.Position.X.Equals(130))
                     {
                         this.player = PlayerFacory.MakePlayer(PlayerChars.Redhead);
@@ -94,29 +105,45 @@ namespace LeGame.Core
 
                     this.stage = GameStages.GameStage;
                     this.player.Level = LevelFactory.MakeLevel(Maps.HouseMap, this.player);
+                    button.IsClicked = false;
+
                 }
+               
 
                 this.startScreen.Update(mouse);
+                
             }
 
             if (this.stage == GameStages.DeathStage)
             {
-                var button = this.deathScreen.IsClicked();
-                if (button != null)
+                this.player.Level = null;
+                IButton button = this.deathScreen.IsClicked();
+                if (button != null && button.IsClicked)
                 {    
                     this.stage = GameStages.Start_Stage;
+                    button.IsClicked = false;
                 }
+                
 
                 this.deathScreen.Update(mouse);
             }
 
             if (this.stage == GameStages.GameStage)
             {
+                foreach (var button in this.startScreen.buttons)
+                {
+                    button.IsClicked = false;
+                }
+                foreach (var button in this.deathScreen.buttons)
+                {
+                    button.IsClicked = false;
+                }
                 GfxHandler.UpdateLevel(gameTime, this.player.Level);
 
                 if (this.player.CurrentHealth <= 0)
                 {
                     this.stage = GameStages.DeathStage;
+                    this.player.Level = null;
                 }
             }
 

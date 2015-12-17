@@ -265,5 +265,9 @@
         {
             return new FourDirectionSprite(texture);
         }
+        public static void ClearEffects()
+        {
+            Effects.Clear();
+        }
     }
 }

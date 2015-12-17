@@ -81,6 +81,7 @@
                 if (doorBox.Intersects(characterBox))
                 {
                     character.Level = LevelFactory.MakeLevel(Maps.BloodyMap, character);
+                    GfxHandler.ClearEffects();
                 }
             }
         }

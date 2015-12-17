@@ -14,7 +14,7 @@
 
         bool Down { get; }
 
-        bool IsClicked { get; }
+        bool IsClicked { get; set; }
 
         Rectangle BoundingBox { get; }
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using LeGame.Handlers;
 using LeGame.Screens.StartScreen;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -23,7 +24,7 @@ namespace LeGame.Screens.DeathScreen
         public override void Load(ContentManager content)
         {
             font = content.Load<SpriteFont>(@"Fonts/SpriteFont");
-            Button replay = new Button(content.Load<Texture2D>(@"TestObjects/kappa"), new Vector2(300, 150));
+            Button replay = new Button(content.Load<Texture2D>(@"TestObjects/kappa"), new Vector2(300, 250));
             buttons.Add(replay);
         }
 
@@ -39,7 +40,7 @@ namespace LeGame.Screens.DeathScreen
         {
             spriteBatch.Begin();
             spriteBatch.DrawString(font, "GG NOOB", new Vector2(300, 100), Color.Red);
-            spriteBatch.DrawString(font, "I AM NOT A NOOB BUTTON", new Vector2(260, 300), Color.Red);
+            spriteBatch.DrawString(font, "I AM NOT A NOOB BUTTON", new Vector2(260, 350), Color.Red);
             foreach (Button button in buttons)
             {
                 button.Draw(spriteBatch);
@@ -52,6 +53,7 @@ namespace LeGame.Screens.DeathScreen
             foreach (Button button in buttons)
             {
                 if (button.IsClicked)
+                    GfxHandler.ClearEffects();
                     return button;
             }
             return null;
