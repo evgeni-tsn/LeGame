@@ -62,10 +62,11 @@ namespace LeGame.Handlers
                     var item = (IPickable)collider;
 
                     // legit cool gold-pickup sound 
-                    Console.Beep(8000, 50);
+                   
                     if ((character as Player).TryToPick(item))
                     {
                         item.PickedUpBy(character);
+                        Console.Beep(8000, 50);
                     }
 
                     var healingItem = item as IHeals;
@@ -77,15 +78,13 @@ namespace LeGame.Handlers
             IGameObject door = character.Level.Assets.Find(a => a.Type.Contains("Door"));
             if (door != null)
             {
-                // TODO: do not assume that the door is to the left of the character to offset it.
                 Rectangle doorBox = GfxHandler.GetBBox(door);
-                doorBox.Offset(-29, 0);
 
                 Rectangle characterBox = GfxHandler.GetBBox(character);
 
                 if (doorBox.Intersects(characterBox))
                 {
-                    character.Level = LevelFactory.MakeLevel(Maps.BloodyMap, character);
+                    character.Level = LevelFactory.MakeLevel(character);
                     GfxHandler.ClearEffects();
                 }
             }

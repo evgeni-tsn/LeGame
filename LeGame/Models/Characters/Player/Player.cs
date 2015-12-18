@@ -1,4 +1,7 @@
-﻿namespace LeGame.Models.Characters.Player
+﻿using System;
+using Microsoft.Xna.Framework.Input;
+
+namespace LeGame.Models.Characters.Player
 {
     using System;
     using System.Linq;
@@ -13,19 +16,27 @@
 
     public class Player : Character
     {
+
         public const int startingPointX = 500;
         public const int startingPointY = 240;
         private int killCount;
         private IPickable[] inventory;
         protected const int inventoryCapacity = 6;
 
+        private static readonly Vector2 DefaultStart = new Vector2(500, 240);
+
+
         protected Player(string type, int maxHealth, int currentHealth, int speed, int hitCooldown, ILevel level) 
-            : base(new Vector2(startingPointX, startingPointY), type, maxHealth, currentHealth, speed, hitCooldown, level)
+            : base(DefaultStart, type, maxHealth, currentHealth, speed, hitCooldown, level)
         {
             // TODO: Implement weapon pickup and display it on the character.
-            this.EquippedWeapon = new LaserGun();
+
+            
             this.killCount = 0;
             this.Inventory = new IPickable[inventoryCapacity];
+
+            this.EquippedWeapon = new Unarmed();
+
         }
 
         public Keys[] KbKeys { get; } = { Keys.W, Keys.A, Keys.S, Keys.D };

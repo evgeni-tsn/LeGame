@@ -1,11 +1,15 @@
+
 using System;
 using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 
+
 namespace LeGame.Core
 {
+    using System.Threading;
+
     using Enumerations;
 
     using Handlers;
@@ -16,8 +20,6 @@ namespace LeGame.Core
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
     using Microsoft.Xna.Framework.Input;
-
-    using Models.Items.PickableItems;
 
     using Screens;
     using Screens.DeathScreen;
@@ -85,6 +87,7 @@ namespace LeGame.Core
             if (this.stage == GameStages.Start_Stage)
             {
 
+                
 
 
                 string characterClass = this.startScreen.IsClicked();
@@ -107,14 +110,15 @@ namespace LeGame.Core
 
                     this.startScreen.UnloadButtons();
                     this.stage = GameStages.GameStage;
-                    this.player.Level = LevelFactory.MakeLevel(Maps.HouseMap, this.player);
+
+                    this.player.Level = LevelFactory.MakeLevel(this.player,Maps.HouseMap);
                     
 
+
+                   
                 }
-               
 
                 this.startScreen.Update(mouse);
-                
             }
 
             if (this.stage == GameStages.DeathStage)
