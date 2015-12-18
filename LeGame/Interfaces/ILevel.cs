@@ -4,6 +4,8 @@
 
     public interface ILevel
     {
+        string Type { get; }
+
         ICharacter Player { get; set; }
 
         List<IProjectile> Projectiles { get; }

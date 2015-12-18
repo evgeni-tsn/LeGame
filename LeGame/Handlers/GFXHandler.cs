@@ -99,7 +99,7 @@
                                 null,
                                 null,
                                 SpriteEffects.None,
-                                1); // Layer 1 since everything else is 0
+                                0.1f); // Layer 1 since everything else is 0
                         }
                         else
                         {
@@ -157,7 +157,7 @@
             var bleeder = (IGameObject)sender;
             var position = new Vector2(bleeder.Position.X + 16, bleeder.Position.Y + 16);
             
-            Effects.Add(new Effect(new EffectSprite(GetTexture("Effects/BloodEffect"), true), position));
+            Effects.Add(new Effect(new EffectSprite(GetTexture("Effects/BloodEffect1"), true), position));
         }
 
         public static void AddDeathEffect(object sender)
@@ -166,6 +166,11 @@
             var position = new Vector2(riper.Position.X + 16, riper.Position.Y + 16);
 
             Effects.Add(new Effect(new EffectSprite(GetTexture("Effects/FleshExplosionEffect"), true), position));
+        }
+
+        public static void ClearEffects()
+        {
+            Effects.Clear();
         }
 
         // Get GameObject Width
@@ -264,10 +269,6 @@
         private static FourDirectionSprite MakeEnemySprite(Texture2D texture)
         {
             return new FourDirectionSprite(texture);
-        }
-        public static void ClearEffects()
-        {
-            Effects.Clear();
         }
     }
 }
