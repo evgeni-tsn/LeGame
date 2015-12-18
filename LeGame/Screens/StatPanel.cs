@@ -1,4 +1,7 @@
-﻿namespace LeGame.Screens
+﻿using System.Collections.Generic;
+using LeGame.Screens.Stats;
+
+namespace LeGame.Screens
 {
     using LeGame.Core;
     using LeGame.Interfaces;
@@ -10,34 +13,54 @@
 
     public class StatPanel
     {
+        private List<IStat> stats;
+        private HealthStat healthStat;
+        private KillsStat killsStat;
+        private InventoryStat inventoryStat;
         private SpriteFont font;
 
-        public void DrawHealth(ICharacter character, ContentManager content, SpriteBatch spriteBatch)
+       
+
+        public StatPanel()
         {
-            int hp = character.CurrentHealth;
+            this.stats = new List<IStat>();
+            this.healthStat = new HealthStat();
+            this.killsStat = new KillsStat();
+            this.inventoryStat = new InventoryStat();
+            this.Stats.Add(inventoryStat);
+            this.Stats.Add(killsStat);
+            this.Stats.Add(healthStat);
+        }
+
+        public ICollection<IStat> Stats
+        {
+            get
+            {
+                return stats;
+            }
+
+          
+        }
+        public void Load(ContentManager content)
+        {
             this.font = content.Load<SpriteFont>(@"Fonts/SpriteFont");
-            string healthBar = $"Health points: {hp}";
-
-            spriteBatch.Begin();
-            spriteBatch.DrawString(this.font, healthBar, new Vector2(650, 10), Color.Red);
-            spriteBatch.End();
+            foreach (IStat stat in Stats)
+            {
+                stat.Load(content);
+                stat.Font = font;
+            }
         }
-
-        public void EndScreen(ContentManager content, SpriteBatch spriteBatch)
+        public void Draw(ICharacter character, SpriteBatch spriteBatch)
         {
-            this.font = content.Load<SpriteFont>(@"Fonts/DeathFont");
-            var middle = new Vector2
-                (GlobalVariables.WindowWidthDefault / 2f,
-                GlobalVariables.WindowHeightDefault / 2f);
-
-            spriteBatch.Begin();
-            spriteBatch.DrawString(this.font, "GG NOOB", middle, Color.Red);
-            spriteBatch.End();
+            foreach (IStat stat in Stats)
+            {
+                stat.Draw(character, spriteBatch);
+            }
         }
 
-        internal void Update(MouseState mouse)
-        {
-        }
+        
+
+        
     }
 }
 

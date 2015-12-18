@@ -235,7 +235,7 @@
         }
 
         // Get Texture
-        private static Texture2D GetTexture(IGameObject obj)
+        public static Texture2D GetTexture(IGameObject obj)
         {
             return TextureLibrary[obj.Type];
         }

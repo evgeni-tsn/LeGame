@@ -1,4 +1,6 @@
-﻿namespace LeGame.Handlers
+﻿using LeGame.Models.Characters.Player;
+
+namespace LeGame.Handlers
 {
     using System;
     using System.Collections.Generic;
@@ -61,7 +63,10 @@
 
                     // legit cool gold-pickup sound 
                     Console.Beep(8000, 50);
-                    item.PickedUpBy(character);
+                    if ((character as Player).TryToPick(item))
+                    {
+                        item.PickedUpBy(character);
+                    }
 
                     var healingItem = item as IHeals;
                     healingItem?.HealCharacter(character);

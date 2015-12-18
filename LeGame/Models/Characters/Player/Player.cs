@@ -15,15 +15,48 @@
     {
         public const int startingPointX = 500;
         public const int startingPointY = 240;
+        private int killCount;
+        private IPickable[] inventory;
+        protected const int inventoryCapacity = 6;
 
         protected Player(string type, int maxHealth, int currentHealth, int speed, int hitCooldown, ILevel level) 
             : base(new Vector2(startingPointX, startingPointY), type, maxHealth, currentHealth, speed, hitCooldown, level)
         {
             // TODO: Implement weapon pickup and display it on the character.
             this.EquippedWeapon = new LaserGun();
+            this.killCount = 0;
+            this.Inventory = new IPickable[inventoryCapacity];
         }
 
         public Keys[] KbKeys { get; } = { Keys.W, Keys.A, Keys.S, Keys.D };
+
+        public int KillCount
+        {
+            get
+            {
+                return killCount;
+            }
+
+            set
+            {
+                killCount = value;
+            }
+        }
+
+        public IPickable[] Inventory
+        {
+            get
+            {
+                return inventory;
+            }
+
+            set
+            {
+                inventory = value;
+            }
+        }
+
+       
 
         public override void Move()
         {
@@ -71,6 +104,26 @@
             {
                 this.AttackUsingWeapon();
             }
+        }
+
+        public bool TryToPick(IPickable item)
+        {
+            bool picked = false;
+            if (this.inventory.Any(x => x == null))
+            {
+                for (int i = 0; i < inventoryCapacity; i++)
+                {
+                    if (this.Inventory[i] == null)
+                    {
+                        this.Inventory[i] = item;
+                        picked = true;
+                        break;
+                    }
+
+                }
+                return picked;
+            }
+            return picked;
         }
     }
 }

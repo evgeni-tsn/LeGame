@@ -1,4 +1,6 @@
-﻿namespace LeGame.Core.Factories
+﻿using Microsoft.Xna.Framework;
+
+namespace LeGame.Core.Factories
 {
     using System.Collections.Generic;
 
@@ -16,6 +18,8 @@
             {
                 IEnumerable<ICharacter> enemies = EnemyFactory.MakeRandomEnemies();
                 newLevel.Enemies.AddRange(enemies);
+                //TODO figure a way to avoid hardcoding here
+                player.Position = new Vector2(600,240);
             }
 
             foreach (ICharacter enemy in newLevel.Enemies)
@@ -24,6 +28,7 @@
             }
 
             newLevel.Assets.AddRange(ItemFactory.MakeTextItems());
+            
 
             return newLevel;
         }

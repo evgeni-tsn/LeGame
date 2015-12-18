@@ -72,6 +72,7 @@
                 if (this is Enemy)
                 {
                     this.Level.Enemies.Remove(this);
+                    (attacker as Player.Player).KillCount++;
                 }
             }
         }

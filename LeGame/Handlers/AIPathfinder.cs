@@ -36,7 +36,7 @@
                         ai.Position = new Vector2(ai.Position.X - ai.Speed, ai.Position.Y);
                         ((Enemy)ai).Direction = "Left";
                     }
-                    //else
+                    //else if(ai.Position.X < player.Position.X +10 || ai.Position.X > player.Position.X-10)
                     //{
                         if (ai.Position.Y < player.Position.Y)
                         {
@@ -48,7 +48,7 @@
                             ai.Position = new Vector2(ai.Position.X, ai.Position.Y - ai.Speed);
                             ((Enemy)ai).Direction = "Up";
                         }
-                    //}
+                   // }
                 }
             }
             else

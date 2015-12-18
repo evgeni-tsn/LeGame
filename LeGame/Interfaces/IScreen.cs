@@ -16,8 +16,9 @@
 
         void Update(MouseState mouse);
 
-        IButton IsClicked();
+        string IsClicked();
 
         void Load(ContentManager content);
+        void UnloadButtons();
     }
 }

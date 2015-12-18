@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -61,6 +62,7 @@ namespace LeGame.Core
 
             this.startScreen.Load(this.Content);
             this.deathScreen.Load(this.Content);
+            this.statPanel.Load(Content);
         }
         
         protected override void UnloadContent()
@@ -84,28 +86,29 @@ namespace LeGame.Core
             {
 
 
-                
-                IButton button = this.startScreen.IsClicked();
 
-                if (button != null && button.IsClicked)
+                string characterClass = this.startScreen.IsClicked();
+
+                if (characterClass != null)
                 {
-                    Thread.Sleep(10);
-                    if (button.Position.X.Equals(130))
+                    //Thread.Sleep(10);
+                    if (characterClass=="Redhead")
                     {
                         this.player = PlayerFacory.MakePlayer(PlayerChars.Redhead);
                     }
-                    else if (button.Position.X.Equals(330))
+                    else if (characterClass == "Guy")
                     {
                         this.player = PlayerFacory.MakePlayer(PlayerChars.TheGuy);
                     }
-                    else
+                    else if(characterClass =="Blondie")
                     {
                         this.player = PlayerFacory.MakePlayer(PlayerChars.Blondy);
                     }
 
+                    this.startScreen.UnloadButtons();
                     this.stage = GameStages.GameStage;
                     this.player.Level = LevelFactory.MakeLevel(Maps.HouseMap, this.player);
-                    button.IsClicked = false;
+                    
 
                 }
                
@@ -117,11 +120,12 @@ namespace LeGame.Core
             if (this.stage == GameStages.DeathStage)
             {
                 this.player.Level = null;
-                IButton button = this.deathScreen.IsClicked();
-                if (button != null && button.IsClicked)
-                {    
+                string death = this.deathScreen.IsClicked();
+                if (death !=null)
+                {
+                    this.startScreen.UnloadButtons();
                     this.stage = GameStages.Start_Stage;
-                    button.IsClicked = false;
+                   
                 }
                 
 
@@ -130,14 +134,7 @@ namespace LeGame.Core
 
             if (this.stage == GameStages.GameStage)
             {
-                foreach (var button in this.startScreen.buttons)
-                {
-                    button.IsClicked = false;
-                }
-                foreach (var button in this.deathScreen.buttons)
-                {
-                    button.IsClicked = false;
-                }
+                
                 GfxHandler.UpdateLevel(gameTime, this.player.Level);
 
                 if (this.player.CurrentHealth <= 0)
@@ -158,7 +155,7 @@ namespace LeGame.Core
             // TODO: Add your drawing code here
             if (this.stage == GameStages.GameStage)
             {
-                this.statPanel.DrawHealth(this.player, this.Content, this.spriteBatch);
+                this.statPanel.Draw(this.player, spriteBatch);
 
                 GfxHandler.DrawLevel(this.spriteBatch, this.player.Level);
             }

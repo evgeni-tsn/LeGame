@@ -135,6 +135,9 @@
     <Compile Include="Screens\StartScreen\Button.cs" />
     <Compile Include="Screens\StartScreen\StartScreen.cs" />
     <Compile Include="Screens\Stats\HealthStat.cs" />
+    <Compile Include="Screens\Stats\InventorySlot.cs" />
+    <Compile Include="Screens\Stats\InventoryStat.cs" />
+    <Compile Include="Screens\Stats\KillsStat.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

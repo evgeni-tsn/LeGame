@@ -16,6 +16,18 @@ namespace LeGame.Screens.Stats
         private const int positionY = 10;
         private Vector2 position;
 
+        public SpriteFont Font
+        {
+            get
+            {
+                return font;
+            }
+
+            set
+            {
+                font = value;
+            }
+        }
 
         public HealthStat()
         {
@@ -24,7 +36,8 @@ namespace LeGame.Screens.Stats
 
         public void Load(ContentManager content)
         {
-            this.font = content.Load<SpriteFont>(@"Fonts/SpriteFont");
+
+           
         }
 
         public void Draw(ICharacter character, SpriteBatch spriteBatch)
@@ -33,7 +46,7 @@ namespace LeGame.Screens.Stats
             healthText = $"Health points: {healthPoints}";
 
             spriteBatch.Begin();
-            spriteBatch.DrawString(this.font, healthText, new Vector2(650, 10), Color.Red);
+            spriteBatch.DrawString(this.Font, healthText, new Vector2(650, 10), Color.Red);
             spriteBatch.End();
         }
     }
