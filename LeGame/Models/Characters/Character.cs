@@ -10,9 +10,7 @@
 
     public abstract class Character : GameObject, ICharacter, ICollidable
     {
-        
-
-        protected Character( Vector2 position,string type, int maxHealth, int currentHealth, int speed, int hitCooldown, ILevel level)
+        protected Character(Vector2 position,string type, int maxHealth, int currentHealth, int speed, int hitCooldown, ILevel level)
             : base(position, type)
         {
             this.MaxHealth = maxHealth;
@@ -48,12 +46,12 @@
         public bool CanCollide { get; set; }
 
         public abstract void Move();
-        
+
         public virtual void AttackUsingWeapon()
         {
             this.EquippedWeapon?.Attack(this.Level, this);
         }
-
+        
         public virtual void TakeDamage(ICharacter attacker)
         {
             var currentTime = GlobalVariables.GlobalTimer;

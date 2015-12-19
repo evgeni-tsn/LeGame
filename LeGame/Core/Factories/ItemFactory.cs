@@ -4,17 +4,21 @@
 
     using LeGame.Interfaces;
     using LeGame.Models.Items.PickableItems;
+    using LeGame.Models.Items.Weapons;
 
     using Microsoft.Xna.Framework;
 
     public static class ItemFactory
     {
-        public static IEnumerable<PickableItem> MakeTextItems()
+        public static IEnumerable<PickableItem> MakeTestItems()
         {
             return new PickableItem[]
                        {
                            new GoldCoin(new Vector2(300, 300), "TestObjects/coin"),
-                           new Steak(new Vector2(448, 150))
+                           new Steak(new Vector2(448, 150)),
+                           new LightningStaff(new Vector2(50, 50)),
+                           new LaserGun(new Vector2(100, 50)), 
+                           new IceSpear(new Vector2(150, 50)), 
                        };
         }
 

@@ -1,7 +1,4 @@
-﻿using System;
-using Microsoft.Xna.Framework.Input;
-
-namespace LeGame.Models.Characters.Player
+﻿namespace LeGame.Models.Characters.Player
 {
     using System;
     using System.Linq;
@@ -16,15 +13,9 @@ namespace LeGame.Models.Characters.Player
 
     public class Player : Character
     {
-
-        public const int startingPointX = 500;
-        public const int startingPointY = 240;
-        private int killCount;
-        private IPickable[] inventory;
-        protected const int inventoryCapacity = 6;
+        protected const int InventoryCapacity = 6;
 
         private static readonly Vector2 DefaultStart = new Vector2(500, 240);
-
 
         protected Player(string type, int maxHealth, int currentHealth, int speed, int hitCooldown, ILevel level) 
             : base(DefaultStart, type, maxHealth, currentHealth, speed, hitCooldown, level)
@@ -32,42 +23,17 @@ namespace LeGame.Models.Characters.Player
             // TODO: Implement weapon pickup and display it on the character.
 
             
-            this.killCount = 0;
-            this.Inventory = new IPickable[inventoryCapacity];
+            this.KillCount = 0;
+            this.Inventory = new IPickable[InventoryCapacity];
 
-            this.EquippedWeapon = new Unarmed();
-
+            this.EquippedWeapon = new Unarmed(this.Position);
         }
 
         public Keys[] KbKeys { get; } = { Keys.W, Keys.A, Keys.S, Keys.D };
 
-        public int KillCount
-        {
-            get
-            {
-                return killCount;
-            }
+        public int KillCount { get; set; }
 
-            set
-            {
-                killCount = value;
-            }
-        }
-
-        public IPickable[] Inventory
-        {
-            get
-            {
-                return inventory;
-            }
-
-            set
-            {
-                inventory = value;
-            }
-        }
-
-       
+        public IPickable[] Inventory { get; set; }
 
         public override void Move()
         {
@@ -120,9 +86,9 @@ namespace LeGame.Models.Characters.Player
         public bool TryToPick(IPickable item)
         {
             bool picked = false;
-            if (this.inventory.Any(x => x == null))
+            if (this.Inventory.Any(x => x == null))
             {
-                for (int i = 0; i < inventoryCapacity; i++)
+                for (int i = 0; i < InventoryCapacity; i++)
                 {
                     if (this.Inventory[i] == null)
                     {
@@ -130,7 +96,6 @@ namespace LeGame.Models.Characters.Player
                         picked = true;
                         break;
                     }
-
                 }
                 return picked;
             }

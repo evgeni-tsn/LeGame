@@ -1,6 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-
-namespace LeGame.Core.Factories
+﻿namespace LeGame.Core.Factories
 {
     using System.Collections.Generic;
 
@@ -35,8 +33,10 @@ namespace LeGame.Core.Factories
                 enemy.Level = newLevel;
             }
 
-            newLevel.Assets.AddRange(ItemFactory.MakeTextItems());
-            
+            if (map == Maps.HouseMap)
+            {
+                newLevel.Assets.AddRange(ItemFactory.MakeTestItems());
+            }
 
             return newLevel;
         }

@@ -1,9 +1,9 @@
-┏TzzZzzzZzzzZzzzZzt┓
-i                  |
-i                  |
-i                  |
-I   b   b   b   b  |
-i                  |
+┏TzzZzzzX__TZzzzZzt┓
+i                  u
+i                  x
+i                  x
+I   b   b   b   b  x
+i                  U
 l                  |
 D                  |
 b   b   b   b   b  |
@@ -12,28 +12,31 @@ i                  |
 i                  |
 I   b   b   b   b  |
 i  W               |
-┗Nw.wwwwn--Nwwwwwwn┛
+┗Nw.wwwwn-----Nwwwn┛
 Legend:(char:file:isCollidable:drawPriority?)|[more layers at the same position]
  :Tiles/NULL:false
 .:Tiles/NULL:true
 D:Tiles/NULLDoorV:false
-┏:Tiles/BloodyWallNW:true:1|Tiles/BloodyBackground:false
+┏:Tiles/BloodyWallNW:true:1|Tiles/BloodyBackgroundEdit:false
 ┓:Tiles/BloodyWallNE:true
 ┗:Tiles/BloodyWallSW:true
 ┛:Tiles/BloodyWallSE:true
-B:Tiles/BloodyWallN:true:1|Tiles/BloodyBackground:false
-b:Tiles/BloodyBackground:false
+B:Tiles/BloodyWallN:true:1|Tiles/BloodyBackgroundEdit:false
+b:Tiles/BloodyBackgroundEdit:false
 _:Tiles/BloodyWallN:true
 -:Tiles/BloodyWallS:true
 |:Tiles/BloodyWallE:true
+u:Tiles/BloodyTeethRightN:true
+x:Tiles/BloodyTeethE:true
+U:Tiles/BloodyTeethRightS:true
 i:Tiles/BloodyWallW:true
 l:Tiles/BloodyTeethLeftN:true
 L:Tiles/BloodyTeethLeftS:true
-I:Tiles/BloodyWallW:true:1|Tiles/BloodyBackground:false
-j:Tiles/whiteWall2W:true|Tiles/Furniture/KitchenSW:false:1
+I:Tiles/BloodyWallW:true:1|Tiles/BloodyBackgroundEdit:false
 T:Tiles/BloodyTeethTopW:true
 t:Tiles/BloodyTeethTopE:true
-Z:Tiles/BloodyTeethBigN:false:1|Tiles/BloodyBackground:false|Tiles/NULL:true
+X:Tiles/BloodyTeethTopE:true:1|Tiles/BloodyBackgroundEdit:false
+Z:Tiles/BloodyTeethBigN:false:1|Tiles/BloodyBackgroundEdit:false|Tiles/NULL:true
 z:Tiles/BloodyTeethN:true
 N:Tiles/BloodyTeethDownW:true
 n:Tiles/BloodyTeethDownE:true

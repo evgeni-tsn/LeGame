@@ -33,6 +33,6 @@
 
         public abstract void Update(GameTime gameTime, ICharacter character = null);
 
-        public abstract void Draw(SpriteBatch spriteBatch, Vector2 location, float rotationA = 0, float rotationB = 0);
+        public abstract void Draw(SpriteBatch spriteBatch, Vector2 location, float rotationA = 0, float rotationB = 0, Texture2D additionalTexture = null);
     }
 }

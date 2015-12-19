@@ -12,7 +12,7 @@
             : base(position, type, maxHealth, currentHealth, speed, hitCooldown, level)
         {
             this.CanCollide = true;
-            this.EquippedWeapon = new Unarmed();
+            this.EquippedWeapon = new Unarmed(this.Position);
         }
 
         public string Direction { get; set; }

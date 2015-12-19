@@ -42,7 +42,7 @@
 
         }
 
-        public override void Draw(SpriteBatch spriteBatch, Vector2 location, float rotation = 0, float rotationB = 0)
+        public override void Draw(SpriteBatch spriteBatch, Vector2 location, float rotation = 0, float rotationB = 0, Texture2D additionalTexture = null)
         {
             // If rotation is not used, generate random rotation a single time for effect variety.
             if (this.Rotation.Equals(0) && rotation.Equals(0))

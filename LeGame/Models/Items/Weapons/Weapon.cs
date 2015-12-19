@@ -1,10 +1,14 @@
 ﻿namespace LeGame.Models.Items.Weapons
 {
     using LeGame.Interfaces;
+    using LeGame.Models.Items.PickableItems;
 
-    public abstract class Weapon : IWeapon
+    using Microsoft.Xna.Framework;
+
+    public abstract class Weapon : PickableItem, IWeapon
     {
-        protected Weapon(int damage, int range)
+        protected Weapon(Vector2 position, string type, int damage, int range)
+            : base(position, type)
         {
             this.Damage = damage;
             this.Range = range;
@@ -15,5 +19,10 @@
         public int Range { get; set; }
 
         public abstract void Attack(ILevel level, ICharacter attacker);
+
+        public void EquipCharacter(ICharacter character)
+        {
+            character.EquippedWeapon = this;
+        }
     }
 }
