@@ -7,5 +7,7 @@
         int Range { get; set; }
 
         void Attack(ILevel level, ICharacter attacker);
+
+        void EquipCharacter(ICharacter character);
     }
 }

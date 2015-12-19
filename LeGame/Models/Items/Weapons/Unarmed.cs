@@ -1,13 +1,18 @@
 ﻿namespace LeGame.Models.Items.Weapons
 {
     using Interfaces;
+
+    using Microsoft.Xna.Framework;
+
     using Projectiles;
 
     public class Unarmed : MeleeWeapon
     {
+        private const string UnarmedType = "Tiles/NULL";
         private const int UnarmedDamage = 70;
 
-        public Unarmed() : base(UnarmedDamage)
+        public Unarmed(Vector2 position) 
+            : base(position, UnarmedType, UnarmedDamage)
         {
         }
 

@@ -9,7 +9,6 @@ namespace LeGame.Handlers
     using Interfaces;
 
     using LeGame.Core.Factories;
-    using LeGame.Enumerations;
 
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Input;
@@ -68,9 +67,12 @@ namespace LeGame.Handlers
                         item.PickedUpBy(character);
                         Console.Beep(8000, 50);
                     }
-
+                    
                     var healingItem = item as IHeals;
                     healingItem?.HealCharacter(character);
+
+                    var weaponItem = item as IWeapon;
+                    weaponItem?.EquipCharacter(character);
                 }
             }
 

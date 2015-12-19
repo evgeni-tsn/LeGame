@@ -87,6 +87,7 @@
     <Compile Include="Models\Items\PickableItems\OrangePotion.cs" />
     <Compile Include="Models\Items\PickableItems\RedPotion.cs" />
     <Compile Include="Models\Items\PickableItems\Steak.cs" />
+    <Compile Include="Models\Items\Weapons\LightningStaff.cs" />
     <Compile Include="Models\Items\Weapons\Weapon.cs" />
     <Compile Include="Screens\Screen.cs" />
     <Compile Include="Screens\StatPanel.cs" />

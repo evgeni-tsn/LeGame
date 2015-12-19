@@ -1,21 +1,12 @@
-
-using System;
-using System.Linq;
-using System.Net;
-using System.Threading;
-using System.Threading.Tasks;
-
-
 namespace LeGame.Core
 {
-    using System.Threading;
+    using Core.Factories;
 
     using Enumerations;
 
     using Handlers;
 
-    using LeGame.Core.Factories;
-    using LeGame.Interfaces;
+    using Interfaces;
 
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
@@ -64,7 +55,7 @@ namespace LeGame.Core
 
             this.startScreen.Load(this.Content);
             this.deathScreen.Load(this.Content);
-            this.statPanel.Load(Content);
+            this.statPanel.Load(this.Content);
         }
         
         protected override void UnloadContent()
@@ -86,16 +77,11 @@ namespace LeGame.Core
 
             if (this.stage == GameStages.Start_Stage)
             {
-
-                
-
-
                 string characterClass = this.startScreen.IsClicked();
 
                 if (characterClass != null)
                 {
-                    //Thread.Sleep(10);
-                    if (characterClass=="Redhead")
+                    if (characterClass == "Redhead")
                     {
                         this.player = PlayerFacory.MakePlayer(PlayerChars.Redhead);
                     }
@@ -103,7 +89,7 @@ namespace LeGame.Core
                     {
                         this.player = PlayerFacory.MakePlayer(PlayerChars.TheGuy);
                     }
-                    else if(characterClass =="Blondie")
+                    else if (characterClass == "Blondie")
                     {
                         this.player = PlayerFacory.MakePlayer(PlayerChars.Blondy);
                     }
@@ -111,11 +97,7 @@ namespace LeGame.Core
                     this.startScreen.UnloadButtons();
                     this.stage = GameStages.GameStage;
 
-                    this.player.Level = LevelFactory.MakeLevel(this.player,Maps.HouseMap);
-                    
-
-
-                   
+                    this.player.Level = LevelFactory.MakeLevel(this.player, Maps.HouseMap);
                 }
 
                 this.startScreen.Update(mouse);
@@ -125,20 +107,17 @@ namespace LeGame.Core
             {
                 this.player.Level = null;
                 string death = this.deathScreen.IsClicked();
-                if (death !=null)
+                if (death != null)
                 {
                     this.startScreen.UnloadButtons();
                     this.stage = GameStages.Start_Stage;
                    
                 }
-                
-
                 this.deathScreen.Update(mouse);
             }
 
             if (this.stage == GameStages.GameStage)
             {
-                
                 GfxHandler.UpdateLevel(gameTime, this.player.Level);
 
                 if (this.player.CurrentHealth <= 0)
@@ -159,7 +138,7 @@ namespace LeGame.Core
             // TODO: Add your drawing code here
             if (this.stage == GameStages.GameStage)
             {
-                this.statPanel.Draw(this.player, spriteBatch);
+                this.statPanel.Draw(this.player, this.spriteBatch);
 
                 GfxHandler.DrawLevel(this.spriteBatch, this.player.Level);
             }
