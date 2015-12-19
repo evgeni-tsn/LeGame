@@ -61,7 +61,6 @@ namespace LeGame.Core
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
-            
         }
 
         protected override void Update(GameTime gameTime)
@@ -111,8 +110,8 @@ namespace LeGame.Core
                 {
                     this.startScreen.UnloadButtons();
                     this.stage = GameStages.Start_Stage;
-                   
                 }
+
                 this.deathScreen.Update(mouse);
             }
 
@@ -153,8 +152,7 @@ namespace LeGame.Core
                 this.GraphicsDevice.Clear(Color.Wheat);
                 this.startScreen.Draw(this.spriteBatch, this.GraphicsDevice);
             }
-
-
+            
             base.Draw(gameTime);
         }   
     }
