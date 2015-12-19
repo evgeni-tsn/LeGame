@@ -8,8 +8,12 @@
 
     public class MeleeSwing : Projectile
     {
+        private const string MeleeSwingType = "Projectiles/SwingProjectileEdit";
+
+        private const int MeleeSwingSpeed = 3;
+
         public MeleeSwing(ICharacter attacker, float angle, int damage, int range)
-            : base(attacker, "Projectiles/SwingProjectileEdit", damage, 3, angle, range)
+            : base(attacker, MeleeSwingType, damage, MeleeSwingSpeed, angle, range)
         {
         }
 

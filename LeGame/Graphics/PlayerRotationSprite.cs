@@ -55,12 +55,13 @@
             }
         }
 
-        public override void Draw(SpriteBatch spriteBatch, Vector2 location, float torsoRotation = 0, float legRotation = 0)
+        public override void Draw(SpriteBatch spriteBatch, Vector2 location, float torsoRotation = 0, float legRotation = 0, Texture2D additionalTexture = null)
         {
             int width = this.Texture.Width / this.Columns;
             int height = this.Texture.Height / this.Rows;
             int column = this.CurrentFrame % this.Columns;
             var origin = new Vector2(width / 2f, height / 2f);
+            var weaponOrigin = new Vector2(width / 2f, height / 1.3f);
 
             Rectangle torsoSource = new Rectangle(width * column, height * TorsoRow, width, height);
             Rectangle legsSource = new Rectangle(width * column, height * LegsRow, width, height);
@@ -68,6 +69,7 @@
 
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
             spriteBatch.Draw(this.Texture, null, destinationRectangle, legsSource, origin, legRotation);
+            spriteBatch.Draw(additionalTexture, location, null, null, weaponOrigin, torsoRotation + 0.6f);
             spriteBatch.Draw(this.Texture, null, destinationRectangle, torsoSource, origin, torsoRotation);
             spriteBatch.End();
         }

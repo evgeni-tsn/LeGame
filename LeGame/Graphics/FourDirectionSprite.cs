@@ -63,7 +63,7 @@
             }
         }
 
-        public override void Draw(SpriteBatch spriteBatch, Vector2 location, float a = 0, float b = 0)
+        public override void Draw(SpriteBatch spriteBatch, Vector2 location, float a = 0, float b = 0, Texture2D additionalTexture = null)
         {
             int width = this.Texture.Width / this.Columns;
             int height = this.Texture.Height / this.Rows;

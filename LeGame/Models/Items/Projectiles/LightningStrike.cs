@@ -8,14 +8,18 @@
 
     public class LightningStrike : Projectile
     {
+        private const string LightningStrikeType = "Projectiles/LightningProjectile";
+
         private const int LightningStrikeSpeed = 20;
 
         public LightningStrike(ICharacter attacker, float angle, int damage, int range) 
-            : base(attacker, "Projectiles/LightningProjectile", damage, LightningStrikeSpeed, angle, range)
+            : base(attacker, LightningStrikeType, damage, LightningStrikeSpeed, angle, range)
         {
+            // Initial displacement to match weapon position
+            this.Move();
         }
 
-        public override void Move()
+        public sealed override void Move()
         {
             this.Position = new Vector2(
                 this.Position.X + ((float)Math.Cos(this.Angle) * this.Speed),

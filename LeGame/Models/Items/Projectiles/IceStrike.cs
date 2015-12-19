@@ -6,14 +6,14 @@
 
     using Microsoft.Xna.Framework;
 
-    public class LaserBlast : Projectile
+    public class IceStrike : Projectile
     {
-        private const string LazerBlastType = "Projectiles/LaserProjectile";
-        
-        private const int LazerBlastSpeed = 20;
+        private const string IceStrikeType = "Projectiles/IceProjectileTilt";
 
-        public LaserBlast(ICharacter attacker, float angle, int damage, int range) 
-            : base(attacker, LazerBlastType, damage, LazerBlastSpeed, angle, range)
+        private const int IceStrikeDamage = 20;
+
+        public IceStrike(ICharacter attacker, float angle, int damage, int range)
+            : base(attacker, IceStrikeType, damage, IceStrikeDamage, angle, range)
         {
             // Initial displacement to match weapon position
             this.Move();

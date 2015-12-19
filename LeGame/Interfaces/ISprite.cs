@@ -12,6 +12,6 @@ namespace LeGame.Interfaces
 
         void Update(GameTime gameTime, ICharacter character = null);
 
-        void Draw(SpriteBatch spriteBatch, Vector2 location, float rotationA = 0, float rotationB = 0);
+        void Draw(SpriteBatch spriteBatch, Vector2 location, float rotationA = 0, float rotationB = 0, Texture2D additionalTexture = null);
     }
 }

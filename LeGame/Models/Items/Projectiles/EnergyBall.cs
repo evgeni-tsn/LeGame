@@ -8,10 +8,12 @@
 
     public class EnergyBall : Projectile
     {
+        private const string EnergyBallType = "Projectiles/EnergyBallProjectile";
+
         private const int EnergyBallSpeed = 20;
 
         public EnergyBall(ICharacter attacker, float angle, int damage, int range) 
-            : base(attacker, "Projectiles/EnergyBallProjectile", damage, EnergyBallSpeed, angle, range)
+            : base(attacker, EnergyBallType, damage, EnergyBallSpeed, angle, range)
         {
         }
 

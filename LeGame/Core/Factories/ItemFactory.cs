@@ -18,6 +18,7 @@
                            new Steak(new Vector2(448, 150)),
                            new LightningStaff(new Vector2(50, 50)),
                            new LaserGun(new Vector2(100, 50)), 
+                           new IceSpear(new Vector2(150, 50)), 
                        };
         }
 

@@ -115,6 +115,13 @@
             {
                 GetSprite(ememy).Draw(spriteBatch, ememy.Position);
             }
+            
+            GetSprite(level.Player).Draw(
+                spriteBatch, 
+                level.Player.Position,
+                level.Player.FacingAngle,
+                level.Player.MovementAngle,
+                GetTexture(level.Player.EquippedWeapon));
 
             foreach (var projectile in level.Projectiles.ToList())
             {
@@ -125,8 +132,6 @@
                     level.Projectiles.Remove(projectile);
                 }
             }
-
-            GetSprite(level.Player).Draw(spriteBatch, level.Player.Position, level.Player.FacingAngle, level.Player.MovementAngle);
         }
         
         // Get Bounding Box
