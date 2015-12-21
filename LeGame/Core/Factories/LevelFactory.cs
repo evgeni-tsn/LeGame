@@ -20,9 +20,19 @@
             ILevel newLevel = new Level($@"{GlobalVariables.ContentDir}Maps\{map}.txt", player);
             player.Position = GetNewPlayerPosition(player.Position);
 
+
+            var spawnLocations = new List<ISpanwLocation>();
+            foreach (IGameObject asset in player.Level.Assets)
+            {
+                if (asset.Type.Contains("SpawnLocation"))
+                {
+                    spawnLocations.Add(asset);
+                }
+            }
+
             if (map == Maps.BloodyMapW)
             {
-                IEnumerable<ICharacter> enemies = EnemyFactory.MakeRandomEnemies();
+                IEnumerable<ICharacter> enemies = EnemyFactory.MakeRandomEnemies(spawnLocations);
                 newLevel.Enemies.AddRange(enemies);
                 //TODO figure a way to avoid hardcoding here
                 player.Position = new Vector2(600,240);
