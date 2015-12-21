@@ -12,7 +12,7 @@
 
     public static class EnemyFactory
     {
-        public static IEnumerable<ICharacter> MakeRandomEnemies()
+        public static IEnumerable<ICharacter> MakeRandomEnemies(List<ISpanwLocations> spawnLocations)
         {
             IList<ICharacter> enemies = new List<ICharacter>();
 
