@@ -99,7 +99,7 @@
                                 null,
                                 null,
                                 SpriteEffects.None,
-                                0.1f); // Layer 1 since everything else is 0
+                                0.1f); // Layer 0.1 since everything else is 0
                         }
                         else
                         {
@@ -200,7 +200,7 @@
                     UniqueSprites.Add(enemy.Id, new FourDirectionSprite(GetTexture(enemy.Type)));
                 }
             }
-            else if (UniqueSprites.Count > enemies.Count)
+            else //if (UniqueSprites.Count > enemies.Count)
             {
                 // Make sure that the dead enemies are not kept in the list.
                 foreach (var sprite in UniqueSprites.Where(s => !enemies.Select(e => e.Id).Contains(s.Key)).ToList())

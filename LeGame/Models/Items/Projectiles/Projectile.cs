@@ -18,7 +18,7 @@
         
         public int Damage { get; }
 
-        public int Speed { get; set; }
+        public float Speed { get; set; }
 
         public float Angle { get; }
 

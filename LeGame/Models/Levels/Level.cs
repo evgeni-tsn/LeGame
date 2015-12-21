@@ -1,10 +1,10 @@
-﻿namespace LeGame.Models
+﻿namespace LeGame.Models.Levels
 {
     using System.Collections.Generic;
 
     using Interfaces;
 
-    using LeGame.Models.Items.LevelAssets;
+    using LeGame.Models.Levels.LevelAssets;
 
     public class Level : ILevel
     {
@@ -13,7 +13,7 @@
             this.Player = player;
 
             this.Type = path;
-            var backgroundBuilder = new BackgroundBuilder(path);
+            var backgroundBuilder = new LevelBuilder(path);
 
             this.Assets = backgroundBuilder.Background;
             this.Enemies = new List<ICharacter>();
@@ -30,7 +30,5 @@
         public List<ICharacter> Enemies { get; }
 
         public List<IGameObject> Assets { get; }
-
-       
     }
 }

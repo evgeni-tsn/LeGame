@@ -5,6 +5,8 @@
 
     using Interfaces;
 
+    using LeGame.Enumerations;
+
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
     using Microsoft.Xna.Framework.Input;
@@ -15,20 +17,20 @@
     {
         private const int FourDirectionSpriteUpdateTime = 130;
 
-        private readonly Dictionary<Keys, string> keyToDirection = new Dictionary<Keys, string>
+        private readonly Dictionary<Keys, MoveDirection> keyToDirection = new Dictionary<Keys, MoveDirection>
         {
-            { Keys.D, "Right" },
-            { Keys.A, "Left" },
-            { Keys.W, "Up"},
-            { Keys.S, "Down" }
+            { Keys.D, MoveDirection.Right },
+            { Keys.A, MoveDirection.Left },
+            { Keys.W, MoveDirection.Up },
+            { Keys.S, MoveDirection.Down }
         };
 
-        private readonly Dictionary<string, int[]> directionToFrames = new Dictionary<string, int[]>
+        private readonly Dictionary<MoveDirection, int[]> directionToFrames = new Dictionary<MoveDirection, int[]>
         {
-            { "Right", new[] { 6, 7, 8 } },
-            { "Up", new[] { 9, 10, 11 } },
-            { "Left", new[] { 3, 4, 5 } },
-            { "Down", new[] { 0, 1, 2 } }
+            { MoveDirection.Right, new[] { 6, 7, 8 } },
+            { MoveDirection.Up, new[] { 9, 10, 11 } },
+            { MoveDirection.Left, new[] { 3, 4, 5 } },
+            { MoveDirection.Down, new[] { 0, 1, 2 } }
         };
 
         public FourDirectionSprite(Texture2D texture) 
@@ -78,14 +80,9 @@
             spriteBatch.End();
         }
 
-        private void SpriteRotaions(GameTime gameTime, string direction)
+        private void SpriteRotaions(GameTime gameTime, MoveDirection direction)
         {
-            if (string.IsNullOrEmpty(direction))
-            {
-                return;
-            }
-
-            foreach (string direct in this.directionToFrames.Keys.Where(key => direction.Equals(key)))
+            foreach (MoveDirection direct in this.directionToFrames.Keys.Where(key => direction.Equals(key)))
             {
                 if (this.directionToFrames[direct].Contains(this.CurrentFrame))
                 {

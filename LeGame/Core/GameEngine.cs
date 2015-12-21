@@ -96,7 +96,7 @@ namespace LeGame.Core
                     this.startScreen.UnloadButtons();
                     this.stage = GameStages.GameStage;
 
-                    this.player.Level = LevelFactory.MakeLevel(this.player, Maps.BloodyMapN);
+                    this.player.Level = LevelFactory.MakeLevel(this.player, Maps.HouseMap);
                 }
 
                 this.startScreen.Update(mouse);

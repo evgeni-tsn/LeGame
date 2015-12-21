@@ -1,13 +1,11 @@
-﻿using System.Text;
-using LeGame.Models.Misc;
-
-namespace LeGame.Core.Factories
+﻿namespace LeGame.Core.Factories
 {
     using System.Collections.Generic;
 
     using LeGame.Enumerations;
     using LeGame.Interfaces;
-    using LeGame.Models;
+    using LeGame.Models.Levels;
+    using LeGame.Models.Levels.LevelAssets;
 
     using Microsoft.Xna.Framework;
 
@@ -15,16 +13,15 @@ namespace LeGame.Core.Factories
     {
         public static ILevel MakeLevel(ICharacter player, Maps map = Maps.Random)
         {
-            while (map == Maps.Random)
+            // Get a new random map, which is not the same as the previous map.
+            while (map == Maps.Random || (player.Level != null && player.Level.Type.Contains(map.ToString())))
             {
+                // 2 in order to skip the starting map
                 map = (Maps)GlobalVariables.Rng.Next(2, 6);
             }
 
             ILevel newLevel = new Level($@"{GlobalVariables.ContentDir}Maps\{map}.txt", player);
-            player.Position = GetNewPlayerPosition(player.Position);
-
-
-
+            
             if (map == Maps.HouseMap)
             {
                 newLevel.Assets.AddRange(ItemFactory.MakeTestItems());
@@ -39,21 +36,18 @@ namespace LeGame.Core.Factories
                 }
             }
 
-            if (map == Maps.BloodyMapN)
+            if (map.ToString().Contains("Bloody"))
             {
                 IEnumerable<ICharacter> enemies = EnemyFactory.MakeRandomEnemies(spawnLocations);
                 newLevel.Enemies.AddRange(enemies);
                 //TODO figure a way to avoid hardcoding here
-                player.Position = new Vector2(600,240);
+                player.Position = GetNewPlayerPosition(player.Position);
             }
 
             foreach (ICharacter enemy in newLevel.Enemies)
             {
                 enemy.Level = newLevel;
             }
-
-            
-           
 
             return newLevel;
         }

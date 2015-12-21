@@ -1,12 +1,11 @@
-﻿using LeGame.Models.Misc;
-
-namespace LeGame.Core.Factories
+﻿namespace LeGame.Core.Factories
 {
     using System.Collections.Generic;
 
     using LeGame.Handlers;
     using LeGame.Interfaces;
     using LeGame.Models.Characters.Enemies;
+    using LeGame.Models.Levels.LevelAssets;
 
     using Microsoft.Xna.Framework;
 
@@ -21,21 +20,31 @@ namespace LeGame.Core.Factories
             for (int i = 0; i < locations.Count; i++)
             {
                 Rectangle hugeBox = locations[i].InfalateBBox();
+                
+                var randomPosition = new Vector2(Rng.Next(hugeBox.Left + 10, hugeBox.Right - 10), Rng.Next(hugeBox.Top + 10, hugeBox.Bottom - 10));
+                ICharacter enemy;
 
-                for (int j = 0; j <5; j++)
+                switch (Rng.Next(0,3))
                 {
-                    var randomPosition = new Vector2(Rng.Next(hugeBox.Left + 10, hugeBox.Right - 10), Rng.Next(hugeBox.Top + 10, hugeBox.Bottom - 10));
-                    var enemy = new Chicken(randomPosition, locations[i]);
-                    enemy.Died += (sender, args) => GfxHandler.AddDeathEffect(sender);
-                    enemy.Died += (sender, args) => ItemFactory.SpawnPotionByChance(sender);
-                    enemy.Damaged += (sender, args) => GfxHandler.AddBloodEffect(sender);
-
-                    enemies.Add(enemy);
+                    case 0:
+                        enemy = new Zombie(randomPosition, locations[i]);
+                        break;
+                    case 1:
+                        enemy = new Crawler(randomPosition, locations[i]);
+                        break;
+                    case 2:
+                        // Skip some locations for a bit randomness.
+                        continue;
+                    default:
+                        enemy = new Chicken(randomPosition, locations[i]);
+                        break;
                 }
-               
-                
 
-                
+                enemy.Died += (sender, args) => GfxHandler.AddDeathEffect(sender);
+                enemy.Died += (sender, args) => ItemFactory.SpawnPotionByChance(sender);
+                enemy.Damaged += (sender, args) => GfxHandler.AddBloodEffect(sender);
+
+                enemies.Add(enemy);
             }
 
             return enemies;

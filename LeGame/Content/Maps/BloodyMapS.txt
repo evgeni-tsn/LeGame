@@ -1,13 +1,13 @@
 ┏TzzZzzzX__TZzzzZzt┓
 u                  |
 x                  |
-x                  |
-K   b   b   b   b  |
+x     S       S    |
+K   b   b S b   b  |
 U                  |
+i       S   S      |
 i                  |
-i                  |
-I   b   b   b   b  |
-i                  |
+I   b   b S b   b  |
+i     S       S    |
 i                  |
 i                  |
 I   b   b   b   b  |
@@ -16,6 +16,7 @@ i  W            W  |
 Legend:(char:file:isCollidable:drawPriority?)|[more layers at the same position]
  :Tiles/NULL:false
 .:Tiles/NULL:true
+S:Tiles/SpawnPointNULL:false
 D:Tiles/NULLDoorH:false
 ┏:Tiles/BloodyWallNW:true:1|Tiles/BloodyBackgroundEdit:false
 ┓:Tiles/BloodyWallNE:true

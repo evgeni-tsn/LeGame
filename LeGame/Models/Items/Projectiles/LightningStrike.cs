@@ -10,13 +10,11 @@
     {
         private const string LightningStrikeType = "Projectiles/LightningProjectile";
 
-        private const int LightningStrikeSpeed = 20;
+        private const int LightningStrikeSpeed = 32;
 
         public LightningStrike(ICharacter attacker, float angle, int damage, int range) 
             : base(attacker, LightningStrikeType, damage, LightningStrikeSpeed, angle, range)
         {
-            // Initial displacement to match weapon position
-            this.Move();
         }
 
         public sealed override void Move()
