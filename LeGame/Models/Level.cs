@@ -18,6 +18,7 @@
             this.Assets = backgroundBuilder.Background;
             this.Enemies = new List<ICharacter>();
             this.Projectiles = new List<IProjectile>();
+            
         }
 
         public string Type { get; }
@@ -29,5 +30,7 @@
         public List<ICharacter> Enemies { get; }
 
         public List<IGameObject> Assets { get; }
+
+       
     }
 }

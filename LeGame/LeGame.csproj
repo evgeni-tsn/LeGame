@@ -82,6 +82,7 @@
     <Compile Include="Graphics\Sprite.cs" />
     <Compile Include="Interfaces\IButton.cs" />
     <Compile Include="Interfaces\IScreen.cs" />
+    <Compile Include="Interfaces\ISpawnLocation.cs" />
     <Compile Include="Interfaces\IStat.cs" />
     <Compile Include="Models\Items\PickableItems\HealingItem.cs" />
     <Compile Include="Models\Items\PickableItems\OrangePotion.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="Models\Items\Weapons\LightningStaff.cs" />
     <Compile Include="Models\Items\Weapons\IceSpear.cs" />
     <Compile Include="Models\Items\Weapons\Weapon.cs" />
+    <Compile Include="Models\Misc\SpawnLocation.cs" />
     <Compile Include="Screens\Screen.cs" />
     <Compile Include="Screens\StatPanel.cs" />
     <Compile Include="Handlers\MovementHandler.cs" />

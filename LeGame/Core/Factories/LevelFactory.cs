@@ -1,4 +1,7 @@
-﻿namespace LeGame.Core.Factories
+﻿using System.Text;
+using LeGame.Models.Misc;
+
+namespace LeGame.Core.Factories
 {
     using System.Collections.Generic;
 
@@ -21,16 +24,22 @@
             player.Position = GetNewPlayerPosition(player.Position);
 
 
-            var spawnLocations = new List<ISpanwLocation>();
-            foreach (IGameObject asset in player.Level.Assets)
+
+            if (map == Maps.HouseMap)
             {
-                if (asset.Type.Contains("SpawnLocation"))
+                newLevel.Assets.AddRange(ItemFactory.MakeTestItems());
+            }
+
+            var spawnLocations = new List<SpawnLocation>();
+            foreach (IGameObject asset in newLevel.Assets)
+            {
+                if (asset.Type.Contains("SpawnPoint"))
                 {
-                    spawnLocations.Add(asset);
+                    spawnLocations.Add(new SpawnLocation(asset.Position, asset.Type, 0, false));
                 }
             }
 
-            if (map == Maps.BloodyMapW)
+            if (map == Maps.BloodyMapN)
             {
                 IEnumerable<ICharacter> enemies = EnemyFactory.MakeRandomEnemies(spawnLocations);
                 newLevel.Enemies.AddRange(enemies);
@@ -43,10 +52,8 @@
                 enemy.Level = newLevel;
             }
 
-            if (map == Maps.HouseMap)
-            {
-                newLevel.Assets.AddRange(ItemFactory.MakeTestItems());
-            }
+            
+           
 
             return newLevel;
         }
