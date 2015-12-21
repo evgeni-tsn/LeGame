@@ -2,7 +2,7 @@
 {
     public interface IMovable
     {
-        int Speed { get; set; }
+        float Speed { get; }
 
         void Move();
     }

@@ -9,6 +9,7 @@ namespace LeGame.Handlers
     using Interfaces;
 
     using LeGame.Core.Factories;
+    using LeGame.Models.Items.Weapons;
 
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Input;
@@ -99,7 +100,10 @@ namespace LeGame.Handlers
 
             if (collider != null)
             {
-                level.Projectiles.Remove(projectile);
+                if (level.Player.EquippedWeapon is RangedWeapon)
+                {
+                    level.Projectiles.Remove(projectile);
+                }
 
                 var enemy = collider as Enemy;
                 enemy?.TakeDamage(projectile.Attacker);

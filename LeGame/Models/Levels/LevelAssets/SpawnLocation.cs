@@ -1,13 +1,11 @@
-﻿using System;
-using LeGame.Handlers;
-using LeGame.Interfaces;
-using LeGame.Models.Items.LevelAssets;
-using Microsoft.Xna.Framework;
-
-
-namespace LeGame.Models.Misc
+﻿namespace LeGame.Models.Levels.LevelAssets
 {
-    public class SpawnLocation : BackgroundAsset, ISpawnLocation
+    using LeGame.Handlers;
+    using LeGame.Interfaces;
+
+    using Microsoft.Xna.Framework;
+
+    public class SpawnLocation : LevelAsset, ISpawnLocation
     {
         public SpawnLocation(Vector2 position, string type, int drawPriority, bool canCollide)
             : base(position, type, drawPriority, canCollide)
@@ -17,12 +15,8 @@ namespace LeGame.Models.Misc
         public Rectangle InfalateBBox()
         {
             Rectangle originaBBox = GfxHandler.GetBBox(this);
-            originaBBox.Inflate(50,50);
+            originaBBox.Inflate(50, 50);
             return originaBBox; 
         }
-
-        public bool CanCollide { get; set; }
-
-        
     }
 }

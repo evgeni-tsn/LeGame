@@ -10,10 +10,10 @@
     {
         private const string IceStrikeType = "Projectiles/IceProjectileTilt";
 
-        private const int IceStrikeDamage = 20;
+        private const int IceStrikeSpeed = 15;
 
         public IceStrike(ICharacter attacker, float angle, int damage, int range)
-            : base(attacker, IceStrikeType, damage, IceStrikeDamage, angle, range)
+            : base(attacker, IceStrikeType, damage, IceStrikeSpeed, angle, range)
         {
             // Initial displacement to match weapon position
             this.Move();

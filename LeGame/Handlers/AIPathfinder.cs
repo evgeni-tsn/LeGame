@@ -1,21 +1,20 @@
-﻿using System.Net;
-using Microsoft.Xna.Framework.Input.Touch;
-
-namespace LeGame.Handlers
+﻿namespace LeGame.Handlers
 {
-    using System;
-
     using Core;
 
     using Interfaces;
+
+    using LeGame.Enumerations;
 
     using Microsoft.Xna.Framework;
 
     using Models.Characters.Enemies;
 
+    using static LeGame.Enumerations.MoveDirection;
+
     public static class AiPathfinder
     {
-        private const float tolerance = 0.001f;
+        //private const float tolerance = 0.001f;
 
         public static void FindPath(ICharacter player, ICharacter ai)
         {
@@ -23,6 +22,9 @@ namespace LeGame.Handlers
             {
                 return;
             }
+
+            var enemyAi = (Enemy)ai;
+
             if ((ai as Enemy).IsAggroed == false)
             {
                 Enemy vrag = ai as Enemy;
@@ -30,104 +32,122 @@ namespace LeGame.Handlers
                 Rectangle playerBbox = GfxHandler.GetBBox(player);
                 ISpawnLocation spawnLocation = vrag.SpawnLocation;
                 Rectangle spawnBbox = spawnLocation.InfalateBBox();
-                Rectangle inflatedBox = vragBbox;
-                inflatedBox.Inflate(150, 150);
-                if (String.IsNullOrEmpty(vrag.Direction))
+                Rectangle aggroBox = vragBbox;
+                aggroBox.Inflate(100, 100);
+
+                if (vrag.Direction == NotSet)
                 {
-                    vrag.Direction = "Down";
+                    // Random initial movement direction.
+                    vrag.Direction = (MoveDirection)GlobalVariables.Rng.Next(1, 5);
                 }
 
-                if (inflatedBox.Intersects(playerBbox))
+                if (aggroBox.Intersects(playerBbox))
                 {
                     vrag.IsAggroed = true;
                 }
-                if (vragBbox.Intersects(spawnBbox))
+
+                if (vragBbox.Intersects(spawnBbox) && CollisionHandler.Collide(ai, ai.Level.Assets) == null)
                 {
-                    if (vrag.Direction == "Down")
+                    if (vrag.Direction == Down)
                     {
-                        ai.Position = new Vector2(ai.Position.X, ai.Position.Y + ai.Speed/2);
-                        //((Enemy)ai).Direction = "Down";
+                        MovementHandler.MoveDown(ai, 0.5f);
                     }
-                    else if (vrag.Direction == "Up")
+                    else if (vrag.Direction == Up)
                     {
-                        ai.Position = new Vector2(ai.Position.X, ai.Position.Y - ai.Speed/2);
-                        //((Enemy)ai).Direction = "Up";
+                        MovementHandler.MoveUp(ai, 0.5f);
+                    }
+                    else if (vrag.Direction == Left)
+                    {
+                        MovementHandler.MoveLeft(ai, 0.5f);
+                    }
+                    else if (vrag.Direction == Right)
+                    {
+                        MovementHandler.MoveRight(ai, 0.5f);
                     }
                 }
                 else
                 {
-                    if (vrag.Direction == "Down")
+                    if (vrag.Direction == Down)
                     {
-                        ai.Position = new Vector2(ai.Position.X, ai.Position.Y - ai.Speed*2);
-                        
-                        ((Enemy)ai).Direction = "Up";
+                        MovementHandler.MoveUp(ai, 2f);
+                        enemyAi.Direction = Up;
                     }
-                    else if (vrag.Direction == "Up")
+                    else if (vrag.Direction == Up)
                     {
-                        ai.Position = new Vector2(ai.Position.X, ai.Position.Y + ai.Speed*2);
-                        ((Enemy)ai).Direction = "Down";
-
+                        MovementHandler.MoveDown(ai, 2f);
+                        enemyAi.Direction = Down;
+                    }
+                    else if (vrag.Direction == Right)
+                    {
+                        MovementHandler.MoveLeft(ai, 2f);
+                        enemyAi.Direction = Left;
+                    }
+                    else if (vrag.Direction == Left)
+                    {
+                        MovementHandler.MoveRight(ai, 2f);
+                        enemyAi.Direction = Right;
                     }
                 }
                 return;
+            }
+
+            // Testing out without this
+
+            //if (Math.Abs(ai.Position.X - player.Position.X) > tolerance && 
+            //    Math.Abs(ai.Position.Y - player.Position.Y) > tolerance)
+            //{
+            //    if (GlobalVariables.Rng.Next(1, 3) == 1)
+            //    {
+            //        if (ai.Position.X < player.Position.X)
+            //        {
+            //            MovementHandler.MoveRight(ai);
+            //            enemyAi.Direction = Right;
+            //        }
+            //        else if (ai.Position.X > player.Position.X)
+            //        {
+            //            MovementHandler.MoveLeft(ai);
+            //            enemyAi.Direction = Left;
+            //        }
+            //        //else if(ai.Position.X < player.Position.X +10 || ai.Position.X > player.Position.X-10)
+            //        //{
+            //            if (ai.Position.Y < player.Position.Y)
+            //            {
+            //                MovementHandler.MoveDown(ai);
+            //                enemyAi.Direction = Down;
+            //            }
+            //            else if (ai.Position.Y > player.Position.Y)
+            //            {
+            //                MovementHandler.MoveUp(ai);
+            //                enemyAi.Direction = Up;
+            //            }
+            //       // }
+            //    }
+            //}
+            //else
+            //{
                 
-               
-            }
-
-
-            if (Math.Abs(ai.Position.X - player.Position.X) > tolerance && 
-                Math.Abs(ai.Position.Y - player.Position.Y) > tolerance)
-            {
-                if (GlobalVariables.Rng.Next(1, 3) == 1)
+                if (ai.Position.Y < player.Position.Y)
                 {
-                    if (ai.Position.X < player.Position.X)
-                    {
-                        ai.Position = new Vector2(ai.Position.X + ai.Speed, ai.Position.Y);
-                        ((Enemy)ai).Direction = "Right";
-                    }
-                    else if (ai.Position.X > player.Position.X)
-                    {
-                        ai.Position = new Vector2(ai.Position.X - ai.Speed, ai.Position.Y);
-                        ((Enemy)ai).Direction = "Left";
-                    }
-                    //else if(ai.Position.X < player.Position.X +10 || ai.Position.X > player.Position.X-10)
-                    //{
-                        if (ai.Position.Y < player.Position.Y)
-                        {
-                            ai.Position = new Vector2(ai.Position.X, ai.Position.Y + ai.Speed);
-                            ((Enemy)ai).Direction = "Down";
-                        }
-                        else if (ai.Position.Y > player.Position.Y)
-                        {
-                            ai.Position = new Vector2(ai.Position.X, ai.Position.Y - ai.Speed);
-                            ((Enemy)ai).Direction = "Up";
-                        }
-                   // }
-                }
-            }
-            else
-            {
-                if (ai.Position.X < player.Position.X)
-                {
-                    ai.Position = new Vector2(ai.Position.X + ai.Speed, ai.Position.Y);
-                    ((Enemy)ai).Direction = "Right";
-                }
-                else if (ai.Position.X > player.Position.X)
-                {
-                    ai.Position = new Vector2(ai.Position.X - ai.Speed, ai.Position.Y);
-                    ((Enemy)ai).Direction = "Left";
-                }
-                else if (ai.Position.Y < player.Position.Y)
-                {
-                    ai.Position = new Vector2(ai.Position.X, ai.Position.Y + ai.Speed);
-                    ((Enemy)ai).Direction = "Down";
+                    MovementHandler.MoveDown(ai, 0.7f);
+                    enemyAi.Direction = Down;
                 }
                 else if (ai.Position.Y > player.Position.Y)
                 {
-                    ai.Position = new Vector2(ai.Position.X, ai.Position.Y - ai.Speed);
-                    ((Enemy)ai).Direction = "Up";
+                    MovementHandler.MoveUp(ai, 0.7f);
+                    enemyAi.Direction = Up;
                 }
-            }
+
+                if (ai.Position.X < player.Position.X)
+                {
+                    MovementHandler.MoveRight(ai, 0.7f);
+                    enemyAi.Direction = Right;
+                }
+                else if (ai.Position.X > player.Position.X)
+                {
+                    MovementHandler.MoveLeft(ai, 0.7f);
+                    enemyAi.Direction = Left;
+                }
+            //}
         }
     }
 }

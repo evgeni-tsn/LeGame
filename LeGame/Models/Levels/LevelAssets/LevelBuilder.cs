@@ -1,4 +1,4 @@
-﻿namespace LeGame.Models.Items.LevelAssets
+﻿namespace LeGame.Models.Levels.LevelAssets
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -10,11 +10,11 @@
 
     using Microsoft.Xna.Framework;
 
-    public class BackgroundBuilder
+    public class LevelBuilder
     {
         private readonly List<IGameObject> background;
         
-        public BackgroundBuilder(string mapFilePath)
+        public LevelBuilder(string mapFilePath)
         {
             // Read the text file for the map and find the separation between map and legend.
             List<string> mapFile = FileHandler.ReadMapFile(mapFilePath);
@@ -57,7 +57,7 @@
                         int drawPriority = parameters.Length > 2 ? int.Parse(parameters[2]) : 0;
                         var position = new Vector2(col * GlobalVariables.TileHeight, row * GlobalVariables.TileWidth);
 
-                        this.background.Add(new BackgroundAsset(position, contentPath, drawPriority, hasCollision));
+                        this.background.Add(new LevelAsset(position, contentPath, drawPriority, hasCollision));
                     }
                 }
             }
@@ -68,7 +68,7 @@
             get
             {
                 return this.background
-                    .OrderBy(ass => ((BackgroundAsset)ass).DrawPriority)
+                    .OrderBy(ass => ((LevelAsset)ass).DrawPriority)
                     .ToList();
             }
         }
