@@ -1,5 +1,7 @@
 ﻿namespace LeGame.Handlers
 {
+    using System;
+
     using Core;
 
     using Interfaces;
@@ -14,7 +16,7 @@
 
     public static class AiPathfinder
     {
-        //private const float tolerance = 0.001f;
+        private const float Tolerance = 0.001f;
 
         public static void FindPath(ICharacter player, ICharacter ai)
         {
@@ -22,6 +24,8 @@
             {
                 return;
             }
+
+            Vector2 playerCenter = new Vector2(player.Position.X - 16, player.Position.Y - 16);
 
             var enemyAi = (Enemy)ai;
 
@@ -91,63 +95,61 @@
                 return;
             }
 
-            // Testing out without this
-
-            //if (Math.Abs(ai.Position.X - player.Position.X) > tolerance && 
-            //    Math.Abs(ai.Position.Y - player.Position.Y) > tolerance)
-            //{
-            //    if (GlobalVariables.Rng.Next(1, 3) == 1)
-            //    {
-            //        if (ai.Position.X < player.Position.X)
-            //        {
-            //            MovementHandler.MoveRight(ai);
-            //            enemyAi.Direction = Right;
-            //        }
-            //        else if (ai.Position.X > player.Position.X)
-            //        {
-            //            MovementHandler.MoveLeft(ai);
-            //            enemyAi.Direction = Left;
-            //        }
-            //        //else if(ai.Position.X < player.Position.X +10 || ai.Position.X > player.Position.X-10)
-            //        //{
-            //            if (ai.Position.Y < player.Position.Y)
-            //            {
-            //                MovementHandler.MoveDown(ai);
-            //                enemyAi.Direction = Down;
-            //            }
-            //            else if (ai.Position.Y > player.Position.Y)
-            //            {
-            //                MovementHandler.MoveUp(ai);
-            //                enemyAi.Direction = Up;
-            //            }
-            //       // }
-            //    }
-            //}
-            //else
-            //{
-                
-                if (ai.Position.Y < player.Position.Y)
+            if (Math.Abs(ai.Position.X - playerCenter.X) > Tolerance &&
+                Math.Abs(ai.Position.Y - playerCenter.Y) > Tolerance)
+            {
+                if (GlobalVariables.Rng.Next(1, 3) == 1)
                 {
-                    MovementHandler.MoveDown(ai, 0.7f);
+                    if (ai.Position.X < playerCenter.X)
+                    {
+                        MovementHandler.MoveRight(ai);
+                        enemyAi.Direction = Right;
+                    }
+                    else if (ai.Position.X > playerCenter.X)
+                    {
+                        MovementHandler.MoveLeft(ai);
+                        enemyAi.Direction = Left;
+                    }
+                    //else if(ai.Position.X < player.Position.X +10 || ai.Position.X > player.Position.X-10)
+                    //{
+                    if (ai.Position.Y < playerCenter.Y)
+                    {
+                        MovementHandler.MoveDown(ai);
+                        enemyAi.Direction = Down;
+                    }
+                    else if (ai.Position.Y > playerCenter.Y)
+                    {
+                        MovementHandler.MoveUp(ai);
+                        enemyAi.Direction = Up;
+                    }
+                    // }
+                }
+            }
+            else
+            {
+
+                if (ai.Position.Y < playerCenter.Y)
+                {
+                    MovementHandler.MoveDown(ai);
                     enemyAi.Direction = Down;
                 }
-                else if (ai.Position.Y > player.Position.Y)
+                else if (ai.Position.Y > playerCenter.Y)
                 {
-                    MovementHandler.MoveUp(ai, 0.7f);
+                    MovementHandler.MoveUp(ai);
                     enemyAi.Direction = Up;
                 }
 
-                if (ai.Position.X < player.Position.X)
+                if (ai.Position.X < playerCenter.X)
                 {
-                    MovementHandler.MoveRight(ai, 0.7f);
+                    MovementHandler.MoveRight(ai);
                     enemyAi.Direction = Right;
                 }
-                else if (ai.Position.X > player.Position.X)
+                else if (ai.Position.X > playerCenter.X)
                 {
-                    MovementHandler.MoveLeft(ai, 0.7f);
+                    MovementHandler.MoveLeft(ai);
                     enemyAi.Direction = Left;
                 }
-            //}
+            }
         }
     }
 }
