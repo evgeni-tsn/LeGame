@@ -1,15 +1,15 @@
 ┏TzzZzzzX__TZzzzZzt┓
 i                  |
 i                  |
-i     S       S    |
-I   b   b S b   b  |
 i                  |
-i       S   S      l
+I   b   b   b   b  |
+i                  |
+i   S   S   S      l
 i                  D
 I   b   b S b   b   
-i     S       S    L
+i                  L
 i                  u
-i                  x
+i     S       S    x
 I   b   b   b   b  x
 i  W               U
 ┗Nw.wn-----Nwwwwwwn┛

@@ -30,5 +30,15 @@
             AiPathfinder.FindPath(this.Level.Player, this);
             CollisionHandler.AiCollide(this, this.Level.Player);
         }
+
+        public override void TakeDamage(ICharacter attacker)
+        {
+            if (!this.IsAggroed)
+            {
+                this.IsAggroed = true;
+            }
+
+            base.TakeDamage(attacker);
+        }
     }
 }

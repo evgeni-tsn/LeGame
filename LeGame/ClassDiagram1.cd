@@ -1,0 +1,628 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="LeGame.Core.Factories.EnemyFactory" Collapsed="true">
+    <Position X="57.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Factories\EnemyFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LeGame.Core.Factories.ItemFactory" Collapsed="true">
+    <Position X="52" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Factories\ItemFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LeGame.Core.Factories.LevelFactory" Collapsed="true">
+    <Position X="50.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>Core\Factories\LevelFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LeGame.Core.Factories.PlayerFacory" Collapsed="true">
+    <Position X="55.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Factories\PlayerFacory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LeGame.Core.GameEngine" Collapsed="true">
+    <Position X="52" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQQAEEAAAAAAAgAAAAAAAAAAAIAACAgBAAIAAAAAAAQ=</HashCode>
+      <FileName>Core\GameEngine.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LeGame.Core.GlobalVariables" Collapsed="true">
+    <Position X="55.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAACAAAACBAAAAAACAAAAAgCAEAAAAAAQAABAA=</HashCode>
+      <FileName>Core\GlobalVariables.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LeGame.Core.Messages" Collapsed="true">
+    <Position X="52" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Messages.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LeGame.Exceptions.CharacterException" Collapsed="true">
+    <Position X="53.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exceptions\CharacterException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LeGame.Exceptions.GameException" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exceptions\GameException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LeGame.Exceptions.MapException" Collapsed="true">
+    <Position X="0.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exceptions\MapException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LeGame.Graphics.EffectSprite" Collapsed="true">
+    <Position X="12.75" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAoAAAAAAQAAAAAAAAAAAACAAAAAAAAA=</HashCode>
+      <FileName>Graphics\EffectSprite.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LeGame.Graphics.FourDirectionSprite" Collapsed="true">
+    <Position X="8.25" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAgAAAAAAAAgAAAAAARAAAAAAAIAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Graphics\FourDirectionSprite.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LeGame.Graphics.PlayerRotationSprite" Collapsed="true">
+    <Position X="10.5" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAgAAAAAAgAAgAAAAAAAAAAAAAIAgAAAAAAAAAA=</HashCode>
+      <FileName>Graphics\PlayerRotationSprite.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LeGame.Graphics.RotationSprite" Collapsed="true">
+    <Position X="12.75" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAgAAAAAAAAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Graphics\RotationSprite.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LeGame.Graphics.Sprite" Collapsed="true">
+    <Position X="10.5" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AASAAAAAAAAACkAAAAACAAAAAAAAAAAAAAIAAEgAAAA=</HashCode>
+      <FileName>Graphics\Sprite.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="LeGame.Handlers.AiPathfinder" Collapsed="true">
+    <Position X="50.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>Handlers\AiPathfinder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LeGame.Handlers.CollisionHandler" Collapsed="true">
+    <Position X="55.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAAAAAAAAQAAAAAAAAAAIBAAAAAAAA=</HashCode>
+      <FileName>Handlers\CollisionHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LeGame.Handlers.FileHandler" Collapsed="true">
+    <Position X="50.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAAACAAAAAAAAAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>Handlers\FileHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LeGame.Handlers.GfxHandler" Collapsed="true">
+    <Position X="53.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAgAACABAAFAAAAAQAAkBAgEAQAEIAAQQAQEBATAA=</HashCode>
+      <FileName>Handlers\GfxHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LeGame.Handlers.MovementHandler" Collapsed="true">
+    <Position X="53.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAIQAAAAAAAAAA=</HashCode>
+      <FileName>Handlers\MovementHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LeGame.Screens.Screen" Collapsed="true">
+    <Position X="1.75" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAgAAACAAgAgAAAAAAAAAAAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>Screens\Screen.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="LeGame.Screens.StatPanel" Collapsed="true">
+    <Position X="50.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QBIAgAAQAAAAAgAAAAAAAAAAAAAAAAEAAAAAAAAAEAA=</HashCode>
+      <FileName>Screens\StatPanel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LeGame.Models.Characters.Character" Collapsed="true">
+    <Position X="8.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAEoAAGBAAAAAAAAQBQAAAAAADAAAIgAIAAAA=</HashCode>
+      <FileName>Models\Characters\Character.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="LeGame.Models.Characters.Enemies.Chicken" Collapsed="true">
+    <Position X="9.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAAEAACAACAAAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>Models\Characters\Enemies\Chicken.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LeGame.Models.Characters.Enemies.Crawler" Collapsed="true">
+    <Position X="11.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAACAAAAgAAAAAAAAAAAAAAACAAAEAA=</HashCode>
+      <FileName>Models\Characters\Enemies\Crawler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LeGame.Models.Characters.Enemies.Enemy" Collapsed="true">
+    <Position X="11.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIEAAIAAACAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Characters\Enemies\Enemy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LeGame.Models.Characters.Enemies.Zombie" Collapsed="true">
+    <Position X="7.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQBBAAAAAAAAAAQAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Characters\Enemies\Zombie.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LeGame.Models.Characters.Player.Blondy" Collapsed="true">
+    <Position X="2.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAAAAAAAAACAAAIAAQAAAQAAAAAAA=</HashCode>
+      <FileName>Models\Characters\Player\Blondy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LeGame.Models.Characters.Player.Player" Collapsed="true">
+    <Position X="5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAEIAAAAgAAwAAAAAAAAAQAAAAAAAAAgAAAAI=</HashCode>
+      <FileName>Models\Characters\Player\Player.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LeGame.Models.Characters.Player.Redhead" Collapsed="true">
+    <Position X="5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAgAAAAAEAAABA=</HashCode>
+      <FileName>Models\Characters\Player\Redhead.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LeGame.Models.Characters.Player.TheGuy" Collapsed="true">
+    <Position X="7.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQQAAAAAAAAAAAAAEAAAAAAAAAAAAAIAAgAAAAAAA=</HashCode>
+      <FileName>Models\Characters\Player\TheGuy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LeGame.Models.GameObject" Collapsed="true">
+    <Position X="25.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAgAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Models\GameObject.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="LeGame.Models.Items.PickableItems.GoldCoin" Collapsed="true">
+    <Position X="41" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Items\PickableItems\GoldCoin.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LeGame.Models.Items.PickableItems.HealingItem" Collapsed="true">
+    <Position X="45.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAABAAAA=</HashCode>
+      <FileName>Models\Items\PickableItems\HealingItem.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="LeGame.Models.Items.PickableItems.OrangePotion" Collapsed="true">
+    <Position X="45.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>Models\Items\PickableItems\OrangePotion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LeGame.Models.Items.PickableItems.PickableItem" Collapsed="true">
+    <Position X="39.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Items\PickableItems\PickableItem.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="LeGame.Models.Items.PickableItems.RedPotion" Collapsed="true">
+    <Position X="47.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABg=</HashCode>
+      <FileName>Models\Items\PickableItems\RedPotion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LeGame.Models.Items.PickableItems.Steak" Collapsed="true">
+    <Position X="43.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAABAAAAA=</HashCode>
+      <FileName>Models\Items\PickableItems\Steak.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LeGame.Models.Items.Projectiles.EnergyBall" Collapsed="true">
+    <Position X="18.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAIAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Items\Projectiles\EnergyBall.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LeGame.Models.Items.Projectiles.Grenade" Collapsed="true">
+    <Position X="20.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Items\Projectiles\Grenade.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LeGame.Models.Items.Projectiles.IceStrike" Collapsed="true">
+    <Position X="23.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIIAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Models\Items\Projectiles\IceStrike.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LeGame.Models.Items.Projectiles.LaserBlast" Collapsed="true">
+    <Position X="25.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Items\Projectiles\LaserBlast.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LeGame.Models.Items.Projectiles.LightningStrike" Collapsed="true">
+    <Position X="27.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAACgAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Items\Projectiles\LightningStrike.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LeGame.Models.Items.Projectiles.MeleeSwing" Collapsed="true">
+    <Position X="29.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAIAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Items\Projectiles\MeleeSwing.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LeGame.Models.Items.Projectiles.Projectile" Collapsed="true">
+    <Position X="24.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAGAAIAACAAAAAIAAAABAAAAAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>Models\Items\Projectiles\Projectile.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="LeGame.Models.Items.Weapons.IceSpear" Collapsed="true">
+    <Position X="34.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAAAAAAAAAAAAIAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Items\Weapons\IceSpear.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LeGame.Models.Items.Weapons.LaserGun" Collapsed="true">
+    <Position X="38.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAQAAAAAAAAAAAoAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Items\Weapons\LaserGun.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LeGame.Models.Items.Weapons.LightningStaff" Collapsed="true">
+    <Position X="36.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAAAAAAAAAAAAIAAAAAAAAAgAAAAgAA=</HashCode>
+      <FileName>Models\Items\Weapons\LightningStaff.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LeGame.Models.Items.Weapons.MeleeWeapon" Collapsed="true">
+    <Position X="33" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Items\Weapons\MeleeWeapon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LeGame.Models.Items.Weapons.RangedWeapon" Collapsed="true">
+    <Position X="37.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Items\Weapons\RangedWeapon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LeGame.Models.Items.Weapons.Unarmed" Collapsed="true">
+    <Position X="32" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAACAKAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Items\Weapons\Unarmed.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LeGame.Models.Items.Weapons.Weapon" Collapsed="true">
+    <Position X="35.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAACAAAAACAAAAAAAAAAAAIAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Items\Weapons\Weapon.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="LeGame.Models.Levels.Level" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="55.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAEAAEAAAQAgAQAAAAA=</HashCode>
+      <FileName>Models\Levels\Level.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="LeGame.Models.Levels.LevelAssets.LevelAsset" Collapsed="true">
+    <Position X="16.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Levels\LevelAssets\LevelAsset.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="LeGame.Models.Levels.LevelAssets.LevelBuilder" Collapsed="true">
+    <Position X="57.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAIAA=</HashCode>
+      <FileName>Models\Levels\LevelAssets\LevelBuilder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LeGame.Models.Levels.LevelAssets.SpawnLocation" Collapsed="true">
+    <Position X="16.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Levels\LevelAssets\SpawnLocation.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="LeGame.RolePlayingGame" Collapsed="true">
+    <Position X="57.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>RolePlayingGame.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LeGame.Screens.DeathScreen.DeathScreen" Collapsed="true">
+    <Position X="0.5" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAgAAACAAAAgAAIAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Screens\DeathScreen\DeathScreen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LeGame.Screens.StartScreen.Button" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="52" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAQAAAIACAACAgggAAAAIAAAACAAAgAAAAIAABAAAAA=</HashCode>
+      <FileName>Screens\StartScreen\Button.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="LeGame.Screens.StartScreen.StartScreen" Collapsed="true">
+    <Position X="2.75" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAgAAACAAAAgAAIAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Screens\StartScreen\StartScreen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LeGame.Screens.Stats.HealthStat" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="57.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAgAAAAAAAAkAAAAAAIAAAAAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>Screens\Stats\HealthStat.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="LeGame.Screens.Stats.InventoryStat" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="50.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAgAQABAAAAAAAAAAAAAAAAAAQAACAQA=</HashCode>
+      <FileName>Screens\Stats\InventoryStat.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="LeGame.Screens.Stats.KillsStat" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="53.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAgEAAAAAAAgAAAAAAAAQAAAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>Screens\Stats\KillsStat.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Struct Name="LeGame.Graphics.Effect" Collapsed="true">
+    <Position X="50.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>Graphics\Effect.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="LeGame.Screens.Stats.InventorySlot" Collapsed="true">
+    <Position X="52" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAiAAAAIgAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Screens\Stats\InventorySlot.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Interface Name="LeGame.Interfaces.IAttacker" Collapsed="true">
+    <Position X="13.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAgAAEBAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IAttacker.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="LeGame.Interfaces.IBonus" Collapsed="true">
+    <Position X="50.25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IBonus.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="LeGame.Interfaces.ICharacter" Collapsed="true">
+    <Position X="7.25" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\ICharacter.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="LeGame.Interfaces.ICollidable" Collapsed="true">
+    <Position X="53.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\ICollidable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="LeGame.Interfaces.ICooldown" Collapsed="true">
+    <Position X="15.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\ICooldown.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="LeGame.Interfaces.IGameObject" Collapsed="true">
+    <Position X="4" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAgAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IGameObject.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="LeGame.Interfaces.IHeals" Collapsed="true">
+    <Position X="55.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAABAAAA=</HashCode>
+      <FileName>Interfaces\IHeals.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="LeGame.Interfaces.IKillable" Collapsed="true">
+    <Position X="3.25" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAAAAQAAAAAAAAAAAAIgAIAAAA=</HashCode>
+      <FileName>Interfaces\IKillable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="LeGame.Interfaces.ILevel" Collapsed="true">
+    <Position X="57.25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAEAAEAAAQAgAQAAAAA=</HashCode>
+      <FileName>Interfaces\ILevel.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="LeGame.Interfaces.IMovable" Collapsed="true">
+    <Position X="10.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IMovable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="LeGame.Interfaces.IPickable" Collapsed="true">
+    <Position X="50.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IPickable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="LeGame.Interfaces.IProjectile" Collapsed="true">
+    <Position X="7.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IProjectile.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="LeGame.Interfaces.IScreen" Collapsed="true">
+    <Position X="52" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAgAAACAAgAgAAAAAAAAAAAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IScreen.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="LeGame.Interfaces.ISpawnLocation" Collapsed="true">
+    <Position X="8" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\ISpawnLocation.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="LeGame.Interfaces.ISprite" Collapsed="true">
+    <Position X="53.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAkAAAAAAAAAAAAAAAAAAAAAAAAgAAAA=</HashCode>
+      <FileName>Interfaces\ISprite.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="LeGame.Interfaces.IStat" Collapsed="true">
+    <Position X="55.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>Interfaces\IStat.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="LeGame.Interfaces.IWeapon" Collapsed="true">
+    <Position X="1.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAACAAAAACAAAAAAAAAAAAIAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IWeapon.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="LeGame.Screens.IButton" Collapsed="true">
+    <Position X="52" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAIACAAAAAAgAAAAAAAAACAAAAAAAAIAABAAAAA=</HashCode>
+      <FileName>Interfaces\IButton.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="LeGame.Enumerations.GameStages" Collapsed="true">
+    <Position X="50.25" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAgAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Enumerations\GameStages.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="LeGame.Enumerations.Maps" Collapsed="true">
+    <Position X="52" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAABAAUgEAEAAAAAAA=</HashCode>
+      <FileName>Enumerations\Maps.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="LeGame.Enumerations.MoveDirection" Collapsed="true">
+    <Position X="53.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAACACAAAgAAAI=</HashCode>
+      <FileName>Enumerations\MoveDirection.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="LeGame.Enumerations.PlayerChars" Collapsed="true">
+    <Position X="55.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAABAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Enumerations\PlayerChars.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

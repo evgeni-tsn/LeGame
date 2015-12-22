@@ -4,10 +4,10 @@ i                  x
 i     S       S    x
 I   b   b S b   b  x
 i                  U
-l       S   S      |
+l   S   S   S   S  |
 D                  |
 b   b   b S b   b  |
-L     S       S    |
+L   S           S  |
 i                  |
 i                  |
 I   b   b   b   b  |

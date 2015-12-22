@@ -13,13 +13,8 @@
     {
         public static ILevel MakeLevel(ICharacter player, Maps map = Maps.Random)
         {
-            // Get a new random map, which is not the same as the previous map.
-            while (map == Maps.Random || (player.Level != null && player.Level.Type.Contains(map.ToString())))
-            {
-                // 2 in order to skip the starting map
-                map = (Maps)GlobalVariables.Rng.Next(2, 6);
-            }
-
+            // map = GetNewRandomMap(map, player);
+            map = GetMapByOrder(player);
             ILevel newLevel = new Level($@"{GlobalVariables.ContentDir}Maps\{map}.txt", player);
             
             if (map == Maps.HouseMap)
@@ -50,6 +45,51 @@
             }
 
             return newLevel;
+        }
+
+        private static Maps GetMapByOrder(ICharacter player)
+        {
+            Maps returnMap;
+            string levelType = player.Level?.Type;
+
+            if (string.IsNullOrEmpty(levelType))
+            {
+                returnMap = Maps.HouseMap;
+            }
+            else if (levelType.Contains("HouseMap"))
+            {
+                returnMap = Maps.BloodyMapN;
+            }
+            else if (levelType.Contains("BloodyMapN"))
+            {
+                returnMap = Maps.BloodyMapW;
+            }
+            else if (levelType.Contains("BloodyMapW"))
+            {
+                returnMap = Maps.BloodyMapS;
+            }
+            else if (levelType.Contains("BloodyMapS"))
+            {
+                returnMap = Maps.BloodyMapE;
+            }
+            else
+            {
+                returnMap = Maps.BloodyMapN;
+            }
+
+            return returnMap;
+        }
+
+        // Get a new random map, which is not the same as the previous map.
+        private static Maps GetNewRandomMap(Maps map, ICharacter player)
+        {
+            while (map == Maps.Random || (player.Level != null && player.Level.Type.Contains(map.ToString())))
+            {
+                // 2 in order to skip the starting map
+                map = (Maps)GlobalVariables.Rng.Next(2, 6);
+            }
+
+            return map;
         }
 
         private static Vector2 GetNewPlayerPosition(Vector2 position)
