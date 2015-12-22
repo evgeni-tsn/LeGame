@@ -17,7 +17,7 @@
   <Class Name="LeGame.Core.Factories.LevelFactory" Collapsed="true">
     <Position X="50.25" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAQA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAgAAgAAAAAAAAAAQAAAAAAAAAAAAAQA=</HashCode>
       <FileName>Core\Factories\LevelFactory.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -53,53 +53,53 @@
     <Position X="53.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Exceptions\CharacterException.cs</FileName>
+      <FileName>Enumerations\Exceptions\CharacterException.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="LeGame.Exceptions.GameException" Collapsed="true">
     <Position X="0.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Exceptions\GameException.cs</FileName>
+      <FileName>Enumerations\Exceptions\GameException.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="LeGame.Exceptions.MapException" Collapsed="true">
     <Position X="0.5" Y="2" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Exceptions\MapException.cs</FileName>
+      <FileName>Enumerations\Exceptions\MapException.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="LeGame.Graphics.EffectSprite" Collapsed="true">
-    <Position X="12.75" Y="13.75" Width="1.5" />
+    <Position X="9.5" Y="14.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAAAoAAAAAAQAAAAAAAAAAAACAAAAAAAAA=</HashCode>
       <FileName>Graphics\EffectSprite.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="LeGame.Graphics.FourDirectionSprite" Collapsed="true">
-    <Position X="8.25" Y="12.25" Width="1.5" />
+    <Position X="5" Y="13" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAgAAAAAAAAgAAAAAARAAAAAAAIAAAAAAAAAAAAAA=</HashCode>
       <FileName>Graphics\FourDirectionSprite.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="LeGame.Graphics.PlayerRotationSprite" Collapsed="true">
-    <Position X="10.5" Y="12.25" Width="1.5" />
+    <Position X="7.25" Y="13" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAgAAAAAAgAAgAAAAAAAAAAAAAIAgAAAAAAAAAA=</HashCode>
       <FileName>Graphics\PlayerRotationSprite.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="LeGame.Graphics.RotationSprite" Collapsed="true">
-    <Position X="12.75" Y="12.25" Width="1.5" />
+    <Position X="9.5" Y="13" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAAAgAAAAAAAAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Graphics\RotationSprite.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="LeGame.Graphics.Sprite" Collapsed="true">
-    <Position X="10.5" Y="11" Width="1.5" />
+    <Position X="7.25" Y="11.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AASAAAAAAAAACkAAAAACAAAAAAAAAAAAAAIAAEgAAAA=</HashCode>
       <FileName>Graphics\Sprite.cs</FileName>
@@ -181,12 +181,12 @@
   <Class Name="LeGame.Models.Characters.Enemies.Enemy" Collapsed="true">
     <Position X="11.75" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAIEAAIAAACAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAIEAAIAAACAAAAAAAAAAAAAAAAAAgAAAAAA=</HashCode>
       <FileName>Models\Characters\Enemies\Enemy.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="LeGame.Models.Characters.Enemies.Zombie" Collapsed="true">
-    <Position X="7.5" Y="4.5" Width="1.5" />
+    <Position X="13.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAQBBAAAAAAAAAAQAAgAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Characters\Enemies\Zombie.cs</FileName>
@@ -287,14 +287,14 @@
     </TypeIdentifier>
   </Class>
   <Class Name="LeGame.Models.Items.Projectiles.IceStrike" Collapsed="true">
-    <Position X="23.25" Y="5.25" Width="1.5" />
+    <Position X="23.25" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAIIAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAA=</HashCode>
       <FileName>Models\Items\Projectiles\IceStrike.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="LeGame.Models.Items.Projectiles.LaserBlast" Collapsed="true">
-    <Position X="25.5" Y="5.25" Width="1.5" />
+    <Position X="25.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAQMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Items\Projectiles\LaserBlast.cs</FileName>
@@ -471,7 +471,7 @@
     </TypeIdentifier>
   </Struct>
   <Interface Name="LeGame.Interfaces.IAttacker" Collapsed="true">
-    <Position X="13.5" Y="8" Width="1.5" />
+    <Position X="10.5" Y="10.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AgAAAAAAAgAAEBAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Interfaces\IAttacker.cs</FileName>
@@ -499,7 +499,7 @@
     </TypeIdentifier>
   </Interface>
   <Interface Name="LeGame.Interfaces.ICooldown" Collapsed="true">
-    <Position X="15.5" Y="8" Width="1.5" />
+    <Position X="10.5" Y="9.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAEAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAA=</HashCode>
       <FileName>Interfaces\ICooldown.cs</FileName>
@@ -520,7 +520,7 @@
     </TypeIdentifier>
   </Interface>
   <Interface Name="LeGame.Interfaces.IKillable" Collapsed="true">
-    <Position X="3.25" Y="10" Width="1.5" />
+    <Position X="3.5" Y="10" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAACAAAAAAAAAQAAAAAAAAAAAAIgAIAAAA=</HashCode>
       <FileName>Interfaces\IKillable.cs</FileName>
