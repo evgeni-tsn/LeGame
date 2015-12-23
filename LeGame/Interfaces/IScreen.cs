@@ -2,8 +2,6 @@
 {
     using System.Collections.Generic;
 
-    using LeGame.Screens;
-
     using Microsoft.Xna.Framework.Content;
     using Microsoft.Xna.Framework.Graphics;
     using Microsoft.Xna.Framework.Input;
@@ -14,12 +12,12 @@
 
         void Draw(SpriteBatch spriteBatch, GraphicsDevice graphics);
 
-        void Update(MouseState mouse);
-
         string IsClicked();
 
         void Load(ContentManager content);
 
         void UnloadButtons();
+
+        void Update(MouseState mouse);
     }
 }

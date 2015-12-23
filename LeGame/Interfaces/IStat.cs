@@ -4,11 +4,11 @@
     using Microsoft.Xna.Framework.Graphics;
 
     public interface IStat
-   {
+    {
         SpriteFont Font { get; set; }
 
-        void Load(ContentManager content);
-
         void Draw(ICharacter character, SpriteBatch spriteBatch);
-   }
+
+        void Load(ContentManager content);
+    }
 }

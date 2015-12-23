@@ -1,16 +1,20 @@
 ﻿namespace LeGame.Handlers
 {
-    using Core;
-    using Interfaces;
+    using LeGame.Core;
+    using LeGame.Interfaces;
+
     using Microsoft.Xna.Framework;
 
     public static class MovementHandler
     {
-        public static void MoveRight(ICharacter character, float speedModifier = 1f)
+        public static void MoveDown(ICharacter character, float speedModifier = 1f)
         {
-            if (character.Position.X + character.Speed <= GlobalVariables.WindowWidthDefault - GfxHandler.GetWidth(character))
+            if (character.Position.Y + character.Speed
+                <= GlobalVariables.WindowHeightDefault - GfxHandler.GetHeight(character))
             {
-                character.Position = new Vector2(character.Position.X + (character.Speed * speedModifier), character.Position.Y);
+                character.Position = new Vector2(
+                    character.Position.X, 
+                    character.Position.Y + (character.Speed * speedModifier));
             }
         }
 
@@ -18,7 +22,20 @@
         {
             if (character.Position.X - character.Speed > 0)
             {
-                character.Position = new Vector2(character.Position.X - (character.Speed * speedModifier), character.Position.Y);
+                character.Position = new Vector2(
+                    character.Position.X - (character.Speed * speedModifier), 
+                    character.Position.Y);
+            }
+        }
+
+        public static void MoveRight(ICharacter character, float speedModifier = 1f)
+        {
+            if (character.Position.X + character.Speed
+                <= GlobalVariables.WindowWidthDefault - GfxHandler.GetWidth(character))
+            {
+                character.Position = new Vector2(
+                    character.Position.X + (character.Speed * speedModifier), 
+                    character.Position.Y);
             }
         }
 
@@ -26,16 +43,10 @@
         {
             if (character.Position.Y - character.Speed > 0)
             {
-                character.Position = new Vector2(character.Position.X, character.Position.Y - (character.Speed * speedModifier));
+                character.Position = new Vector2(
+                    character.Position.X, 
+                    character.Position.Y - (character.Speed * speedModifier));
             }
         }
-
-        public static void MoveDown(ICharacter character, float speedModifier = 1f)
-        {
-            if (character.Position.Y + character.Speed <= GlobalVariables.WindowHeightDefault - GfxHandler.GetHeight(character))
-            {
-                character.Position = new Vector2(character.Position.X, character.Position.Y + (character.Speed * speedModifier));
-            }
-        }     
     }
 }

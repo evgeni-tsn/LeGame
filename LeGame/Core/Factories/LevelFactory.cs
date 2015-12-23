@@ -8,32 +8,49 @@
     using LeGame.Interfaces;
     using LeGame.Models.Levels;
     using LeGame.Models.Levels.LevelAssets;
+
     using Microsoft.Xna.Framework;
 
     public static class LevelFactory
     {
+        // Get a new random map, which is not the same as the previous map.
+        public static Maps GetNewRandomMap(Maps map, ICharacter player)
+        {
+            while ((map == Maps.Random) || ((player.Level != null) && player.Level.Type.Contains(map.ToString())))
+            {
+                // 2 in order to skip the starting map
+                map = (Maps)GlobalVariables.Rng.Next(2, 6);
+            }
+
+            return map;
+        }
+
         public static ILevel MakeLevel(ICharacter player, Maps map = Maps.Random)
         {
             if (!Enum.IsDefined(typeof(Maps), map))
             {
                 throw new ArgumentOutOfRangeException(nameof(map));
             }
+
             // map = GetNewRandomMap(map, player);
             map = GetMapByOrder(player);
             ILevel newLevel = new Level($@"{GlobalVariables.ContentDir}Maps\{map}.txt", player);
-            
+
             if (map == Maps.HouseMap)
             {
                 newLevel.Assets.AddRange(ItemFactory.MakeTestItems());
             }
 
-            var spawnLocations = (from asset in newLevel.Assets where asset.Type.Contains("SpawnPoint") select new SpawnLocation(asset.Position, asset.Type, 0, false)).ToList();
+            var spawnLocations = (from asset in newLevel.Assets
+                                  where asset.Type.Contains("SpawnPoint")
+                                  select new SpawnLocation(asset.Position, asset.Type, 0, false)).ToList();
 
             if (map.ToString().Contains("Bloody"))
             {
                 IEnumerable<ICharacter> enemies = EnemyFactory.MakeRandomEnemies(spawnLocations);
                 newLevel.Enemies.AddRange(enemies);
-                //TODO figure a way to avoid hardcoding here
+
+                // TODO figure a way to avoid hardcoding here
                 player.Position = GetNewPlayerPosition(player.Position);
             }
 
@@ -76,18 +93,6 @@
             }
 
             return returnMap;
-        }
-
-        // Get a new random map, which is not the same as the previous map.
-        public static Maps GetNewRandomMap(Maps map, ICharacter player)
-        {
-            while ((map == Maps.Random) || ((player.Level != null) && player.Level.Type.Contains(map.ToString())))
-            {
-                // 2 in order to skip the starting map
-                map = (Maps)GlobalVariables.Rng.Next(2, 6);
-            }
-
-            return map;
         }
 
         private static Vector2 GetNewPlayerPosition(Vector2 position)

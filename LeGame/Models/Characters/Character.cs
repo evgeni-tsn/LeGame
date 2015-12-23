@@ -2,15 +2,22 @@
 {
     using System;
 
-    using Core;
-    using Interfaces;
-    using Enemies;
+    using LeGame.Core;
+    using LeGame.Interfaces;
+    using LeGame.Models.Characters.Enemies;
 
     using Microsoft.Xna.Framework;
 
     public abstract class Character : GameObject, ICharacter, IColidable
     {
-        protected Character(Vector2 position,string type, int maxHealth, int currentHealth, float speed, int hitCooldown, ILevel level)
+        protected Character(
+            Vector2 position, 
+            string type, 
+            int maxHealth, 
+            int currentHealth, 
+            float speed, 
+            int hitCooldown, 
+            ILevel level)
             : base(position, type)
         {
             this.MaxHealth = maxHealth;
@@ -25,33 +32,33 @@
 
         public event EventHandler Died;
 
-        public ILevel Level { get; set; }
+        public bool CanCollide { get; set; }
 
-        public IWeapon EquippedWeapon { get; set; }
-
-        public int TimeAtLastHit { get; set; }
-
-        public int CooldownTimer { get;  set; }
-
-        public int MaxHealth { get; set; }
+        public int CooldownTimer { get; set; }
 
         public int CurrentHealth { get; set; }
 
-        public float Speed { get; set; }
+        public IWeapon EquippedWeapon { get; set; }
 
         public float FacingAngle { get; set; }
 
+        public ILevel Level { get; set; }
+
+        public int MaxHealth { get; set; }
+
         public float MovementAngle { get; set; }
 
-        public bool CanCollide { get; set; }
+        public float Speed { get; set; }
 
-        public abstract void Move();
+        public int TimeAtLastHit { get; set; }
 
         public virtual void AttackUsingWeapon()
         {
             this.EquippedWeapon?.Attack(this.Level, this);
         }
-        
+
+        public abstract void Move();
+
         public virtual void TakeDamage(ICharacter attacker)
         {
             var currentTime = GlobalVariables.GlobalTimer;
@@ -59,6 +66,7 @@
             {
                 return;
             }
+
             this.TimeAtLastHit = currentTime;
 
             this.CurrentHealth -= attacker.EquippedWeapon.Damage;

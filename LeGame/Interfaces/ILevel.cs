@@ -4,14 +4,14 @@
 
     public interface ILevel
     {
-        string Type { get; }
+        List<IGameObject> Assets { get; }
+
+        List<ICharacter> Enemies { get; }
 
         ICharacter Player { get; set; }
 
         List<IProjectile> Projectiles { get; }
 
-        List<ICharacter> Enemies { get; }
-
-        List<IGameObject> Assets { get; }
+        string Type { get; }
     }
 }

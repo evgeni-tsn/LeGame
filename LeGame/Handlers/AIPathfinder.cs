@@ -1,11 +1,11 @@
 ﻿namespace LeGame.Handlers
 {
     using System;
-    using Core;
-    using Interfaces;
+    using LeGame.Core;
     using LeGame.Enumerations;
+    using LeGame.Interfaces;
+    using LeGame.Models.Characters.Enemies;
     using Microsoft.Xna.Framework;
-    using Models.Characters.Enemies;
     using static LeGame.Enumerations.MoveDirection;
 
     public static class AiPathfinder
@@ -44,7 +44,8 @@
                     enemy.IsAggroed = true;
                 }
 
-                if (enemyBoundingBox.Intersects(spawnBoundingBox) && (CollisionHandler.Collide(ai, ai.Level.Assets) == null))
+                if (enemyBoundingBox.Intersects(spawnBoundingBox)
+                    && (CollisionHandler.Collide(ai, ai.Level.Assets) == null))
                 {
                     if (enemy.Direction == Down)
                     {
@@ -86,11 +87,12 @@
                         enemyAi.Direction = Right;
                     }
                 }
+
                 return;
             }
 
-            if ((Math.Abs(ai.Position.X - playerCenter.X) > Tolerance) &&
-                (Math.Abs(ai.Position.Y - playerCenter.Y) > Tolerance))
+            if ((Math.Abs(ai.Position.X - playerCenter.X) > Tolerance)
+                && (Math.Abs(ai.Position.Y - playerCenter.Y) > Tolerance))
             {
                 if (GlobalVariables.Rng.Next(1, 3) == 1)
                 {
@@ -104,8 +106,9 @@
                         MovementHandler.MoveLeft(ai);
                         enemyAi.Direction = Left;
                     }
-                    //else if(ai.Position.X < player.Position.X +10 || ai.Position.X > player.Position.X-10)
-                    //{
+
+                    // else if(ai.Position.X < player.Position.X +10 || ai.Position.X > player.Position.X-10)
+                    // {
                     if (ai.Position.Y < playerCenter.Y)
                     {
                         MovementHandler.MoveDown(ai);
@@ -116,12 +119,12 @@
                         MovementHandler.MoveUp(ai);
                         enemyAi.Direction = Up;
                     }
+
                     // }
                 }
             }
             else
             {
-
                 if (ai.Position.Y < playerCenter.Y)
                 {
                     MovementHandler.MoveDown(ai);

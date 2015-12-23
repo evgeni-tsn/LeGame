@@ -3,8 +3,8 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    using Graphics;
-    using Interfaces;
+    using LeGame.Graphics;
+    using LeGame.Interfaces;
 
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Content;
@@ -12,17 +12,136 @@
 
     using static LeGame.Core.GlobalVariables;
 
-    using Effect = Graphics.Effect;
+    using Effect = LeGame.Graphics.Effect;
 
     public static class GfxHandler
     {
-        private static readonly IDictionary<string, ISprite> SharedSprites = new Dictionary<string, ISprite>();
-        private static readonly IDictionary<string, ISprite> UniqueSprites = new Dictionary<string, ISprite>();
-
-        private static readonly IDictionary<string, Texture2D> TextureLibrary = new Dictionary<string, Texture2D>();
         private static readonly IList<Effect> Effects = new List<Effect>();
 
         private static readonly IList<string> FileNames = new List<string>();
+
+        private static readonly IDictionary<string, ISprite> SharedSprites = new Dictionary<string, ISprite>();
+
+        private static readonly IDictionary<string, Texture2D> TextureLibrary = new Dictionary<string, Texture2D>();
+
+        private static readonly IDictionary<string, ISprite> UniqueSprites = new Dictionary<string, ISprite>();
+
+        public static void AddBloodEffect(object sender)
+        {
+            var bleeder = (IGameObject)sender;
+            var position = new Vector2(bleeder.Position.X + 16, bleeder.Position.Y + 16);
+
+            Effects.Add(new Effect(new EffectSprite(GetTexture("Effects/BloodEffect1"), true), position));
+        }
+
+        public static void AddDeathEffect(object sender)
+        {
+            var riper = (IGameObject)sender;
+            var position = new Vector2(riper.Position.X + 16, riper.Position.Y + 16);
+
+            Effects.Add(new Effect(new EffectSprite(GetTexture("Effects/FleshExplosionEffect"), true), position));
+        }
+
+        public static void ClearEffects()
+        {
+            Effects.Clear();
+        }
+
+        public static void DrawLevel(SpriteBatch spriteBatch, ILevel level)
+        {
+            spriteBatch.Begin();
+            level.Assets.ForEach(
+                asset =>
+                    {
+                        // Make sure Items are always top layer.
+                        if (asset is IPickable)
+                        {
+                            spriteBatch.Draw(
+                                GetTexture(asset), 
+                                asset.Position, 
+                                null, 
+                                null, 
+                                null, 
+                                0, 
+                                null, 
+                                null, 
+                                SpriteEffects.None, 
+                                0.1f); // Layer 0.1 since everything else is 0
+                        }
+                        else
+                        {
+                            spriteBatch.Draw(GetTexture(asset), asset.Position);
+                        }
+                    });
+            spriteBatch.End();
+
+            DrawExistingEffects(spriteBatch);
+
+            UpdateUniqueSprites(level.Enemies);
+            foreach (var enemy in level.Enemies)
+            {
+                GetSprite(enemy).Draw(spriteBatch, enemy.Position);
+            }
+
+            GetSprite(level.Player)
+                .Draw(
+                    spriteBatch, 
+                    level.Player.Position, 
+                    level.Player.FacingAngle, 
+                    level.Player.MovementAngle, 
+                    GetTexture(level.Player.EquippedWeapon));
+
+            foreach (var projectile in level.Projectiles.ToList())
+            {
+                GetSprite(projectile).Draw(spriteBatch, projectile.Position, projectile.Angle);
+
+                if (projectile.Lifetime > projectile.Range)
+                {
+                    level.Projectiles.Remove(projectile);
+                }
+            }
+        }
+
+        // Get Bounding Box
+        public static Rectangle GetBBox(IGameObject obj)
+        {
+            Texture2D texture = GetTexture(obj);
+            Vector2 pos = obj.Position;
+            int width = texture.Width;
+            int height = texture.Height;
+
+            if (obj.Type.ToLower().Contains("sprite"))
+            {
+                width = TileWidth;
+                height = TileHeight;
+            }
+            else if (obj.Type.ToLower().Contains("rotation") || obj.Type.ToLower().Contains("projectile"))
+            {
+                pos = new Vector2(pos.X - TileWidth / 2f, pos.Y - TileHeight / 2f);
+                width = TileWidth;
+                height = TileHeight;
+            }
+
+            return new Rectangle((int)(pos.X + 6), (int)(pos.Y + 6), width - 12, height - 10);
+        }
+
+        // Get GameObject Height
+        public static int GetHeight(IGameObject obj)
+        {
+            return GetBBox(obj).Height;
+        }
+
+        // Get Texture
+        public static Texture2D GetTexture(IGameObject obj)
+        {
+            return TextureLibrary[obj.Type];
+        }
+
+        // Get GameObject Width
+        public static int GetWidth(IGameObject obj)
+        {
+            return GetBBox(obj).Width;
+        }
 
         public static void Load(ContentManager content)
         {
@@ -30,7 +149,7 @@
             foreach (string s in FileNames)
             {
                 // s is something like: "..\..\..\Content\TestObjects\catSprite.png"
-                //                      |->     17     <-|>---- take this ----<|   |
+                // |->     17     <-|>---- take this ----<|   |
                 string fileName = s.Substring(17, s.LastIndexOf('.') - 17);
 
                 // format it appropriately for the content.Load
@@ -57,7 +176,7 @@
                 {
                     SharedSprites.Add(fileName, MakeEffectSprite(content.Load<Texture2D>(fileName)));
                 }
-                
+
                 TextureLibrary.Add(fileName, content.Load<Texture2D>(fileName));
             }
         }
@@ -81,142 +200,49 @@
             UpdateExistingEffects(gameTime);
         }
 
-        public static void DrawLevel(SpriteBatch spriteBatch, ILevel level)
-        {
-            spriteBatch.Begin();
-            level.Assets.ForEach(
-                asset =>
-                    {
-                        // Make sure Items are always top layer.
-                        if (asset is IPickable)
-                        {
-                            spriteBatch.Draw(
-                                GetTexture(asset),
-                                asset.Position,
-                                null,
-                                null,
-                                null,
-                                0,
-                                null,
-                                null,
-                                SpriteEffects.None,
-                                0.1f); // Layer 0.1 since everything else is 0
-                        }
-                        else
-                        {
-                            spriteBatch.Draw(GetTexture(asset), asset.Position);
-                        }
-                    });
-            spriteBatch.End();
-
-            DrawExistingEffects(spriteBatch);
-
-            UpdateUniqueSprites(level.Enemies);
-            foreach (var enemy in level.Enemies)
-            {
-                GetSprite(enemy).Draw(spriteBatch, enemy.Position);
-            }
-            
-            GetSprite(level.Player).Draw(
-                spriteBatch, 
-                level.Player.Position,
-                level.Player.FacingAngle,
-                level.Player.MovementAngle,
-                GetTexture(level.Player.EquippedWeapon));
-
-            foreach (var projectile in level.Projectiles.ToList())
-            {
-                GetSprite(projectile).Draw(spriteBatch, projectile.Position, projectile.Angle);
-
-                if (projectile.Lifetime > projectile.Range)
-                {
-                    level.Projectiles.Remove(projectile);
-                }
-            }
-        }
-        
-        // Get Bounding Box
-        public static Rectangle GetBBox(IGameObject obj)
-        {
-            Texture2D texture = GetTexture(obj);
-            Vector2 pos = obj.Position;
-            int width = texture.Width;
-            int height = texture.Height;
-
-            if (obj.Type.ToLower().Contains("sprite"))
-            {
-                width = TileWidth;
-                height = TileHeight;
-            }
-            else if (obj.Type.ToLower().Contains("rotation") || obj.Type.ToLower().Contains("projectile"))
-            {
-                pos = new Vector2(pos.X - TileWidth / 2f, pos.Y - TileHeight / 2f);
-                width = TileWidth;
-                height = TileHeight;
-            }
-
-            return new Rectangle((int)(pos.X + 6), (int)(pos.Y + 6), width - 12, height - 10);
-        }
-
-       public static void AddBloodEffect(object sender)
-        {
-            var bleeder = (IGameObject)sender;
-            var position = new Vector2(bleeder.Position.X + 16, bleeder.Position.Y + 16);
-            
-            Effects.Add(new Effect(new EffectSprite(GetTexture("Effects/BloodEffect1"), true), position));
-        }
-
-        public static void AddDeathEffect(object sender)
-        {
-            var riper = (IGameObject)sender;
-            var position = new Vector2(riper.Position.X + 16, riper.Position.Y + 16);
-
-            Effects.Add(new Effect(new EffectSprite(GetTexture("Effects/FleshExplosionEffect"), true), position));
-        }
-
-        public static void ClearEffects()
-        {
-            Effects.Clear();
-        }
-
-        // Get GameObject Width
-        public static int GetWidth(IGameObject obj)
-        {
-            return GetBBox(obj).Width;
-        }
-
-        // Get GameObject Height
-        public static int GetHeight(IGameObject obj)
-        {
-            return GetBBox(obj).Height;
-        }
-
-        private static void UpdateUniqueSprites(ICollection<ICharacter> enemies)
-        {
-            if (UniqueSprites.Count < enemies.Count)
-            {
-                // Add the new enemies to the list.
-                foreach (ICharacter enemy in enemies.Where(e => !UniqueSprites.ContainsKey(e.Id)))
-                {
-                    UniqueSprites.Add(enemy.Id, new FourDirectionSprite(GetTexture(enemy.Type)));
-                }
-            }
-            else //if (UniqueSprites.Count > enemies.Count)
-            {
-                // Make sure that the dead enemies are not kept in the list.
-                foreach (var sprite in UniqueSprites.Where(s => !enemies.Select(e => e.Id).Contains(s.Key)).ToList())
-                {
-                    UniqueSprites.Remove(sprite);
-                }
-            }
-        }
-
         private static void DrawExistingEffects(SpriteBatch spriteBatch)
         {
             foreach (var effect in Effects.ToList())
             {
                 effect.Sprite.Draw(spriteBatch, effect.Location);
             }
+        }
+
+        // Get Sprite
+        private static ISprite GetSprite(IGameObject obj)
+        {
+            if (UniqueSprites.ContainsKey(obj.Id))
+            {
+                return UniqueSprites[obj.Id];
+            }
+
+            return SharedSprites[obj.Type];
+        }
+
+        private static Texture2D GetTexture(string type)
+        {
+            return TextureLibrary[type];
+        }
+
+        // Making SharedSprites
+        private static EffectSprite MakeEffectSprite(Texture2D texture, bool isPersistant = false)
+        {
+            return new EffectSprite(texture, isPersistant);
+        }
+
+        private static FourDirectionSprite MakeEnemySprite(Texture2D texture)
+        {
+            return new FourDirectionSprite(texture);
+        }
+
+        private static PlayerRotationSprite MakePlayerSprite(Texture2D texture)
+        {
+            return new PlayerRotationSprite(texture);
+        }
+
+        private static RotationSprite MakeRotationSprite(Texture2D texture)
+        {
+            return new RotationSprite(texture);
         }
 
         private static void UpdateExistingEffects(GameTime gameTime)
@@ -234,47 +260,25 @@
             }
         }
 
-        // Get Sprite
-        private static ISprite GetSprite(IGameObject obj)
+        private static void UpdateUniqueSprites(ICollection<ICharacter> enemies)
         {
-            if (UniqueSprites.ContainsKey(obj.Id))
+            if (UniqueSprites.Count < enemies.Count)
             {
-                return UniqueSprites[obj.Id];
+                // Add the new enemies to the list.
+                foreach (ICharacter enemy in enemies.Where(e => !UniqueSprites.ContainsKey(e.Id)))
+                {
+                    UniqueSprites.Add(enemy.Id, new FourDirectionSprite(GetTexture(enemy.Type)));
+                }
             }
-            
-            return SharedSprites[obj.Type];
-        }
-
-        // Get Texture
-        public static Texture2D GetTexture(IGameObject obj)
-        {
-            return TextureLibrary[obj.Type];
-        }
-
-        private static Texture2D GetTexture(string type)
-        {
-            return TextureLibrary[type];
-        }
-
-        // Making SharedSprites
-        private static EffectSprite MakeEffectSprite(Texture2D texture, bool isPersistant = false)
-        {
-            return new EffectSprite(texture, isPersistant);
-        }
-
-        private static RotationSprite MakeRotationSprite(Texture2D texture)
-        {
-            return new RotationSprite(texture);
-        }
-        
-        private static PlayerRotationSprite MakePlayerSprite(Texture2D texture)
-        {
-            return new PlayerRotationSprite(texture);
-        }
-        
-        private static FourDirectionSprite MakeEnemySprite(Texture2D texture)
-        {
-            return new FourDirectionSprite(texture);
+            else
+            {
+                // if (UniqueSprites.Count > enemies.Count)
+                // Make sure that the dead enemies are not kept in the list.
+                foreach (var sprite in UniqueSprites.Where(s => !enemies.Select(e => e.Id).Contains(s.Key)).ToList())
+                {
+                    UniqueSprites.Remove(sprite);
+                }
+            }
         }
     }
 }

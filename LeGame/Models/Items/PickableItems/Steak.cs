@@ -4,9 +4,9 @@
 
     public class Steak : HealingItem
     {
-        private const string DefaultSteakType = "Items/Steak";
-
         private const int DefaultSteakHealingAmount = 70;
+
+        private const string DefaultSteakType = "Items/Steak";
 
         public Steak(Vector2 position)
             : base(position, DefaultSteakType)

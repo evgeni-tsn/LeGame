@@ -2,10 +2,14 @@
 {
     public enum MoveDirection
     {
-        NotSet,
-        Up,
-        Down,
-        Left,
+        NotSet, 
+
+        Up, 
+
+        Down, 
+
+        Left, 
+
         Right
     }
 }

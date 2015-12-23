@@ -2,11 +2,16 @@
 {
     public enum Maps
     {
-        Random,
-        HouseMap,
-        BloodyMapW,
-        BloodyMapN,
-        BloodyMapE,
+        Random, 
+
+        HouseMap, 
+
+        BloodyMapW, 
+
+        BloodyMapN, 
+
+        BloodyMapE, 
+
         BloodyMapS
     }
 }

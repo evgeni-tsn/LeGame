@@ -8,12 +8,12 @@
 
     public class StatPanel
     {
-        private readonly List<IStat> stats;
         private readonly HealthStat healthStat;
-        private readonly KillsStat killsStat;
         private readonly InventoryStat inventoryStat;
+        private readonly KillsStat killsStat;
+        private readonly List<IStat> stats;
+
         private SpriteFont font;
-       
 
         public StatPanel()
         {
@@ -28,6 +28,14 @@
 
         public ICollection<IStat> Stats => this.stats;
 
+        public void Draw(ICharacter character, SpriteBatch spriteBatch)
+        {
+            foreach (IStat stat in this.Stats)
+            {
+                stat.Draw(character, spriteBatch);
+            }
+        }
+
         public void Load(ContentManager content)
         {
             this.font = content.Load<SpriteFont>(@"Fonts/SpriteFont");
@@ -37,18 +45,5 @@
                 stat.Font = this.font;
             }
         }
-
-        public void Draw(ICharacter character, SpriteBatch spriteBatch)
-        {
-            foreach (IStat stat in this.Stats)
-            {
-                stat.Draw(character, spriteBatch);
-            }
-        }
-
-        
-
-        
     }
 }
-

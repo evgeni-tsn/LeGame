@@ -1,7 +1,8 @@
 ﻿namespace LeGame.Models.Levels
 {
     using System.Collections.Generic;
-    using Interfaces;
+
+    using LeGame.Interfaces;
     using LeGame.Models.Levels.LevelAssets;
 
     public class Level : ILevel
@@ -18,14 +19,14 @@
             this.Projectiles = new List<IProjectile>();
         }
 
-        public string Type { get; }
-
-        public ICharacter Player { get; set; }
-
-        public List<IProjectile> Projectiles { get; } 
+        public List<IGameObject> Assets { get; }
 
         public List<ICharacter> Enemies { get; }
 
-        public List<IGameObject> Assets { get; }
+        public ICharacter Player { get; set; }
+
+        public List<IProjectile> Projectiles { get; }
+
+        public string Type { get; }
     }
 }

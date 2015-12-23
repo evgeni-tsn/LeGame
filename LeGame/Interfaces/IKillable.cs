@@ -8,9 +8,9 @@
 
         event EventHandler Died;
 
-        int MaxHealth { get; set; }
-
         int CurrentHealth { get; set; }
+
+        int MaxHealth { get; set; }
 
         void TakeDamage(ICharacter attacker);
     }

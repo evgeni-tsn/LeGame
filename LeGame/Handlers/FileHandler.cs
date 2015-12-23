@@ -8,16 +8,6 @@
     {
         private static readonly string[] FoldersToAvoid = { "bin", "obj", "Maps", "Font" };
 
-        public static List<string> ReadMapFile(string textFilePath)
-        {
-            if (!File.Exists(textFilePath))
-            {
-                throw new FileNotFoundException("The supplied file path \"{0}\" for the tile builder is invalid.", textFilePath);
-            }
-
-            return File.ReadAllLines(textFilePath).ToList();
-        }
-
         // Recursively get the files in Content.
         public static void GetFilenames(string sourceDir, IList<string> fileNames)
         {
@@ -33,6 +23,18 @@
 
                 GetFilenames(dir, fileNames);
             }
+        }
+
+        public static List<string> ReadMapFile(string textFilePath)
+        {
+            if (!File.Exists(textFilePath))
+            {
+                throw new FileNotFoundException(
+                    "The supplied file path \"{0}\" for the tile builder is invalid.", 
+                    textFilePath);
+            }
+
+            return File.ReadAllLines(textFilePath).ToList();
         }
     }
 }

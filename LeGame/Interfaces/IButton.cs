@@ -1,4 +1,4 @@
-﻿namespace LeGame.Screens
+﻿namespace LeGame.Interfaces
 {
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
@@ -6,9 +6,7 @@
 
     public interface IButton
     {
-        Texture2D Texture { get; }
-
-        Vector2 Position { get; }
+        Rectangle BoundingBox { get; }
 
         Color Colour { get; }
 
@@ -16,7 +14,9 @@
 
         bool IsClicked { get; set; }
 
-        Rectangle BoundingBox { get; }
+        Vector2 Position { get; }
+
+        Texture2D Texture { get; }
 
         void Update(MouseState mouse);
     }

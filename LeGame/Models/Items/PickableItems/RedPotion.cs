@@ -4,9 +4,9 @@
 
     public class RedPotion : HealingItem
     {
-        private const string DefaultRedPotionType = "Items/RedPotion";
-
         private const int DefaultRedPotionHealingAmount = 150;
+
+        private const string DefaultRedPotionType = "Items/RedPotion";
 
         public RedPotion(Vector2 position)
             : base(position, DefaultRedPotionType)

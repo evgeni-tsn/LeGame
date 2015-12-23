@@ -1,7 +1,7 @@
 ﻿namespace LeGame.Graphics
 {
-    using Core;
-    using Interfaces;
+    using LeGame.Core;
+    using LeGame.Interfaces;
 
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
@@ -16,22 +16,27 @@
             this.TimePerFrame = timePerFrame;
         }
 
-        public int Rows { get; set; }
-
         public int Columns { get; set; }
+
+        public int Rows { get; set; }
 
         protected int CurrentFrame { get; set; }
 
-        protected int TotalFrames { get; set; }
+        protected Texture2D Texture { get; }
 
         protected int TimePerFrame { get; set; }
 
         protected int TimeSinceLastFrame { get; set; }
 
-        protected Texture2D Texture { get; }
+        protected int TotalFrames { get; set; }
+
+        public abstract void Draw(
+            SpriteBatch spriteBatch, 
+            Vector2 location, 
+            float rotationA = 0, 
+            float rotationB = 0, 
+            Texture2D additionalTexture = null);
 
         public abstract void Update(GameTime gameTime, ICharacter character = null);
-
-        public abstract void Draw(SpriteBatch spriteBatch, Vector2 location, float rotationA = 0, float rotationB = 0, Texture2D additionalTexture = null);
     }
 }

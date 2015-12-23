@@ -10,17 +10,17 @@
         {
         }
 
-        public CharacterException(string message) 
+        public CharacterException(string message)
             : base(message)
         {
         }
 
-        public CharacterException(string message, Exception innerException) 
+        public CharacterException(string message, Exception innerException)
             : base(message, innerException)
         {
         }
 
-        protected CharacterException(SerializationInfo info, StreamingContext context) 
+        protected CharacterException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
         }

@@ -2,6 +2,7 @@
 {
     using LeGame.Handlers;
     using LeGame.Interfaces;
+
     using Microsoft.Xna.Framework;
 
     public class SpawnLocation : LevelAsset, ISpawnLocation
@@ -15,7 +16,7 @@
         {
             Rectangle originaBBox = GfxHandler.GetBBox(this);
             originaBBox.Inflate(50, 50);
-            return originaBBox; 
+            return originaBBox;
         }
     }
 }

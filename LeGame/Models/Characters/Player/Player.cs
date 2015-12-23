@@ -2,10 +2,12 @@
 {
     using System;
     using System.Linq;
-    using Core;
-    using Handlers;
-    using Interfaces;
-    using Items.Weapons;
+
+    using LeGame.Core;
+    using LeGame.Handlers;
+    using LeGame.Interfaces;
+    using LeGame.Models.Items.Weapons;
+
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Input;
 
@@ -15,35 +17,55 @@
 
         private static readonly Vector2 DefaultStart = new Vector2(500, 240);
 
-        protected Player(string type, int maxHealth, int currentHealth, int speed, int hitCooldown, ILevel level) 
+        protected Player(string type, int maxHealth, int currentHealth, int speed, int hitCooldown, ILevel level)
             : base(DefaultStart, type, maxHealth, currentHealth, speed, hitCooldown, level)
         {
             // TODO: Implement weapon pickup and display it on the character.
-
-            
             this.KillCount = 0;
             this.Inventory = new IPickable[InventoryCapacity];
 
             this.EquippedWeapon = new Unarmed(this.Position);
         }
 
+        public IPickable[] Inventory { get; set; }
+
         public Keys[] KbKeys { get; } = { Keys.W, Keys.A, Keys.S, Keys.D };
 
         public int KillCount { get; set; }
-
-        public IPickable[] Inventory { get; set; }
 
         public override void Move()
         {
             KeyboardState keyboardState = Keyboard.GetState();
             MouseState mouseState = Mouse.GetState();
 
-            this.FacingAngle = (float)((Math.PI * 0.5f) + Math.Atan2(mouseState.Y - this.Position.Y, mouseState.X - this.Position.X));
-            // Debug.WriteLine(this.FacingAngle);
+            this.FacingAngle =
+                (float)((Math.PI * 0.5f) + Math.Atan2(mouseState.Y - this.Position.Y, mouseState.X - this.Position.X));
 
+            // Debug.WriteLine(this.FacingAngle);
             this.KeyboardAction(keyboardState);
 
             this.MouseAction(mouseState);
+        }
+
+        public bool TryToPick(IPickable item)
+        {
+            bool picked = false;
+            if (this.Inventory.Any(x => x == null))
+            {
+                for (int i = 0; i < InventoryCapacity; i++)
+                {
+                    if (this.Inventory[i] == null)
+                    {
+                        this.Inventory[i] = item;
+                        picked = true;
+                        break;
+                    }
+                }
+
+                return picked;
+            }
+
+            return false;
         }
 
         private void KeyboardAction(KeyboardState kbState)
@@ -69,6 +91,7 @@
                         this.MovementAngle = GlobalVariables.LeftAngle;
                         break;
                 }
+
                 CollisionHandler.PlayerReaction(this, key);
             }
         }
@@ -79,25 +102,6 @@
             {
                 this.AttackUsingWeapon();
             }
-        }
-
-        public bool TryToPick(IPickable item)
-        {
-            bool picked = false;
-            if (this.Inventory.Any(x => x == null))
-            {
-                for (int i = 0; i < InventoryCapacity; i++)
-                {
-                    if (this.Inventory[i] == null)
-                    {
-                        this.Inventory[i] = item;
-                        picked = true;
-                        break;
-                    }
-                }
-                return picked;
-            }
-            return false;
         }
     }
 }

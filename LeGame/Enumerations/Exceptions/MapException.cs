@@ -2,7 +2,7 @@
 {
     public class MapException : GameException
     {
-        public MapException(string message) 
+        public MapException(string message)
             : base(message)
         {
         }

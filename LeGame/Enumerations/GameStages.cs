@@ -2,8 +2,10 @@
 {
     public enum GameStages
     {
-        Start_Stage,
-        GameStage,
+        StartStage, 
+
+        GameStage, 
+
         DeathStage
     }
 }

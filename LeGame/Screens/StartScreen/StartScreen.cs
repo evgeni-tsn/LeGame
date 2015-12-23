@@ -1,68 +1,51 @@
-﻿using System.Collections.Generic;
-using Microsoft.Xna.Framework.Input;
-
-namespace LeGame.Screens.StartScreen
+﻿namespace LeGame.Screens.StartScreen
 {
-    using Core;
+    using System.Collections.Generic;
+
+    using LeGame.Interfaces;
+
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Content;
     using Microsoft.Xna.Framework.Graphics;
+    using Microsoft.Xna.Framework.Input;
 
     public class StartScreen : Screen
     {
+        private List<Button> buttons;
 
-        public List<Button> buttons;
-        public SpriteFont font;
+        private SpriteFont font;
 
-        //public ICollection<IButton> Buttons { get; } 
+        // public ICollection<IButton> Buttons { get; } 
         public StartScreen()
         {
             this.Buttons = new List<IButton>();
         }
 
-        public override void Load(ContentManager Content)
-        {
-            font = Content.Load<SpriteFont>(@"Fonts/DeathFont");
-            Button buttonLeft = new Button(Content.Load<Texture2D>(@"TestObjects/redheadButton"), new Vector2(130, 150));
-            Button buttonMid = new Button(Content.Load<Texture2D>(@"TestObjects/guyButton"), new Vector2(330, 150));
-            Button buttonRight = new Button(Content.Load<Texture2D>(@"TestObjects/blondieButton"), new Vector2(530, 150));
-            this.Buttons.Add(buttonLeft);
-            this.Buttons.Add(buttonRight);
-            this.Buttons.Add(buttonMid);
-        }
-
-        public override void Update(MouseState mouse)
-        {
-            foreach (Button button in Buttons)
-            {
-                button.Update(mouse);
-            }
-        }
-
         public override void Draw(SpriteBatch spriteBatch, GraphicsDevice graphics)
         {
             spriteBatch.Begin();
-            
+
             graphics.Clear(Color.Black);
-            spriteBatch.DrawString(font, "Rattatak", new Vector2(5,5), Color.White);
-            spriteBatch.DrawString(font,"Choose your character", new Vector2(250,280),Color.DarkMagenta);
-            foreach (Button button in Buttons)
+            spriteBatch.DrawString(this.font, "Rattatak", new Vector2(5, 5), Color.White);
+            spriteBatch.DrawString(this.font, "Choose your character", new Vector2(250, 280), Color.DarkMagenta);
+            foreach (Button button in this.Buttons)
             {
                 button.Draw(spriteBatch);
             }
+
             spriteBatch.End();
         }
 
         public override string IsClicked()
         {
-            string characterClass = "";
-            foreach (Button button in Buttons)
+            foreach (Button button in this.Buttons)
             {
                 if (button.IsClicked)
                 {
+                    string characterClass;
                     if (button.Position.X.Equals(130))
                     {
-                        characterClass= "Redhead";
+                        characterClass = "Redhead";
                         button.IsClicked = false;
                         return characterClass;
                     }
@@ -79,13 +62,30 @@ namespace LeGame.Screens.StartScreen
                         return characterClass;
                     }
                 }
-
-                
             }
 
             return null;
         }
 
-            
+        public override void Load(ContentManager content)
+        {
+            this.font = content.Load<SpriteFont>(@"Fonts/DeathFont");
+            Button buttonLeft = new Button(content.Load<Texture2D>(@"TestObjects/redheadButton"), new Vector2(130, 150));
+            Button buttonMid = new Button(content.Load<Texture2D>(@"TestObjects/guyButton"), new Vector2(330, 150));
+            Button buttonRight = new Button(
+                content.Load<Texture2D>(@"TestObjects/blondieButton"), 
+                new Vector2(530, 150));
+            this.Buttons.Add(buttonLeft);
+            this.Buttons.Add(buttonRight);
+            this.Buttons.Add(buttonMid);
+        }
+
+        public override void Update(MouseState mouse)
+        {
+            foreach (Button button in this.Buttons)
+            {
+                button.Update(mouse);
+            }
+        }
     }
 }

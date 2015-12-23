@@ -1,7 +1,9 @@
 ﻿namespace LeGame.Models
 {
     using System.IO;
-    using Interfaces;
+
+    using LeGame.Interfaces;
+
     using Microsoft.Xna.Framework;
 
     public abstract class GameObject : IGameObject
@@ -14,11 +16,11 @@
             this.Position = position;
             this.Type = type;
         }
-        
+
         public string Id { get; set; }
 
-        public string Type { get; set; }
-
         public Vector2 Position { get; set; }
+
+        public string Type { get; set; }
     }
 }

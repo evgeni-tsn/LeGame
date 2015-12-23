@@ -3,6 +3,7 @@
     using System.Collections.Generic;
 
     using LeGame.Handlers;
+    using LeGame.Interfaces;
     using LeGame.Screens.StartScreen;
 
     using Microsoft.Xna.Framework;
@@ -13,26 +14,12 @@
     public class DeathScreen : Screen
     {
         private List<Button> buttons;
+
         private SpriteFont font;
 
         public DeathScreen()
         {
             this.Buttons = new List<IButton>();
-        }
-
-        public override void Load(ContentManager content)
-        {
-            this.font = content.Load<SpriteFont>(@"Fonts/SpriteFont");
-            Button replay = new Button(content.Load<Texture2D>(@"TestObjects/kappa"), new Vector2(300, 250));
-            this.Buttons.Add(replay);
-        }
-
-        public override void Update(MouseState mouse)
-        {
-            foreach (Button button in this.Buttons)
-            {
-                button.Update(mouse);
-            }
         }
 
         public override void Draw(SpriteBatch spriteBatch, GraphicsDevice graphics)
@@ -61,6 +48,21 @@
             }
 
             return null;
+        }
+
+        public override void Load(ContentManager content)
+        {
+            this.font = content.Load<SpriteFont>(@"Fonts/SpriteFont");
+            Button replay = new Button(content.Load<Texture2D>(@"TestObjects/kappa"), new Vector2(300, 250));
+            this.Buttons.Add(replay);
+        }
+
+        public override void Update(MouseState mouse)
+        {
+            foreach (Button button in this.Buttons)
+            {
+                button.Update(mouse);
+            }
         }
     }
 }

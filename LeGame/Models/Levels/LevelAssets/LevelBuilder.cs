@@ -13,7 +13,7 @@
     public class LevelBuilder
     {
         private readonly List<IGameObject> background;
-        
+
         public LevelBuilder(string mapFilePath)
         {
             // Read the text file for the map and find the separation between map and legend.
@@ -24,16 +24,13 @@
                 throw new MapException(string.Format(Messages.MissingLegendMap, mapFilePath));
             }
 
-            List<string> mapRows = mapFile
-                .Take(separatorLocation)
-                .ToList();
+            List<string> mapRows = mapFile.Take(separatorLocation).ToList();
 
-            Dictionary<char, string> legend = mapFile
-                .Skip(separatorLocation + 1)
+            Dictionary<char, string> legend = mapFile.Skip(separatorLocation + 1)
                 .ToDictionary(item => item[0], item => item.Substring(2));
 
             this.background = new List<IGameObject>();
-            
+
             // Go through the chars and store their corresponding items in the background/tiles
             for (int row = 0; row < mapRows.Count; row++)
             {
@@ -62,14 +59,12 @@
                 }
             }
         }
-        
+
         public List<IGameObject> Background
         {
             get
             {
-                return this.background
-                    .OrderBy(ass => ((LevelAsset)ass).DrawPriority)
-                    .ToList();
+                return this.background.OrderBy(ass => ((LevelAsset)ass).DrawPriority).ToList();
             }
         }
     }

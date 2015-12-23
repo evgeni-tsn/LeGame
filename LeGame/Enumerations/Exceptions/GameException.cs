@@ -4,7 +4,7 @@
 
     public abstract class GameException : Exception
     {
-        protected GameException(string message) 
+        protected GameException(string message)
             : base(message)
         {
         }

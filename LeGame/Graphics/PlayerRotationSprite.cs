@@ -2,62 +2,36 @@
 {
     using System.Linq;
 
-    using Interfaces;
+    using LeGame.Interfaces;
+    using LeGame.Models.Characters.Player;
 
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
     using Microsoft.Xna.Framework.Input;
 
-    using Models.Characters.Player;
-
     public class PlayerRotationSprite : Sprite
     {
-        private const int PlayerRotationSpriteUpdateTime = 50;
         private const int LegsRow = 0;
+
+        private const int PlayerRotationSpriteUpdateTime = 50;
+
         private const int TorsoRow = 1;
+
         private bool reverse;
 
-        public PlayerRotationSprite(Texture2D texture) 
+        public PlayerRotationSprite(Texture2D texture)
             : base(texture, PlayerRotationSpriteUpdateTime)
         {
             this.CurrentFrame = 5;
             this.TotalFrames = this.Columns;
         }
 
-        public override void Update(GameTime gameTime, ICharacter character = null)
-        {
-            this.TimeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
-            if (this.TimeSinceLastFrame < this.TimePerFrame)
-            {
-                return;
-            }
-
-            this.TimeSinceLastFrame = gameTime.ElapsedGameTime.Milliseconds;
-            
-            KeyboardState keyState = Keyboard.GetState();
-
-            Player player = (Player)character;
-            bool moving = (player != null) && player.KbKeys.Any(key => keyState.IsKeyDown(key));
-
-            if (moving || (this.CurrentFrame != 5))
-            {
-                if (this.reverse)
-                {
-                    this.CurrentFrame--;
-                }
-                else
-                {
-                    this.CurrentFrame++;
-                }
-                
-                if ((this.CurrentFrame == this.TotalFrames - 1) || (this.CurrentFrame == 0))
-                {
-                    this.reverse = !this.reverse;
-                }
-            }
-        }
-
-        public override void Draw(SpriteBatch spriteBatch, Vector2 location, float torsoRotation = 0, float legRotation = 0, Texture2D additionalTexture = null)
+        public override void Draw(
+            SpriteBatch spriteBatch, 
+            Vector2 location, 
+            float torsoRotation = 0, 
+            float legRotation = 0, 
+            Texture2D additionalTexture = null)
         {
             int width = this.Texture.Width / this.Columns;
             int height = this.Texture.Height / this.Rows;
@@ -74,6 +48,39 @@
             spriteBatch.Draw(additionalTexture, location, null, null, weaponOrigin, torsoRotation + 0.6f);
             spriteBatch.Draw(this.Texture, null, destinationRectangle, torsoSource, origin, torsoRotation);
             spriteBatch.End();
+        }
+
+        public override void Update(GameTime gameTime, ICharacter character = null)
+        {
+            this.TimeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
+            if (this.TimeSinceLastFrame < this.TimePerFrame)
+            {
+                return;
+            }
+
+            this.TimeSinceLastFrame = gameTime.ElapsedGameTime.Milliseconds;
+
+            KeyboardState keyState = Keyboard.GetState();
+
+            Player player = (Player)character;
+            bool moving = (player != null) && player.KbKeys.Any(key => keyState.IsKeyDown(key));
+
+            if (moving || (this.CurrentFrame != 5))
+            {
+                if (this.reverse)
+                {
+                    this.CurrentFrame--;
+                }
+                else
+                {
+                    this.CurrentFrame++;
+                }
+
+                if ((this.CurrentFrame == this.TotalFrames - 1) || (this.CurrentFrame == 0))
+                {
+                    this.reverse = !this.reverse;
+                }
+            }
         }
     }
 }

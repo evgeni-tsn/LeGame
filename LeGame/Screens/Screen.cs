@@ -13,8 +13,6 @@
 
         public abstract void Draw(SpriteBatch spriteBatch, GraphicsDevice graphics);
 
-        public abstract void Update(MouseState mouse);
-
         public abstract string IsClicked();
 
         public abstract void Load(ContentManager content);
@@ -26,5 +24,7 @@
                 button.IsClicked = false;
             }
         }
+
+        public abstract void Update(MouseState mouse);
     }
 }

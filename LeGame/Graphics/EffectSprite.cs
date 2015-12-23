@@ -1,7 +1,7 @@
 ﻿namespace LeGame.Graphics
 {
-    using Core;
-    using Interfaces;
+    using LeGame.Core;
+    using LeGame.Interfaces;
 
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
@@ -22,6 +22,26 @@
 
         private float Rotation { get; set; }
 
+        public override void Draw(
+            SpriteBatch spriteBatch, 
+            Vector2 location, 
+            float rotation = 0, 
+            float rotationB = 0, 
+            Texture2D additionalTexture = null)
+        {
+            // If rotation is not used, generate random rotation a single time for effect variety.
+            if (this.Rotation.Equals(0) && rotation.Equals(0))
+            {
+                this.Rotation = (float)GlobalVariables.Rng.NextDouble() + GlobalVariables.Rng.Next(-1, 4);
+            }
+            else if (!rotation.Equals(0))
+            {
+                this.Rotation = rotation;
+            }
+
+            base.Draw(spriteBatch, location, this.Rotation, rotationB);
+        }
+
         public override void Update(GameTime gameTime, ICharacter character = null)
         {
             this.TimeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
@@ -40,21 +60,6 @@
             {
                 this.HasEnded = true;
             }
-        }
-
-        public override void Draw(SpriteBatch spriteBatch, Vector2 location, float rotation = 0, float rotationB = 0, Texture2D additionalTexture = null)
-        {
-            // If rotation is not used, generate random rotation a single time for effect variety.
-            if (this.Rotation.Equals(0) && rotation.Equals(0))
-            {
-                this.Rotation = (float)GlobalVariables.Rng.NextDouble() + GlobalVariables.Rng.Next(-1, 4);
-            }
-            else if (!rotation.Equals(0))
-            {
-                this.Rotation = rotation;
-            }
-
-            base.Draw(spriteBatch, location, this.Rotation, rotationB);
         }
     }
 }

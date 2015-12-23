@@ -2,8 +2,10 @@
 {
     public enum PlayerChars
     {
-        TheGuy,
-        Redhead,
+        TheGuy, 
+
+        Redhead, 
+
         Blondy
     }
 }

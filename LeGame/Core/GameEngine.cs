@@ -1,58 +1,94 @@
 namespace LeGame.Core
 {
-    using Core.Factories;
-    using Enumerations;
-    using Handlers;
-    using Interfaces;
+    using LeGame.Core.Factories;
+    using LeGame.Enumerations;
+    using LeGame.Handlers;
+    using LeGame.Interfaces;
+    using LeGame.Screens;
+    using LeGame.Screens.DeathScreen;
+    using LeGame.Screens.StartScreen;
+
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
     using Microsoft.Xna.Framework.Input;
-    using Screens;
-    using Screens.DeathScreen;
-    using Screens.StartScreen;
 
     public class GameEngine : Game
     {
         private readonly GraphicsDeviceManager graphics;
-        private SpriteBatch spriteBatch;
 
-        private StartScreen startScreen;
         private DeathScreen deathScreen;
-        private StatPanel statPanel;
-        private GameStages stage;
 
         private ICharacter player;
+
+        private SpriteBatch spriteBatch;
+
+        private GameStages stage;
+
+        private StartScreen startScreen;
+
+        private StatPanel statPanel;
 
         public GameEngine()
         {
             this.graphics = new GraphicsDeviceManager(this);
             this.Content.RootDirectory = "Content";
         }
-        
+
+        protected override void Draw(GameTime gameTime)
+        {
+            this.GraphicsDevice.Clear(Color.Black);
+
+            // Vector2 origin = new Vector2(GfxHandler.GetWidth(this.testPlayer) / 2, GfxHandler.GetHeight(this.testPlayer) / 2);
+            // TODO: Add your drawing code here
+            if (this.stage == GameStages.GameStage)
+            {
+                this.statPanel.Draw(this.player, this.spriteBatch);
+
+                GfxHandler.DrawLevel(this.spriteBatch, this.player.Level);
+            }
+            else if (this.stage == GameStages.DeathStage)
+            {
+                // this.statPanel.EndScreen(this.Content, this.spriteBatch);
+                this.GraphicsDevice.Clear(Color.AliceBlue);
+                this.deathScreen.Draw(this.spriteBatch, this.GraphicsDevice);
+            }
+            else
+            {
+                this.GraphicsDevice.Clear(Color.Wheat);
+                this.startScreen.Draw(this.spriteBatch, this.GraphicsDevice);
+            }
+
+            base.Draw(gameTime);
+        }
+
         protected override void LoadContent()
         {
             this.IsMouseVisible = true;
 
-            this.graphics.PreferredBackBufferWidth = GlobalVariables.WindowWidthDefault; // set this value to the desired width of your window
-            this.graphics.PreferredBackBufferHeight = GlobalVariables.WindowHeightDefault;   // set this value to the desired height of your window
+            this.graphics.PreferredBackBufferWidth = GlobalVariables.WindowWidthDefault;
+
+                // set this value to the desired width of your window
+            this.graphics.PreferredBackBufferHeight = GlobalVariables.WindowHeightDefault;
+
+                // set this value to the desired height of your window
             this.graphics.ApplyChanges();
 
             this.statPanel = new StatPanel();
             this.startScreen = new StartScreen();
             this.deathScreen = new DeathScreen();
 
-            this.stage = GameStages.Start_Stage;
+            this.stage = GameStages.StartStage;
 
             // Create a new SpriteBatch, which can be used to draw textures.
             this.spriteBatch = new SpriteBatch(this.GraphicsDevice);
-            
+
             GfxHandler.Load(this.Content);
 
             this.startScreen.Load(this.Content);
             this.deathScreen.Load(this.Content);
             this.statPanel.Load(this.Content);
         }
-        
+
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
@@ -69,7 +105,7 @@ namespace LeGame.Core
                 this.Exit();
             }
 
-            if (this.stage == GameStages.Start_Stage)
+            if (this.stage == GameStages.StartStage)
             {
                 string characterClass = this.startScreen.IsClicked();
 
@@ -104,7 +140,7 @@ namespace LeGame.Core
                 if (death != null)
                 {
                     this.startScreen.UnloadButtons();
-                    this.stage = GameStages.Start_Stage;
+                    this.stage = GameStages.StartStage;
                 }
 
                 this.deathScreen.Update(mouse);
@@ -123,32 +159,5 @@ namespace LeGame.Core
 
             base.Update(gameTime);
         }
-
-        protected override void Draw(GameTime gameTime)
-        {
-            this.GraphicsDevice.Clear(Color.Black);
-
-            // Vector2 origin = new Vector2(GfxHandler.GetWidth(this.testPlayer) / 2, GfxHandler.GetHeight(this.testPlayer) / 2);
-            // TODO: Add your drawing code here
-            if (this.stage == GameStages.GameStage)
-            {
-                this.statPanel.Draw(this.player, this.spriteBatch);
-
-                GfxHandler.DrawLevel(this.spriteBatch, this.player.Level);
-            }
-            else if (this.stage == GameStages.DeathStage)
-            {
-                // this.statPanel.EndScreen(this.Content, this.spriteBatch);
-                this.GraphicsDevice.Clear(Color.AliceBlue);
-                this.deathScreen.Draw(this.spriteBatch, this.GraphicsDevice);
-            }
-            else
-            {
-                this.GraphicsDevice.Clear(Color.Wheat);
-                this.startScreen.Draw(this.spriteBatch, this.GraphicsDevice);
-            }
-            
-            base.Draw(gameTime);
-        }   
     }
 }

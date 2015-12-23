@@ -6,25 +6,25 @@
 
     public class Chicken : Enemy
     {
-        private const string ChickenDefaultType = "TestObjects/cockSprite";
-
-        private const int ChickenDefaultMaxHealth = 100;
-
         private const int ChickenDefaultCurrentHealth = 100;
-
-        private const int ChickenDefaultSpeed = 2;
 
         private const int ChickenDefaultHitCooldown = 50;
 
+        private const int ChickenDefaultMaxHealth = 100;
+
+        private const int ChickenDefaultSpeed = 2;
+
+        private const string ChickenDefaultType = "TestObjects/cockSprite";
+
         public Chicken(Vector2 position, ISpawnLocation spawnLocation, ILevel level = null)
             : base(
-                position,
-                spawnLocation,
-                ChickenDefaultType,
-                ChickenDefaultMaxHealth,
-                ChickenDefaultCurrentHealth,
-                ChickenDefaultSpeed,
-                ChickenDefaultHitCooldown,
+                position, 
+                spawnLocation, 
+                ChickenDefaultType, 
+                ChickenDefaultMaxHealth, 
+                ChickenDefaultCurrentHealth, 
+                ChickenDefaultSpeed, 
+                ChickenDefaultHitCooldown, 
                 level)
         {
         }
