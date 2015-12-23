@@ -1,7 +1,6 @@
 ﻿namespace LeGame
 {
     using System;
-
     using Core;
 
     public static class RolePlayingGame

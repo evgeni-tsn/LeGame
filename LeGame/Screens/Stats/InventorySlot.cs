@@ -1,44 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Xna.Framework;
-
-namespace LeGame.Screens.Stats
+﻿namespace LeGame.Screens.Stats
 {
+    using Microsoft.Xna.Framework;
+
     public struct InventorySlot
     {
-        private Vector2 position;
-        private bool isOccupied;
-
         public InventorySlot(int x, int y)
         {
-            this.position = new Vector2(x, y);
-            isOccupied = false;
+            this.Position = new Vector2(x, y);
+            this.IsOccupied = false;
         }
-        public Vector2 Position
-        {
-            get
-            {
-                return position;
-            }
 
-            set
-            {
-                position = value;
-            }
-        }
-        public bool IsOccupied
-        {
-            get
-            {
-                return isOccupied;
-            }
+        public Vector2 Position { get; set; }
 
-            set
-            {
-                isOccupied = value;
-            }
-        }   
+        public bool IsOccupied { get; set; }
     }
 }

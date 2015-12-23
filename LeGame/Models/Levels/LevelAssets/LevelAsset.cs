@@ -4,7 +4,7 @@
 
     using Microsoft.Xna.Framework;
 
-    public class LevelAsset : GameObject, ICollidable
+    public class LevelAsset : GameObject, IColidable
     {
         public LevelAsset(Vector2 position, string type, int drawPriority, bool canCollide)
             : base(position, type)

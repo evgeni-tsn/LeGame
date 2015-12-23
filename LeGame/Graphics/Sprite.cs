@@ -8,7 +8,6 @@
 
     public abstract class Sprite : ISprite
     {
-
         protected Sprite(Texture2D texture, int timePerFrame)
         {
             this.Texture = texture;

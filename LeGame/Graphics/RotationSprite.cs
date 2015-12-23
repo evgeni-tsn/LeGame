@@ -23,6 +23,7 @@
             {
                 return;
             }
+
             this.TimeSinceLastFrame = gameTime.ElapsedGameTime.Milliseconds;
 
             // this.CurrentFrame = GlobalVariables.Rng.Next(0, this.TotalFrames);

@@ -35,8 +35,6 @@
                     riper = sender as ICharacter;
                     riper?.Level.Assets.Add(new OrangePotion(riper.Position));
                     break;
-                default:
-                    break;
             }
         }
     }

@@ -1,17 +1,12 @@
 namespace LeGame.Core
 {
     using Core.Factories;
-
     using Enumerations;
-
     using Handlers;
-
     using Interfaces;
-
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
     using Microsoft.Xna.Framework.Input;
-
     using Screens;
     using Screens.DeathScreen;
     using Screens.StartScreen;
@@ -82,15 +77,15 @@ namespace LeGame.Core
                 {
                     if (characterClass == "Redhead")
                     {
-                        this.player = PlayerFacory.MakePlayer(PlayerChars.Redhead);
+                        this.player = PlayerFactory.MakePlayer(PlayerChars.Redhead);
                     }
                     else if (characterClass == "Guy")
                     {
-                        this.player = PlayerFacory.MakePlayer(PlayerChars.TheGuy);
+                        this.player = PlayerFactory.MakePlayer(PlayerChars.TheGuy);
                     }
                     else if (characterClass == "Blondie")
                     {
-                        this.player = PlayerFacory.MakePlayer(PlayerChars.Blondy);
+                        this.player = PlayerFactory.MakePlayer(PlayerChars.Blondy);
                     }
 
                     this.startScreen.UnloadButtons();
@@ -143,7 +138,7 @@ namespace LeGame.Core
             }
             else if (this.stage == GameStages.DeathStage)
             {
-                //this.statPanel.EndScreen(this.Content, this.spriteBatch);
+                // this.statPanel.EndScreen(this.Content, this.spriteBatch);
                 this.GraphicsDevice.Clear(Color.AliceBlue);
                 this.deathScreen.Draw(this.spriteBatch, this.GraphicsDevice);
             }

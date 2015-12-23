@@ -1,5 +1,6 @@
 ﻿namespace LeGame.Graphics
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -40,16 +41,17 @@
             this.CurrentFrame = 0;
         }
 
-        public override void Update(GameTime gameTime, ICharacter character)
+        public override void Update(GameTime gameTime, ICharacter character = null)
         {
             this.TimeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
             if (this.TimeSinceLastFrame < this.TimePerFrame)
             {
                 return;
             }
+
             this.TimeSinceLastFrame = gameTime.ElapsedGameTime.Milliseconds;
 
-            if (character is ICollidable)
+            if (character is IColidable)
             {
                 // Enemy
                 this.SpriteRotaions(gameTime, ((Enemy)character).Direction);
@@ -82,6 +84,11 @@
 
         private void SpriteRotaions(GameTime gameTime, MoveDirection direction)
         {
+            if (gameTime == null)
+            {
+                throw new ArgumentNullException(nameof(gameTime));
+            }
+
             foreach (MoveDirection direct in this.directionToFrames.Keys.Where(key => direction.Equals(key)))
             {
                 if (this.directionToFrames[direct].Contains(this.CurrentFrame))

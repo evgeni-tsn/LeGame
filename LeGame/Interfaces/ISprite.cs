@@ -1,5 +1,4 @@
-﻿
-namespace LeGame.Interfaces
+﻿namespace LeGame.Interfaces
 {
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;

@@ -4,7 +4,7 @@
     using System.Linq;
 
     using LeGame.Core;
-    using LeGame.Exceptions;
+    using LeGame.Enumerations.Exceptions;
     using LeGame.Handlers;
     using LeGame.Interfaces;
 

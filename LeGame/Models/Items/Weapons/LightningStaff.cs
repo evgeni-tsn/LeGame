@@ -1,18 +1,19 @@
 ﻿namespace LeGame.Models.Items.Weapons
 {
-    using Interfaces;
+    using LeGame.Interfaces;
+    using LeGame.Models.Items.Projectiles;
 
     using Microsoft.Xna.Framework;
 
-    using Projectiles;
-
     public class LightningStaff : RangedWeapon
     {
-        private const string LightningStaffType = "Items/LightningStaff";
         private const int LightningStaffDamage = 5;
+
         private const int LightningStaffRange = 20;
 
-        public LightningStaff(Vector2 position) 
+        private const string LightningStaffType = "Items/LightningStaff";
+
+        public LightningStaff(Vector2 position)
             : base(position, LightningStaffType, LightningStaffDamage, LightningStaffRange)
         {
         }

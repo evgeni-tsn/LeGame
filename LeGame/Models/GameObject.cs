@@ -1,9 +1,7 @@
 ﻿namespace LeGame.Models
 {
     using System.IO;
-
     using Interfaces;
-
     using Microsoft.Xna.Framework;
 
     public abstract class GameObject : IGameObject

@@ -29,6 +29,7 @@
             {
                 return;
             }
+
             this.TimeSinceLastFrame = gameTime.ElapsedGameTime.Milliseconds;
 
             if (this.CurrentFrame != this.TotalFrames - 1)
@@ -39,7 +40,6 @@
             {
                 this.HasEnded = true;
             }
-
         }
 
         public override void Draw(SpriteBatch spriteBatch, Vector2 location, float rotation = 0, float rotationB = 0, Texture2D additionalTexture = null)

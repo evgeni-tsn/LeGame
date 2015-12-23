@@ -1,7 +1,7 @@
 ﻿namespace LeGame.Models.Items.Projectiles
 {
-    using Handlers;
-    using Interfaces;
+    using LeGame.Handlers;
+    using LeGame.Interfaces;
 
     public abstract class Projectile : GameObject, IProjectile
     {
@@ -15,27 +15,27 @@
             this.Range = range;
             this.Lifetime = 0;
         }
-        
-        public int Damage { get; }
-
-        public float Speed { get; set; }
 
         public float Angle { get; }
+
+        public ICharacter Attacker { get; }
+
+        public int Damage { get; }
 
         public int Lifetime { get; protected set; }
 
         public int Range { get; }
 
-        public ICharacter Attacker { get; }
-
-        public virtual void Move()
-        {
-            CollisionHandler.ProjectileReaction(this, this.Attacker.Level);
-        }
+        public float Speed { get; set; }
 
         // TODO: Might be redundant, consider removal
         public virtual void Hit(ICharacter target)
         {
+        }
+
+        public virtual void Move()
+        {
+            CollisionHandler.ProjectileReaction(this, this.Attacker.Level);
         }
     }
 }

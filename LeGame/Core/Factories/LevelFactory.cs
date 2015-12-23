@@ -1,18 +1,23 @@
 ﻿namespace LeGame.Core.Factories
 {
+    using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     using LeGame.Enumerations;
     using LeGame.Interfaces;
     using LeGame.Models.Levels;
     using LeGame.Models.Levels.LevelAssets;
-
     using Microsoft.Xna.Framework;
 
     public static class LevelFactory
     {
         public static ILevel MakeLevel(ICharacter player, Maps map = Maps.Random)
         {
+            if (!Enum.IsDefined(typeof(Maps), map))
+            {
+                throw new ArgumentOutOfRangeException(nameof(map));
+            }
             // map = GetNewRandomMap(map, player);
             map = GetMapByOrder(player);
             ILevel newLevel = new Level($@"{GlobalVariables.ContentDir}Maps\{map}.txt", player);
@@ -22,14 +27,7 @@
                 newLevel.Assets.AddRange(ItemFactory.MakeTestItems());
             }
 
-            var spawnLocations = new List<SpawnLocation>();
-            foreach (IGameObject asset in newLevel.Assets)
-            {
-                if (asset.Type.Contains("SpawnPoint"))
-                {
-                    spawnLocations.Add(new SpawnLocation(asset.Position, asset.Type, 0, false));
-                }
-            }
+            var spawnLocations = (from asset in newLevel.Assets where asset.Type.Contains("SpawnPoint") select new SpawnLocation(asset.Position, asset.Type, 0, false)).ToList();
 
             if (map.ToString().Contains("Bloody"))
             {
@@ -81,9 +79,9 @@
         }
 
         // Get a new random map, which is not the same as the previous map.
-        private static Maps GetNewRandomMap(Maps map, ICharacter player)
+        public static Maps GetNewRandomMap(Maps map, ICharacter player)
         {
-            while (map == Maps.Random || (player.Level != null && player.Level.Type.Contains(map.ToString())))
+            while ((map == Maps.Random) || ((player.Level != null) && player.Level.Type.Contains(map.ToString())))
             {
                 // 2 in order to skip the starting map
                 map = (Maps)GlobalVariables.Rng.Next(2, 6);

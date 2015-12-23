@@ -1,4 +1,4 @@
-﻿namespace LeGame.Exceptions
+﻿namespace LeGame.Enumerations.Exceptions
 {
     public class MapException : GameException
     {

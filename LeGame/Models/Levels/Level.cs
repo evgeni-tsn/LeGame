@@ -1,9 +1,7 @@
 ﻿namespace LeGame.Models.Levels
 {
     using System.Collections.Generic;
-
     using Interfaces;
-
     using LeGame.Models.Levels.LevelAssets;
 
     public class Level : ILevel
@@ -18,7 +16,6 @@
             this.Assets = backgroundBuilder.Background;
             this.Enemies = new List<ICharacter>();
             this.Projectiles = new List<IProjectile>();
-            
         }
 
         public string Type { get; }

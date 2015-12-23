@@ -2,12 +2,10 @@
 {
     using System;
     using System.Linq;
-
     using Core;
     using Handlers;
     using Interfaces;
     using Items.Weapons;
-
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Input;
 
@@ -99,7 +97,7 @@
                 }
                 return picked;
             }
-            return picked;
+            return false;
         }
     }
 }

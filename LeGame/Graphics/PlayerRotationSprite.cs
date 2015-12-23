@@ -24,20 +24,22 @@
             this.TotalFrames = this.Columns;
         }
 
-        public override void Update(GameTime gameTime, ICharacter character)
+        public override void Update(GameTime gameTime, ICharacter character = null)
         {
             this.TimeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
             if (this.TimeSinceLastFrame < this.TimePerFrame)
             {
                 return;
             }
+
             this.TimeSinceLastFrame = gameTime.ElapsedGameTime.Milliseconds;
             
             KeyboardState keyState = Keyboard.GetState();
 
-            bool moving = ((Player)character).KbKeys.Any(key => keyState.IsKeyDown(key));
+            Player player = (Player)character;
+            bool moving = (player != null) && player.KbKeys.Any(key => keyState.IsKeyDown(key));
 
-            if (moving || this.CurrentFrame != 5)
+            if (moving || (this.CurrentFrame != 5))
             {
                 if (this.reverse)
                 {
@@ -48,7 +50,7 @@
                     this.CurrentFrame++;
                 }
                 
-                if (this.CurrentFrame == this.TotalFrames - 1 || this.CurrentFrame == 0)
+                if ((this.CurrentFrame == this.TotalFrames - 1) || (this.CurrentFrame == 0))
                 {
                     this.reverse = !this.reverse;
                 }

@@ -8,7 +8,7 @@
 
     using Microsoft.Xna.Framework;
 
-    public abstract class Character : GameObject, ICharacter, ICollidable
+    public abstract class Character : GameObject, ICharacter, IColidable
     {
         protected Character(Vector2 position,string type, int maxHealth, int currentHealth, float speed, int hitCooldown, ILevel level)
             : base(position, type)
@@ -70,7 +70,7 @@
                 if (this is Enemy)
                 {
                     this.Level.Enemies.Remove(this);
-                    (attacker as Player.Player).KillCount++;
+                    ((Player.Player)attacker).KillCount++;
                 }
             }
         }

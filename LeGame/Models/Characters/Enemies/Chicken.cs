@@ -1,7 +1,7 @@
-﻿using LeGame.Interfaces;
-
-namespace LeGame.Models.Characters.Enemies
+﻿namespace LeGame.Models.Characters.Enemies
 {
+    using LeGame.Interfaces;
+
     using Microsoft.Xna.Framework;
 
     public class Chicken : Enemy
@@ -16,8 +16,16 @@ namespace LeGame.Models.Characters.Enemies
 
         private const int ChickenDefaultHitCooldown = 50;
 
-        public Chicken(Vector2 position,ISpawnLocation spawnLocation, ILevel level = null)
-            : base(position,spawnLocation, ChickenDefaultType, ChickenDefaultMaxHealth, ChickenDefaultCurrentHealth, ChickenDefaultSpeed, ChickenDefaultHitCooldown, level)
+        public Chicken(Vector2 position, ISpawnLocation spawnLocation, ILevel level = null)
+            : base(
+                position,
+                spawnLocation,
+                ChickenDefaultType,
+                ChickenDefaultMaxHealth,
+                ChickenDefaultCurrentHealth,
+                ChickenDefaultSpeed,
+                ChickenDefaultHitCooldown,
+                level)
         {
         }
     }

@@ -1,19 +1,12 @@
-﻿using System;
-using LeGame.Core;
-using Microsoft.Xna.Framework.Input;
-
-namespace LeGame.Screens.StartScreen
+﻿namespace LeGame.Screens.StartScreen
 {
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
+    using Microsoft.Xna.Framework.Input;
 
     public class Button : IButton
     {
         private Color colour = new Color(255, 255, 255, 255);
-        Texture2D texture;
-        private Vector2 position;
-        private bool down;
-        private bool isClicked;
 
         public Button(Texture2D newTexture, Vector2 position)
         {
@@ -22,115 +15,68 @@ namespace LeGame.Screens.StartScreen
             this.Texture = newTexture;
         }
 
-        public Rectangle BoundingBox
-        {
-            get { return new Rectangle((int) Position.X, (int) Position.Y, (int)Texture.Width, (int)Texture.Height); }
+        public Rectangle BoundingBox => new Rectangle((int)this.Position.X, (int)this.Position.Y, this.Texture.Width, this.Texture.Height);
 
-        }
+        public Texture2D Texture { get; set; }
 
-        public Texture2D Texture
-        {
-            get
-            {
-                return texture;
-            }
+        public Vector2 Position { get; set; }
 
-            set
-            {
-                texture = value;
-            }
-        }
+        public bool Down { get; set; }
 
-        public Vector2 Position
-        {
-            get
-            {
-                return position;
-            }
-
-            set
-            {
-                position = value;
-            }
-        }
-
-        public bool Down
-        {
-            get
-            {
-                return down;
-            }
-
-            set
-            {
-                down = value;
-            }
-        }
-
-        public bool IsClicked
-        {
-            get
-            {
-                return isClicked;
-            }
-
-            set
-            {
-                isClicked = value;
-            }
-        }
+        public bool IsClicked { get; set; }
 
         public Color Colour
         {
             get
             {
-                return colour;
+                return this.colour;
             }
 
             set
             {
-                colour = value;
+                this.colour = value;
             }
         }
-
-
+        
         public void Update(MouseState mouse)
         {
             
-            Rectangle mouseRectangle = new Rectangle(mouse.X, mouse.Y, 1,1);
+            Rectangle mouseRectangle = new Rectangle(mouse.X, mouse.Y, 1, 1);
 
             if (mouseRectangle.Intersects(this.BoundingBox))
             {
-                if (colour.A == 255)
+                if (this.colour.A == 255)
                 {
-                    down = false;
-                }   
-                if (colour.A == 27)
-                {
-                    down = true;
+                    this.Down = false;
                 }
-                if (down)
+   
+                if (this.colour.A == 27)
                 {
-                    colour.A += 3;
+                    this.Down = true;
+                }
+
+                if (this.Down)
+                {
+                    this.colour.A += 3;
                 }
                 else
                 {
-                    colour.A -= 3;
+                    this.colour.A -= 3;
                 }
 
-                if (mouse.LeftButton == ButtonState.Pressed) IsClicked = true;
+                if (mouse.LeftButton == ButtonState.Pressed) this.IsClicked = true;
                
             }
-            else if (colour.A < 255)
+            else if (this.colour.A < 255)
             {
-                colour.A += 3;
-                IsClicked = false;
+                this.colour.A += 3;
+                this.IsClicked = false;
             }
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Texture, this.BoundingBox,Colour);
+            spriteBatch.Draw(this.Texture, this.BoundingBox, this.Colour);
 
         }
     }

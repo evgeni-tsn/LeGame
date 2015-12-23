@@ -1,5 +1,4 @@
-﻿using System;
-using LeGame.Interfaces;
+﻿using LeGame.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -11,27 +10,17 @@ namespace LeGame.Screens.Stats
 
         private int healthPoints;
         private string healthText;
-        private SpriteFont font;
-        private const int positionX = 650;
-        private const int positionY = 10;
-        private Vector2 position;
 
-        public SpriteFont Font
-        {
-            get
-            {
-                return font;
-            }
+        private const int PositionX = 650;
+        private const int PositionY = 10;
 
-            set
-            {
-                font = value;
-            }
-        }
+        public Vector2 Position { get; }
+
+        public SpriteFont Font { get; set; }
 
         public HealthStat()
         {
-            this.position = new Vector2(positionX, positionY);
+            this.Position = new Vector2(PositionX, PositionY);
         }
 
         public void Load(ContentManager content)
@@ -42,11 +31,11 @@ namespace LeGame.Screens.Stats
 
         public void Draw(ICharacter character, SpriteBatch spriteBatch)
         {
-            healthPoints = character.CurrentHealth;
-            healthText = $"Health points: {healthPoints}";
+            this.healthPoints = character.CurrentHealth;
+            this.healthText = $"Health points: {this.healthPoints}";
 
             spriteBatch.Begin();
-            spriteBatch.DrawString(this.Font, healthText, new Vector2(650, 10), Color.Red);
+            spriteBatch.DrawString(this.Font, this.healthText, new Vector2(650, 10), Color.Red);
             spriteBatch.End();
         }
     }

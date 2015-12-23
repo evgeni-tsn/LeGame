@@ -1,18 +1,19 @@
 ﻿namespace LeGame.Models.Items.Weapons
 {
-    using Interfaces;
+    using LeGame.Interfaces;
+    using LeGame.Models.Items.Projectiles;
 
     using Microsoft.Xna.Framework;
 
-    using Projectiles;
-
     public class LaserGun : RangedWeapon
     {
-        private const string LaserGunType = "Items/LaserGun";
         private const int LaserGunDamage = 4;
+
         private const int LaserGunRange = 20;
 
-        public LaserGun(Vector2 position) 
+        private const string LaserGunType = "Items/LaserGun";
+
+        public LaserGun(Vector2 position)
             : base(position, LaserGunType, LaserGunDamage, LaserGunRange)
         {
         }

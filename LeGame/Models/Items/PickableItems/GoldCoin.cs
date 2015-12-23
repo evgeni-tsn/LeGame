@@ -10,6 +10,6 @@
             this.HasBeenPicked = false;
         }
 
-        public sealed override bool HasBeenPicked { get; set; }
+        public override sealed bool HasBeenPicked { get; set; }
     }
 }

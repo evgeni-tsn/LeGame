@@ -4,6 +4,6 @@
 
     public interface ISpawnLocation : IGameObject
     {
-        Rectangle InfalateBBox();
+        Rectangle InflateBBox();
     }
 }

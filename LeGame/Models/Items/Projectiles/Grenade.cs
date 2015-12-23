@@ -1,6 +1,6 @@
 ﻿namespace LeGame.Models.Items.Projectiles
 {
-    using Interfaces;
+    using LeGame.Interfaces;
 
     public class Grenade : Projectile
     {
@@ -8,6 +8,5 @@
             : base(attacker, type, damage, speed, angle, range)
         {
         }
-        
     }
 }

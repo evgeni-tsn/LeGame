@@ -1,24 +1,18 @@
-﻿using System.Collections.Generic;
-using LeGame.Screens.Stats;
-
-namespace LeGame.Screens
+﻿namespace LeGame.Screens
 {
-    using LeGame.Core;
+    using System.Collections.Generic;
     using LeGame.Interfaces;
-
-    using Microsoft.Xna.Framework;
+    using LeGame.Screens.Stats;
     using Microsoft.Xna.Framework.Content;
     using Microsoft.Xna.Framework.Graphics;
-    using Microsoft.Xna.Framework.Input;
 
     public class StatPanel
     {
-        private List<IStat> stats;
-        private HealthStat healthStat;
-        private KillsStat killsStat;
-        private InventoryStat inventoryStat;
+        private readonly List<IStat> stats;
+        private readonly HealthStat healthStat;
+        private readonly KillsStat killsStat;
+        private readonly InventoryStat inventoryStat;
         private SpriteFont font;
-
        
 
         public StatPanel()
@@ -27,32 +21,26 @@ namespace LeGame.Screens
             this.healthStat = new HealthStat();
             this.killsStat = new KillsStat();
             this.inventoryStat = new InventoryStat();
-            this.Stats.Add(inventoryStat);
-            this.Stats.Add(killsStat);
-            this.Stats.Add(healthStat);
+            this.Stats.Add(this.inventoryStat);
+            this.Stats.Add(this.killsStat);
+            this.Stats.Add(this.healthStat);
         }
 
-        public ICollection<IStat> Stats
-        {
-            get
-            {
-                return stats;
-            }
+        public ICollection<IStat> Stats => this.stats;
 
-          
-        }
         public void Load(ContentManager content)
         {
             this.font = content.Load<SpriteFont>(@"Fonts/SpriteFont");
-            foreach (IStat stat in Stats)
+            foreach (IStat stat in this.Stats)
             {
                 stat.Load(content);
-                stat.Font = font;
+                stat.Font = this.font;
             }
         }
+
         public void Draw(ICharacter character, SpriteBatch spriteBatch)
         {
-            foreach (IStat stat in Stats)
+            foreach (IStat stat in this.Stats)
             {
                 stat.Draw(character, spriteBatch);
             }

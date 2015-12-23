@@ -64,7 +64,7 @@
     <Compile Include="Enumerations\MoveDirection.cs" />
     <Compile Include="Enumerations\Maps.cs" />
     <Compile Include="Enumerations\Exceptions\CharacterException.cs" />
-    <Compile Include="Core\Factories\PlayerFacory.cs" />
+    <Compile Include="Core\Factories\PlayerFactory.cs" />
     <Compile Include="Core\Messages.cs" />
     <Compile Include="Enumerations\PlayerChars.cs" />
     <Compile Include="Enumerations\Exceptions\GameException.cs" />
@@ -100,7 +100,7 @@
     <Compile Include="Screens\StatPanel.cs" />
     <Compile Include="Handlers\MovementHandler.cs" />
     <Compile Include="Interfaces\ICharacter.cs" />
-    <Compile Include="Interfaces\ICollidable.cs" />
+    <Compile Include="Interfaces\IColidable.cs" />
     <Compile Include="Interfaces\ICooldown.cs" />
     <Compile Include="Interfaces\IPickable.cs" />
     <Compile Include="Interfaces\IProjectile.cs" />

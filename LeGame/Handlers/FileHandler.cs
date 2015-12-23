@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-
-namespace LeGame.Handlers
+﻿namespace LeGame.Handlers
 {
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+
     public static class FileHandler
     {
         private static readonly string[] FoldersToAvoid = { "bin", "obj", "Maps", "Font" };
@@ -30,6 +30,7 @@ namespace LeGame.Handlers
                         fileNames.Add(file);
                     }
                 }
+
                 GetFilenames(dir, fileNames);
             }
         }

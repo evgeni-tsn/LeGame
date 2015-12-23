@@ -1,17 +1,17 @@
 ﻿namespace LeGame.Models.Items.Weapons
 {
-    using Interfaces;
+    using LeGame.Interfaces;
+    using LeGame.Models.Items.Projectiles;
 
     using Microsoft.Xna.Framework;
 
-    using Projectiles;
-
     public class IceSpear : MeleeWeapon
     {
-        private const string IceSpearType = "Items/IceSpear";
         private const int IceSpearDamage = 30;
 
-        public IceSpear(Vector2 position) 
+        private const string IceSpearType = "Items/IceSpear";
+
+        public IceSpear(Vector2 position)
             : base(position, IceSpearType, IceSpearDamage)
         {
         }

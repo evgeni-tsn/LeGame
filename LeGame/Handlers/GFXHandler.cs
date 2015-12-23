@@ -3,13 +3,14 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    using Core;
     using Graphics;
     using Interfaces;
 
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Content;
     using Microsoft.Xna.Framework.Graphics;
+
+    using static LeGame.Core.GlobalVariables;
 
     using Effect = Graphics.Effect;
 
@@ -25,7 +26,7 @@
 
         public static void Load(ContentManager content)
         {
-            FileHandler.GetFilenames(GlobalVariables.ContentDir, FileNames);
+            FileHandler.GetFilenames(ContentDir, FileNames);
             foreach (string s in FileNames)
             {
                 // s is something like: "..\..\..\Content\TestObjects\catSprite.png"
@@ -111,9 +112,9 @@
             DrawExistingEffects(spriteBatch);
 
             UpdateUniqueSprites(level.Enemies);
-            foreach (var ememy in level.Enemies)
+            foreach (var enemy in level.Enemies)
             {
-                GetSprite(ememy).Draw(spriteBatch, ememy.Position);
+                GetSprite(enemy).Draw(spriteBatch, enemy.Position);
             }
             
             GetSprite(level.Player).Draw(
@@ -144,14 +145,14 @@
 
             if (obj.Type.ToLower().Contains("sprite"))
             {
-                width = GlobalVariables.TileWidth;
-                height = GlobalVariables.TileHeight;
+                width = TileWidth;
+                height = TileHeight;
             }
             else if (obj.Type.ToLower().Contains("rotation") || obj.Type.ToLower().Contains("projectile"))
             {
-                pos = new Vector2(pos.X - GlobalVariables.TileWidth / 2f, pos.Y - GlobalVariables.TileHeight / 2f);
-                width = GlobalVariables.TileWidth;
-                height = GlobalVariables.TileHeight;
+                pos = new Vector2(pos.X - TileWidth / 2f, pos.Y - TileHeight / 2f);
+                width = TileWidth;
+                height = TileHeight;
             }
 
             return new Rectangle((int)(pos.X + 6), (int)(pos.Y + 6), width - 12, height - 10);

@@ -1,7 +1,7 @@
-﻿using LeGame.Interfaces;
-
-namespace LeGame.Models.Characters.Player
+﻿namespace LeGame.Models.Characters.Player
 {
+    using LeGame.Interfaces;
+
     public class Redhead : Player
     {
         private const string RedheadDefaultType = "Player/p3Rotation";

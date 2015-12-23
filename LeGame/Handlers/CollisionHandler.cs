@@ -30,7 +30,7 @@ namespace LeGame.Handlers
                  Vector2 temp = new Vector2(character.Position.X, character.Position.Y);
                
                 // movement reactions
-                if (collider is ICollidable && !(collider is IKillable))
+                if (collider is IColidable && !(collider is IKillable))
                 {
                     if (key == Keys.D)
                     {
@@ -63,7 +63,7 @@ namespace LeGame.Handlers
 
                     // legit cool gold-pickup sound 
                    
-                    if ((character as Player).TryToPick(item))
+                    if (((Player)character).TryToPick(item))
                     {
                         item.PickedUpBy(character);
                         Console.Beep(8000, 50);
@@ -112,25 +112,17 @@ namespace LeGame.Handlers
 
         public static IGameObject Collide(IGameObject collider, IEnumerable<IGameObject> collisionItems)
         {
-            foreach (var item in collisionItems)
-            {
-                Rectangle obj = GfxHandler.GetBBox(item);
-
-                if (((item is ICollidable && ((ICollidable)item).CanCollide) || item is IPickable)
-                    && GfxHandler.GetBBox(collider).Intersects(obj))
-                {
-                    return item;
-                }
-            }
-
-            return null;
+            return (from item in collisionItems let obj = 
+                    GfxHandler.GetBBox(item) where 
+                    ((item is IColidable && ((IColidable)item).CanCollide) || item is IPickable)
+                    && GfxHandler.GetBBox(collider).Intersects(obj) select item).FirstOrDefault();
         }
 
         public static void AiCollide(IGameObject collider, ICharacter character)
         {
-            Rectangle colliderBBox = GfxHandler.GetBBox(collider);
-            Rectangle charBBox = GfxHandler.GetBBox(character);
-            if (colliderBBox.Intersects(charBBox))
+            Rectangle colliderBoundingBox = GfxHandler.GetBBox(collider);
+            Rectangle characterBoundingBox = GfxHandler.GetBBox(character);
+            if (colliderBoundingBox.Intersects(characterBoundingBox))
             {
                 character.TakeDamage((ICharacter)collider);
 
